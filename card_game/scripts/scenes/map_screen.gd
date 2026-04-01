@@ -238,6 +238,7 @@ func _on_overlay_draw() -> void:
 # Node selection & routing
 # ---------------------------------------------------------------------------
 func _on_node_selected(row: int, col: int) -> void:
+	SFXManager.play_button_click()
 	var run := GameManager.current_run
 	var map_data: Array = run.map_data
 	if row >= map_data.size():
