@@ -2,7 +2,6 @@ class_name RunState
 extends RefCounted
 
 var deck: Array[String] = []
-var relics: Array[String] = []
 var current_hp: int = 80
 var max_hp: int = 80
 var gold: int = 0
