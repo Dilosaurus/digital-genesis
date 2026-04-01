@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "uriel"
+display_name = "URIEL — Angel of Judgment"
+max_hp = 250
+intent_pool = [{"type": 3, "value": 4}, {"type": 0, "value": 12}, {"type": 5, "value": 18}, {"type": 0, "value": 16}, {"type": 3, "value": 3}, {"type": 5, "value": 22}, {"type": 0, "value": 20}]

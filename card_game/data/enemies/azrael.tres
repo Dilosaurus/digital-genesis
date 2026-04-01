@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "azrael"
+display_name = "AZRAEL — Angel of Death"
+max_hp = 200
+intent_pool = [{"type": 0, "value": 18}, {"type": 0, "value": 22}, {"type": 2, "value": 4}, {"type": 0, "value": 30}, {"type": 0, "value": 15}, {"type": 5, "value": 25}]

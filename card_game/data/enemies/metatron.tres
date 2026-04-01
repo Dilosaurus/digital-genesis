@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "metatron"
+display_name = "METATRON — Voice of God"
+max_hp = 500
+intent_pool = [{"type": 2, "value": 3}, {"type": 0, "value": 15}, {"type": 5, "value": 20}, {"type": 1, "value": 20}, {"type": 0, "value": 25}, {"type": 2, "value": 2}, {"type": 0, "value": 35}, {"type": 5, "value": 30}, {"type": 1, "value": 15}, {"type": 0, "value": 20}]
