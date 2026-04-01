@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "pommel_strike"
+display_name = "Data Mine"
+description = "Deal 9 damage. Draw 1."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 9
+block = 0
+heal = 0
+draw = 1
+hits = 1
+apply_vulnerable = 0
+apply_weak = 0

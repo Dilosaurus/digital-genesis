@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://soul_display"]
+
+[ext_resource type="Script" path="res://scripts/ui/soul_display.gd" id="1_soul_display"]
+
+[node name="SoulDisplay" type="Control"]
+custom_minimum_size = Vector2(200, 40)
+mouse_filter = 2
+script = ExtResource("1_soul_display")
+
+[node name="CountLabel" type="Label" parent="."]
+offset_right = 200.0
+offset_bottom = 20.0
+mouse_filter = 2
+text = "Souls: 0"
+
+[node name="AbsorbedLabel" type="Label" parent="."]
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 40.0
+mouse_filter = 2
+visible = false
+text = ""

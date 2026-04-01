@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "michael"
+display_name = "MICHAEL — Archangel of War"
+max_hp = 300
+intent_pool = [{"type": 0, "value": 8}, {"type": 0, "value": 14}, {"type": 5, "value": 15}, {"type": 1, "value": 16}, {"type": 0, "value": 20}, {"type": 5, "value": 20}, {"type": 0, "value": 12}, {"type": 1, "value": 10}, {"type": 0, "value": 25}]

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "holy_wrath"
+display_name = "Holy Wrath"
+description = "Heaven's judgment. Deal 12 damage to ALL enemies. Apply 1 Vulnerable."
+energy_cost = 2
+card_type = 0
+target_type = 2
+damage = 12
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 1
+apply_weak = 0

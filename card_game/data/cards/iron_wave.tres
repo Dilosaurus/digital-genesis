@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "iron_wave"
+display_name = "Ping"
+description = "Deal 5 damage. Gain 5 Block."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 5
+block = 5
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 0

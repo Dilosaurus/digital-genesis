@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://sin_display"]
+
+[ext_resource type="Script" path="res://scripts/ui/sin_display.gd" id="1_sindsp"]
+
+[node name="SinDisplay" type="Control"]
+custom_minimum_size = Vector2(160, 60)
+size = Vector2(160, 60)
+script = ExtResource("1_sindsp")
+
+[node name="WrathLabel" type="Label" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 160.0
+offset_bottom = 20.0
+text = "Wrath: 0/7"
+
+[node name="SlothLabel" type="Label" parent="."]
+offset_left = 0.0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 40.0
+text = "Sloth: 0/7"
+
+[node name="PrideLabel" type="Label" parent="."]
+offset_left = 0.0
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 60.0
+text = "Pride: 0/7"

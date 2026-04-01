@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "uppercut"
+display_name = "Buffer Overflow"
+description = "Deal 13 damage. Apply 1 Weak."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 13
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 1
+corruption_gain = 2
