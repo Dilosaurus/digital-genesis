@@ -2,9 +2,11 @@ extends Control
 
 const EventScreenScene = preload("res://scenes/ui/event_screen.tscn")
 const ShopScreenScene = preload("res://scenes/ui/shop_screen.tscn")
+const DeckViewerScene = preload("res://scenes/ui/deck_viewer.tscn")
 
 var event_screen = null
 var shop_screen = null
+var deck_viewer = null
 
 const NODE_DATA = [
 	# Act 1
@@ -37,6 +39,14 @@ const NODE_DATA = [
 func _ready() -> void:
 	_build_map()
 	_update_info()
+	GameManager.save_run()
+
+	var deck_btn = Button.new()
+	deck_btn.text = "View Deck"
+	deck_btn.position = Vector2(20, get_viewport_rect().size.y - 50)
+	deck_btn.custom_minimum_size = Vector2(120, 35)
+	deck_btn.pressed.connect(_show_deck)
+	add_child(deck_btn)
 
 func _build_map() -> void:
 	for child in node_container.get_children():
@@ -174,6 +184,13 @@ func _show_rest() -> void:
 	skip_btn.custom_minimum_size = Vector2(300, 40)
 	skip_btn.pressed.connect(_finish_rest)
 	rest_panel.add_child(skip_btn)
+
+func _show_deck() -> void:
+	if deck_viewer:
+		deck_viewer.queue_free()
+	deck_viewer = DeckViewerScene.instantiate()
+	add_child(deck_viewer)
+	deck_viewer.show_deck(GameManager.current_run.deck)
 
 func _finish_rest() -> void:
 	GameManager.current_run.completed_nodes.append(GameManager.current_run.current_node)

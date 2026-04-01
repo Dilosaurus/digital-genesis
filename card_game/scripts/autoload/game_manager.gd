@@ -61,9 +61,22 @@ func get_boss_rewards(enemy_id: String) -> Array[String]:
 func start_new_run() -> void:
 	current_run = RunState.new_run()
 	current_enemy = ""
+	current_run.save_to_file()
 
 func is_run_active() -> bool:
 	return current_run != null
 
 func end_run() -> void:
+	RunState.delete_save()
 	current_run = null
+
+func save_run() -> void:
+	if current_run:
+		current_run.save_to_file()
+
+func load_saved_run() -> bool:
+	var loaded = RunState.load_from_file()
+	if loaded:
+		current_run = loaded
+		return true
+	return false

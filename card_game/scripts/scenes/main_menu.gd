@@ -1,8 +1,16 @@
 extends Control
 
+const SettingsScene = preload("res://scenes/settings/settings_screen.tscn")
+var settings_screen = null
+
 func _ready() -> void:
 	$VBox/PortInput.text = "9999"
 	EventBus.player_connected.connect(_on_player_joined)
+
+	var has_save = FileAccess.file_exists("user://save.json")
+	if has_node("VBox/ContinueButton"):
+		$VBox/ContinueButton.disabled = not has_save
+		$VBox/ContinueButton.visible = has_save
 
 	var args = OS.get_cmdline_user_args()
 	if "--host" in args:
@@ -37,6 +45,18 @@ func _on_join_pressed() -> void:
 func _on_solo_pressed() -> void:
 	GameManager.start_new_run()
 	get_tree().change_scene_to_file("res://scenes/map/map_screen.tscn")
+
+func _on_continue_pressed() -> void:
+	if GameManager.load_saved_run():
+		get_tree().change_scene_to_file("res://scenes/map/map_screen.tscn")
+
+func _on_settings_pressed() -> void:
+	settings_screen = SettingsScene.instantiate()
+	add_child(settings_screen)
+	settings_screen.settings_closed.connect(func():
+		settings_screen.queue_free()
+		settings_screen = null
+	)
 
 func _on_start_pressed() -> void:
 	if not NetworkManager.is_host:
