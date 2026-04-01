@@ -2,7 +2,8 @@ extends Node
 
 var card_database: Dictionary = {}  # String -> CardData
 var current_run: RunState = null
-var current_enemy: String = ""
+var current_enemy: String = ""          # kept for backwards compat; always first enemy
+var current_enemies: Array[String] = [] # all enemies in the current combat node
 var current_node_type: String = "fight"  # "fight", "elite", or "boss"
 
 # Boss ID -> Array of card IDs players can absorb after defeating them
@@ -104,6 +105,7 @@ func get_random_card_rewards(count: int = 3) -> Array[String]:
 func start_new_run() -> void:
 	current_run = RunState.new_run()
 	current_enemy = ""
+	current_enemies = []
 	current_run.save_to_file()
 
 func is_run_active() -> bool:

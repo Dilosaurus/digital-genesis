@@ -36,7 +36,7 @@ var is_networked: bool = false
 var player_board_nodes: Dictionary = {}
 var enemy_display_nodes: Dictionary = {}
 var cached_state: Dictionary = {}
-var current_enemy_id: String = ""
+var current_enemy_id: String = ""       # first enemy — used for boss reward look-up
 var reward_screen = null
 var relic_reward_screen = null
 var relic_display = null
@@ -52,10 +52,18 @@ var turn_banner = null
 
 var _end_turn_pulse_tween: Tween = null
 
+# Targeting state for multi-enemy single-target card selection
+var _targeting_active: bool = false
+var _targeting_hand_index: int = -1
+# Tracks enemy indices for which a death animation has already been triggered.
+var _dead_enemies_animated: Array = []
+
 func _ready() -> void:
 	result_panel.visible = false
 	end_turn_btn.pressed.connect(_on_end_turn_pressed)
 	hand_display.card_selected.connect(_on_card_selected)
+	hand_display.targeting_started.connect(_on_targeting_started)
+	hand_display.targeting_cancelled.connect(_on_targeting_cancelled)
 	continue_btn.pressed.connect(_on_continue_pressed)
 	# Fade in the scene on entry
 	TransitionManager.fade_in(0.4)
@@ -85,13 +93,20 @@ func _start_local_combat() -> void:
 	local_peer_id = 1
 	engine = CombatEngine.new()
 	_connect_engine_signals()
-	var enemy: String
+
 	if GameManager.is_run_active():
-		enemy = GameManager.current_enemy
-		current_enemy_id = enemy
+		# Use the full enemies list set by the map screen.
+		var enemies_list: Array = GameManager.current_enemies.duplicate()
+		if enemies_list.is_empty():
+			# Fallback: use the legacy single-enemy field.
+			if GameManager.current_enemy != "":
+				enemies_list.append(GameManager.current_enemy)
+			else:
+				enemies_list.append("jaw_worm")
+		current_enemy_id = enemies_list[0]  # first enemy for boss reward look-up
 		var peer_ids: Array[int] = [1]
-		print("Campaign combat: vs %s" % enemy)
-		engine.initialize(peer_ids, enemy)
+		print("Campaign combat: vs %s" % str(enemies_list))
+		engine.initialize_multi(peer_ids, enemies_list)
 		# Override with run deck/HP
 		var ps = engine.state.players[1]
 		ps.draw_pile = GameManager.current_run.deck.duplicate()
@@ -111,9 +126,10 @@ func _start_local_combat() -> void:
 		_create_ui_elements_from_engine()
 		_refresh_all_ui()
 		return
-	enemy = _pick_random_enemy()
+
+	# Solo / sandbox mode: 1 human + 3 bots vs a random enemy.
+	var enemy = _pick_random_enemy()
 	current_enemy_id = enemy
-	# Solo mode: 1 human + 3 bots
 	var peer_ids: Array[int] = [1, 2, 3, 4]
 	print("Solo combat: %d players vs %s" % [peer_ids.size(), enemy])
 	engine.initialize(peer_ids, enemy)
@@ -441,10 +457,27 @@ func _server_end_turn() -> void:
 # === UI Element Creation ===
 
 func _create_ui_elements_from_engine() -> void:
-	for i in engine.state.enemies.size():
+	var enemy_count = engine.state.enemies.size()
+	for i in enemy_count:
 		var ed = EnemyDisplayScene.instantiate()
 		enemy_area.add_child(ed)
+		ed.enemy_index = i
+		ed.enemy_clicked.connect(_on_enemy_display_clicked)
 		enemy_display_nodes[i] = ed
+
+	# Widen the enemy area to fit multiple enemies side by side.
+	# Each enemy display is 200px wide + 30px gap between; add 20px padding each side.
+	const ENEMY_W: int = 200
+	const ENEMY_GAP: int = 30
+	const AREA_PADDING: int = 20
+	var area_width = enemy_count * ENEMY_W + (enemy_count - 1) * ENEMY_GAP + AREA_PADDING * 2
+	area_width = maxi(area_width, 300)  # Minimum 300px for single enemy
+	enemy_area.offset_left = -area_width / 2.0
+	enemy_area.offset_right = area_width / 2.0
+
+	# Enable target-selection mode in hand_display when there are multiple enemies.
+	hand_display.needs_target_selection = enemy_count > 1
+
 	for peer_id in engine.state.players:
 		var pb = PlayerBoardScene.instantiate()
 		player_boards.add_child(pb)
@@ -546,7 +579,16 @@ func _refresh_ui_from_dict(state_dict: Dictionary) -> void:
 	turn_label.text = "Turn %d" % state_dict["turn_number"]
 	for i in state_dict["enemies"].size():
 		if enemy_display_nodes.has(i):
-			enemy_display_nodes[i].update_enemy(state_dict["enemies"][i])
+			var ed = enemy_display_nodes[i]
+			var edata: Dictionary = state_dict["enemies"][i]
+			if edata.get("current_hp", 1) <= 0:
+				# Dead enemy: trigger death animation exactly once, then hide.
+				if i not in _dead_enemies_animated:
+					_dead_enemies_animated.append(i)
+					ed.play_death_animation()
+					_hide_enemy_display_after_death(ed)
+			else:
+				ed.update_enemy(edata)
 	for peer_id in state_dict["players"]:
 		var pid = int(peer_id)
 		if player_board_nodes.has(pid):
@@ -575,9 +617,20 @@ func _stop_end_turn_pulse() -> void:
 		_end_turn_pulse_tween = null
 	end_turn_btn.modulate = Color(0.6, 0.6, 0.6, 0.8)
 
+# Waits for the death animation (~0.85s) then hides the enemy display node.
+func _hide_enemy_display_after_death(ed: Control) -> void:
+	await get_tree().create_timer(0.85).timeout
+	if is_instance_valid(ed):
+		ed.visible = false
+
 # === Input Handlers ===
 
 func _on_card_selected(hand_index: int, target_index: int) -> void:
+	# Clear any lingering targeting highlights before playing the card.
+	_clear_targeting_highlights()
+	_targeting_active = false
+	_targeting_hand_index = -1
+
 	if is_networked:
 		if is_server:
 			engine.try_play_card(local_peer_id, hand_index, target_index)
@@ -587,6 +640,42 @@ func _on_card_selected(hand_index: int, target_index: int) -> void:
 		engine.try_play_card(local_peer_id, hand_index, target_index)
 		if not GameManager.is_run_active():
 			_bot_play_turn()
+
+# --- Multi-enemy targeting flow ---
+
+func _on_targeting_started(hand_index: int) -> void:
+	_targeting_active = true
+	_targeting_hand_index = hand_index
+	# Highlight all living enemies as valid targets.
+	for i in enemy_display_nodes:
+		var ed = enemy_display_nodes[i]
+		if ed and engine and i < engine.state.enemies.size():
+			var es = engine.state.enemies[i]
+			ed.set_targetable(es.current_hp > 0)
+
+func _on_targeting_cancelled() -> void:
+	_targeting_active = false
+	_targeting_hand_index = -1
+	_clear_targeting_highlights()
+
+func _on_enemy_display_clicked(enemy_index: int) -> void:
+	if not _targeting_active:
+		return
+	# Validate that this enemy is still alive.
+	if engine and enemy_index < engine.state.enemies.size():
+		var es = engine.state.enemies[enemy_index]
+		if es.current_hp <= 0:
+			return  # dead enemy — ignore click
+	_targeting_active = false
+	_targeting_hand_index = -1
+	_clear_targeting_highlights()
+	hand_display.confirm_target(enemy_index)
+
+func _clear_targeting_highlights() -> void:
+	for i in enemy_display_nodes:
+		var ed = enemy_display_nodes[i]
+		if ed:
+			ed.set_targetable(false)
 
 func _on_end_turn_pressed() -> void:
 	if is_networked:
@@ -624,14 +713,21 @@ func _on_card_played(peer_id: int, card_id: String, target_index: int, result: D
 			result["weak_applied"])
 
 	if combat_log:
-		var cdata = GameManager.get_card_data(card_id)
-		var cname = cdata.display_name if cdata else card_id
 		if result["damage_dealt"] > 0:
-			combat_log.add_damage("P%d" % peer_id, "Enemy", result["damage_dealt"])
+			var target_name = _get_enemy_log_name(target_index)
+			combat_log.add_damage("P%d" % peer_id, target_name, result["damage_dealt"])
 		if result["block_gained"] > 0:
 			combat_log.add_block("P%d" % peer_id, result["block_gained"])
 		if result["heal_amount"] > 0:
 			combat_log.add_heal("P%d" % peer_id, result["heal_amount"])
+
+func _get_enemy_log_name(enemy_index: int) -> String:
+	if engine and enemy_index >= 0 and enemy_index < engine.state.enemies.size():
+		var es = engine.state.enemies[enemy_index]
+		var edata: EnemyData = load("res://data/enemies/%s.tres" % es.enemy_data_id)
+		if edata:
+			return edata.display_name
+	return "Enemy"
 
 func _on_enemy_acted(enemy_index: int, intent_type: int, value: int, target_peer_id: int, damage_dealt: int) -> void:
 	if is_networked:
@@ -640,12 +736,13 @@ func _on_enemy_acted(enemy_index: int, intent_type: int, value: int, target_peer
 		_client_enemy_acted_fx(enemy_index, intent_type, value, target_peer_id, damage_dealt)
 
 	if combat_log:
+		var ename = _get_enemy_log_name(enemy_index)
 		if intent_type == Enums.EnemyIntent.ATTACK and damage_dealt > 0:
-			combat_log.add_damage("Enemy", "P%d" % target_peer_id, damage_dealt)
+			combat_log.add_damage(ename, "P%d" % target_peer_id, damage_dealt)
 		elif intent_type == Enums.EnemyIntent.DEFEND:
-			combat_log.add_block("Enemy", value)
+			combat_log.add_block(ename, value)
 		elif intent_type == Enums.EnemyIntent.BUFF:
-			combat_log.add_status("Enemy buffed: +%d STR" % value)
+			combat_log.add_status("%s buffed: +%d STR" % [ename, value])
 
 func _on_combat_ended(won: bool) -> void:
 	if is_networked:
@@ -762,6 +859,18 @@ func _bot_play_for(bot_id: int) -> void:
 		var card_data = GameManager.get_card_data(bot_ps.hand[0])
 		if not card_data or card_data.energy_cost > bot_ps.energy:
 			break
-		var target = 0 if card_data.target_type == Enums.TargetType.ENEMY else -1
+		var target: int = -1
+		if card_data.target_type == Enums.TargetType.ENEMY:
+			# Target the first living enemy.
+			target = _get_first_living_enemy_index()
+			if target < 0:
+				break  # No living enemies — combat should be ending
 		if not engine.try_play_card(bot_id, 0, target):
 			break
+
+func _get_first_living_enemy_index() -> int:
+	if engine:
+		for i in engine.state.enemies.size():
+			if engine.state.enemies[i].current_hp > 0:
+				return i
+	return -1

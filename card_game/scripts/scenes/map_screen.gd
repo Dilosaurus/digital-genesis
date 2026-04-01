@@ -264,10 +264,14 @@ func _on_node_selected(row: int, col: int) -> void:
 		"shop":
 			_show_shop()
 		_:
-			# fight / elite / boss — go to combat
+			# fight / elite / boss — go to combat with ALL listed enemies
 			var enemies: Array = node["enemies"]
-			var enemy: String = enemies[randi() % enemies.size()]
-			GameManager.current_enemy = enemy
+			# Populate both fields: current_enemies holds the full list,
+			# current_enemy holds the first for backward-compat / boss reward logic.
+			GameManager.current_enemies.clear()
+			for e in enemies:
+				GameManager.current_enemies.append(e)
+			GameManager.current_enemy = enemies[0] if enemies.size() > 0 else ""
 			GameManager.current_node_type = node["type"]
 			GameManager.save_run()
 			TransitionManager.transition_to_scene("res://scenes/combat/combat_scene.tscn")

@@ -17,6 +17,10 @@ signal pact_offered(peer_id: int, pact: Dictionary)
 var state: CombatState
 
 func initialize(peer_ids: Array[int], enemy_data_id: String) -> void:
+	# Convenience wrapper for single-enemy initialisation (backwards compat).
+	initialize_multi(peer_ids, [enemy_data_id])
+
+func initialize_multi(peer_ids: Array[int], enemy_data_ids: Array) -> void:
 	state = CombatState.new()
 
 	# Create player states
@@ -28,14 +32,18 @@ func initialize(peer_ids: Array[int], enemy_data_id: String) -> void:
 		DeckManager.shuffle(ps.draw_pile)
 		state.players[peer_id] = ps
 
-	# Create enemy
-	var enemy_data: EnemyData = load("res://data/enemies/%s.tres" % enemy_data_id)
-	var es = EnemyState.new()
-	es.enemy_data_id = enemy_data_id
-	es.max_hp = _scale_hp(enemy_data.max_hp, peer_ids.size())
-	es.current_hp = es.max_hp
-	EnemyAI.pick_intent(es, enemy_data)
-	state.enemies.append(es)
+	# Create one EnemyState per enemy ID
+	for enemy_data_id in enemy_data_ids:
+		var enemy_data: EnemyData = load("res://data/enemies/%s.tres" % enemy_data_id)
+		if not enemy_data:
+			push_warning("CombatEngine: enemy data not found for '%s'" % enemy_data_id)
+			continue
+		var es = EnemyState.new()
+		es.enemy_data_id = enemy_data_id
+		es.max_hp = _scale_hp(enemy_data.max_hp, peer_ids.size())
+		es.current_hp = es.max_hp
+		EnemyAI.pick_intent(es, enemy_data)
+		state.enemies.append(es)
 
 	start_player_turn()
 
