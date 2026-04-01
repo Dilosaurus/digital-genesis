@@ -312,7 +312,7 @@ func _on_continue_pressed() -> void:
 			GameManager.current_run.current_hp = ps.current_hp
 		GameManager.current_run.completed_nodes.append(GameManager.current_run.current_node)
 		# Check if all nodes done (campaign complete)
-		if GameManager.current_run.completed_nodes.size() >= 7:
+		if GameManager.current_run.completed_nodes.size() >= 17:
 			GameManager.end_run()
 			get_tree().change_scene_to_file("res://scenes/main/main_menu.tscn")
 		else:

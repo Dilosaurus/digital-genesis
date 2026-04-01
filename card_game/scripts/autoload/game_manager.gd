@@ -11,6 +11,11 @@ var boss_rewards: Dictionary = {
 	"jaw_worm": ["recursive_loop", "phantom_firewall"],
 	"cultist": ["adaptive_shield", "full_reboot"],
 	"louse_red": ["overclock_core", "recursive_loop"],
+	"gabriel": ["adaptive_shield", "full_reboot", "phantom_firewall"],
+	"raphael": ["overclock_core", "phantom_firewall", "full_reboot"],
+	"uriel": ["power_surge", "recursive_loop"],
+	"azrael": ["overclock_core", "power_surge", "recursive_loop"],
+	"metatron": ["flaming_sword", "divine_shield", "holy_wrath", "power_surge"],
 }
 
 func _ready() -> void:

@@ -1,13 +1,26 @@
 extends Control
 
 const NODE_DATA = [
-	{"type": "fight", "enemies": ["jaw_worm", "louse_red", "cultist"], "label": "COMBAT"},
+	# Act 1
+	{"type": "fight", "enemies": ["jaw_worm", "louse_red"], "label": "COMBAT"},
 	{"type": "fight", "enemies": ["cultist", "louse_red", "jaw_worm"], "label": "COMBAT"},
 	{"type": "rest", "label": "REST SITE"},
-	{"type": "fight", "enemies": ["jaw_worm", "cultist", "louse_red"], "label": "COMBAT"},
-	{"type": "fight", "enemies": ["louse_red", "jaw_worm", "cultist"], "label": "COMBAT"},
+	{"type": "fight", "enemies": ["cultist", "jaw_worm"], "label": "COMBAT"},
 	{"type": "elite", "enemies": ["hexaghost"], "label": ">> ELITE <<"},
-	{"type": "boss", "enemies": ["michael"], "label": ">>> BOSS <<<"},
+	{"type": "boss", "enemies": ["michael"], "label": ">>> MICHAEL <<<"},
+	# Act 2
+	{"type": "fight", "enemies": ["cultist", "jaw_worm", "louse_red"], "label": "COMBAT"},
+	{"type": "fight", "enemies": ["louse_red", "cultist"], "label": "COMBAT"},
+	{"type": "rest", "label": "REST SITE"},
+	{"type": "elite", "enemies": ["gabriel"], "label": ">> ELITE <<"},
+	{"type": "fight", "enemies": ["jaw_worm", "cultist", "louse_red"], "label": "COMBAT"},
+	{"type": "boss", "enemies": ["raphael"], "label": ">>> RAPHAEL <<<"},
+	# Act 3
+	{"type": "fight", "enemies": ["cultist", "jaw_worm"], "label": "COMBAT"},
+	{"type": "elite", "enemies": ["uriel"], "label": ">> ELITE <<"},
+	{"type": "rest", "label": "REST SITE"},
+	{"type": "elite", "enemies": ["azrael"], "label": ">> ELITE <<"},
+	{"type": "boss", "enemies": ["metatron"], "label": ">>> METATRON <<<"},
 ]
 
 @onready var node_container: VBoxContainer = $NodeContainer
@@ -57,6 +70,26 @@ func _build_map() -> void:
 					btn.add_theme_color_override("font_color", Color(0.9, 0.2, 0.9))
 
 		node_container.add_child(btn)
+
+		# Add act headers after the first node of each act (displayed above in reverse-order loop)
+		if i == 0:
+			var header = Label.new()
+			header.text = "— ACT I: THE AWAKENING —"
+			header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			header.add_theme_color_override("font_color", Color(0.6, 0.6, 0.7))
+			node_container.add_child(header)
+		elif i == 6:
+			var header = Label.new()
+			header.text = "— ACT II: THE ASCENSION —"
+			header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			header.add_theme_color_override("font_color", Color(0.6, 0.6, 0.7))
+			node_container.add_child(header)
+		elif i == 12:
+			var header = Label.new()
+			header.text = "— ACT III: DIGITAL GENESIS —"
+			header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			header.add_theme_color_override("font_color", Color(0.6, 0.6, 0.7))
+			node_container.add_child(header)
 
 func _get_next_node() -> int:
 	var run = GameManager.current_run

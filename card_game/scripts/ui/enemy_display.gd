@@ -21,6 +21,16 @@ func update_enemy(state_dict: Dictionary) -> void:
 			enemy_rect.color = Color(0.35, 0.12, 0.45)
 		"louse_red":
 			enemy_rect.color = Color(0.55, 0.18, 0.12)
+		"gabriel":
+			enemy_rect.color = Color(0.3, 0.5, 0.8)
+		"raphael":
+			enemy_rect.color = Color(0.2, 0.7, 0.4)
+		"uriel":
+			enemy_rect.color = Color(0.7, 0.5, 0.1)
+		"azrael":
+			enemy_rect.color = Color(0.15, 0.1, 0.2)
+		"metatron":
+			enemy_rect.color = Color(0.9, 0.85, 0.7)
 		_:
 			enemy_rect.color = Color(0.5, 0.15, 0.15)
 
