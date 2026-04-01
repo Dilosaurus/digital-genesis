@@ -15,11 +15,17 @@ func _ready() -> void:
 	visible = false
 
 func show_rewards(boss_name: String, card_ids: Array[String]) -> void:
+	_populate("ABSORBED: %s" % boss_name, card_ids)
+
+func show_card_rewards(card_ids: Array[String]) -> void:
+	_populate("CHOOSE A CARD", card_ids)
+
+func _populate(title: String, card_ids: Array[String]) -> void:
 	reward_cards = []
 	for id in card_ids:
 		reward_cards.append(id)
 
-	title_label.text = "ABSORBED: %s" % boss_name
+	title_label.text = title
 
 	# Clear old cards
 	for child in card_container.get_children():

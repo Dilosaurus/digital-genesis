@@ -282,12 +282,33 @@ func _client_combat_over(won: bool) -> void:
 		SFXManager.play_victory()
 		if GameManager.is_run_active():
 			GameManager.current_run.gold += 25 + randi() % 26  # 25-50 gold per win
-		# Show boss reward screen if rewards exist
-		var rewards = GameManager.get_boss_rewards(current_enemy_id)
-		if rewards.size() > 0:
-			await get_tree().create_timer(1.5).timeout
-			result_panel.visible = false
-			_show_reward_screen(rewards)
+
+		await get_tree().create_timer(1.5).timeout
+		result_panel.visible = false
+
+		# Always show card reward screen after any combat victory
+		var card_rewards = GameManager.get_random_card_rewards(3)
+		if card_rewards.size() > 0:
+			var chosen_card = await _show_card_reward_screen(card_rewards)
+			if chosen_card != "":
+				print("Added card to deck: %s" % chosen_card)
+				if GameManager.is_run_active():
+					GameManager.current_run.add_card(chosen_card)
+
+		# Show boss reward screen afterwards if this enemy has boss rewards
+		var boss_rewards = GameManager.get_boss_rewards(current_enemy_id)
+		if boss_rewards.size() > 0:
+			var absorbed = await _show_boss_reward_screen(boss_rewards)
+			if absorbed != "":
+				print("Absorbed boss ability: %s" % absorbed)
+				if GameManager.is_run_active():
+					GameManager.current_run.add_card(absorbed)
+
+		# All reward screens done — show the continue panel
+		result_panel.visible = true
+		result_label.text = "VICTORY!"
+		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
+		continue_btn.visible = true
 	else:
 		result_label.text = "DEFEAT"
 		result_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))
@@ -296,21 +317,42 @@ func _client_combat_over(won: bool) -> void:
 			GameManager.end_run()
 	end_turn_btn.disabled = true
 
-func _show_reward_screen(rewards: Array[String]) -> void:
+# Shows the post-combat card reward screen; returns the chosen card_id or "" for skip.
+func _show_card_reward_screen(card_ids: Array[String]) -> String:
 	reward_screen = RewardScreenScene.instantiate()
 	add_child(reward_screen)
+	reward_screen.show_card_rewards(card_ids)
+	var chosen: String = await reward_screen.card_chosen
+	if reward_screen:
+		reward_screen.queue_free()
+		reward_screen = null
+	return chosen
+
+# Shows the boss ability absorption screen; returns the chosen card_id or "" for skip.
+func _show_boss_reward_screen(rewards: Array[String]) -> String:
+	var screen = RewardScreenScene.instantiate()
+	add_child(screen)
 	var enemy_data: EnemyData = load("res://data/enemies/%s.tres" % current_enemy_id)
 	var boss_name = enemy_data.display_name if enemy_data else current_enemy_id
-	reward_screen.show_rewards(boss_name, rewards)
-	reward_screen.card_chosen.connect(_on_reward_chosen)
+	screen.show_rewards(boss_name, rewards)
+	var chosen: String = await screen.card_chosen
+	screen.queue_free()
+	return chosen
+
+# Legacy wrapper kept so any external callers still compile (unused in normal flow).
+func _show_reward_screen(rewards: Array[String]) -> void:
+	var screen = RewardScreenScene.instantiate()
+	add_child(screen)
+	var enemy_data: EnemyData = load("res://data/enemies/%s.tres" % current_enemy_id)
+	var boss_name = enemy_data.display_name if enemy_data else current_enemy_id
+	screen.show_rewards(boss_name, rewards)
+	screen.card_chosen.connect(_on_reward_chosen)
 
 func _on_reward_chosen(card_id: String) -> void:
 	if card_id != "":
 		print("Absorbed ability: %s" % card_id)
 		if GameManager.is_run_active():
 			GameManager.current_run.add_card(card_id)
-		# In a full roguelike, this would add to player's persistent deck
-		# For now, just display confirmation
 		result_panel.visible = true
 		var card_data = GameManager.get_card_data(card_id)
 		if card_data:
