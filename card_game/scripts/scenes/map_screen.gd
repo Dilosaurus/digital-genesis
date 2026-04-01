@@ -3,10 +3,12 @@ extends Control
 const EventScreenScene = preload("res://scenes/ui/event_screen.tscn")
 const ShopScreenScene  = preload("res://scenes/ui/shop_screen.tscn")
 const DeckViewerScene  = preload("res://scenes/ui/deck_viewer.tscn")
+const RelicDisplayScene = preload("res://scenes/ui/relic_display.tscn")
 
 var event_screen = null
 var shop_screen  = null
 var deck_viewer  = null
+var relic_display = null
 
 # Map layout constants
 const NODE_W        := 80     # button width
@@ -27,6 +29,7 @@ var map_buttons: Array = []
 @onready var hp_label:  Label = $InfoBar/HPLabel
 @onready var deck_label: Label = $InfoBar/DeckLabel
 @onready var act_label:  Label = $InfoBar/ActLabel
+@onready var info_bar: HBoxContainer = $InfoBar
 
 # ---------------------------------------------------------------------------
 # Type display helpers
@@ -62,6 +65,8 @@ func _ready() -> void:
 
 	_build_map()
 	_update_info()
+	_setup_relic_display()
+	_setup_relic_display()
 	GameManager.save_run()
 
 	# "View Deck" button fixed in top-right
@@ -263,6 +268,7 @@ func _on_node_selected(row: int, col: int) -> void:
 			var enemies: Array = node["enemies"]
 			var enemy: String = enemies[randi() % enemies.size()]
 			GameManager.current_enemy = enemy
+			GameManager.current_node_type = node["type"]
 			GameManager.save_run()
 			get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
 
@@ -422,6 +428,13 @@ func _show_deck() -> void:
 # ---------------------------------------------------------------------------
 # Info bar
 # ---------------------------------------------------------------------------
+func _setup_relic_display() -> void:
+	relic_display = RelicDisplayScene.instantiate()
+	info_bar.add_child(relic_display)
+	var run = GameManager.current_run
+	if run:
+		relic_display.update_relics(run.relics)
+
 func _update_info() -> void:
 	var run := GameManager.current_run
 	if not run:
@@ -429,6 +442,8 @@ func _update_info() -> void:
 	hp_label.text  = "HP: %d / %d" % [run.current_hp, run.max_hp]
 	deck_label.text = "Deck: %d cards" % run.deck.size()
 	act_label.text  = "ACT %d" % run.act
+	if relic_display:
+		relic_display.update_relics(run.relics)
 
 # ---------------------------------------------------------------------------
 # Inner class: line-drawing overlay

@@ -4,6 +4,8 @@ const EnemyDisplayScene = preload("res://scenes/combat/enemy_display.tscn")
 const PlayerBoardScene = preload("res://scenes/combat/player_board.tscn")
 const DamageNumberScript = preload("res://scripts/ui/damage_number.gd")
 const RewardScreenScene = preload("res://scenes/ui/reward_screen.tscn")
+const RelicRewardScreenScene = preload("res://scenes/ui/relic_reward_screen.tscn")
+const RelicDisplayScene = preload("res://scenes/ui/relic_display.tscn")
 const HackChallengeScene = preload("res://scenes/ui/hack_challenge.tscn")
 const CorruptionMeterScene = preload("res://scenes/ui/corruption_meter.tscn")
 const SinDisplayScene = preload("res://scenes/ui/sin_display.tscn")
@@ -36,6 +38,8 @@ var enemy_display_nodes: Dictionary = {}
 var cached_state: Dictionary = {}
 var current_enemy_id: String = ""
 var reward_screen = null
+var relic_reward_screen = null
+var relic_display = null
 var hack_challenge = null
 var corruption_meter = null
 var sin_display = null
@@ -295,14 +299,22 @@ func _client_combat_over(won: bool) -> void:
 				if GameManager.is_run_active():
 					GameManager.current_run.add_card(chosen_card)
 
-		# Show boss reward screen afterwards if this enemy has boss rewards
-		var boss_rewards = GameManager.get_boss_rewards(current_enemy_id)
-		if boss_rewards.size() > 0:
-			var absorbed = await _show_boss_reward_screen(boss_rewards)
-			if absorbed != "":
-				print("Absorbed boss ability: %s" % absorbed)
-				if GameManager.is_run_active():
-					GameManager.current_run.add_card(absorbed)
+		# Elite and boss fights award a relic
+		var node_type = GameManager.current_node_type
+		var is_elite = node_type == "elite"
+		var is_boss = node_type == "boss"
+		if GameManager.is_run_active() and (is_elite or is_boss):
+			await _show_relic_reward()
+
+		# Boss fights also award card absorption
+		if is_boss:
+			var boss_rewards = GameManager.get_boss_rewards(current_enemy_id)
+			if boss_rewards.size() > 0:
+				var absorbed = await _show_boss_reward_screen(boss_rewards)
+				if absorbed != "":
+					print("Absorbed boss ability: %s" % absorbed)
+					if GameManager.is_run_active():
+						GameManager.current_run.add_card(absorbed)
 
 		# All reward screens done — show the continue panel
 		result_panel.visible = true
@@ -316,6 +328,28 @@ func _client_combat_over(won: bool) -> void:
 		if GameManager.is_run_active():
 			GameManager.end_run()
 	end_turn_btn.disabled = true
+
+func _show_relic_reward() -> void:
+	if not GameManager.is_run_active():
+		return
+	var owned = GameManager.current_run.relics
+	var relic_ids = RelicSystem.get_random_relic_reward(owned, 3)
+	if relic_ids.size() == 0:
+		return
+	relic_reward_screen = RelicRewardScreenScene.instantiate()
+	add_child(relic_reward_screen)
+	relic_reward_screen.show_relics(relic_ids)
+	var chosen_id = await relic_reward_screen.relic_chosen
+	relic_reward_screen.queue_free()
+	relic_reward_screen = null
+	if chosen_id != "" and GameManager.is_run_active():
+		GameManager.current_run.add_relic(chosen_id)
+		if not relic_display:
+			relic_display = RelicDisplayScene.instantiate()
+			$HUD.add_child(relic_display)
+			relic_display.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+			relic_display.position = Vector2(-620.0, 35.0)
+		relic_display.update_relics(GameManager.current_run.relics)
 
 # Shows the post-combat card reward screen; returns the chosen card_id or "" for skip.
 func _show_card_reward_screen(card_ids: Array[String]) -> String:
@@ -446,6 +480,14 @@ func _create_ui_elements_from_engine() -> void:
 	# Turn banner (fullscreen overlay)
 	turn_banner = TurnBannerScene.instantiate()
 	add_child(turn_banner)
+
+	# Relic display (top-right of HUD, below deck count)
+	if GameManager.is_run_active() and GameManager.current_run.relics.size() > 0:
+		relic_display = RelicDisplayScene.instantiate()
+		$HUD.add_child(relic_display)
+		relic_display.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		relic_display.position = Vector2(-620.0, 35.0)
+		relic_display.update_relics(GameManager.current_run.relics)
 
 # === State Broadcast ===
 
