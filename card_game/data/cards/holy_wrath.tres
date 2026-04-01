@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "holy_wrath"
 display_name = "Holy Wrath"
-description = "Heaven's judgment. Deal 12 damage to ALL enemies. Apply 1 Vulnerable."
+description = "Heaven's judgment. Deal 9 damage to ALL enemies. Apply 1 Vulnerable."
 energy_cost = 2
 card_type = 0
 target_type = 2
-damage = 12
+damage = 9
 block = 0
 heal = 0
 draw = 0

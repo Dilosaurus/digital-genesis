@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "gabriel"
+display_name = "GABRIEL — Herald of Annihilation"
+max_hp = 280
+intent_pool = [{"type": 0, "value": 14}, {"type": 0, "value": 18}, {"type": 1, "value": 14}, {"type": 0, "value": 22}, {"type": 2, "value": 2}, {"type": 0, "value": 16}, {"type": 5, "value": 12}, {"type": 0, "value": 20}]

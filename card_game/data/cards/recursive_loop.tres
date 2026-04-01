@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "recursive_loop"
 display_name = "Recursive Loop"
-description = "Deal 4 damage 4 times."
+description = "Deal 3 damage 4 times."
 energy_cost = 2
 card_type = 0
 target_type = 0
-damage = 4
+damage = 3
 block = 0
 heal = 0
 draw = 0

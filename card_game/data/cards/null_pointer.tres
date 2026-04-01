@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "null_pointer"
 display_name = "Null Pointer"
-description = "Deal 15 damage. Exhaust."
-energy_cost = 1
+description = "Deal 18 damage. Exhaust."
+energy_cost = 2
 card_type = 0
 target_type = 0
-damage = 15
+damage = 18
 block = 0
 heal = 0
 draw = 0

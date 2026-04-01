@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "cleave"
 display_name = "Broadcast"
-description = "Deal 8 damage to ALL enemies."
+description = "Deal 5 damage to ALL enemies."
 energy_cost = 1
 card_type = 0
 target_type = 2
-damage = 8
+damage = 5
 block = 0
 heal = 0
 draw = 0

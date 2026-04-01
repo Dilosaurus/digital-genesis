@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "pommel_strike"
 display_name = "Data Mine"
-description = "Deal 9 damage. Draw 1."
+description = "Deal 7 damage. Draw 1."
 energy_cost = 1
 card_type = 0
 target_type = 0
-damage = 9
+damage = 7
 block = 0
 heal = 0
 draw = 1

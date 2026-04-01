@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "twin_strike_plus"
 display_name = "Fork Process+"
-description = "Deal 7 damage twice."
+description = "Deal 6 damage twice."
 energy_cost = 1
 card_type = 0
 target_type = 0
-damage = 7
+damage = 6
 block = 0
 heal = 0
 draw = 0
