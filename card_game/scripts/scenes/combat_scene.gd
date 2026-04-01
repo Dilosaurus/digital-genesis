@@ -409,11 +409,18 @@ func _on_continue_pressed() -> void:
 		var run := GameManager.current_run
 		# Mark the combat node as complete in the branching map
 		run.mark_node_complete(run.current_row, run.current_node_col)
-		# Check if we just beat the final boss (last row of the map)
-		var is_final_boss: bool = (run.current_row == run.map_data.size() - 1)
-		if is_final_boss:
-			GameManager.end_run()
-			TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
+		# Check if we just beat the boss (last row of the map)
+		var is_boss_row: bool = (run.current_row == run.map_data.size() - 1)
+		if is_boss_row:
+			if run.act >= 3:
+				# Final boss defeated — show victory screen
+				_show_victory_screen()
+			else:
+				# Advance to next act
+				var completed_act: int = run.act
+				run.advance_act()
+				GameManager.save_run()
+				_show_act_complete_screen(completed_act)
 		else:
 			GameManager.save_run()
 			TransitionManager.transition_to_scene("res://scenes/map/map_screen.tscn")
@@ -421,6 +428,112 @@ func _on_continue_pressed() -> void:
 	if is_networked:
 		NetworkManager.disconnect_game()
 	TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
+
+func _show_act_complete_screen(completed_act: int) -> void:
+	# Hide the result panel so only our interstitial is visible
+	result_panel.visible = false
+
+	var act_names := ["ACT I", "ACT II", "ACT III"]
+	var act_label_text: String = act_names[clampi(completed_act - 1, 0, 2)]
+
+	var overlay := Panel.new()
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.modulate = Color(0, 0, 0, 0)
+	add_child(overlay)
+
+	var vbox := VBoxContainer.new()
+	vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	vbox.custom_minimum_size = Vector2(480, 260)
+	vbox.position -= vbox.custom_minimum_size / 2.0
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	overlay.add_child(vbox)
+
+	var title := Label.new()
+	title.text = "%s COMPLETE" % act_label_text
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 42)
+	title.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2))
+	vbox.add_child(title)
+
+	var spacer := Control.new()
+	spacer.custom_minimum_size = Vector2(0, 28)
+	vbox.add_child(spacer)
+
+	var sub := Label.new()
+	sub.text = "Prepare yourself for Act %d..." % (completed_act + 1)
+	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sub.add_theme_font_size_override("font_size", 20)
+	sub.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
+	vbox.add_child(sub)
+
+	var spacer2 := Control.new()
+	spacer2.custom_minimum_size = Vector2(0, 36)
+	vbox.add_child(spacer2)
+
+	var cont_btn := Button.new()
+	cont_btn.text = "Continue"
+	cont_btn.custom_minimum_size = Vector2(200, 48)
+	cont_btn.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(cont_btn)
+	cont_btn.pressed.connect(func():
+		TransitionManager.transition_to_scene("res://scenes/map/map_screen.tscn")
+	)
+
+	# Fade the overlay in
+	var tween := create_tween()
+	tween.tween_property(overlay, "modulate", Color(0.05, 0.05, 0.1, 0.96), 0.5)
+
+func _show_victory_screen() -> void:
+	# Hide the result panel so only our victory screen is visible
+	result_panel.visible = false
+
+	var overlay := Panel.new()
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.modulate = Color(0, 0, 0, 0)
+	add_child(overlay)
+
+	var vbox := VBoxContainer.new()
+	vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	vbox.custom_minimum_size = Vector2(520, 300)
+	vbox.position -= vbox.custom_minimum_size / 2.0
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	overlay.add_child(vbox)
+
+	var title := Label.new()
+	title.text = "YOU WIN"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 56)
+	title.add_theme_color_override("font_color", Color(0.2, 1.0, 0.5))
+	vbox.add_child(title)
+
+	var spacer := Control.new()
+	spacer.custom_minimum_size = Vector2(0, 16)
+	vbox.add_child(spacer)
+
+	var sub := Label.new()
+	sub.text = "DIGITAL GENESIS COMPLETE"
+	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sub.add_theme_font_size_override("font_size", 24)
+	sub.add_theme_color_override("font_color", Color(0.85, 0.85, 1.0))
+	vbox.add_child(sub)
+
+	var spacer2 := Control.new()
+	spacer2.custom_minimum_size = Vector2(0, 40)
+	vbox.add_child(spacer2)
+
+	var cont_btn := Button.new()
+	cont_btn.text = "Return to Main Menu"
+	cont_btn.custom_minimum_size = Vector2(240, 48)
+	cont_btn.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(cont_btn)
+	cont_btn.pressed.connect(func():
+		GameManager.end_run()
+		TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
+	)
+
+	# Fade the overlay in
+	var tween := create_tween()
+	tween.tween_property(overlay, "modulate", Color(0.0, 0.02, 0.05, 0.97), 0.7)
 
 # === RPCs: Client -> Server ===
 
