@@ -326,12 +326,16 @@ func _on_continue_pressed() -> void:
 		var ps = engine.state.players.get(local_peer_id)
 		if ps:
 			GameManager.current_run.current_hp = ps.current_hp
-		GameManager.current_run.completed_nodes.append(GameManager.current_run.current_node)
-		# Check if all nodes done (campaign complete)
-		if GameManager.current_run.completed_nodes.size() >= 17:
+		var run := GameManager.current_run
+		# Mark the combat node as complete in the branching map
+		run.mark_node_complete(run.current_row, run.current_node_col)
+		# Check if we just beat the final boss (last row of the map)
+		var is_final_boss: bool = (run.current_row == run.map_data.size() - 1)
+		if is_final_boss:
 			GameManager.end_run()
 			get_tree().change_scene_to_file("res://scenes/main/main_menu.tscn")
 		else:
+			GameManager.save_run()
 			get_tree().change_scene_to_file("res://scenes/map/map_screen.tscn")
 		return
 	if is_networked:
