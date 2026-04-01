@@ -12,6 +12,18 @@ func update_enemy(state_dict: Dictionary) -> void:
 	if enemy_data:
 		name_label.text = enemy_data.display_name
 
+	match state_dict["enemy_data_id"]:
+		"michael":
+			enemy_rect.color = Color(0.8, 0.6, 0.1)
+		"hexaghost":
+			enemy_rect.color = Color(0.15, 0.4, 0.15)
+		"cultist":
+			enemy_rect.color = Color(0.35, 0.12, 0.45)
+		"louse_red":
+			enemy_rect.color = Color(0.55, 0.18, 0.12)
+		_:
+			enemy_rect.color = Color(0.5, 0.15, 0.15)
+
 	hp_bar.set_values(state_dict["current_hp"], state_dict["max_hp"])
 
 	# Block display
