@@ -279,16 +279,16 @@ var rest_panel: Panel = null
 
 func _show_rest() -> void:
 	rest_panel = Panel.new()
-	rest_panel.custom_minimum_size = Vector2(400, 240)
+	rest_panel.custom_minimum_size = Vector2(500, 290)
 	rest_panel.position = Vector2(
-		get_viewport_rect().size.x / 2.0 - 200,
-		get_viewport_rect().size.y / 2.0 - 100
+		get_viewport_rect().size.x / 2.0 - 250,
+		get_viewport_rect().size.y / 2.0 - 145
 	)
 	add_child(rest_panel)
 
 	var title := Label.new()
 	title.text = "REST SITE"
-	title.position = Vector2(100, 20)
+	title.position = Vector2(150, 20)
 	title.add_theme_font_size_override("font_size", 24)
 	rest_panel.add_child(title)
 
@@ -297,8 +297,8 @@ func _show_rest() -> void:
 
 	var rest_btn := Button.new()
 	rest_btn.text = "Rest (Heal %d HP)" % heal_amount
-	rest_btn.position = Vector2(50, 80)
-	rest_btn.custom_minimum_size = Vector2(300, 40)
+	rest_btn.position = Vector2(50, 75)
+	rest_btn.custom_minimum_size = Vector2(400, 40)
 	rest_btn.pressed.connect(func():
 		run.heal(heal_amount)
 		_finish_rest()
@@ -307,15 +307,22 @@ func _show_rest() -> void:
 
 	var upgrade_btn := Button.new()
 	upgrade_btn.text = "Upgrade a Card"
-	upgrade_btn.position = Vector2(50, 130)
-	upgrade_btn.custom_minimum_size = Vector2(300, 40)
+	upgrade_btn.position = Vector2(50, 125)
+	upgrade_btn.custom_minimum_size = Vector2(400, 40)
 	upgrade_btn.pressed.connect(_show_upgrade_choices)
 	rest_panel.add_child(upgrade_btn)
 
+	var remove_btn := Button.new()
+	remove_btn.text = "Remove a Card"
+	remove_btn.position = Vector2(50, 175)
+	remove_btn.custom_minimum_size = Vector2(400, 40)
+	remove_btn.pressed.connect(_show_remove_choices)
+	rest_panel.add_child(remove_btn)
+
 	var skip_btn := Button.new()
-	skip_btn.text = "Skip"
-	skip_btn.position = Vector2(50, 180)
-	skip_btn.custom_minimum_size = Vector2(300, 40)
+	skip_btn.text = "Skip (Continue)"
+	skip_btn.position = Vector2(50, 225)
+	skip_btn.custom_minimum_size = Vector2(400, 40)
 	skip_btn.pressed.connect(_finish_rest)
 	rest_panel.add_child(skip_btn)
 
@@ -390,6 +397,82 @@ func _do_upgrade(deck_index: int, upgrade_id: String) -> void:
 	var run := GameManager.current_run
 	if deck_index < run.deck.size():
 		run.deck[deck_index] = upgrade_id
+	_finish_rest()
+
+func _show_remove_choices() -> void:
+	if rest_panel:
+		rest_panel.queue_free()
+		rest_panel = null
+
+	var run := GameManager.current_run
+
+	rest_panel = Panel.new()
+	rest_panel.custom_minimum_size = Vector2(500, 400)
+	rest_panel.position = Vector2(
+		get_viewport_rect().size.x / 2.0 - 250,
+		get_viewport_rect().size.y / 2.0 - 200
+	)
+	add_child(rest_panel)
+
+	var title := Label.new()
+	title.text = "CHOOSE CARD TO REMOVE"
+	title.position = Vector2(100, 15)
+	title.add_theme_font_size_override("font_size", 20)
+	rest_panel.add_child(title)
+
+	if run.deck.size() <= 5:
+		var warn := Label.new()
+		warn.text = "Deck too small to remove cards (minimum 5)."
+		warn.position = Vector2(50, 80)
+		warn.add_theme_color_override("font_color", Color(1.0, 0.6, 0.3))
+		rest_panel.add_child(warn)
+	else:
+		var y_pos: int = 55
+		for i in run.deck.size():
+			var card_id: String = run.deck[i]
+			var card_data = GameManager.get_card_data(card_id)
+			if not card_data:
+				continue
+			var btn := Button.new()
+			var type_label: String = ""
+			var type_color: Color = Color.WHITE
+			match card_data.card_type:
+				Enums.CardType.ATTACK:
+					type_label = "Attack"
+					type_color = Color(1.0, 0.4, 0.4)
+				Enums.CardType.SKILL:
+					type_label = "Skill"
+					type_color = Color(0.4, 0.6, 1.0)
+				Enums.CardType.POWER:
+					type_label = "Power"
+					type_color = Color(1.0, 0.85, 0.2)
+				Enums.CardType.CURSE:
+					type_label = "Curse"
+					type_color = Color(0.6, 0.3, 0.8)
+			btn.text = "%s  [%s]" % [card_data.display_name, type_label]
+			btn.position = Vector2(30, y_pos)
+			btn.custom_minimum_size = Vector2(440, 35)
+			btn.add_theme_color_override("font_color", type_color)
+			btn.pressed.connect(_do_remove.bind(i))
+			rest_panel.add_child(btn)
+			y_pos += 45
+
+	var back_y: int = maxi(rest_panel.custom_minimum_size.y - 60, 310)
+	var back_btn := Button.new()
+	back_btn.text = "Back"
+	back_btn.position = Vector2(180, back_y)
+	back_btn.custom_minimum_size = Vector2(140, 35)
+	back_btn.pressed.connect(func():
+		rest_panel.queue_free()
+		rest_panel = null
+		_show_rest()
+	)
+	rest_panel.add_child(back_btn)
+
+func _do_remove(deck_index: int) -> void:
+	var run := GameManager.current_run
+	if deck_index < run.deck.size() and run.deck.size() > 5:
+		run.deck.remove_at(deck_index)
 	_finish_rest()
 
 # ---------------------------------------------------------------------------
