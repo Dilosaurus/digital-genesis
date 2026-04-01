@@ -17,3 +17,4 @@ draw = 0
 hits = 2
 apply_vulnerable = 0
 apply_weak = 0
+upgrade_id = "twin_strike_plus"
