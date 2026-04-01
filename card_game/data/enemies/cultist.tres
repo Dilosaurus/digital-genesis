@@ -7,4 +7,4 @@ script = ExtResource("1")
 id = "cultist"
 display_name = "Rogue Process"
 max_hp = 50
-intent_pool = [{"type": 0, "value": 6}, {"type": 0, "value": 6}, {"type": 3, "value": 3}, {"type": 0, "value": 6}]
+intent_pool = [{"type": 0, "value": 6}, {"type": 0, "value": 6}, {"type": 3, "value": 3}, {"type": 0, "value": 6}, {"type": 2, "value": 3}]

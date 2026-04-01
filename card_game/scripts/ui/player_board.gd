@@ -28,6 +28,10 @@ func update_player(state_dict: Dictionary, is_local: bool) -> void:
 		statuses.append("Vuln %d" % state_dict["vulnerable"])
 	if state_dict.get("weak", 0) > 0:
 		statuses.append("Weak %d" % state_dict["weak"])
+	if state_dict.get("strength", 0) > 0:
+		statuses.append("STR +%d" % state_dict["strength"])
+	if state_dict.get("dexterity", 0) > 0:
+		statuses.append("DEX +%d" % state_dict["dexterity"])
 	status_label.text = " | ".join(statuses) if statuses.size() > 0 else ""
 
 	# Turn status

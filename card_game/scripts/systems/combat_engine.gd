@@ -117,7 +117,10 @@ func try_play_card(peer_id: int, hand_index: int, target_index: int) -> bool:
 
 	# Remove card from hand (before resolving, so hand_index is valid)
 	ps.hand.remove_at(hand_index)
-	ps.discard_pile.append(card_id)
+	if card_data.exhaust:
+		ps.exhaust_pile.append(card_id)
+	else:
+		ps.discard_pile.append(card_id)
 
 	# Handle ALL_ENEMIES target type (e.g. Cleave)
 	if card_data.target_type == Enums.TargetType.ALL_ENEMIES:
@@ -186,6 +189,11 @@ func _post_card_played(peer_id: int, ps: PlayerState, card_data: CardData, damag
 			if DeathsDoorSystem.check_deaths_door(ps):
 				player_entered_deaths_door.emit(peer_id)
 
+	# Power Surge: gain max energy
+	if card_data.id == "power_surge":
+		ps.max_energy += 1
+		ps.energy += 1
+
 	# Pact offer chance (corruption-gated, not after combat ends)
 	if state.phase != Enums.CombatPhase.COMBAT_OVER and PactSystem.should_offer_pact(state.turn_number, ps.corruption):
 		var pact = PactSystem.get_random_pact()
@@ -230,7 +238,7 @@ func execute_enemy_turn() -> void:
 				var ps: PlayerState = state.players[peer_id]
 				if ps.is_dead:
 					continue
-				var dmg = enemy.intent_value + SoulSystem.get_boss_damage_bonus(state)
+				var dmg = enemy.intent_value + enemy.strength + SoulSystem.get_boss_damage_bonus(state)
 				if enemy.weak > 0:
 					dmg = int(dmg * 0.75)
 				if ps.vulnerable > 0:
@@ -250,6 +258,10 @@ func execute_enemy_turn() -> void:
 
 		elif enemy.intent_type == Enums.EnemyIntent.DEFEND:
 			enemy.block += enemy.intent_value
+			enemy_acted.emit(i, enemy.intent_type, enemy.intent_value, 0, 0)
+
+		elif enemy.intent_type == Enums.EnemyIntent.BUFF:
+			enemy.strength += enemy.intent_value
 			enemy_acted.emit(i, enemy.intent_type, enemy.intent_value, 0, 0)
 
 		elif enemy.intent_type == Enums.EnemyIntent.HACK:

@@ -10,6 +10,7 @@ var intent_value: int = 0
 var intent_index: int = 0
 var vulnerable: int = 0
 var weak: int = 0
+var strength: int = 0
 
 func to_dict() -> Dictionary:
 	return {
@@ -21,4 +22,5 @@ func to_dict() -> Dictionary:
 		"intent_value": intent_value,
 		"vulnerable": vulnerable,
 		"weak": weak,
+		"strength": strength,
 	}

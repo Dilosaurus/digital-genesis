@@ -16,3 +16,6 @@ extends Resource
 @export var apply_vulnerable: int = 0
 @export var apply_weak: int = 0
 @export var corruption_gain: int = 0
+@export var exhaust: bool = false
+@export var gain_strength: int = 0
+@export var gain_dexterity: int = 0

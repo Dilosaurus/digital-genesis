@@ -27,6 +27,8 @@ var is_on_deaths_door: bool = false
 var deaths_door_turns: int = 0
 var is_dead: bool = false
 var pact_damage_boost: int = 0
+var strength: int = 0
+var dexterity: int = 0
 
 func to_public_dict() -> Dictionary:
 	return {
@@ -48,6 +50,8 @@ func to_public_dict() -> Dictionary:
 		"sin_wrath": sin_wrath,
 		"sin_sloth": sin_sloth,
 		"sin_pride": sin_pride,
+		"strength": strength,
+		"dexterity": dexterity,
 		"is_on_deaths_door": is_on_deaths_door,
 		"deaths_door_turns": deaths_door_turns,
 		"is_dead": is_dead,

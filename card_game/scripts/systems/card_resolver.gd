@@ -9,6 +9,8 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 		"heal_amount": 0,
 		"vulnerable_applied": 0,
 		"weak_applied": 0,
+		"strength_gained": 0,
+		"dexterity_gained": 0,
 	}
 
 	# Deduct energy
@@ -23,8 +25,12 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 	var effective_damage = c_overrides.get("damage", card.damage)
 	if card.id == "body_slam":
 		effective_damage = player.block
+	if effective_damage > 0:
+		effective_damage += player.strength
 	var effective_hits = c_overrides.get("hits", card.hits)
 	var effective_block = c_overrides.get("block", card.block)
+	if effective_block > 0:
+		effective_block += player.dexterity
 	var effective_heal = c_overrides.get("heal", card.heal)
 	var effective_vuln = c_overrides.get("apply_vulnerable", card.apply_vulnerable)
 	var effective_weak = c_overrides.get("apply_weak", card.apply_weak)
@@ -78,5 +84,12 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 	# Draw cards
 	if card.draw > 0:
 		DeckManager.draw(player, card.draw)
+
+	if card.gain_strength > 0:
+		player.strength += card.gain_strength
+		result["strength_gained"] = card.gain_strength
+	if card.gain_dexterity > 0:
+		player.dexterity += card.gain_dexterity
+		result["dexterity_gained"] = card.gain_dexterity
 
 	return result

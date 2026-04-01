@@ -365,6 +365,8 @@ func _refresh_all_ui() -> void:
 		hand_display.update_hand(local_ps.hand, local_ps.energy, local_ps.corruption_tier)
 		deck_count_label.text = "Deck: %d" % local_ps.draw_pile.size()
 		discard_count_label.text = "Discard: %d" % local_ps.discard_pile.size()
+		if local_ps.exhaust_pile.size() > 0:
+			discard_count_label.text += " | Exhaust: %d" % local_ps.exhaust_pile.size()
 
 		# Update M1 UI
 		if corruption_meter:

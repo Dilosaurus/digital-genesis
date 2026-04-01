@@ -5,7 +5,10 @@ var card_database: Dictionary = {}  # String -> CardData
 # Boss ID -> Array of card IDs players can absorb after defeating them
 var boss_rewards: Dictionary = {
 	"michael": ["flaming_sword", "divine_shield", "holy_wrath"],
-	"hexaghost": ["heavy_blade", "cleave", "root_access"],
+	"hexaghost": ["heavy_blade", "overclock_core", "power_surge"],
+	"jaw_worm": ["recursive_loop", "phantom_firewall"],
+	"cultist": ["adaptive_shield", "full_reboot"],
+	"louse_red": ["overclock_core", "recursive_loop"],
 }
 
 func _ready() -> void:

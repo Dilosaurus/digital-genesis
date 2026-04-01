@@ -34,6 +34,9 @@ func update_enemy(state_dict: Dictionary) -> void:
 		Enums.EnemyIntent.HACK:
 			intent_label.text = "HACK %d" % intent_value
 			intent_label.add_theme_color_override("font_color", Color(0.8, 0.2, 0.9))
+		Enums.EnemyIntent.BUFF:
+			intent_label.text = "BUFF +%d" % intent_value
+			intent_label.add_theme_color_override("font_color", Color(1, 0.8, 0.2))
 		_:
 			intent_label.text = "???"
 
@@ -43,6 +46,8 @@ func update_enemy(state_dict: Dictionary) -> void:
 		statuses.append("Vuln %d" % state_dict["vulnerable"])
 	if state_dict.get("weak", 0) > 0:
 		statuses.append("Weak %d" % state_dict["weak"])
+	if state_dict.get("strength", 0) > 0:
+		statuses.append("STR +%d" % state_dict["strength"])
 	status_label.text = " | ".join(statuses) if statuses.size() > 0 else ""
 
 func shake() -> void:
