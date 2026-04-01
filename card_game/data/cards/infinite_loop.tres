@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "infinite_loop"
 display_name = "Infinite Loop"
-description = "Deal 2 damage 6 times."
+description = "Deal 3 damage 6 times."
 energy_cost = 3
 card_type = 0
 target_type = 0
-damage = 2
+damage = 3
 block = 0
 heal = 0
 draw = 0

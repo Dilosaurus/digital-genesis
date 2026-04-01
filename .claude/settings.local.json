@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"/c/Program Files/Godot/Godot_v4.6.1-stable_win64_console.exe\" --headless --import)",
+      "Bash(\"/c/Program Files/Godot/Godot_v4.6.1-stable_win64_console.exe\" --headless --path . --script tests/test_combat.gd)",
+      "Bash(\"/c/Program Files/Godot/Godot_v4.6.1-stable_win64_console.exe\" --headless --path . tests/test_combat.tscn)",
+      "Bash(\"C:/Program Files/Godot/Godot_v4.6.1-stable_win64.exe\" --path \"E:/godot_games/card_game\" --headless --import)",
+      "Bash(\"C:/Program Files/Godot/Godot_v4.6.1-stable_win64.exe\" --path \"E:/godot_games/card_game\" -- --solo)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(grep -A2 \"max_hp\" E:/godot_games/card_game/data/enemies/*.tres)"
+    ]
+  }
+}

@@ -6,13 +6,13 @@
 script = ExtResource("1")
 id = "bandage"
 display_name = "Debug Patch"
-description = "Heal 4 HP."
+description = "Heal 8 HP."
 energy_cost = 1
 card_type = 1
 target_type = 1
 damage = 0
 block = 0
-heal = 4
+heal = 8
 draw = 0
 hits = 1
 apply_vulnerable = 0

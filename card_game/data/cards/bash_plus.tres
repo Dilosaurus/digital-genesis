@@ -6,11 +6,11 @@
 script = ExtResource("1")
 id = "bash_plus"
 display_name = "Overclock+"
-description = "Deal 12 damage. Apply 3 Vulnerable."
+description = "Deal 14 damage. Apply 3 Vulnerable."
 energy_cost = 2
 card_type = 0
 target_type = 0
-damage = 12
+damage = 14
 block = 0
 heal = 0
 draw = 0

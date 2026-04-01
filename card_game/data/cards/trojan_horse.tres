@@ -6,12 +6,12 @@
 script = ExtResource("1")
 id = "trojan_horse"
 display_name = "Trojan Horse"
-description = "Deal 7 damage. Gain 7 Block."
+description = "Deal 9 damage. Gain 9 Block."
 energy_cost = 2
 card_type = 0
 target_type = 0
-damage = 7
-block = 7
+damage = 9
+block = 9
 heal = 0
 draw = 0
 hits = 1
