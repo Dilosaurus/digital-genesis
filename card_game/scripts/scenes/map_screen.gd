@@ -3,10 +3,12 @@ extends Control
 const EventScreenScene = preload("res://scenes/ui/event_screen.tscn")
 const ShopScreenScene = preload("res://scenes/ui/shop_screen.tscn")
 const DeckViewerScene = preload("res://scenes/ui/deck_viewer.tscn")
+const RelicDisplayScene = preload("res://scenes/ui/relic_display.tscn")
 
 var event_screen = null
 var shop_screen = null
 var deck_viewer = null
+var relic_display = null
 
 const NODE_DATA = [
 	# Act 1
@@ -35,10 +37,12 @@ const NODE_DATA = [
 @onready var hp_label: Label = $InfoBar/HPLabel
 @onready var deck_label: Label = $InfoBar/DeckLabel
 @onready var act_label: Label = $InfoBar/ActLabel
+@onready var info_bar: HBoxContainer = $InfoBar
 
 func _ready() -> void:
 	_build_map()
 	_update_info()
+	_setup_relic_display()
 	GameManager.save_run()
 
 	var deck_btn = Button.new()
@@ -118,6 +122,13 @@ func _get_next_node() -> int:
 			return i
 	return -1
 
+func _setup_relic_display() -> void:
+	relic_display = RelicDisplayScene.instantiate()
+	info_bar.add_child(relic_display)
+	var run = GameManager.current_run
+	if run:
+		relic_display.update_relics(run.relics)
+
 func _update_info() -> void:
 	var run = GameManager.current_run
 	if not run:
@@ -125,6 +136,8 @@ func _update_info() -> void:
 	hp_label.text = "HP: %d / %d" % [run.current_hp, run.max_hp]
 	deck_label.text = "Deck: %d cards" % run.deck.size()
 	act_label.text = "ACT %d" % run.act
+	if relic_display:
+		relic_display.update_relics(run.relics)
 
 func _on_node_selected(node_index: int) -> void:
 	var node = NODE_DATA[node_index]
@@ -142,6 +155,7 @@ func _on_node_selected(node_index: int) -> void:
 
 	var enemy = node["enemies"][randi() % node["enemies"].size()]
 	GameManager.current_enemy = enemy
+	GameManager.current_node_type = node["type"]
 	get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
 
 var rest_panel: Panel = null

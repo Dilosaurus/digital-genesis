@@ -56,12 +56,36 @@ static func get_corruption_resistance(relic_ids: Array) -> int:
 	return total
 
 static func get_random_relic_reward(owned: Array, count: int = 3) -> Array[String]:
-	var available: Array[String] = []
+	# Separate by rarity: 0=common, 1=uncommon, 2=rare
+	var by_rarity: Dictionary = {0: [], 1: [], 2: []}
 	for rid in _relic_database:
 		if rid not in owned:
-			available.append(rid)
-	available.shuffle()
+			var r: RelicData = _relic_database[rid]
+			by_rarity[r.rarity].append(rid)
+
+	# Build weighted pool: common=60%, uncommon=30%, rare=10%
+	# We'll pick by weighted random, without replacement per call
 	var result: Array[String] = []
-	for i in mini(count, available.size()):
-		result.append(available[i])
+	var attempts = 0
+	while result.size() < count and attempts < 100:
+		attempts += 1
+		var roll = randf()
+		var pool: Array
+		if roll < 0.6 and by_rarity[0].size() > 0:
+			pool = by_rarity[0]
+		elif roll < 0.9 and by_rarity[1].size() > 0:
+			pool = by_rarity[1]
+		elif by_rarity[2].size() > 0:
+			pool = by_rarity[2]
+		else:
+			# Fallback: any non-empty pool
+			for rarity in [0, 1, 2]:
+				if by_rarity[rarity].size() > 0:
+					pool = by_rarity[rarity]
+					break
+		if pool == null or pool.size() == 0:
+			break
+		var pick: String = pool[randi() % pool.size()]
+		if pick not in result:
+			result.append(pick)
 	return result

@@ -4,6 +4,8 @@ const EnemyDisplayScene = preload("res://scenes/combat/enemy_display.tscn")
 const PlayerBoardScene = preload("res://scenes/combat/player_board.tscn")
 const DamageNumberScript = preload("res://scripts/ui/damage_number.gd")
 const RewardScreenScene = preload("res://scenes/ui/reward_screen.tscn")
+const RelicRewardScreenScene = preload("res://scenes/ui/relic_reward_screen.tscn")
+const RelicDisplayScene = preload("res://scenes/ui/relic_display.tscn")
 const HackChallengeScene = preload("res://scenes/ui/hack_challenge.tscn")
 const CorruptionMeterScene = preload("res://scenes/ui/corruption_meter.tscn")
 const SinDisplayScene = preload("res://scenes/ui/sin_display.tscn")
@@ -36,6 +38,8 @@ var enemy_display_nodes: Dictionary = {}
 var cached_state: Dictionary = {}
 var current_enemy_id: String = ""
 var reward_screen = null
+var relic_reward_screen = null
+var relic_display = null
 var hack_challenge = null
 var corruption_meter = null
 var sin_display = null
@@ -282,12 +286,24 @@ func _client_combat_over(won: bool) -> void:
 		SFXManager.play_victory()
 		if GameManager.is_run_active():
 			GameManager.current_run.gold += 25 + randi() % 26  # 25-50 gold per win
-		# Show boss reward screen if rewards exist
-		var rewards = GameManager.get_boss_rewards(current_enemy_id)
-		if rewards.size() > 0:
+		var node_type = GameManager.current_node_type
+		var is_elite = node_type == "elite"
+		var is_boss = node_type == "boss"
+		# Elite and boss fights both award a relic
+		if GameManager.is_run_active() and (is_elite or is_boss):
 			await get_tree().create_timer(1.5).timeout
 			result_panel.visible = false
-			_show_reward_screen(rewards)
+			await _show_relic_reward()
+		# Boss fights also award a card absorption
+		if is_boss:
+			var card_rewards = GameManager.get_boss_rewards(current_enemy_id)
+			if card_rewards.size() > 0:
+				result_panel.visible = false
+				end_turn_btn.disabled = true
+				_show_reward_screen(card_rewards)
+				return  # _on_reward_chosen will re-show result_panel
+		if result_panel and not result_panel.visible:
+			result_panel.visible = true
 	else:
 		result_label.text = "DEFEAT"
 		result_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))
@@ -295,6 +311,29 @@ func _client_combat_over(won: bool) -> void:
 		if GameManager.is_run_active():
 			GameManager.end_run()
 	end_turn_btn.disabled = true
+
+func _show_relic_reward() -> void:
+	if not GameManager.is_run_active():
+		return
+	var owned = GameManager.current_run.relics
+	var relic_ids = RelicSystem.get_random_relic_reward(owned, 3)
+	if relic_ids.size() == 0:
+		return
+	relic_reward_screen = RelicRewardScreenScene.instantiate()
+	add_child(relic_reward_screen)
+	relic_reward_screen.show_relics(relic_ids)
+	var chosen_id = await relic_reward_screen.relic_chosen
+	relic_reward_screen.queue_free()
+	relic_reward_screen = null
+	if chosen_id != "" and GameManager.is_run_active():
+		GameManager.current_run.add_relic(chosen_id)
+		# Create relic display lazily if it doesn't exist yet
+		if not relic_display:
+			relic_display = RelicDisplayScene.instantiate()
+			$HUD.add_child(relic_display)
+			relic_display.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+			relic_display.position = Vector2(-620.0, 35.0)
+		relic_display.update_relics(GameManager.current_run.relics)
 
 func _show_reward_screen(rewards: Array[String]) -> void:
 	reward_screen = RewardScreenScene.instantiate()
@@ -400,6 +439,14 @@ func _create_ui_elements_from_engine() -> void:
 	# Turn banner (fullscreen overlay)
 	turn_banner = TurnBannerScene.instantiate()
 	add_child(turn_banner)
+
+	# Relic display (top-right of HUD, below deck count)
+	if GameManager.is_run_active() and GameManager.current_run.relics.size() > 0:
+		relic_display = RelicDisplayScene.instantiate()
+		$HUD.add_child(relic_display)
+		relic_display.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		relic_display.position = Vector2(-620.0, 35.0)
+		relic_display.update_relics(GameManager.current_run.relics)
 
 # === State Broadcast ===
 

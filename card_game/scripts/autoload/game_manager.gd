@@ -3,6 +3,7 @@ extends Node
 var card_database: Dictionary = {}  # String -> CardData
 var current_run: RunState = null
 var current_enemy: String = ""
+var current_node_type: String = "fight"  # "fight", "elite", or "boss"
 
 # Boss ID -> Array of card IDs players can absorb after defeating them
 var boss_rewards: Dictionary = {
