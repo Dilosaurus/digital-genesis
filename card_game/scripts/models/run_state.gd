@@ -11,6 +11,12 @@ var completed_nodes: Array[int] = []
 var relics: Array[String] = []
 var remove_count: int = 0  # Tracks how many cards removed at shop (raises price)
 
+# Run statistics
+var enemies_defeated: int = 0
+var floors_cleared: int = 0
+var total_gold_earned: int = 0
+var total_damage_dealt: int = 0
+
 # Branching map data
 var map_data: Array = []         # Array of rows; each row = Array of node dicts
 var current_row: int = -1        # -1 = hasn't started yet
@@ -249,6 +255,10 @@ func save_to_file() -> void:
 		"current_row": current_row,
 		"current_node_col": current_node_col,
 		"remove_count": remove_count,
+		"enemies_defeated": enemies_defeated,
+		"floors_cleared": floors_cleared,
+		"total_gold_earned": total_gold_earned,
+		"total_damage_dealt": total_damage_dealt,
 	}
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	if file:
@@ -281,6 +291,10 @@ static func load_from_file() -> RunState:
 	rs.current_row = data.get("current_row", -1)
 	rs.current_node_col = data.get("current_node_col", -1)
 	rs.remove_count = data.get("remove_count", 0)
+	rs.enemies_defeated = data.get("enemies_defeated", 0)
+	rs.floors_cleared = data.get("floors_cleared", 0)
+	rs.total_gold_earned = data.get("total_gold_earned", 0)
+	rs.total_damage_dealt = data.get("total_damage_dealt", 0)
 
 	# Deserialize map_data
 	var raw_map = data.get("map_data", [])
