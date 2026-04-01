@@ -79,3 +79,9 @@ func shake() -> void:
 	tween.tween_property(enemy_rect, "position", orig - Vector2(8, 0), 0.05)
 	tween.tween_property(enemy_rect, "position", orig + Vector2(4, 0), 0.05)
 	tween.tween_property(enemy_rect, "position", orig, 0.05)
+
+func play_death_animation() -> void:
+	var tween = create_tween().set_parallel()
+	tween.tween_property(enemy_rect, "modulate:a", 0.0, 0.5)
+	tween.tween_property(enemy_rect, "scale", Vector2(0.5, 1.5), 0.5)
+	tween.tween_property(self, "modulate:a", 0.3, 0.8)

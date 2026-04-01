@@ -115,6 +115,7 @@ func play_animation(target_pos: Vector2) -> void:
 
 	var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.set_parallel()
+	tween.tween_property(self, "rotation", randf_range(-0.2, 0.2), 0.35)
 	tween.tween_property(self, "global_position", target_pos, 0.35)
 	tween.tween_property(self, "scale", Vector2(0.6, 0.6), 0.35)
 	tween.tween_property(self, "modulate:a", 0.0, 0.15).set_delay(0.25)
