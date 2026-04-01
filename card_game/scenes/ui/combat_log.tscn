@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/combat_log.gd" id="1"]
+
+[node name="CombatLog" type="Control"]
+custom_minimum_size = Vector2(320, 170)
+script = ExtResource("1")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 170.0
+
+[node name="LogText" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+bbcode_enabled = true
+scroll_active = true
+scroll_following = true
+fit_content = false

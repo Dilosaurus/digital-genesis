@@ -80,6 +80,17 @@ func _on_mouse_entered() -> void:
 	var tween = create_tween().set_parallel().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.2)
 	tween.tween_property(self, "position:y", _base_position.y - 40, 0.2)
+	if card_data:
+		var tip = card_data.display_name
+		if card_data.damage > 0:
+			tip += "\nDmg: %d" % card_data.damage
+			if card_data.hits > 1:
+				tip += " x%d" % card_data.hits
+		if card_data.block > 0:
+			tip += "\nBlock: %d" % card_data.block
+		if card_data.heal > 0:
+			tip += "\nHeal: %d" % card_data.heal
+		tooltip_text = tip
 	hover_highlight.modulate.a = 0.12
 	z_index = 10
 

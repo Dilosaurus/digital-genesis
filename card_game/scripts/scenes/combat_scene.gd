@@ -11,6 +11,8 @@ const DeathsDoorOverlayScene = preload("res://scenes/ui/deaths_door_overlay.tscn
 const SoulDisplayScene = preload("res://scenes/ui/soul_display.tscn")
 const TitheScreenScene = preload("res://scenes/ui/tithe_screen.tscn")
 const PactScreenScene = preload("res://scenes/ui/pact_screen.tscn")
+const CombatLogScene = preload("res://scenes/ui/combat_log.tscn")
+const TurnBannerScene = preload("res://scenes/ui/turn_banner.tscn")
 
 @onready var enemy_area: Control = $ShakeContainer/EnemyArea
 @onready var hand_display = $HandDisplay
@@ -41,6 +43,8 @@ var deaths_door_overlay = null
 var soul_display = null
 var tithe_screen = null
 var pact_screen = null
+var combat_log = null
+var turn_banner = null
 
 func _ready() -> void:
 	result_panel.visible = false
@@ -336,6 +340,15 @@ func _create_ui_elements_from_engine() -> void:
 	pact_screen = PactScreenScene.instantiate()
 	$HUD.add_child(pact_screen)
 
+	# Combat log (bottom-left, above hand)
+	combat_log = CombatLogScene.instantiate()
+	add_child(combat_log)
+	combat_log.position = Vector2(10, 580)
+
+	# Turn banner (fullscreen overlay)
+	turn_banner = TurnBannerScene.instantiate()
+	add_child(turn_banner)
+
 # === State Broadcast ===
 
 func _broadcast_state() -> void:
@@ -430,6 +443,8 @@ func _on_end_turn_pressed() -> void:
 
 func _on_state_changed() -> void:
 	if is_server:
+		if engine.state.phase == Enums.CombatPhase.PLAYER_TURN and turn_banner:
+			turn_banner.show_banner("YOUR TURN", Color(0.2, 0.9, 0.3))
 		_refresh_all_ui()
 		if is_networked:
 			_broadcast_state()
@@ -446,11 +461,29 @@ func _on_card_played(peer_id: int, card_id: String, target_index: int, result: D
 			result["heal_amount"], result["vulnerable_applied"],
 			result["weak_applied"])
 
+	if combat_log:
+		var cdata = GameManager.get_card_data(card_id)
+		var cname = cdata.display_name if cdata else card_id
+		if result["damage_dealt"] > 0:
+			combat_log.add_damage("P%d" % peer_id, "Enemy", result["damage_dealt"])
+		if result["block_gained"] > 0:
+			combat_log.add_block("P%d" % peer_id, result["block_gained"])
+		if result["heal_amount"] > 0:
+			combat_log.add_heal("P%d" % peer_id, result["heal_amount"])
+
 func _on_enemy_acted(enemy_index: int, intent_type: int, value: int, target_peer_id: int, damage_dealt: int) -> void:
 	if is_networked:
 		_client_enemy_acted_fx.rpc(enemy_index, intent_type, value, target_peer_id, damage_dealt)
 	else:
 		_client_enemy_acted_fx(enemy_index, intent_type, value, target_peer_id, damage_dealt)
+
+	if combat_log:
+		if intent_type == Enums.EnemyIntent.ATTACK and damage_dealt > 0:
+			combat_log.add_damage("Enemy", "P%d" % target_peer_id, damage_dealt)
+		elif intent_type == Enums.EnemyIntent.DEFEND:
+			combat_log.add_block("Enemy", value)
+		elif intent_type == Enums.EnemyIntent.BUFF:
+			combat_log.add_status("Enemy buffed: +%d STR" % value)
 
 func _on_combat_ended(won: bool) -> void:
 	if is_networked:
