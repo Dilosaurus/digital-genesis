@@ -21,8 +21,8 @@ const TurnBannerScene = preload("res://scenes/ui/turn_banner.tscn")
 @onready var player_boards: HBoxContainer = $ShakeContainer/PlayerBoards
 @onready var end_turn_btn: Button = $HUD/EndTurnButton
 @onready var turn_label: Label = $HUD/TurnLabel
-@onready var deck_count_label: Label = $HUD/DeckCount
-@onready var discard_count_label: Label = $HUD/DiscardCount
+@onready var deck_count_label: Label = $HUD/DeckPanel/DeckCount
+@onready var discard_count_label: Label = $HUD/DiscardPanel/DiscardCount
 @onready var result_panel: Panel = $HUD/ResultPanel
 @onready var result_label: Label = $HUD/ResultPanel/ResultLabel
 @onready var continue_btn: Button = $HUD/ResultPanel/ContinueButton
@@ -50,11 +50,15 @@ var pact_screen = null
 var combat_log = null
 var turn_banner = null
 
+var _end_turn_pulse_tween: Tween = null
+
 func _ready() -> void:
 	result_panel.visible = false
 	end_turn_btn.pressed.connect(_on_end_turn_pressed)
 	hand_display.card_selected.connect(_on_card_selected)
 	continue_btn.pressed.connect(_on_continue_pressed)
+	# Fade in the scene on entry
+	TransitionManager.fade_in(0.4)
 
 	# Check if we're in solo mode (launched via --solo or no real network peer)
 	var is_solo = "--solo" in OS.get_cmdline_user_args() or not NetworkManager.is_host
@@ -409,14 +413,14 @@ func _on_continue_pressed() -> void:
 		var is_final_boss: bool = (run.current_row == run.map_data.size() - 1)
 		if is_final_boss:
 			GameManager.end_run()
-			get_tree().change_scene_to_file("res://scenes/main/main_menu.tscn")
+			TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
 		else:
 			GameManager.save_run()
-			get_tree().change_scene_to_file("res://scenes/map/map_screen.tscn")
+			TransitionManager.transition_to_scene("res://scenes/map/map_screen.tscn")
 		return
 	if is_networked:
 		NetworkManager.disconnect_game()
-	get_tree().change_scene_to_file("res://scenes/main/main_menu.tscn")
+	TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
 
 # === RPCs: Client -> Server ===
 
@@ -553,8 +557,23 @@ func _refresh_ui_from_dict(state_dict: Dictionary) -> void:
 	var local_data = state_dict["players"].get(local_peer_id, state_dict["players"].get(str(local_peer_id), {}))
 	if local_data and not local_data.get("has_ended_turn", true) and state_dict.get("phase", -1) == Enums.CombatPhase.PLAYER_TURN:
 		end_turn_btn.disabled = false
+		_start_end_turn_pulse()
 	else:
 		end_turn_btn.disabled = true
+		_stop_end_turn_pulse()
+
+func _start_end_turn_pulse() -> void:
+	if _end_turn_pulse_tween and _end_turn_pulse_tween.is_valid():
+		return  # Already pulsing
+	_end_turn_pulse_tween = create_tween().set_loops()
+	_end_turn_pulse_tween.tween_property(end_turn_btn, "modulate", Color(1.3, 1.3, 1.1, 1.0), 0.7).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	_end_turn_pulse_tween.tween_property(end_turn_btn, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.7).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+
+func _stop_end_turn_pulse() -> void:
+	if _end_turn_pulse_tween and _end_turn_pulse_tween.is_valid():
+		_end_turn_pulse_tween.kill()
+		_end_turn_pulse_tween = null
+	end_turn_btn.modulate = Color(0.6, 0.6, 0.6, 0.8)
 
 # === Input Handlers ===
 

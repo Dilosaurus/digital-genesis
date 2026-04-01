@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/card_visual.gd" id="1"]
 
 [sub_resource type="StyleBoxFlat" id="card_style"]
-bg_color = Color(0.18, 0.18, 0.25, 1)
+bg_color = Color(0.18, 0.13, 0.26, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -13,6 +13,36 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="glow_style"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.3, 0.9, 1.0, 0.85)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="cost_style"]
+bg_color = Color(0.15, 0.1, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.45, 0.35, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
 
 [node name="CardVisual" type="Control"]
 custom_minimum_size = Vector2(150, 210)
@@ -27,46 +57,82 @@ offset_bottom = 210.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("card_style")
 
-[node name="CostLabel" type="Label" parent="."]
+[node name="GlowBorder" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 6.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 152.0
+offset_bottom = 212.0
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0)
+theme_override_styles/panel = SubResource("glow_style")
+
+[node name="TypeBanner" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 150.0
+offset_bottom = 48.0
+mouse_filter = 2
+color = Color(0.75, 0.18, 0.13, 1)
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
 offset_top = 6.0
-offset_right = 28.0
-offset_bottom = 28.0
+offset_right = 144.0
+offset_bottom = 40.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Card Name"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+
+[node name="CostBG" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 30.0
+offset_bottom = 30.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("cost_style")
+
+[node name="CostLabel" type="Label" parent="CostBG"]
+layout_mode = 0
+offset_right = 26.0
+offset_bottom = 26.0
 mouse_filter = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 text = "1"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="Divider" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 55.0
-offset_right = 140.0
-offset_bottom = 75.0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 142.0
+offset_bottom = 52.0
 mouse_filter = 2
-horizontal_alignment = 1
-text = "Card Name"
-
-[node name="TypeBanner" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 78.0
-offset_right = 140.0
-offset_bottom = 82.0
-mouse_filter = 2
-color = Color(0.8, 0.25, 0.2, 1)
+color = Color(0.4, 0.4, 0.5, 0.5)
 
 [node name="DescLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 88.0
-offset_right = 140.0
-offset_bottom = 200.0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = 142.0
+offset_bottom = 202.0
 mouse_filter = 2
 text = "Card description"
-fit_content = true
+fit_content = false
 scroll_active = false
+theme_override_font_sizes/normal_font_size = 11
+theme_override_colors/default_color = Color(0.88, 0.86, 0.82, 1)
 
 [node name="HoverHighlight" type="ColorRect" parent="."]
 layout_mode = 0

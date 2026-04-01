@@ -66,8 +66,8 @@ func _ready() -> void:
 	_build_map()
 	_update_info()
 	_setup_relic_display()
-	_setup_relic_display()
 	GameManager.save_run()
+	TransitionManager.fade_in(0.4)
 
 	# "View Deck" button fixed in top-right
 	var deck_btn := Button.new()
@@ -270,7 +270,7 @@ func _on_node_selected(row: int, col: int) -> void:
 			GameManager.current_enemy = enemy
 			GameManager.current_node_type = node["type"]
 			GameManager.save_run()
-			get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
+			TransitionManager.transition_to_scene("res://scenes/combat/combat_scene.tscn")
 
 # ---------------------------------------------------------------------------
 # Rest site
