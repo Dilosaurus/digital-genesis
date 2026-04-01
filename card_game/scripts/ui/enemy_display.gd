@@ -1,14 +1,26 @@
 extends Control
 
+const StatusIconScene = preload("res://scenes/ui/status_icon.tscn")
+
 @onready var name_label: Label = $NameLabel
 @onready var hp_bar = $HPBar
 @onready var intent_label: Label = $IntentLabel
 @onready var block_label: Label = $BlockLabel
 @onready var enemy_rect: ColorRect = $EnemyRect
-@onready var status_label: Label = $StatusLabel
+@onready var status_icons_container: HBoxContainer = $StatusIconsContainer
 
 var _idle_tween: Tween = null
 var _base_rect_y: float = 40.0
+
+# Track active icon instances keyed by status type
+var _icons: Dictionary = {}
+
+# Status types tracked for enemies
+const TRACKED_STATUSES = [
+	StatusIcon.TYPE_STRENGTH,
+	StatusIcon.TYPE_VULNERABLE,
+	StatusIcon.TYPE_WEAK,
+]
 
 # Enemy visual colors: [primary, secondary (slightly lighter)]
 const ENEMY_COLORS = {
@@ -27,6 +39,14 @@ const ENEMY_COLORS = {
 func _ready() -> void:
 	_base_rect_y = enemy_rect.position.y
 	_start_idle_animation()
+	_init_icons()
+
+func _init_icons() -> void:
+	for type in TRACKED_STATUSES:
+		var icon = StatusIconScene.instantiate()
+		status_icons_container.add_child(icon)
+		icon.setup(type, 0)
+		_icons[type] = icon
 
 func _start_idle_animation() -> void:
 	if _idle_tween:
@@ -77,15 +97,14 @@ func update_enemy(state_dict: Dictionary) -> void:
 			intent_label.text = "?"
 			intent_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 
-	# Status effects
-	var statuses = []
-	if state_dict.get("vulnerable", 0) > 0:
-		statuses.append("Vuln %d" % state_dict["vulnerable"])
-	if state_dict.get("weak", 0) > 0:
-		statuses.append("Weak %d" % state_dict["weak"])
-	if state_dict.get("strength", 0) > 0:
-		statuses.append("STR +%d" % state_dict["strength"])
-	status_label.text = " | ".join(statuses) if statuses.size() > 0 else ""
+	# Update status icons
+	_update_icon(StatusIcon.TYPE_STRENGTH,   state_dict.get("strength",   0))
+	_update_icon(StatusIcon.TYPE_VULNERABLE, state_dict.get("vulnerable", 0))
+	_update_icon(StatusIcon.TYPE_WEAK,       state_dict.get("weak",       0))
+
+func _update_icon(type: String, count: int) -> void:
+	if _icons.has(type):
+		_icons[type].update_count(count)
 
 func shake() -> void:
 	# Flash white first, then shake
