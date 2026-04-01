@@ -40,6 +40,7 @@ func _ready() -> void:
 	_build_map()
 	_update_info()
 	GameManager.save_run()
+	TransitionManager.fade_in(0.4)
 
 	var deck_btn = Button.new()
 	deck_btn.text = "View Deck"
@@ -142,7 +143,7 @@ func _on_node_selected(node_index: int) -> void:
 
 	var enemy = node["enemies"][randi() % node["enemies"].size()]
 	GameManager.current_enemy = enemy
-	get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
+	TransitionManager.transition_to_scene("res://scenes/combat/combat_scene.tscn")
 
 var rest_panel: Panel = null
 
