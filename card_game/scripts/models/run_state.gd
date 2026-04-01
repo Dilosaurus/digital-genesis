@@ -164,6 +164,13 @@ static func generate_map(act_number: int) -> Array:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+func advance_act() -> void:
+	act += 1
+	map_data = RunState.generate_map(act)
+	current_row = -1
+	current_node_col = -1
+	completed_nodes.clear()
+
 func add_card(card_id: String) -> void:
 	deck.append(card_id)
 
