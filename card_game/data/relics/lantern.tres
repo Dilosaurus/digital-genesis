@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "lantern"
+display_name = "Lantern"
+description = "+1 max Energy."
+rarity = 2
+bonus_max_energy = 1

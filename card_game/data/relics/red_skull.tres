@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "red_skull"
+display_name = "Red Skull"
+description = "+3 Strength at combat start. +10 corruption resistance."
+rarity = 2
+start_combat_strength = 3
+corruption_resistance = 10
