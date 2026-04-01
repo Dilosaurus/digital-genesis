@@ -94,6 +94,12 @@ func _start_local_combat() -> void:
 		ps.max_hp = GameManager.current_run.max_hp
 		ps.energy = ps.max_energy
 		DeckManager.draw(ps, 5)
+		# Apply relic effects
+		if GameManager.current_run.relics.size() > 0:
+			RelicSystem.apply_start_of_combat(ps, GameManager.current_run.relics)
+			var bonus_draw = RelicSystem.get_bonus_draw(GameManager.current_run.relics)
+			if bonus_draw > 0:
+				DeckManager.draw(ps, bonus_draw)
 		_create_ui_elements_from_engine()
 		_refresh_all_ui()
 		return

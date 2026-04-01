@@ -20,6 +20,7 @@ var boss_rewards: Dictionary = {
 
 func _ready() -> void:
 	_load_card_database()
+	RelicSystem.load_relics()
 
 func _load_card_database() -> void:
 	var dir = DirAccess.open("res://data/cards/")
