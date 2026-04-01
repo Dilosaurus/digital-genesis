@@ -18,3 +18,4 @@ hits = 1
 apply_vulnerable = 2
 apply_weak = 0
 corruption_gain = 1
+upgrade_id = "bash_plus"

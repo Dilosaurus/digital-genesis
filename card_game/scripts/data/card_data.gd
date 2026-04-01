@@ -19,3 +19,5 @@ extends Resource
 @export var exhaust: bool = false
 @export var gain_strength: int = 0
 @export var gain_dexterity: int = 0
+@export var upgraded: bool = false
+@export var upgrade_id: String = ""

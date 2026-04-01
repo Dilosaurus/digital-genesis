@@ -89,7 +89,7 @@ var rest_panel: Panel = null
 
 func _show_rest() -> void:
 	rest_panel = Panel.new()
-	rest_panel.custom_minimum_size = Vector2(400, 200)
+	rest_panel.custom_minimum_size = Vector2(400, 240)
 	rest_panel.position = Vector2(get_viewport_rect().size.x / 2 - 200, get_viewport_rect().size.y / 2 - 100)
 	add_child(rest_panel)
 
@@ -112,9 +112,16 @@ func _show_rest() -> void:
 	)
 	rest_panel.add_child(rest_btn)
 
+	var upgrade_btn = Button.new()
+	upgrade_btn.text = "Upgrade a Card"
+	upgrade_btn.position = Vector2(50, 110)
+	upgrade_btn.custom_minimum_size = Vector2(300, 40)
+	upgrade_btn.pressed.connect(_show_upgrade_choices)
+	rest_panel.add_child(upgrade_btn)
+
 	var skip_btn = Button.new()
 	skip_btn.text = "Skip"
-	skip_btn.position = Vector2(50, 140)
+	skip_btn.position = Vector2(50, 170)
 	skip_btn.custom_minimum_size = Vector2(300, 40)
 	skip_btn.pressed.connect(_finish_rest)
 	rest_panel.add_child(skip_btn)
@@ -126,3 +133,63 @@ func _finish_rest() -> void:
 		rest_panel = null
 	_build_map()
 	_update_info()
+
+func _show_upgrade_choices() -> void:
+	if rest_panel:
+		rest_panel.queue_free()
+		rest_panel = null
+
+	rest_panel = Panel.new()
+	rest_panel.custom_minimum_size = Vector2(500, 400)
+	rest_panel.position = Vector2(get_viewport_rect().size.x / 2 - 250, get_viewport_rect().size.y / 2 - 200)
+	add_child(rest_panel)
+
+	var title = Label.new()
+	title.text = "CHOOSE CARD TO UPGRADE"
+	title.position = Vector2(100, 15)
+	title.add_theme_font_size_override("font_size", 20)
+	rest_panel.add_child(title)
+
+	var run = GameManager.current_run
+	var y_pos = 55
+	var shown = 0
+	for i in run.deck.size():
+		var card_id = run.deck[i]
+		var card_data = GameManager.get_card_data(card_id)
+		if not card_data or card_data.upgraded or card_data.upgrade_id == "":
+			continue
+		if shown >= 5:
+			break
+		var btn = Button.new()
+		var upgrade_data = GameManager.get_card_data(card_data.upgrade_id)
+		var upgrade_name = upgrade_data.display_name if upgrade_data else card_data.upgrade_id
+		btn.text = "%s → %s" % [card_data.display_name, upgrade_name]
+		btn.position = Vector2(30, y_pos)
+		btn.custom_minimum_size = Vector2(440, 35)
+		btn.pressed.connect(_do_upgrade.bind(i, card_data.upgrade_id))
+		rest_panel.add_child(btn)
+		y_pos += 45
+		shown += 1
+
+	if shown == 0:
+		var no_label = Label.new()
+		no_label.text = "No cards available to upgrade."
+		no_label.position = Vector2(100, 80)
+		rest_panel.add_child(no_label)
+
+	var back_btn = Button.new()
+	back_btn.text = "Back"
+	back_btn.position = Vector2(180, y_pos + 15)
+	back_btn.custom_minimum_size = Vector2(140, 35)
+	back_btn.pressed.connect(func():
+		rest_panel.queue_free()
+		rest_panel = null
+		_show_rest()
+	)
+	rest_panel.add_child(back_btn)
+
+func _do_upgrade(deck_index: int, upgrade_id: String) -> void:
+	var run = GameManager.current_run
+	if deck_index < run.deck.size():
+		run.deck[deck_index] = upgrade_id
+	_finish_rest()
