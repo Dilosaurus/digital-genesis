@@ -59,6 +59,9 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 			total_damage += dmg
 		target.current_hp = maxi(target.current_hp, 0)
 		result["damage_dealt"] = total_damage
+		# Track total damage dealt in run stats
+		if GameManager.is_run_active():
+			GameManager.current_run.total_damage_dealt += total_damage
 
 	# Apply block
 	if effective_block > 0:

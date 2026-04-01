@@ -15,6 +15,7 @@ const TitheScreenScene = preload("res://scenes/ui/tithe_screen.tscn")
 const PactScreenScene = preload("res://scenes/ui/pact_screen.tscn")
 const CombatLogScene = preload("res://scenes/ui/combat_log.tscn")
 const TurnBannerScene = preload("res://scenes/ui/turn_banner.tscn")
+const RunSummaryScreenScene = preload("res://scenes/ui/run_summary_screen.tscn")
 
 @onready var enemy_area: Control = $ShakeContainer/EnemyArea
 @onready var hand_display = $HandDisplay
@@ -49,6 +50,7 @@ var tithe_screen = null
 var pact_screen = null
 var combat_log = null
 var turn_banner = null
+var run_summary_screen = null
 
 var _end_turn_pulse_tween: Tween = null
 
@@ -303,17 +305,23 @@ func _trigger_hack_challenge(hack_value: int, target_peer_id: int) -> void:
 @rpc("authority", "call_local", "reliable")
 func _client_combat_over(won: bool) -> void:
 	SFXManager.stop_ambient_hum()
+	end_turn_btn.disabled = true
 	result_panel.visible = true
 	if won:
+		if GameManager.is_run_active():
+			var gold_gained: int = 25 + randi() % 26  # 25-50 gold per win
+			GameManager.current_run.gold += gold_gained
+			GameManager.current_run.total_gold_earned += gold_gained
+			GameManager.current_run.enemies_defeated += engine.state.enemies.size()
+
+		# Brief flash of "VICTORY!" before reward flow
+		result_panel.visible = true
 		result_label.text = "VICTORY!"
 		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
 		SFXManager.play_victory()
-		if GameManager.is_run_active():
-			var gold_earned = 25 + randi() % 26  # 25-50 gold per win
-			GameManager.current_run.gold += gold_earned
-			SFXManager.play_gold_gain()
+		SFXManager.play_gold_gain()
 
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(1.2).timeout
 		result_panel.visible = false
 
 		# Always show card reward screen after any combat victory
@@ -334,26 +342,52 @@ func _client_combat_over(won: bool) -> void:
 
 		# Boss fights also award card absorption
 		if is_boss:
-			var boss_rewards = GameManager.get_boss_rewards(current_enemy_id)
-			if boss_rewards.size() > 0:
-				var absorbed = await _show_boss_reward_screen(boss_rewards)
+			var boss_rewards_list = GameManager.get_boss_rewards(current_enemy_id)
+			if boss_rewards_list.size() > 0:
+				var absorbed = await _show_boss_reward_screen(boss_rewards_list)
 				if absorbed != "":
 					print("Absorbed boss ability: %s" % absorbed)
 					if GameManager.is_run_active():
 						GameManager.current_run.add_card(absorbed)
 
-		# All reward screens done — show the continue panel
-		result_panel.visible = true
-		result_label.text = "VICTORY!"
-		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
-		continue_btn.visible = true
-	else:
-		result_label.text = "DEFEAT"
-		result_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))
-		SFXManager.play_defeat()
+		# All rewards done — check for final boss victory
 		if GameManager.is_run_active():
+			var ps = engine.state.players.get(local_peer_id)
+			if ps:
+				GameManager.current_run.current_hp = ps.current_hp
+			var run := GameManager.current_run
+			run.mark_node_complete(run.current_row, run.current_node_col)
+			run.floors_cleared += 1
+			var is_final_boss: bool = (run.current_row == run.map_data.size() - 1)
+			if is_final_boss:
+				# Victory run complete — show summary then return to menu
+				await _show_run_summary(true)
+				GameManager.end_run()
+				TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
+			else:
+				# Intermediate victory — show summary then continue to map
+				await _show_run_summary(true)
+				GameManager.save_run()
+				TransitionManager.transition_to_scene("res://scenes/map/map_screen.tscn")
+		else:
+			# Non-campaign victory (solo/networked): show continue button
+			result_panel.visible = true
+			result_label.text = "VICTORY!"
+			result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
+			continue_btn.visible = true
+	else:
+		# Defeat
+		if GameManager.is_run_active():
+			await _show_run_summary(false)
 			GameManager.end_run()
-	end_turn_btn.disabled = true
+			TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
+		else:
+			# Non-campaign defeat
+			result_label.text = "DEFEAT"
+			result_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))
+			result_panel.visible = true
+			if is_networked:
+				NetworkManager.disconnect_game()
 
 func _show_relic_reward() -> void:
 	if not GameManager.is_run_active():
@@ -432,6 +466,9 @@ func _on_continue_pressed() -> void:
 		var run := GameManager.current_run
 		# Mark the combat node as complete in the branching map
 		run.mark_node_complete(run.current_row, run.current_node_col)
+		run.floors_cleared += 1
+		# Show run summary before transitioning
+		await _show_run_summary(true)
 		# Check if we just beat the boss (last row of the map)
 		var is_boss_row: bool = (run.current_row == run.map_data.size() - 1)
 		if is_boss_row:
@@ -557,6 +594,22 @@ func _show_victory_screen() -> void:
 	# Fade the overlay in
 	var tween := create_tween()
 	tween.tween_property(overlay, "modulate", Color(0.0, 0.02, 0.05, 0.97), 0.7)
+
+## Show the run summary overlay and wait for the player to dismiss it.
+func _show_run_summary(is_victory: bool) -> void:
+	if not GameManager.is_run_active():
+		return
+	var run := GameManager.current_run
+	var ps = engine.state.players.get(local_peer_id)
+	var hp: int = ps.current_hp if ps else 0
+
+	run_summary_screen = RunSummaryScreenScene.instantiate()
+	add_child(run_summary_screen)
+	run_summary_screen.show_summary(is_victory, run, hp)
+	await run_summary_screen.summary_closed
+	if run_summary_screen:
+		run_summary_screen.queue_free()
+		run_summary_screen = null
 
 # === RPCs: Client -> Server ===
 
