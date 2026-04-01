@@ -44,16 +44,17 @@ func _build_map() -> void:
 			btn.disabled = true
 			btn.modulate = Color(0.6, 0.6, 0.6)
 
-		# Color by type
-		match node["type"]:
-			"fight":
-				btn.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3)) if not btn.disabled else null
-			"rest":
-				btn.add_theme_color_override("font_color", Color(0.3, 0.9, 0.4)) if not btn.disabled else null
-			"elite":
-				btn.add_theme_color_override("font_color", Color(0.9, 0.6, 0.1)) if not btn.disabled else null
-			"boss":
-				btn.add_theme_color_override("font_color", Color(0.9, 0.2, 0.9)) if not btn.disabled else null
+		# Color by type (only for non-disabled buttons)
+		if not btn.disabled:
+			match node["type"]:
+				"fight":
+					btn.add_theme_color_override("font_color", Color(0.9, 0.3, 0.3))
+				"rest":
+					btn.add_theme_color_override("font_color", Color(0.3, 0.9, 0.4))
+				"elite":
+					btn.add_theme_color_override("font_color", Color(0.9, 0.6, 0.1))
+				"boss":
+					btn.add_theme_color_override("font_color", Color(0.9, 0.2, 0.9))
 
 		node_container.add_child(btn)
 

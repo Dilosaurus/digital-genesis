@@ -46,7 +46,11 @@ func get_starter_deck() -> Array[String]:
 	return deck
 
 func get_boss_rewards(enemy_id: String) -> Array[String]:
-	return boss_rewards.get(enemy_id, [])
+	var rewards: Array[String] = []
+	var raw = boss_rewards.get(enemy_id, [])
+	for r in raw:
+		rewards.append(r)
+	return rewards
 
 func start_new_run() -> void:
 	current_run = RunState.new_run()
