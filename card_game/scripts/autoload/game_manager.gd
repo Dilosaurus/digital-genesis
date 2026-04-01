@@ -1,6 +1,8 @@
 extends Node
 
 var card_database: Dictionary = {}  # String -> CardData
+var current_run: RunState = null
+var current_enemy: String = ""
 
 # Boss ID -> Array of card IDs players can absorb after defeating them
 var boss_rewards: Dictionary = {
@@ -45,3 +47,13 @@ func get_starter_deck() -> Array[String]:
 
 func get_boss_rewards(enemy_id: String) -> Array[String]:
 	return boss_rewards.get(enemy_id, [])
+
+func start_new_run() -> void:
+	current_run = RunState.new_run()
+	current_enemy = ""
+
+func is_run_active() -> bool:
+	return current_run != null
+
+func end_run() -> void:
+	current_run = null

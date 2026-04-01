@@ -35,7 +35,8 @@ func _on_join_pressed() -> void:
 		)
 
 func _on_solo_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
+	GameManager.start_new_run()
+	get_tree().change_scene_to_file("res://scenes/map/map_screen.tscn")
 
 func _on_start_pressed() -> void:
 	if not NetworkManager.is_host:
