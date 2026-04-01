@@ -73,7 +73,27 @@ func _start_local_combat() -> void:
 	local_peer_id = 1
 	engine = CombatEngine.new()
 	_connect_engine_signals()
-	var enemy = _pick_random_enemy()
+	var enemy: String
+	if GameManager.is_run_active():
+		enemy = GameManager.current_enemy
+		current_enemy_id = enemy
+		var peer_ids: Array[int] = [1]
+		print("Campaign combat: vs %s" % enemy)
+		engine.initialize(peer_ids, enemy)
+		# Override with run deck/HP
+		var ps = engine.state.players[1]
+		ps.draw_pile = GameManager.current_run.deck.duplicate()
+		ps.hand.clear()
+		ps.discard_pile.clear()
+		DeckManager.shuffle(ps.draw_pile)
+		ps.current_hp = GameManager.current_run.current_hp
+		ps.max_hp = GameManager.current_run.max_hp
+		ps.energy = ps.max_energy
+		DeckManager.draw(ps, 5)
+		_create_ui_elements_from_engine()
+		_refresh_all_ui()
+		return
+	enemy = _pick_random_enemy()
 	current_enemy_id = enemy
 	# Solo mode: 1 human + 3 bots
 	var peer_ids: Array[int] = [1, 2, 3, 4]
@@ -252,6 +272,8 @@ func _client_combat_over(won: bool) -> void:
 	else:
 		result_label.text = "DEFEAT"
 		result_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))
+		if GameManager.is_run_active():
+			GameManager.end_run()
 	end_turn_btn.disabled = true
 
 func _show_reward_screen(rewards: Array[String]) -> void:
@@ -265,6 +287,8 @@ func _show_reward_screen(rewards: Array[String]) -> void:
 func _on_reward_chosen(card_id: String) -> void:
 	if card_id != "":
 		print("Absorbed ability: %s" % card_id)
+		if GameManager.is_run_active():
+			GameManager.current_run.add_card(card_id)
 		# In a full roguelike, this would add to player's persistent deck
 		# For now, just display confirmation
 		result_panel.visible = true
@@ -278,6 +302,18 @@ func _on_reward_chosen(card_id: String) -> void:
 		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
 
 func _on_continue_pressed() -> void:
+	if GameManager.is_run_active():
+		var ps = engine.state.players.get(local_peer_id)
+		if ps:
+			GameManager.current_run.current_hp = ps.current_hp
+		GameManager.current_run.completed_nodes.append(GameManager.current_run.current_node)
+		# Check if all nodes done (campaign complete)
+		if GameManager.current_run.completed_nodes.size() >= 7:
+			GameManager.end_run()
+			get_tree().change_scene_to_file("res://scenes/main/main_menu.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/map/map_screen.tscn")
+		return
 	if is_networked:
 		NetworkManager.disconnect_game()
 	get_tree().change_scene_to_file("res://scenes/main/main_menu.tscn")
@@ -411,7 +447,8 @@ func _on_card_selected(hand_index: int, target_index: int) -> void:
 			_server_play_card.rpc_id(1, hand_index, target_index)
 	else:
 		engine.try_play_card(local_peer_id, hand_index, target_index)
-		_bot_play_turn()
+		if not GameManager.is_run_active():
+			_bot_play_turn()
 
 func _on_end_turn_pressed() -> void:
 	if is_networked:
@@ -421,10 +458,10 @@ func _on_end_turn_pressed() -> void:
 			_server_end_turn.rpc_id(1)
 	else:
 		engine.player_end_turn(local_peer_id)
-		# End turn for all bots
-		for pid in engine.state.players:
-			if pid != local_peer_id:
-				engine.player_end_turn(pid)
+		if not GameManager.is_run_active():
+			for pid in engine.state.players:
+				if pid != local_peer_id:
+					engine.player_end_turn(pid)
 
 # === Engine Signal Handlers (server only) ===
 
