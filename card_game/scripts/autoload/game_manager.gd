@@ -58,6 +58,48 @@ func get_boss_rewards(enemy_id: String) -> Array[String]:
 		rewards.append(r)
 	return rewards
 
+func get_random_card_rewards(count: int = 3) -> Array[String]:
+	# Collect eligible cards: non-curse, non-upgraded
+	var eligible: Array[String] = []
+	var player_deck: Array[String] = []
+	if is_run_active():
+		player_deck = current_run.deck
+
+	for card_id in card_database:
+		var card: CardData = card_database[card_id]
+		# Exclude curses (CURSE = 4) and pre-upgraded variants
+		if card.card_type == Enums.CardType.CURSE:
+			continue
+		if card.upgraded:
+			continue
+		eligible.append(card_id)
+
+	# Shuffle eligible list (Fisher-Yates)
+	for i in range(eligible.size() - 1, 0, -1):
+		var j = randi() % (i + 1)
+		var tmp = eligible[i]
+		eligible[i] = eligible[j]
+		eligible[j] = tmp
+
+	# Pick cards — prefer ones not already in the deck
+	var result: Array[String] = []
+	var fallback: Array[String] = []
+	for card_id in eligible:
+		if result.size() >= count:
+			break
+		if player_deck.has(card_id):
+			fallback.append(card_id)
+		else:
+			result.append(card_id)
+
+	# Fill remaining slots from fallback (duplicates) if needed
+	var fi = 0
+	while result.size() < count and fi < fallback.size():
+		result.append(fallback[fi])
+		fi += 1
+
+	return result
+
 func start_new_run() -> void:
 	current_run = RunState.new_run()
 	current_enemy = ""
