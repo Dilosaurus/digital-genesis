@@ -194,19 +194,24 @@ func _client_receive_hand(hand_cards: Array, energy: int, draw_count: int, disca
 
 @rpc("authority", "call_local", "reliable")
 func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, damage: int, block: int, heal: int, vuln: int, weak: int) -> void:
+	SFXManager.play_card()
+
 	# Shake enemy on damage
 	if damage > 0 and enemy_display_nodes.has(target_index):
 		enemy_display_nodes[target_index].shake()
 		_spawn_damage_number(enemy_display_nodes[target_index], damage, "damage")
 		_do_screen_shake(clampf(float(damage) * 0.8, 3.0, 15.0))
+		SFXManager.play_hit()
 
 	# Block number on player
 	if block > 0 and player_board_nodes.has(peer_id):
 		_spawn_damage_number(player_board_nodes[peer_id], block, "block")
+		SFXManager.play_block()
 
 	# Heal number on player
 	if heal > 0 and player_board_nodes.has(peer_id):
 		_spawn_damage_number(player_board_nodes[peer_id], heal, "heal")
+		SFXManager.play_heal()
 
 	# Vulnerable text on enemy
 	if vuln > 0 and enemy_display_nodes.has(target_index):
@@ -221,6 +226,7 @@ func _client_enemy_acted_fx(enemy_index: int, intent_type: int, value: int, targ
 	if intent_type == Enums.EnemyIntent.ATTACK and damage_dealt > 0:
 		if player_board_nodes.has(target_peer_id):
 			_spawn_damage_number(player_board_nodes[target_peer_id], damage_dealt, "damage")
+		SFXManager.play_hit()
 		# Shake screen when local player takes damage
 		if target_peer_id == local_peer_id:
 			_do_screen_shake(clampf(float(damage_dealt) * 1.0, 5.0, 20.0), 0.3)
@@ -267,6 +273,7 @@ func _client_combat_over(won: bool) -> void:
 	if won:
 		result_label.text = "VICTORY!"
 		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
+		SFXManager.play_victory()
 		# Show boss reward screen if rewards exist
 		var rewards = GameManager.get_boss_rewards(current_enemy_id)
 		if rewards.size() > 0:
@@ -276,6 +283,7 @@ func _client_combat_over(won: bool) -> void:
 	else:
 		result_label.text = "DEFEAT"
 		result_label.add_theme_color_override("font_color", Color(0.9, 0.2, 0.2))
+		SFXManager.play_defeat()
 		if GameManager.is_run_active():
 			GameManager.end_run()
 	end_turn_btn.disabled = true
@@ -553,6 +561,7 @@ func _on_player_entered_deaths_door(peer_id: int) -> void:
 
 func _on_player_died(peer_id: int) -> void:
 	print("Player %d has died!" % peer_id)
+	SFXManager.play_death()
 	if peer_id == local_peer_id and deaths_door_overlay:
 		deaths_door_overlay.show_dead()
 
@@ -560,6 +569,7 @@ func _on_corruption_tier_changed(peer_id: int, new_tier: int) -> void:
 	var tier_names = ["PURE", "TAINTED", "CORRUPTED", "DEMONIC"]
 	print("Player %d corruption tier: %s" % [peer_id, tier_names[new_tier]])
 	if peer_id == local_peer_id:
+		SFXManager.play_corruption()
 		_do_screen_shake(6.0, 0.2)
 
 # === M2 Signal Handlers ===

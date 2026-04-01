@@ -12,6 +12,7 @@ config/features=PackedStringArray("4.6")
 EventBus="*res://scripts/autoload/event_bus.gd"
 GameManager="*res://scripts/autoload/game_manager.gd"
 NetworkManager="*res://scripts/autoload/network_manager.gd"
+SFXManager="*res://scripts/autoload/sfx_manager.gd"
 
 [display]
 

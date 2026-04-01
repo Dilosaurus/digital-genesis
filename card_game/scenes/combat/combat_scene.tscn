@@ -15,7 +15,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.08, 0.08, 0.12, 1)
+color = Color(0.06, 0.04, 0.1, 1)
 
 [node name="ShakeContainer" type="Control" parent="."]
 layout_mode = 1
