@@ -110,6 +110,8 @@ func _start_local_combat() -> void:
 				DeckManager.draw(ps, bonus_draw)
 		_create_ui_elements_from_engine()
 		_refresh_all_ui()
+		_play_encounter_intro(GameManager.current_node_type)
+		SFXManager.play_ambient_hum()
 		return
 	enemy = _pick_random_enemy()
 	current_enemy_id = enemy
@@ -119,6 +121,14 @@ func _start_local_combat() -> void:
 	engine.initialize(peer_ids, enemy)
 	_create_ui_elements_from_engine()
 	_refresh_all_ui()
+	SFXManager.play_ambient_hum()
+
+func _play_encounter_intro(node_type: String) -> void:
+	match node_type:
+		"boss":
+			SFXManager.play_boss_intro()
+		"elite":
+			SFXManager.play_elite_intro()
 
 func _pick_random_enemy() -> String:
 	var enemies = ["jaw_worm", "cultist", "louse_red", "michael"]
@@ -208,7 +218,16 @@ func _client_receive_hand(hand_cards: Array, energy: int, draw_count: int, disca
 
 @rpc("authority", "call_local", "reliable")
 func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, damage: int, block: int, heal: int, vuln: int, weak: int) -> void:
-	SFXManager.play_card()
+	# Play type-specific card sound
+	var cdata = GameManager.get_card_data(card_id)
+	if cdata:
+		match cdata.card_type:
+			Enums.CardType.ATTACK: SFXManager.play_card_attack()
+			Enums.CardType.SKILL:  SFXManager.play_card_skill()
+			Enums.CardType.POWER:  SFXManager.play_card_power()
+			_:                     SFXManager.play_card_curse()
+	else:
+		SFXManager.play_card()
 
 	# Shake enemy on damage
 	if damage > 0 and enemy_display_nodes.has(target_index):
@@ -283,13 +302,16 @@ func _trigger_hack_challenge(hack_value: int, target_peer_id: int) -> void:
 
 @rpc("authority", "call_local", "reliable")
 func _client_combat_over(won: bool) -> void:
+	SFXManager.stop_ambient_hum()
 	result_panel.visible = true
 	if won:
 		result_label.text = "VICTORY!"
 		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
 		SFXManager.play_victory()
 		if GameManager.is_run_active():
-			GameManager.current_run.gold += 25 + randi() % 26  # 25-50 gold per win
+			var gold_earned = 25 + randi() % 26  # 25-50 gold per win
+			GameManager.current_run.gold += gold_earned
+			SFXManager.play_gold_gain()
 
 		await get_tree().create_timer(1.5).timeout
 		result_panel.visible = false
@@ -348,6 +370,7 @@ func _show_relic_reward() -> void:
 	relic_reward_screen = null
 	if chosen_id != "" and GameManager.is_run_active():
 		GameManager.current_run.add_relic(chosen_id)
+		SFXManager.play_relic_acquire()
 		if not relic_display:
 			relic_display = RelicDisplayScene.instantiate()
 			$HUD.add_child(relic_display)
@@ -605,8 +628,11 @@ func _on_end_turn_pressed() -> void:
 
 func _on_state_changed() -> void:
 	if is_server:
-		if engine.state.phase == Enums.CombatPhase.PLAYER_TURN and turn_banner:
-			turn_banner.show_banner("YOUR TURN", Color(0.2, 0.9, 0.3))
+		if engine.state.phase == Enums.CombatPhase.PLAYER_TURN:
+			if turn_banner:
+				turn_banner.show_banner("YOUR TURN", Color(0.2, 0.9, 0.3))
+			# Cards are drawn at the start of each player turn
+			SFXManager.play_card_draw()
 		_refresh_all_ui()
 		if is_networked:
 			_broadcast_state()

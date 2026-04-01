@@ -20,6 +20,7 @@ var _base_position := Vector2.ZERO
 var _is_hovered := false
 var _original_y := 0.0
 var _idle_tween: Tween = null
+var _resolved_type_key := "skill"  # set during setup(), used for SFX
 
 # Card type color palettes: [bg_dark, bg_light, border, banner]
 const TYPE_COLORS = {
@@ -56,6 +57,7 @@ func setup(p_card_id: String, p_hand_index: int, p_energy: int, p_corruption_tie
 		desc_label.text = overrides.get("description", card_data.description)
 		type_key = "curse"
 
+	_resolved_type_key = type_key
 	_apply_card_colors(type_key)
 
 	# Playability visual
@@ -113,6 +115,7 @@ func _ready() -> void:
 func _on_mouse_entered() -> void:
 	if not is_playable:
 		return
+	SFXManager.play_button_hover()
 	_is_hovered = true
 	_original_y = _base_position.y
 	var tween = create_tween().set_parallel().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
@@ -147,6 +150,14 @@ func _on_gui_input(event: InputEvent) -> void:
 
 ## Animate the card flying to a target position then disappearing
 func play_animation(target_pos: Vector2) -> void:
+	# Play type-specific card sound based on resolved type (includes corruption override)
+	match _resolved_type_key:
+		"attack": SFXManager.play_card_attack()
+		"skill":  SFXManager.play_card_skill()
+		"power":  SFXManager.play_card_power()
+		"curse":  SFXManager.play_card_curse()
+		_:        SFXManager.play_card()
+
 	# Disable input during animation
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	z_index = 20
