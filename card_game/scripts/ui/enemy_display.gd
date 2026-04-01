@@ -2,6 +2,8 @@ extends Control
 
 const StatusIconScene = preload("res://scenes/ui/status_icon.tscn")
 
+signal enemy_clicked(enemy_index: int)
+
 @onready var name_label: Label = $NameLabel
 @onready var hp_bar = $HPBar
 @onready var intent_label: Label = $IntentLabel
@@ -11,6 +13,9 @@ const StatusIconScene = preload("res://scenes/ui/status_icon.tscn")
 
 var _idle_tween: Tween = null
 var _base_rect_y: float = 40.0
+var enemy_index: int = 0
+var _is_targetable: bool = false
+var _highlight_tween: Tween = null
 
 # Track active icon instances keyed by status type
 var _icons: Dictionary = {}
@@ -40,6 +45,10 @@ func _ready() -> void:
 	_base_rect_y = enemy_rect.position.y
 	_start_idle_animation()
 	_init_icons()
+	gui_input.connect(_on_gui_input)
+	mouse_entered.connect(_on_mouse_entered_enemy)
+	mouse_exited.connect(_on_mouse_exited_enemy)
+	pivot_offset = custom_minimum_size / 2.0
 
 func _init_icons() -> void:
 	for type in TRACKED_STATUSES:
@@ -54,6 +63,35 @@ func _start_idle_animation() -> void:
 	_idle_tween = create_tween().set_loops()
 	_idle_tween.tween_property(enemy_rect, "position:y", _base_rect_y - 6.0, 1.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	_idle_tween.tween_property(enemy_rect, "position:y", _base_rect_y + 2.0, 1.0).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+
+# --- Target highlighting for single-target card selection ---
+
+func set_targetable(targetable: bool) -> void:
+	_is_targetable = targetable
+	mouse_filter = Control.MOUSE_FILTER_STOP if targetable else Control.MOUSE_FILTER_IGNORE
+	if _highlight_tween and _highlight_tween.is_valid():
+		_highlight_tween.kill()
+	if targetable:
+		_highlight_tween = create_tween().set_loops()
+		_highlight_tween.tween_property(enemy_rect, "modulate", Color(1.6, 1.4, 0.5, 1.0), 0.4).set_ease(Tween.EASE_IN_OUT)
+		_highlight_tween.tween_property(enemy_rect, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.4).set_ease(Tween.EASE_IN_OUT)
+	else:
+		enemy_rect.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if _is_targetable:
+			enemy_clicked.emit(enemy_index)
+
+func _on_mouse_entered_enemy() -> void:
+	if _is_targetable:
+		var tween = create_tween()
+		tween.tween_property(self, "scale", Vector2(1.08, 1.08), 0.1)
+
+func _on_mouse_exited_enemy() -> void:
+	if _is_targetable:
+		var tween = create_tween()
+		tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
 
 func update_enemy(state_dict: Dictionary) -> void:
 	var enemy_id: String = state_dict["enemy_data_id"]
