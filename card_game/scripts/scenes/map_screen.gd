@@ -1,5 +1,11 @@
 extends Control
 
+const EventScreenScene = preload("res://scenes/ui/event_screen.tscn")
+const ShopScreenScene = preload("res://scenes/ui/shop_screen.tscn")
+
+var event_screen = null
+var shop_screen = null
+
 const NODE_DATA = [
 	{"type": "fight", "enemies": ["jaw_worm", "louse_red", "cultist"], "label": "COMBAT"},
 	{"type": "fight", "enemies": ["cultist", "louse_red", "jaw_worm"], "label": "COMBAT"},
@@ -55,6 +61,10 @@ func _build_map() -> void:
 					btn.add_theme_color_override("font_color", Color(0.9, 0.6, 0.1))
 				"boss":
 					btn.add_theme_color_override("font_color", Color(0.9, 0.2, 0.9))
+				"event":
+					btn.add_theme_color_override("font_color", Color(0.4, 0.7, 0.9))
+				"shop":
+					btn.add_theme_color_override("font_color", Color(0.9, 0.85, 0.2))
 
 		node_container.add_child(btn)
 
@@ -79,6 +89,12 @@ func _on_node_selected(node_index: int) -> void:
 
 	if node["type"] == "rest":
 		_show_rest()
+		return
+	elif node["type"] == "event":
+		_show_event()
+		return
+	elif node["type"] == "shop":
+		_show_shop()
 		return
 
 	var enemy = node["enemies"][randi() % node["enemies"].size()]
@@ -126,3 +142,23 @@ func _finish_rest() -> void:
 		rest_panel = null
 	_build_map()
 	_update_info()
+
+func _show_event() -> void:
+	event_screen = EventScreenScene.instantiate()
+	add_child(event_screen)
+	event_screen.show_random_event()
+	event_screen.event_completed.connect(func():
+		event_screen.queue_free()
+		event_screen = null
+		_finish_rest()  # Reuse finish logic to mark node complete
+	)
+
+func _show_shop() -> void:
+	shop_screen = ShopScreenScene.instantiate()
+	add_child(shop_screen)
+	shop_screen.open_shop()
+	shop_screen.shop_closed.connect(func():
+		shop_screen.queue_free()
+		shop_screen = null
+		_finish_rest()  # Reuse finish logic to mark node complete
+	)

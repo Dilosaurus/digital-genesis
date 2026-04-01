@@ -267,6 +267,8 @@ func _client_combat_over(won: bool) -> void:
 	if won:
 		result_label.text = "VICTORY!"
 		result_label.add_theme_color_override("font_color", Color(0.2, 0.9, 0.3))
+		if GameManager.is_run_active():
+			GameManager.current_run.gold += 25 + randi() % 26  # 25-50 gold per win
 		# Show boss reward screen if rewards exist
 		var rewards = GameManager.get_boss_rewards(current_enemy_id)
 		if rewards.size() > 0:
