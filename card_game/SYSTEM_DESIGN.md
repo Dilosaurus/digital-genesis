@@ -75,7 +75,7 @@ Every arrow is bidirectional. Cards produce corruption; gems modify how much. Eq
 
 ## 2. Build Archetypes
 
-Eight distinct build paths. Each is viable on any character but naturally aligns with 1-2 characters. Each archetype is supported by cards, gems, equipment, relics, AND skill tree nodes.
+Nine distinct build paths. Each is viable on any character but naturally aligns with 1-2 characters. Each archetype is supported by cards, gems, equipment, relics, AND skill tree nodes.
 
 ### Archetype Summary Table
 
@@ -89,6 +89,8 @@ Eight distinct build paths. Each is viable on any character but naturally aligns
 | 6 | **Daemon Swarm** | Flood board with summoned tokens | TECH, SHADOW | Technomancer | Moderate (25-50) |
 | 7 | **Debuff Controller** | Vulnerable + Weak + bleed out | EXPLOIT, RANGED | Netrunner, White Hat | Flexible |
 | 8 | **Berserker** | Low HP = high damage, Death's Door gaming | MELEE, FIRE | Sysadmin, Cryptomancer | High (50-75) |
+| 9 | **Pirate King** | Strip, steal, plunder, cash in Contraband | PIRACY, SHADOW | Scourge | Embrace (50-75) |
+| 9 | **Pirate King** | Steal everything, drown in Contraband | PIRACY, SHADOW | Scourge | Embrace (50-75) |
 
 ### Detailed Archetype Breakdowns
 
@@ -188,6 +190,20 @@ Eight distinct build paths. Each is viable on any character but naturally aligns
 - **Skill Tree:** Sysadmin's Retaliation branch. Cryptomancer's Glass Cannon branch.
 - **Corruption:** High. Corruption burn helps get your HP low, which is actually a benefit.
 
+#### 2.9 Pirate King
+
+**Fantasy:** Strip everything from your enemies. Steal their block, hijack their buffs, flood your hand with Contraband. The more corrupt you are, the more you take.
+
+**System support:**
+- **Cards:** PIRACY cards that steal Block from enemies. Cards that generate Contraband tokens. Cards that cash in Contraband for burst damage or defense.
+- **Gems:** Amplify gems on Contraband-generating cards. Trigger gems that proc on Block-steal.
+- **Equipment:** Pirate weapons with PIRACY tag bonuses. Accessories that buff Contraband.
+- **Relics:** "Contraband cards deal +3 damage." "Whenever you steal Block, steal 50% more."
+- **Skill Tree:** Scourge's Plunder branch (Contraband scaling), Sabotage branch (defense stripping), Corsair branch (corruption-as-defense).
+- **Corruption:** Embrace (50-75). Corruption fuels piracy — more reckless = more powerful theft.
+
+**Key distinction from Corruption Lord:** The Corruption Lord hoards power for themselves. The Pirate King takes power from enemies and redistributes it. Cipher is selfish; Scourge is an enabler.
+
 ---
 
 ## 3. Card System
@@ -217,8 +233,11 @@ Eight distinct build paths. Each is viable on any character but naturally aligns
 | **Cryptomancer** | Strike x3, Defend x2, Dark Compile, Void Channel, Malware Inject, Null Pointer |
 | **White Hat** | Strike x3, Defend x3, Bash, Purge Routine, Sanctify, Bandage |
 | **Technomancer** | Strike x2, Defend x2, Daemon Compile, Flux Shift, Code Summon, Reality Patch |
+| **Scourge** | Strike x2, Defend x2, Cutlass.exe, Boarding Hook, Ransack, Smoke Screen, Dead Man's Code, Plunder |
 
 ### 3.4 Complete Card Catalog
+
+> **NOTE:** The full 152-card catalog has been moved to **CARD_CATALOG.md**. The tables below are the original 120-card reference. See CARD_CATALOG.md for the expanded pool with 6 characters.
 
 Cards are organized by ownership (shared vs. character-exclusive), then by archetype affinity.
 
@@ -682,18 +701,20 @@ Every relic's value shifts based on your corruption tier:
 
 ### 6.4 Equipment + Character Synergy Matrix
 
-| Equipment | Netrunner | Sysadmin | Cryptomancer | White Hat | Technomancer |
-|---|---|---|---|---|---|
-| Neural Interface | *** | * | * | * | ** |
-| Mithril Vest | * | *** | * | ** | * |
-| Plasma Edge | *** | ** | * | * | *** |
-| Shadow Fang | * | * | *** | - | ** |
-| Holy Avenger | - | * | - | *** | - |
-| Exploit Chip | *** | * | ** | * | ** |
-| Heart of Corruption | * | - | *** | - | ** |
-| Harmony Pendant | * | ** | - | *** | * |
+| Equipment | Netrunner | Sysadmin | Cryptomancer | White Hat | Technomancer | Scourge |
+|---|---|---|---|---|---|---|
+| Neural Interface | *** | * | * | * | ** | * |
+| Mithril Vest | * | *** | * | ** | * | * |
+| Plasma Edge | *** | ** | * | * | *** | * |
+| Shadow Fang | * | * | *** | - | ** | ** |
+| Holy Avenger | - | * | - | *** | - | - |
+| Exploit Chip | *** | * | ** | * | ** | * |
+| Heart of Corruption | * | - | *** | - | ** | *** |
+| Harmony Pendant | * | ** | - | *** | * | - |
 
 (*** = ideal, ** = good, * = usable, - = anti-synergy)
+
+*Note: Scourge synergizes strongly with Heart of Corruption (embraces corruption) and Shadow Fang (SHADOW cards). Anti-synergy with Holy Avenger and Harmony Pendant (incompatible with corruption-embrace playstyle). Scourge-specific equipment (Pirate Cutlass, Corsair Coat, Skull & Crossbones, etc.) to be added in equipment expansion.*
 
 ---
 
@@ -705,7 +726,11 @@ Every relic's value shifts based on your corruption tier:
 
 **New principle:** Each branch is a BUILD PATH, not a stat ladder. The capstone (tier 3) should be a KEYSTONE that fundamentally changes gameplay. You earn ~10-12 skill points per run. Each branch costs ~8 points to complete. You can NOT max all 3 branches -- you must choose.
 
-### 7.2 Skill Point Economy
+### 7.2 Character Count
+
+6 characters x 3 branches = **18 branches total** (15 original + 3 Scourge).
+
+### 7.3 Skill Point Economy
 
 | Source | Points | Timing |
 |---|---|---|
@@ -724,7 +749,7 @@ Every relic's value shifts based on your corruption tier:
 
 This means you can fully complete 1 branch and get partway into a second. OR you can go wide with tier 0-1 in all three branches. The choice matters.
 
-### 7.3 All 15 Branches (5 characters x 3 branches)
+### 7.4 All 18 Branches (6 characters x 3 branches)
 
 ---
 
@@ -928,6 +953,46 @@ This means you can fully complete 1 branch and get partway into a second. OR you
 
 ---
 
+#### SCOURGE: "Black Flag Protocol"
+
+##### Branch 1: Plunder (Offense)
+*More Contraband. Better Contraband. Contraband everywhere.*
+
+| Tier | ID | Name | Cost | Effect |
+|---|---|---|---|---|
+| 0 | `sc_raider` | Raider | 1 | PIRACY attacks deal +2 damage |
+| 1 | `sc_loaded_dice` | Loaded Dice | 1 | Contraband cards deal +3 damage |
+| 2 | `sc_pillage` | Pillage | 2 | Whenever you play a Contraband card, steal 2 Block from random enemy |
+| 3 | `sc_dread_pirate` | **KEYSTONE: Dread Pirate** | 3 | Contraband cards cost 0, draw 1, and deal +4 damage. |
+
+*Dread Pirate transforms Contraband into free cantrips that hit hard. Combined with Pirate King power card, Contraband becomes 0-cost, +8 damage, draw 1. Absurd flood turns.*
+
+##### Branch 2: Sabotage (Enabler)
+*Strip enemies bare. Your team hits harder because you took everything first.*
+
+| Tier | ID | Name | Cost | Effect |
+|---|---|---|---|---|
+| 0 | `sc_case_the_joint` | Case the Joint | 1 | +1 Card Draw per turn |
+| 1 | `sc_exploit_weakness` | Exploit Weakness | 1 | When you steal Block, steal 50% more (rounded up) |
+| 2 | `sc_crippling_blow` | Crippling Blow | 2 | PIRACY cards apply 1 Weak to the target |
+| 3 | `sc_letters_of_marque` | **KEYSTONE: Letters of Marque** | 3 | Once per turn, the first PIRACY card you play strips all Strength from the target. You gain half (rounded down). |
+
+*Letters of Marque turns the Scourge into the ultimate debuffer. Strip a boss's 10 Strength on turn 1, gain 5 for yourself. The team hits a naked target.*
+
+##### Branch 3: Corsair (Defense / Corruption)
+*Corruption isn't a cost — it's plunder fuel.*
+
+| Tier | ID | Name | Cost | Effect |
+|---|---|---|---|---|
+| 0 | `sc_thick_hull` | Thick Hull | 1 | +3 Block to all cards |
+| 1 | `sc_spoils_of_war` | Spoils of War | 1 | Whenever you gain Corruption, gain 1 Block per corruption gained |
+| 2 | `sc_armored_brigantine` | Armored Brigantine | 2 | +8 Max HP. Contraband cards also gain 3 Block. |
+| 3 | `sc_ghost_ship` | **KEYSTONE: Ghost Ship** | 3 | At the start of each turn, create 1 Contraband. Corruption burn is converted to Block instead of damage. |
+
+*Ghost Ship is the signature keystone. At Demonic tier (75+), you'd normally take 5 damage/turn. Instead you gain 5 Block/turn AND a free Contraband. Corruption becomes pure upside.*
+
+---
+
 ### 7.4 Keystone Summary Table
 
 | Character | Branch 1 Keystone | Branch 2 Keystone | Branch 3 Keystone |
@@ -937,6 +1002,7 @@ This means you can fully complete 1 branch and get partway into a second. OR you
 | **Cryptomancer** | Annihilate (doubled corruption damage mult) | Dark Transcendence (corruption burn -3) | Final Form (+50% everything below 25% HP) |
 | **White Hat** | Judgment (corruption removed = holy damage) | Absolution (Holy cards buff all allies) | Divine Mandate (auto-purify 5+3 corruption/turn) |
 | **Technomancer** | Hive Mind (Daemons are free cantrips) | Quantum Core (+2 energy, first card free) | Safe Mode (corruption capped at 49) |
+| **Scourge** | Dread Pirate (Contraband costs 0, +4 dmg, draw 1) | Letters of Marque (first PIRACY strips all Strength) | Ghost Ship (corruption burn → Block, free Contraband) |
 
 ---
 
@@ -997,6 +1063,9 @@ Corruption is the universal currency that binds all five systems together.
 | Judgment (WH) | Tracks corruption removed; converts to Holy damage |
 | Final Form (CM) | Below 25% HP bonus -- corruption burn helps reach threshold |
 | Blood Magic (CM) | HP-as-energy; corruption burn accelerates this |
+| Ghost Ship (SC) | Converts corruption burn to Block. Demonic tier = 5 free Block/turn + Contraband. |
+| Spoils of War (SC) | Corruption gain = Block gain. Every corruption point is also a point of defense. |
+| Letters of Marque (SC) | First PIRACY card strips all enemy Strength. Enables high-corruption aggressive play. |
 
 ### 8.2 Corruption Tier Breakpoints
 
@@ -1019,6 +1088,7 @@ Corruption is the universal currency that binds all five systems together.
 | Daemon Swarm | Tainted (25-40) | Daemon cards generate mild corruption. Manageable. |
 | Debuff Controller | Any (varies) | Debuff cards are low-corruption. Flexible. |
 | Berserker | Corrupted (50-70) | Corruption burn helps get HP low. Feature, not bug. |
+| Pirate King | Corrupted-Demonic (50-75) | Ghost Ship converts burn to Block. Spoils of War turns gain into defense. |
 
 ---
 
@@ -1146,6 +1216,7 @@ In a 4-player party, the ideal composition covers all roles:
 | **Tank** | Absorb hits, share block | Sysadmin | Shared Shield, Fortress Mode |
 | **Support** | Heal, purify, buff | White Hat | Party heal, corruption removal |
 | **Utility** | Debuff, draw for team, manage resources | Technomancer, Netrunner | Overclocked Network, Mana Link |
+| **Enabler** | Strip enemy defenses, weaken for team | Scourge | Steal Block, strip Strength, apply Weak via PIRACY |
 
 ### 10.2 Emergent Team Combos
 
@@ -1180,6 +1251,14 @@ In a 4-player party, the ideal composition covers all roles:
 **Synergy:** The Sysadmin intentionally enters Death's Door (1 HP). Last Stand means they never die from the timer. Berserker cards deal massive damage at low HP. The White Hat's passive healing keeps them at 1 HP (they don't need more). The Sysadmin gets +10 Block/turn from Last Stand AND the White Hat's 3 Block per Holy card.
 
 **Result:** The Sysadmin is functionally immortal while dealing Berserker-level damage. The White Hat's tiny 1-HP heals are the safety net.
+
+#### Combo: "The Plunder Engine" (Scourge + Cryptomancer + White Hat)
+
+**Setup:** Scourge has Ghost Ship (corruption burn → Block, free Contraband/turn) and Letters of Marque (first PIRACY strips all Strength). Cryptomancer is at Demonic tier. White Hat has Divine Mandate (auto-purify).
+
+**Synergy:** Scourge plays Hijack Protocol first — strips ALL Block AND all Strength from the boss (Letters of Marque). Scourge gains half the Strength. Boss now has 0 Block, 0 Strength. Cryptomancer hits the naked boss with Event Horizon (damage = corruption, ~85 damage). White Hat keeps both alive by removing 3 corruption from each per turn.
+
+**Result:** Scourge enables a one-shot by stripping every defensive stat. Cipher delivers the killing blow. White Hat is the reason they don't both die to corruption burn. Three-way symbiosis.
 
 #### Combo: "Full Party Block" (Sysadmin + everyone)
 
@@ -1222,6 +1301,10 @@ The power increase is superlinear because specialization enables multiplicative 
 | Technomancer + Netrunner | **A-tier** | Card engine overflow. Daemon + Exploit flood. |
 | Sysadmin + White Hat | **A-tier** | Unkillable duo. Sustain fortress. |
 | Cryptomancer + Technomancer | **B-tier** | Both generate corruption. Need external purification. |
+| Scourge + Cryptomancer | **A-tier** | Scourge strips defenses, Cipher nukes the naked target. Both embrace corruption. |
+| Scourge + White Hat | **S-tier** | Scourge strips enemy defenses. White Hat cleanses Scourge's corruption. Perfect symbiosis. |
+| Scourge + Sysadmin | **A-tier** | Scourge steals block from enemies, Sysadmin holds the line. Combined: enemies have 0 block and face a wall. |
+| Scourge + Netrunner | **B-tier** | Overlap in utility/debuff. Both are fast and tricky but lack raw defense. |
 | White Hat + White Hat (co-op) | **C-tier** | Too much support, not enough damage. |
 
 ---
@@ -1232,7 +1315,7 @@ The power increase is superlinear because specialization enables multiplicative 
 |---|---|---|---|
 | 1 | Skill tree keystone rework | Medium | Modifier pipeline (done) |
 | 2 | Gem category rework (triggers, converts) | High | GemSystem needs new effect types beyond modifiers |
-| 3 | New card data files (40 new cards) | Medium | CardData schema (done) |
+| 3 | New card data files (152 cards, 6 characters) | High | CardData schema (done), see CARD_CATALOG.md |
 | 4 | Relic effect rework (triggers, conditionals) | High | RelicData needs new effect fields |
 | 5 | Equipment tag synergy | Low | ModifierData conditions (done) |
 | 6 | Corruption integration testing | Medium | All above systems |
@@ -1291,7 +1374,9 @@ Current nodes only support modifier specs. Keystones need:
 #          "below_25_all_50", "scaling_damage_per_card", "hand_size_block_3",
 #          "first_exploit_double", "judgment_holy_bonus", "holy_party_buff",
 #          "auto_purify_5_3", "daemon_free_cantrip", "first_card_free_plus2",
-#          "corruption_cap_49"
+#          "corruption_cap_49",
+#          "contraband_free_cantrip", "strip_strength_first_piracy",
+#          "corruption_burn_to_block"
 ```
 
 ---
@@ -1308,4 +1393,5 @@ Current nodes only support modifier specs. Keystones need:
 | 5 | SHADOW | Cryptomancer, Technomancer | Shadow Fang, Daemon Chassis | CM branches, TM Construct |
 | 6 | TECH | Netrunner, Sysadmin, Technomancer | Plasma Edge, Neural Interface | NR/SA/TM branches |
 | 7 | EXPLOIT | Netrunner, Cryptomancer, Technomancer | Exploit Chip | NR Exploit branch |
-| 8 | CURSE | Curses/Status | -- | -- |
+| 8 | PIRACY | Scourge | (Pirate equipment TBD) | SC Plunder, Sabotage, Corsair branches |
+| 9 | CURSE | Curses/Status | -- | -- |
