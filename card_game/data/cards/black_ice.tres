@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "black_ice"
+display_name = "Black Ice"
+description = "Deal 10 damage x3 hits. Apply 2 Vulnerable. +8 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 10
+hits = 3
+apply_vulnerable = 2
+corruption_gain = 8
+rarity = 3
+character_class = -1
+tags = Array[int]([6, 3, 7])
+gem_sockets = 2

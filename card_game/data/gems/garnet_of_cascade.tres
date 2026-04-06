@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "garnet_of_cascade"
+display_name = "Garnet of Cascade"
+description = "When this card kills an enemy, gain 2 energy."
+rarity = 2
+on_play_modifiers = []
+trigger_event = "on_kill"
+trigger_effect = "gain_energy"
+trigger_value = 2
+convert_damage_to_heal = false
+extra_hit_percent = 0.0
+add_create_contraband = 0

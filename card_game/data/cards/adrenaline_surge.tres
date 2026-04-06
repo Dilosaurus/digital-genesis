@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "adrenaline_surge"
+display_name = "Adrenaline Surge"
+description = "Draw 2. Take 4 self-damage."
+energy_cost = 0
+card_type = 1
+target_type = 1
+draw = 2
+rarity = 1
+character_class = -1
+tags = Array[int]([])
+gem_sockets = 0

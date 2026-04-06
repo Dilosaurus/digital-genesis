@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "divine_compilation"
+display_name = "Divine Compilation"
+description = "Gain 30 Block shared with all allies. Remove 10 Corruption from all allies."
+energy_cost = 3
+card_type = 1
+target_type = 3
+block = 30
+share_block = true
+party_corruption_remove = 10
+rarity = 3
+character_class = -1
+tags = Array[int]([4, 6])
+gem_sockets = 2

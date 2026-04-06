@@ -38,3 +38,24 @@ extends Resource
 # --- Revival fields (Phase 3 Stream D) ---
 @export var revive_ally: bool = false   # Revive a downed/dead ally
 @export var revive_hp: int = 15         # HP to revive with
+
+# --- Corruption removal (separate from negative corruption_gain) ---
+@export var corruption_remove: int = 0          # Remove this much corruption from self
+@export var party_corruption_remove: int = 0    # Remove this much corruption from all allies
+
+# --- Scourge / PIRACY mechanics ---
+@export var steal_block: int = 0                # Steal this much block from the target (target loses, you gain)
+@export var steal_all_block: bool = false       # Steal ALL block from target (Hijack Protocol)
+@export var aoe_steal_block: int = 0            # Steal this much block from each enemy (Broadside, Flying Dutchman)
+@export var create_contraband: int = 0          # Create this many Contraband cards in hand
+@export var destroy_contraband_for_damage: int = 0   # Per-Contraband damage when destroying all (Dead Man's Switch)
+@export var destroy_contraband_for_block: int = 0    # Per-Contraband block when destroying all (Plunder)
+@export var destroy_contraband_corruption: int = 0   # Per-Contraband corruption gain when destroying all
+@export var damage_per_card_played: int = 0     # Damage scales with cards played this turn (Neural Cascade)
+@export var damage_per_contraband_in_hand: int = 0   # Hits scale with contraband in hand
+@export var conditional_damage_if_zero_block: int = 0  # Bonus damage if target has 0 block (Walk the Plank, Dead Man's Code)
+@export var aoe_damage: int = 0                 # Splash damage to ALL enemies (in addition to main damage)
+
+# --- Token / Daemon Fragment fields (existing FLUX support) ---
+@export var create_daemon_fragment: int = 0     # Create this many Daemon Fragments in hand
+@export var destroy_daemons_for_damage: int = 0 # Per-Daemon damage when destroying all (Fusion Core)

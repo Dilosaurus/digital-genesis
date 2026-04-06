@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "black_singularity"
+display_name = "Black Singularity"
+description = "Deal 30 damage. +15 Corruption. Exhaust."
+energy_cost = 3
+card_type = 0
+target_type = 0
+damage = 30
+corruption_gain = 15
+exhaust = true
+rarity = 2
+character_class = 2
+tags = Array[int]([5])
+gem_sockets = 2

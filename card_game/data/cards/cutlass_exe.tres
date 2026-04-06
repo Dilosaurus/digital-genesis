@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "cutlass_exe"
+display_name = "Cutlass.exe"
+description = "Deal 7 damage. Steal 2 Block."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 7
+rarity = 0
+character_class = 5
+tags = Array[int]([0, 9])
+steal_block = 2

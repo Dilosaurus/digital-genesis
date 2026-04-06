@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "trace_route"
+display_name = "Trace Route"
+description = "Deal 3 damage x2 hits to ALL enemies. Draw 1."
+energy_cost = 1
+card_type = 0
+target_type = 2
+damage = 3
+hits = 2
+draw = 1
+rarity = 1
+character_class = 0
+tags = Array[int]([6, 1])
+gem_sockets = 0

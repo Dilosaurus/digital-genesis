@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "nexus_rewrite"
+display_name = "Nexus Rewrite"
+description = "At the start of each turn, draw 2 extra cards. +5 Corruption/turn. (Combat engine: turn-start trigger.)"
+energy_cost = 2
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = -1
+tags = Array[int]([6])
+gem_sockets = 2

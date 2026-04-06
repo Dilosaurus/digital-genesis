@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dead_mans_switch"
+display_name = "Dead Man's Switch"
+description = "Destroy all Contraband in your hand. Deal 6 damage per Contraband destroyed. +3 Corruption per Contraband destroyed."
+energy_cost = 2
+card_type = 0
+target_type = 0
+rarity = 2
+character_class = 5
+tags = Array[int]([9, 5])
+gem_sockets = 1
+destroy_contraband_for_damage = 6
+destroy_contraband_corruption = 3

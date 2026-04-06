@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "shadow_step"
+display_name = "Shadow Step"
+description = "Draw 2. +5 Corruption. If at Demonic tier, draw 3 instead. (Combat engine: tier conditional draw.)"
+energy_cost = 1
+card_type = 1
+target_type = 1
+draw = 2
+corruption_gain = 5
+rarity = 1
+character_class = 2
+tags = Array[int]([5])
+gem_sockets = 0

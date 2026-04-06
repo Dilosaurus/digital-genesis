@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "system_lockdown"
+display_name = "System Lockdown"
+description = "Gain 25 Block. Gain 2 Dexterity. Exhaust."
+energy_cost = 3
+card_type = 1
+target_type = 1
+block = 25
+gain_dexterity = 2
+exhaust = true
+rarity = 2
+character_class = 1
+tags = Array[int]([6])
+gem_sockets = 1

@@ -483,55 +483,59 @@ Cards are organized by ownership (shared vs. character-exclusive), then by arche
 
 Gems are socketed into cards (cards have 0-2 sockets). Each gem applies its effect only when that specific card is played.
 
-#### Amplify Gems
+The first 14 gems use only the standard `ModifierData` stat pipeline. The 6 newer gems (marked NEW) use additional fields on `GemData` (`trigger_event`, `trigger_effect`, `trigger_value`, `convert_damage_to_heal`, `extra_hit_percent`, `add_create_contraband`) because their effects don't fit a flat stat modifier.
 
-| ID | Name | Rarity | Effect | Implementation (Modifier Spec) |
+#### Amplify Gems (5)
+
+| ID | Name | Rarity | Effect | Implementation |
 |---|---|---|---|---|
 | `ruby_of_fury` | Ruby of Fury | COMMON | +15% damage when this card is played | DAMAGE PERCENT_ADD 0.15, CARD_PLAY |
-| `topaz_of_wrath` | Topaz of Wrath | UNCOMMON | +30% damage vs. Vulnerable targets | DAMAGE PERCENT_ADD 0.30, CARD_PLAY, only_vs_vulnerable |
-| `diamond_of_precision` | Diamond of Precision | RARE | +50% damage if this is the only card played this turn | DAMAGE PERCENT_ADD 0.50, CARD_PLAY, conditional: cards_played_this_turn == 1 |
-| `star_sapphire` | Star Sapphire | RARE | This card's damage is applied twice (second hit at 50%) | DAMAGE PERCENT_ADD 0.50, CARD_PLAY (implemented as +1 hit at 50% value) |
+| `topaz_of_wrath` | Topaz of Wrath | UNCOMMON | +4 damage vs Vulnerable targets | DAMAGE FLAT_ADD 4, CARD_PLAY (note: uses `crimson_opal` for percentage variant) |
+| `crimson_opal` | Crimson Opal | RARE | High-corruption damage rider | DAMAGE percent boost while at high corruption tier |
+| `obsidian_shard` | Obsidian Shard | UNCOMMON | +25% damage when this card is played (dark power) | DAMAGE PERCENT_ADD 0.25, CARD_PLAY |
+| `black_pearl_of_plunder` **NEW** | Black Pearl of Plunder | RARE | When this card is played, also create 1 Contraband. PIRACY cards get +20% damage. | `add_create_contraband = 1` + DAMAGE PERCENT_ADD 0.20 with `required_card_tags=[PIRACY]`. The Pirate King's signature scaling gem; benign on any character (free Contraband per play), busted on Scourge (PIRACY rider lights up + Plunder branch synergy). |
 
-#### Convert Gems
+#### Convert Gems (4)
 
 | ID | Name | Rarity | Effect | Implementation |
 |---|---|---|---|---|
-| `jade_of_iron_will` | Jade of Iron Will | UNCOMMON | This card also gains Block equal to 30% of its damage | BLOCK FLAT_ADD (= card damage * 0.3), CARD_PLAY |
+| `jade_of_iron_will` | Jade of Iron Will | UNCOMMON | Adds Block on Skill cards | BLOCK FLAT_ADD, CARD_PLAY, required_card_type=SKILL |
 | `pearl_of_purity` | Pearl of Purity | UNCOMMON | This card removes 3 Corruption instead of adding any | CORRUPTION_GAIN OVERRIDE -3, CARD_PLAY |
-| `moonstone_of_conversion` | Moonstone of Conversion | RARE | This card's damage is converted to healing for you (no damage dealt) | DAMAGE OVERRIDE 0 + HEALING FLAT_ADD (= original damage), CARD_PLAY |
-| `opal_of_sharing` | Opal of Sharing | UNCOMMON | This card's Block is shared with all allies (50% each) | Sets share_block flag, CARD_PLAY |
+| `garnet_of_vitality` | Garnet of Vitality | UNCOMMON | +25% healing when played | HEALING PERCENT_ADD 0.25, CARD_PLAY |
+| `moonstone_of_conversion` **NEW** | Moonstone of Conversion | UNCOMMON | This card's damage is converted to healing for you (no damage dealt) | `convert_damage_to_heal = true`. At resolve time, the post-pipeline damage value is suppressed and added to owner HEALING instead. **Socket on Void Blast = ~18 damage becomes ~18 self-heal — emergency button.** |
 
-#### Trigger Gems
+#### Trigger Gems (5)
 
 | ID | Name | Rarity | Effect | Implementation |
 |---|---|---|---|---|
-| `onyx_of_exploitation` | Onyx of Exploitation | UNCOMMON | When this card is played, if enemy is Vulnerable, draw 1 | Conditional draw +1, CARD_PLAY |
-| `garnet_of_cascade` | Garnet of Cascade | RARE | When this card kills an enemy, gain 2 energy | Conditional on kill: +2 energy refund |
-| `alexandrite_of_chains` | Alexandrite of Chains | RARE | When this card deals unblocked damage, apply 1 Weak | Conditional: apply_weak +1 if unblocked hit |
-| `fire_opal_of_ignition` | Fire Opal of Ignition | UNCOMMON | When this card is played, deal 3 damage to ALL enemies | AoE rider: 3 damage all enemies |
+| `onyx_of_exploitation` | Onyx of Exploitation | UNCOMMON | +4 damage vs Vulnerable enemies | DAMAGE FLAT_ADD 4, only_vs_vulnerable |
+| `garnet_of_cascade` **NEW** | Garnet of Cascade | RARE | When this card kills an enemy, gain 2 energy | `trigger_event="on_kill"`, `trigger_effect="gain_energy"`, `trigger_value=2`. Combat hook checks kill list after card resolves and refunds energy. **Best on AoE finishers (Cleave, Mass Hex) — turn into chain-kill engines.** |
+| `alexandrite_of_chains` **NEW** | Alexandrite of Chains | RARE | When this card deals unblocked damage, apply 1 Weak | `trigger_event="on_unblocked_hit"`, `trigger_effect="apply_weak"`, `trigger_value=1`. Hook fires once per resolved hit that bypasses Block. **Socket on a fast 1-cost attack to set up team turns; competes with Letters of Marque on Scourge.** |
+| `fire_opal_of_ignition` **NEW** | Fire Opal of Ignition | UNCOMMON | When this card is played, deal 3 damage to ALL enemies | `trigger_event="on_play"`, `trigger_effect="deal_aoe_damage"`, `trigger_value=3`. Damage source is the gem (not the card), so it ignores Strength/Vulnerable scaling — pure flat AoE. **Socket on a single-target attack to convert it into a soft-AoE.** |
+| `star_sapphire_of_reprise` **NEW** | Star Sapphire of Reprise | RARE | This card hits a second time at 50% damage | `extra_hit_percent = 0.5`. After the normal damage event resolves, combat repeats it once at 50% of post-pipeline value. Multi-hit on-hit riders (like Alexandrite of Chains, Topaz of Wrath) trigger again on the second hit. **Stacks dangerously with Strength/Vulnerable.** |
 
-#### Sustain Gems
+#### Sustain Gems (3)
 
 | ID | Name | Rarity | Effect | Implementation |
 |---|---|---|---|---|
 | `sapphire_of_shielding` | Sapphire of Shielding | COMMON | +4 Block when this card is played | BLOCK FLAT_ADD 4, CARD_PLAY |
-| `emerald_of_renewal` | Emerald of Renewal | UNCOMMON | Heal 3 HP when this card is played | HEALING FLAT_ADD 3, CARD_PLAY |
-| `amethyst_of_fortitude` | Amethyst of Fortitude | COMMON | +2 Block per hit when this card is played (multi-hit bonus) | BLOCK FLAT_ADD 2 per hit, CARD_PLAY |
+| `emerald_of_renewal` | Emerald of Renewal | UNCOMMON | Heal HP when this card is played | HEALING FLAT_ADD, CARD_PLAY |
+| `amethyst_of_fortitude` | Amethyst of Fortitude | COMMON | +4 Block on Skill cards | BLOCK FLAT_ADD 4, CARD_PLAY, required_card_type=SKILL |
 
-#### Corrupt Gems
+#### Corrupt Gems (1)
 
 | ID | Name | Rarity | Effect | Implementation |
 |---|---|---|---|---|
-| `obsidian_shard` | Obsidian Shard | UNCOMMON | +40% damage. +5 Corruption per play. | DAMAGE PERCENT_ADD 0.40 + CORRUPTION_GAIN FLAT_ADD 5, CARD_PLAY |
-| `crimson_opal` | Crimson Opal | RARE | +25% damage and +25% block. Only active at Corrupted tier or above. | DAMAGE PERCENT_ADD 0.25 + BLOCK PERCENT_ADD 0.25, conditional: corruption >= 50 |
 | `bloodstone_of_sacrifice` | Bloodstone of Sacrifice | RARE | +30% damage and +30% block when below 50% HP | DAMAGE/BLOCK PERCENT_ADD 0.30, only_when_hp_below_pct 0.5 |
 
-#### Utility Gems
+#### Utility Gems (2)
 
 | ID | Name | Rarity | Effect | Implementation |
 |---|---|---|---|---|
 | `moonstone_of_efficiency` | Moonstone of Efficiency | UNCOMMON | This card costs 1 less energy (min 0) | ENERGY_COST FLAT_ADD -1, CARD_PLAY |
 | `diamond_of_efficiency` | Diamond of Efficiency | RARE | This card costs 0 energy. Once per combat. | ENERGY_COST OVERRIDE 0, CARD_PLAY, once per combat |
+
+**Total: 20 gems** (6 Amplify-tier, 4 Convert, 5 Trigger, 3 Sustain, 1 Corrupt, 2 Utility — Crimson Opal counts in the Corrupt design intent but lives in the Amplify table for the corruption-scaling damage rider.)
 
 ### 4.4 Gem Socket Strategy
 

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "kraken_protocol"
+display_name = "Kraken Protocol"
+description = "Deal 8 damage 3 times. Steal 4 Block per hit. +8 Corruption. [combat engine: per-hit steal_block=4]"
+energy_cost = 3
+card_type = 0
+target_type = 0
+damage = 8
+hits = 3
+corruption_gain = 8
+rarity = 2
+character_class = 5
+tags = Array[int]([9, 5])
+gem_sockets = 2
+steal_block = 4

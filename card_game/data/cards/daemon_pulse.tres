@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "daemon_pulse"
+display_name = "Daemon Pulse"
+description = "Deal 3 damage x2 hits. Create 1 Daemon Fragment."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 3
+hits = 2
+create_daemon_fragment = 1
+rarity = 0
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 0

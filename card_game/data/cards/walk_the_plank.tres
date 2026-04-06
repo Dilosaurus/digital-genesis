@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "walk_the_plank"
+display_name = "Walk the Plank"
+description = "Deal 15 damage. If the target has 0 Block, deal 15 again. +5 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 15
+corruption_gain = 5
+rarity = 2
+character_class = 5
+tags = Array[int]([9])
+gem_sockets = 1
+conditional_damage_if_zero_block = 15

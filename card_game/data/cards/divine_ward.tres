@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "divine_ward"
+display_name = "Divine Ward"
+description = "Gain 8 Block. Remove 3 Corruption."
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 8
+corruption_remove = 3
+rarity = 0
+character_class = 3
+tags = Array[int]([4])
+gem_sockets = 0

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "pirate_king"
+display_name = "Pirate King"
+description = "Power. Contraband cards cost 0, deal +4 damage, and draw 1 when played. +5 Corruption per turn. [combat engine: contraband cost override + damage buff + draw rider + per-turn corruption tick]"
+energy_cost = 3
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = 5
+tags = Array[int]([9, 5])
+gem_sockets = 2

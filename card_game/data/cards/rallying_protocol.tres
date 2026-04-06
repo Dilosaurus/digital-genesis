@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "rallying_protocol"
+display_name = "Rallying Protocol"
+description = "All allies draw 2. You gain 5 Block."
+energy_cost = 2
+card_type = 1
+target_type = 3
+block = 5
+party_draw = 2
+rarity = 2
+character_class = -1
+tags = Array[int]([6])
+gem_sockets = 1

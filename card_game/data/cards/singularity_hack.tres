@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "singularity_hack"
+display_name = "Singularity Hack"
+description = "Deal 8 damage x4 hits. If target dies, draw 3 and gain 1 energy. (Combat engine: on-kill bonus.)"
+energy_cost = 3
+card_type = 0
+target_type = 0
+damage = 8
+hits = 4
+rarity = 3
+character_class = 0
+tags = Array[int]([6, 7])
+gem_sockets = 2

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "data_skim"
+display_name = "Data Skim"
+description = "Draw 1. Gain 2 Block."
+energy_cost = 0
+card_type = 1
+target_type = 1
+block = 2
+draw = 1
+rarity = 0
+character_class = 0
+tags = Array[int]([6, 7])
+gem_sockets = 0

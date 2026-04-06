@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "scourge"
+display_name = "BLACKBEARD"
+title = "The Code Privateer"
+character_class = 5
+backstory = "Mira Vashenko grew up in a Pacific arcology where her parents wrote security middleware for the cloud cartels. By fourteen she was siphoning encrypted assets out of those same cartels and laundering them through gray-market relays. By twenty she had a kill list, a fleet of stolen daemon shells, and a callsign — Blackbeard — burned into half the wanted boards on the dark net.
+
+When the Angels seized the Nexus and turned the uploaded dead into a private theological garden, Blackbeard saw the biggest score in history: a vault no one had ever looted, run by entities that thought they were gods. The GENESIS Protocol didn't have to recruit her. She volunteered the moment she heard there was something to steal from the things on top.
+
+She fights like a privateer should: rip the defenses off the mark, hand the spoils to the crew, and let corruption pool in her registers like rum in a hold. Every PIRACY card she plays bleeds shielding straight off the target. The grid calls it corruption. She calls it freedom from anyone who'd ever try to own her code."
+passive_name = "Digital Privateer"
+passive_description = "Whenever you play a PIRACY card, steal 2 Block from the target."
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "cutlass_exe", "boarding_hook", "ransack", "smoke_screen", "dead_mans_code", "plunder"])
+starting_hp = 68
+starting_energy = 3
+color_primary = Color(0.55, 0.1, 0.2, 1)
+color_secondary = Color(0.18, 0.05, 0.1, 1)
+icon_text = "SC"

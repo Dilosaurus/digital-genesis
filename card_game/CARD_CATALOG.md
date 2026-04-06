@@ -450,6 +450,37 @@ Strike x2, Defend x2, Cutlass.exe, Boarding Hook, Ransack, Smoke Screen, Dead Ma
 
 ---
 
+## GEM CATALOG (20 gems)
+
+Gems are socketed into cards (0-2 sockets per card). Each gem fires only when the host card is played. See SYSTEM_DESIGN.md section 4.3 for implementation details.
+
+| ID | Name | Rarity | Category | Effect |
+|---|---|---|---|---|
+| `ruby_of_fury` | Ruby of Fury | C | Amplify | +15% damage when played |
+| `sapphire_of_shielding` | Sapphire of Shielding | C | Sustain | +4 Block when played |
+| `amethyst_of_fortitude` | Amethyst of Fortitude | C | Sustain | +4 Block on Skill cards |
+| `topaz_of_wrath` | Topaz of Wrath | U | Amplify | +damage vs Vulnerable |
+| `obsidian_shard` | Obsidian Shard | U | Amplify | +25% damage (dark power) |
+| `jade_of_iron_will` | Jade of Iron Will | U | Convert | +Block on Skill cards |
+| `pearl_of_purity` | Pearl of Purity | U | Convert | -3 Corruption instead of gain |
+| `garnet_of_vitality` | Garnet of Vitality | U | Convert | +25% healing when played |
+| `emerald_of_renewal` | Emerald of Renewal | U | Sustain | Heal HP when played |
+| `onyx_of_exploitation` | Onyx of Exploitation | U | Trigger | +4 damage vs Vulnerable |
+| `moonstone_of_efficiency` | Moonstone of Efficiency | U | Utility | -1 energy cost |
+| `fire_opal_of_ignition` **NEW** | Fire Opal of Ignition | U | Trigger | On play, deal 3 to ALL enemies |
+| `moonstone_of_conversion` **NEW** | Moonstone of Conversion | U | Convert | Damage becomes self-healing |
+| `crimson_opal` | Crimson Opal | R | Amplify | High-corruption damage rider |
+| `bloodstone_of_sacrifice` | Bloodstone of Sacrifice | R | Corrupt | +30%/+30% under 50% HP |
+| `diamond_of_efficiency` | Diamond of Efficiency | R | Utility | Free once per combat |
+| `garnet_of_cascade` **NEW** | Garnet of Cascade | R | Trigger | On kill, gain 2 energy |
+| `alexandrite_of_chains` **NEW** | Alexandrite of Chains | R | Trigger | On unblocked hit, apply 1 Weak |
+| `star_sapphire_of_reprise` **NEW** | Star Sapphire of Reprise | R | Amplify | Hits a second time at 50% |
+| `black_pearl_of_plunder` **NEW** | Black Pearl of Plunder | R | Pirate / Amplify | Create 1 Contraband on play; +20% to PIRACY |
+
+**Pirate King synergy:** `black_pearl_of_plunder` is the signature Scourge gem — every play yields a Contraband, and the PIRACY rider stacks with the Plunder skill branch (Dread Pirate keystone makes those Contraband 0-cost +4 dmg cantrips). `alexandrite_of_chains` and `garnet_of_cascade` also reward the Scourge's hit-everything-once playstyle.
+
+---
+
 ## CARD COUNT VERIFICATION
 
 | Category | Count |

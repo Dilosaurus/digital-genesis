@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "corruption_spike"
+display_name = "Corruption Spike"
+description = "Deal damage equal to your Corruption / 5 (min 4, max 20). (Combat engine: corruption-scaling damage.)"
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 4
+rarity = 1
+character_class = 2
+tags = Array[int]([5, 7])
+gem_sockets = 1

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "genesis_protocol"
+display_name = "Genesis Protocol"
+description = "All allies fully heal. Remove 20 Corruption from all allies. Exhaust."
+energy_cost = 3
+card_type = 1
+target_type = 3
+party_heal = 999
+party_corruption_remove = 20
+exhaust = true
+rarity = 3
+character_class = -1
+tags = Array[int]([6, 4])
+gem_sockets = 2

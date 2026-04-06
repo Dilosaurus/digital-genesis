@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "ghost_protocol"
+display_name = "Ghost Protocol"
+description = "Draw 3. Gain 4 Block. Exhaust."
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 4
+draw = 3
+exhaust = true
+rarity = 1
+character_class = 0
+tags = Array[int]([6, 7])
+gem_sockets = 1

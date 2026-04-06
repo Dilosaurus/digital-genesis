@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "divine_judgment"
+display_name = "Divine Judgment"
+description = "Deal 15 damage. If you are at Pure tier, deal 15 again. Remove 5 Corruption. (Combat engine: tier conditional.)"
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 15
+corruption_remove = 5
+rarity = 2
+character_class = 3
+tags = Array[int]([4, 0])
+gem_sockets = 1

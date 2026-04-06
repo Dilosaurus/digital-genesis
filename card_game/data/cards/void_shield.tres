@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "void_shield"
+display_name = "Void Shield"
+description = "Gain 5 Block. Gain 1 Block per 10 Corruption. +2 Corruption. (Combat engine: corruption-scaling block.)"
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 5
+corruption_gain = 2
+rarity = 1
+character_class = 2
+tags = Array[int]([5])
+gem_sockets = 0

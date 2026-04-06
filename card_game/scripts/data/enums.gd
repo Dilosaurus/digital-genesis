@@ -46,6 +46,7 @@ enum CardTag {
 	TECH,
 	EXPLOIT,
 	CURSE,
+	PIRACY,
 }
 
 enum EquipSlot {
@@ -55,6 +56,6 @@ enum EquipSlot {
 	ACCESSORY,
 }
 
-enum CharacterClass { NETRUNNER, SYSADMIN, CRYPTOMANCER, WHITE_HAT, TECHNOMANCER }
+enum CharacterClass { NETRUNNER, SYSADMIN, CRYPTOMANCER, WHITE_HAT, TECHNOMANCER, SCOURGE }
 
 enum Rarity { COMMON, UNCOMMON, RARE, LEGENDARY }

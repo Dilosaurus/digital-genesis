@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "singularity_engine"
+display_name = "Singularity Engine"
+description = "Daemon Fragments no longer Exhaust. At end of turn, create 1 Daemon Fragment. +3 Corruption/turn. (Combat engine: fragment exhaust override + end-turn spawn.)"
+energy_cost = 3
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 2

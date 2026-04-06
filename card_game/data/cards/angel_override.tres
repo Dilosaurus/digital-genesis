@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "angel_override"
+display_name = "Angel Override"
+description = "Deal 25 damage. Remove all Corruption. Exhaust."
+energy_cost = 3
+card_type = 0
+target_type = 0
+damage = 25
+exhaust = true
+corruption_remove = 999
+rarity = 3
+character_class = -1
+tags = Array[int]([4, 6])
+gem_sockets = 2

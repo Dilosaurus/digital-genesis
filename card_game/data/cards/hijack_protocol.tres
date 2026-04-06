@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hijack_protocol"
+display_name = "Hijack Protocol"
+description = "Deal 10 damage. Steal ALL Block from the target. +5 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 10
+corruption_gain = 5
+rarity = 1
+character_class = 5
+tags = Array[int]([9, 5])
+gem_sockets = 1
+steal_all_block = true

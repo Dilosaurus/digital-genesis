@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "black_pearl_piracy_dmg"
+stat = 0
+operation = 1
+value = 0.20
+lifecycle = 3
+duration = -1
+required_card_tags = [9]
+
+[resource]
+script = ExtResource("1")
+id = "black_pearl_of_plunder"
+display_name = "Black Pearl of Plunder"
+description = "When this card is played, also create 1 Contraband. PIRACY cards deal +20% damage."
+rarity = 2
+on_play_modifiers = [SubResource("mod1")]
+trigger_event = ""
+trigger_effect = ""
+trigger_value = 0
+convert_damage_to_heal = false
+extra_hit_percent = 0.0
+add_create_contraband = 1

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "reckless_charge"
+display_name = "Reckless Charge"
+description = "Deal 7 damage. Take 3 self-damage."
+energy_cost = 0
+card_type = 0
+target_type = 0
+damage = 7
+party_damage = 0
+rarity = 0
+character_class = -1
+tags = Array[int]([0])
+gem_sockets = 0

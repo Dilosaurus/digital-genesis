@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "archangel_protocol"
+display_name = "Archangel Protocol"
+description = "Whenever you play a HOLY card, all allies gain 4 Block, heal 2 HP, and remove 2 Corruption. (Combat engine: HOLY-play trigger.)"
+energy_cost = 3
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = 3
+tags = Array[int]([4])
+gem_sockets = 2

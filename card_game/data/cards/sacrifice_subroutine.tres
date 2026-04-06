@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "sacrifice_subroutine"
+display_name = "Sacrifice Subroutine"
+description = "Take 6 damage. Target ally heals 10 and draws 1. (Combat engine: self-damage + ally targeting.)"
+energy_cost = 1
+card_type = 1
+target_type = 5
+heal = 10
+draw = 1
+rarity = 1
+character_class = -1
+tags = Array[int]([5])
+gem_sockets = 0

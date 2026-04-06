@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dark_apotheosis"
+display_name = "Dark Apotheosis"
+description = "Corruption burn is converted to Strength instead of damage. +10 Corruption. SHADOW cards cost 1 less. (Combat engine: corruption burn redirect + tag discount.)"
+energy_cost = 3
+card_type = 2
+target_type = 1
+corruption_gain = 10
+rarity = 3
+character_class = 2
+tags = Array[int]([5])
+gem_sockets = 2

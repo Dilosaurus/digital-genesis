@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "recursive_spawn"
+display_name = "Recursive Spawn"
+description = "Create 3 Daemon Fragments. Draw 2. +4 Corruption."
+energy_cost = 2
+card_type = 1
+target_type = 1
+draw = 2
+create_daemon_fragment = 3
+corruption_gain = 4
+rarity = 2
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 1

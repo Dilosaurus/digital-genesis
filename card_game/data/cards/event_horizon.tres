@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "event_horizon"
+display_name = "Event Horizon"
+description = "Deal damage equal to your Corruption (max 100). Set Corruption to 0. Exhaust. (Combat engine: corruption-as-damage + zero out.)"
+energy_cost = 4
+card_type = 0
+target_type = 0
+damage = 0
+exhaust = true
+rarity = 3
+character_class = 2
+tags = Array[int]([5, 7])
+gem_sockets = 2

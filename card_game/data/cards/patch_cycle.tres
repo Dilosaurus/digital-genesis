@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "patch_cycle"
+display_name = "Patch Cycle"
+description = "Gain 6 Block. If Block >= 15, gain 6 more. (Combat engine: conditional bonus block.)"
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 6
+rarity = 0
+character_class = 1
+tags = Array[int]([6])
+gem_sockets = 0

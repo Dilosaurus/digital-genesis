@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "absolute_defense"
+display_name = "Absolute Defense"
+description = "Gain 50 Block. All allies gain 15 Block. Exhaust."
+energy_cost = 4
+card_type = 1
+target_type = 3
+block = 50
+exhaust = true
+rarity = 3
+character_class = 1
+tags = Array[int]([6])
+gem_sockets = 2

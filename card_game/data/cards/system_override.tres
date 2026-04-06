@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "system_override"
+display_name = "System Override"
+description = "Play all Daemon Fragments in your hand (they still Exhaust). +3 Corruption per Fragment played. (Combat engine: auto-play all fragments.)"
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 0
+corruption_gain = 3
+rarity = 2
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 2

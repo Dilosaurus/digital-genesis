@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dead_mans_code"
+display_name = "Dead Man's Code"
+description = "Deal 8 damage. +3 Corruption. Create 1 Contraband if the enemy has 0 Block. [combat engine: contraband-on-zero-block trigger]"
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 8
+corruption_gain = 3
+rarity = 1
+character_class = 5
+tags = Array[int]([9, 5])

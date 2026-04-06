@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "alexandrite_of_chains"
+display_name = "Alexandrite of Chains"
+description = "When this card deals unblocked damage, apply 1 Weak."
+rarity = 2
+on_play_modifiers = []
+trigger_event = "on_unblocked_hit"
+trigger_effect = "apply_weak"
+trigger_value = 1
+convert_damage_to_heal = false
+extra_hit_percent = 0.0
+add_create_contraband = 0

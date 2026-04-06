@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "botnet_cascade"
+display_name = "Botnet Cascade"
+description = "Deal 6 damage to ALL enemies. Draw 1 for each enemy hit. +4 Corruption. (Combat engine: per-enemy draw.)"
+energy_cost = 2
+card_type = 0
+target_type = 2
+damage = 6
+corruption_gain = 4
+rarity = 2
+character_class = 0
+tags = Array[int]([6, 1, 7])
+gem_sockets = 2

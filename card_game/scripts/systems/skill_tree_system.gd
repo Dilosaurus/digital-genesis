@@ -147,6 +147,7 @@ static func _tag_from_string(s: String) -> int:
 		"tech": return Enums.CardTag.TECH
 		"exploit": return Enums.CardTag.EXPLOIT
 		"curse": return Enums.CardTag.CURSE
+		"piracy": return Enums.CardTag.PIRACY
 		_: return -1
 
 # ---------------------------------------------------------------------------
@@ -199,6 +200,7 @@ static func _create_default_trees() -> void:
 	_create_cryptomancer_tree()
 	_create_white_hat_tree()
 	_create_technomancer_tree()
+	_create_scourge_tree()
 
 # ------------------------------------------------------------------
 # Netrunner (Zephyr) — "Neural Network"
@@ -661,6 +663,105 @@ static func _create_technomancer_tree() -> void:
 			_spec("corruption_resist", "percent_add", 0.15),
 			_spec("max_hp", "flat_add", 5.0),
 		],
+		Vector2(2, 3)
+	))
+
+	_tree_database[tree.id] = tree
+
+# ------------------------------------------------------------------
+# Scourge (Blackbeard) — "Black Flag Protocol"
+# Code Pirate. Tags: PIRACY, SHADOW. Passive: PIRACY cards steal 2 Block.
+# Branch 1: Plunder (Offense)              — column 0
+# Branch 2: Sabotage (Enabler)             — column 1
+# Branch 3: Corsair (Defense / Corruption) — column 2
+#
+# NOTE: Several Scourge keystones rely on Contraband-play triggers,
+# per-turn corruption-burn conversions, and on-hit steal scaling that
+# the modifier_spec system can't express. Those nodes still appear in
+# the tree (with their full description text) but carry zero or partial
+# modifier_specs — the combat engine team will wire the trigger logic
+# from the description.
+# ------------------------------------------------------------------
+static func _create_scourge_tree() -> void:
+	var tree := SkillTreeData.new()
+	tree.id = "scourge"
+	tree.display_name = "Black Flag Protocol"
+
+	# --- Branch 1: Plunder (Offense) — column 0 ---
+	tree.nodes.append(_node(
+		"sc_raider", "Raider", "PIRACY attacks deal +2 damage",
+		0, 1, [],
+		[_spec("damage", "flat_add", 2.0, ["piracy"])],
+		Vector2(0, 0)
+	))
+	tree.nodes.append(_node(
+		"sc_loaded_dice", "Loaded Dice", "Contraband cards deal +3 damage [combat engine: contraband-card damage rider]",
+		1, 1, ["sc_raider"],
+		[],
+		Vector2(0, 1)
+	))
+	tree.nodes.append(_node(
+		"sc_pillage", "Pillage", "When you play a Contraband card, steal 2 Block from a random enemy [combat engine: contraband-play trigger]",
+		2, 2, ["sc_loaded_dice"],
+		[],
+		Vector2(0, 2)
+	))
+	tree.nodes.append(_node(
+		"sc_dread_pirate", "Dread Pirate", "KEYSTONE. Contraband cards cost 0, draw 1 when played, and deal +4 damage [combat engine: contraband cost override + draw rider + damage rider]",
+		3, 3, ["sc_pillage"],
+		[],
+		Vector2(0, 3)
+	))
+
+	# --- Branch 2: Sabotage (Enabler) — column 1 ---
+	tree.nodes.append(_node(
+		"sc_case_the_joint", "Case the Joint", "+1 Card Draw per Turn",
+		0, 1, [],
+		[_spec("draw_per_turn", "flat_add", 1.0)],
+		Vector2(1, 0)
+	))
+	tree.nodes.append(_node(
+		"sc_exploit_weakness", "Exploit Weakness", "Stealing Block steals 50% more [combat engine: steal_block x1.5]",
+		1, 1, ["sc_case_the_joint"],
+		[],
+		Vector2(1, 1)
+	))
+	tree.nodes.append(_node(
+		"sc_crippling_blow", "Crippling Blow", "PIRACY cards apply 1 Weak [combat engine: piracy-tag on-play apply_weak=1]",
+		2, 2, ["sc_exploit_weakness"],
+		[],
+		Vector2(1, 2)
+	))
+	tree.nodes.append(_node(
+		"sc_letters_of_marque", "Letters of Marque", "KEYSTONE. The first PIRACY card you play each turn strips ALL Strength from the target. You gain half. [combat engine: first-piracy-per-turn strength steal]",
+		3, 3, ["sc_crippling_blow"],
+		[],
+		Vector2(1, 3)
+	))
+
+	# --- Branch 3: Corsair (Defense / Corruption) — column 2 ---
+	tree.nodes.append(_node(
+		"sc_thick_hull", "Thick Hull", "+3 Block to all cards",
+		0, 1, [],
+		[_spec("block", "flat_add", 3.0)],
+		Vector2(2, 0)
+	))
+	tree.nodes.append(_node(
+		"sc_spoils_of_war", "Spoils of War", "Corruption gain equals Block gain [combat engine: corruption_gain mirrors block]",
+		1, 1, ["sc_thick_hull"],
+		[],
+		Vector2(2, 1)
+	))
+	tree.nodes.append(_node(
+		"sc_armored_brigantine", "Armored Brigantine", "+8 Max HP. Contraband cards also grant 3 Block when played. [combat engine: contraband-play +3 block rider]",
+		2, 2, ["sc_spoils_of_war"],
+		[_spec("max_hp", "flat_add", 8.0)],
+		Vector2(2, 2)
+	))
+	tree.nodes.append(_node(
+		"sc_ghost_ship", "Ghost Ship", "KEYSTONE. Start of turn, create 1 Contraband. Corruption burn becomes Block instead of HP loss. [combat engine: start-of-turn create_contraband=1 + burn->block conversion]",
+		3, 3, ["sc_armored_brigantine"],
+		[],
 		Vector2(2, 3)
 	))
 

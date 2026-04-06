@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "network_tap"
+display_name = "Network Tap"
+description = "Whenever you play an EXPLOIT card, draw 1. (Combat engine: tag-play trigger.)"
+energy_cost = 1
+card_type = 2
+target_type = 1
+rarity = 2
+character_class = -1
+tags = Array[int]([6, 7])
+gem_sockets = 1
