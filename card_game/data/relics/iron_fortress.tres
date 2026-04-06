@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/iron_fortress/iron_fortress.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "iron_fortress"
+display_name = "Iron Fortress"
+description = "Start combat with 15 Block."
+rarity = 1
+icon = ExtResource("icon_tex")
+start_combat_block = 15

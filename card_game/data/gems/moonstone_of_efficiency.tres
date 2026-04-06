@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/moonstone_of_efficiency/moonstone_of_efficiency.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "moonstone_efficiency_cost"
+stat = 6
+operation = 0
+value = -1.0
+lifecycle = 3
+duration = -1
+
+[resource]
+script = ExtResource("1")
+id = "moonstone_of_efficiency"
+display_name = "Moonstone of Efficiency"
+description = "-1 energy cost when played"
+rarity = 2
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1")]

@@ -3,11 +3,13 @@ extends RefCounted
 
 var peer_id: int = 0
 var display_name: String = "Player"
+var character_id: String = ""
 var max_hp: int = 80
 var current_hp: int = 80
 var block: int = 0
-var energy: int = 3
-var max_energy: int = 3
+var energy: int = 0
+var max_energy: int = 10
+var mana_regen: int = 3
 var draw_pile: Array[String] = []
 var hand: Array[String] = []
 var discard_pile: Array[String] = []
@@ -22,13 +24,13 @@ var sin_wrath: int = 0
 var sin_sloth: int = 0
 var sin_pride: int = 0
 var draw_penalty: int = 0
-var pride_penalty: int = 0
 var is_on_deaths_door: bool = false
 var deaths_door_turns: int = 0
 var is_dead: bool = false
-var pact_damage_boost: int = 0
 var strength: int = 0
 var dexterity: int = 0
+var cooldowns: Dictionary = {}  # card_id (String) -> turns remaining (int)
+var modifier_stack: ModifierStack = ModifierStack.new()
 
 func to_public_dict() -> Dictionary:
 	return {
@@ -39,6 +41,7 @@ func to_public_dict() -> Dictionary:
 		"block": block,
 		"energy": energy,
 		"max_energy": max_energy,
+		"mana_regen": mana_regen,
 		"hand_count": hand.size(),
 		"draw_pile_count": draw_pile.size(),
 		"discard_pile_count": discard_pile.size(),
@@ -55,6 +58,7 @@ func to_public_dict() -> Dictionary:
 		"is_on_deaths_door": is_on_deaths_door,
 		"deaths_door_turns": deaths_door_turns,
 		"is_dead": is_dead,
+		"cooldowns": cooldowns.duplicate(),
 	}
 
 func to_owner_dict() -> Dictionary:

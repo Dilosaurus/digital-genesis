@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq7orb_resource"]
+
+[ext_resource type="Script" path="res://scripts/ui/resource_orb.gd" id="1_script"]
+[ext_resource type="Shader"  path="res://shaders/liquid_orb.gdshader"  id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("2_shader")
+shader_parameter/back_fill_colour        = Vector3(0.35, 0.85, 1.0)
+shader_parameter/front_fill_inner_colour = Vector3(0.2, 0.7, 1.0)
+shader_parameter/front_fill_outer_colour = Vector3(0.0, 0.28, 0.9)
+shader_parameter/ring_colour             = Vector3(0.05, 0.1, 0.2)
+shader_parameter/fresnel_colour          = Vector3(0.4, 0.8, 1.0)
+shader_parameter/inner_ring_glow_colour  = Vector3(0.1, 0.8, 1.0)
+shader_parameter/ring_width              = 0.08
+shader_parameter/inner_circle_radius_offset = 0.0
+shader_parameter/fill_value             = 0.0
+
+[node name="ResourceOrb" type="Control"]
+custom_minimum_size = Vector2(80, 100)
+script = ExtResource("1_script")
+
+[node name="OrbRect" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right  = 0.0
+anchor_bottom = 0.0
+offset_right  = 80.0
+offset_bottom = 80.0
+material = SubResource("ShaderMaterial_1")
+
+[node name="ValueLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_right  = 0.0
+anchor_bottom = 0.0
+offset_top    = 28.0
+offset_right  = 80.0
+offset_bottom = 52.0
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 1, 1, 0.95)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1.0)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+
+[node name="TypeLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_right  = 0.0
+anchor_bottom = 0.0
+offset_top    = 50.0
+offset_right  = 80.0
+offset_bottom = 68.0
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1

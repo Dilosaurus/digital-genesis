@@ -1,0 +1,16 @@
+**/__pycache__
+**/*.pyc
+**/node_modules
+**/.git
+**/.claude
+**/backups
+**/frontend/dist
+**/*.import
+*.md
+card_game/art_pipeline/
+card_game/data/
+card_game/scenes/
+card_game/scripts/
+card_game/shaders/
+card_game/project.godot
+card_game/default_bus_layout.tres

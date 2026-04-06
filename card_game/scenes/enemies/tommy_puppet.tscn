@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://daxwn6ox0dhwh"]
+
+[ext_resource type="Texture2D" uid="uid://bcyjyus5kdft" path="res://assets/enemies/boss/tommy/parts/arm_left.png" id="arm_l"]
+[ext_resource type="Texture2D" uid="uid://d0vks2b0ancla" path="res://assets/enemies/boss/tommy/parts/arm_right.png" id="arm_r"]
+[ext_resource type="Texture2D" uid="uid://clfawl2l664tr" path="res://assets/enemies/boss/tommy/parts/foot_left.png" id="foot_l"]
+[ext_resource type="Texture2D" uid="uid://cpa0sm3pb5e5k" path="res://assets/enemies/boss/tommy/parts/foot_right.png" id="foot_r"]
+[ext_resource type="Texture2D" uid="uid://y5xhdhaksp5x" path="res://assets/enemies/boss/tommy/parts/head.png" id="head"]
+[ext_resource type="Texture2D" uid="uid://4npltfbrbal1" path="res://assets/enemies/boss/tommy/parts/leg_left.png" id="leg_l"]
+[ext_resource type="Texture2D" uid="uid://c6cxqnhyhloov" path="res://assets/enemies/boss/tommy/parts/leg_right.png" id="leg_r"]
+[ext_resource type="Script" uid="uid://ca63ki347ep0r" path="res://scripts/enemies/tommy_puppet.gd" id="script"]
+[ext_resource type="Texture2D" uid="uid://d1rug6l5b3s10" path="res://assets/enemies/boss/tommy/parts/shin_left.png" id="shin_l"]
+[ext_resource type="Texture2D" uid="uid://de3yxql86wp0h" path="res://assets/enemies/boss/tommy/parts/shin_right.png" id="shin_r"]
+[ext_resource type="Texture2D" uid="uid://74t5jllmvxst" path="res://assets/enemies/boss/tommy/parts/torso.png" id="torso"]
+
+[node name="TommyPuppet" type="Node2D" unique_id=1084916084]
+position = Vector2(1720, 900)
+scale = Vector2(0.85, 0.85)
+script = ExtResource("script")
+
+[node name="Torso" type="Sprite2D" parent="." unique_id=1150654583]
+position = Vector2(0, -200)
+texture = ExtResource("torso")
+offset = Vector2(0, 100)
+
+[node name="Head" type="Sprite2D" parent="Torso" unique_id=1154385261]
+z_index = 1
+position = Vector2(2.3529413, -235.29413)
+texture = ExtResource("head")
+offset = Vector2(0, -30)
+
+[node name="ArmLeft" type="Sprite2D" parent="Torso" unique_id=1399064759]
+position = Vector2(-114.1176, -112.94117)
+texture = ExtResource("arm_l")
+offset = Vector2(-91.76477, 94.70587)
+flip_h = true
+
+[node name="ArmRight" type="Sprite2D" parent="Torso" unique_id=2078322656]
+position = Vector2(107.05879, -125.88235)
+texture = ExtResource("arm_r")
+offset = Vector2(94.117676, 106.47058)
+flip_h = true
+
+[node name="LegLeft" type="Sprite2D" parent="." unique_id=654973148]
+position = Vector2(64.705894, -15.294126)
+texture = ExtResource("leg_l")
+offset = Vector2(0, 70)
+
+[node name="ShinLeft" type="Sprite2D" parent="LegLeft" unique_id=510002875]
+z_index = -1
+position = Vector2(20, 177.64706)
+texture = ExtResource("shin_l")
+offset = Vector2(0, 40)
+flip_h = true
+
+[node name="FootLeft" type="Sprite2D" parent="LegLeft/ShinLeft" unique_id=663908888]
+position = Vector2(18.82353, 103.5294)
+texture = ExtResource("foot_l")
+offset = Vector2(-5, 20)
+
+[node name="LegRight" type="Sprite2D" parent="." unique_id=1785207377]
+position = Vector2(-64.70589, -15.294113)
+texture = ExtResource("leg_r")
+offset = Vector2(0, 70)
+
+[node name="ShinRight" type="Sprite2D" parent="LegRight" unique_id=206153861]
+z_index = -1
+position = Vector2(-22.352942, 175.29413)
+texture = ExtResource("shin_r")
+offset = Vector2(0, 40)
+flip_h = true
+
+[node name="FootRight" type="Sprite2D" parent="LegRight/ShinRight" unique_id=309812021]
+position = Vector2(-18.823528, 110.588234)
+texture = ExtResource("foot_r")
+offset = Vector2(5, 20)

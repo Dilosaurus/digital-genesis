@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/shadow_cloak/shadow_cloak.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "shadow_cloak_dmg"
+stat = 0
+operation = 1
+value = 0.15
+lifecycle = 0
+duration = -1
+only_when_hp_below_pct = 0.5
+
+[resource]
+script = ExtResource("1")
+id = "shadow_cloak"
+display_name = "Shadow Cloak"
+description = "+15% damage when below 50% HP"
+slot = 1
+rarity = 2
+icon = ExtResource("icon_tex")
+modifiers = [SubResource("mod1")]

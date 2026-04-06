@@ -1,0 +1,191 @@
+[
+  {
+    "id": "berserker_gauntlet",
+    "display_name": "Berserker Gauntlet",
+    "description": "x1.25 damage vs vulnerable enemies",
+    "slot": "WEAPON",
+    "rarity": "RARE",
+    "modifiers": [
+      {
+        "id": "berserker_gauntlet_dmg",
+        "stat": "DAMAGE",
+        "operation": "PERCENT_MULT",
+        "value": 1.25,
+        "lifecycle": "PERMANENT",
+        "duration": -1,
+        "only_vs_vulnerable": true
+      }
+    ]
+  },
+  {
+    "id": "blessed_armor",
+    "display_name": "Blessed Armor",
+    "description": "+1 block to all cards, +10% healing",
+    "slot": "CHEST",
+    "rarity": "UNCOMMON",
+    "modifiers": [
+      {
+        "id": "blessed_armor_block",
+        "stat": "BLOCK",
+        "operation": "FLAT_ADD",
+        "value": 1.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1
+      },
+      {
+        "id": "blessed_armor_heal",
+        "stat": "HEALING",
+        "operation": "PERCENT_ADD",
+        "value": 0.1,
+        "lifecycle": "PERMANENT",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "corrupt_amulet",
+    "display_name": "Corrupt Amulet",
+    "description": "+20% damage",
+    "slot": "ACCESSORY",
+    "rarity": "RARE",
+    "modifiers": [
+      {
+        "id": "corrupt_amulet_dmg",
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.2,
+        "lifecycle": "PERMANENT",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "flame_gauntlets",
+    "display_name": "Flame Gauntlets",
+    "description": "+2 damage on FIRE cards",
+    "slot": "WEAPON",
+    "rarity": "UNCOMMON",
+    "modifiers": [
+      {
+        "id": "flame_gauntlets_dmg",
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 2.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1,
+        "required_card_tags": [
+          "FIRE"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "holy_circlet",
+    "display_name": "Holy Circlet",
+    "description": "+3 healing on HOLY cards",
+    "slot": "HEAD",
+    "rarity": "UNCOMMON",
+    "modifiers": [
+      {
+        "id": "holy_circlet_heal",
+        "stat": "HEALING",
+        "operation": "FLAT_ADD",
+        "value": 3.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1,
+        "required_card_tags": [
+          "HOLY"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "iron_helm",
+    "display_name": "Iron Helm",
+    "description": "+10 Max HP",
+    "slot": "HEAD",
+    "rarity": "COMMON",
+    "modifiers": [
+      {
+        "id": "iron_helm_hp",
+        "stat": "MAX_HP",
+        "operation": "FLAT_ADD",
+        "value": 10.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "leather_vest",
+    "display_name": "Leather Vest",
+    "description": "+2 block to all cards",
+    "slot": "CHEST",
+    "rarity": "COMMON",
+    "modifiers": [
+      {
+        "id": "leather_vest_block",
+        "stat": "BLOCK",
+        "operation": "FLAT_ADD",
+        "value": 2.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "rusty_blade",
+    "display_name": "Rusty Blade",
+    "description": "+1 damage to all attacks",
+    "slot": "WEAPON",
+    "rarity": "COMMON",
+    "modifiers": [
+      {
+        "id": "rusty_blade_dmg",
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 1.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "shadow_cloak",
+    "display_name": "Shadow Cloak",
+    "description": "+15% damage when below 50% HP",
+    "slot": "CHEST",
+    "rarity": "RARE",
+    "modifiers": [
+      {
+        "id": "shadow_cloak_dmg",
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.15,
+        "lifecycle": "PERMANENT",
+        "duration": -1,
+        "only_when_hp_below_pct": 0.5
+      }
+    ]
+  },
+  {
+    "id": "tech_visor",
+    "display_name": "Tech Visor",
+    "description": "+2 damage on TECH cards",
+    "slot": "HEAD",
+    "rarity": "UNCOMMON",
+    "modifiers": [
+      {
+        "id": "tech_visor_dmg",
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 2.0,
+        "lifecycle": "PERMANENT",
+        "duration": -1,
+        "required_card_tags": [
+          "TECH"
+        ]
+      }
+    ]
+  }
+]

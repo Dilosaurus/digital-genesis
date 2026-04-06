@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "memory_worm"
+display_name = "Memory Worm"
+description = "A slithering data construct that burrows into memory banks and corrupts stored processes."
+lore = "Memory Worms are among the most insidious threats in the Rift. They do not attack directly — they infiltrate an operative's stored data, corrupting cards, scrambling deck order, and introducing garbage data into carefully maintained combat routines.
+
+Born from the fragmented remains of the Nexus defragmentation system, Memory Worms retain their original purpose but in twisted form. Instead of organizing data, they scramble it. Instead of repairing corrupted sectors, they spread corruption further. An operative fighting a Memory Worm often finds their most reliable cards suddenly behaving unpredictably, and their deck order completely randomized."
+max_hp = 35
+intent_pool = [{"type": 0, "value": 7}, {"type": 5, "value": 8}, {"type": 3, "value": 2}, {"type": 0, "value": 9}]
+xp_reward = 15

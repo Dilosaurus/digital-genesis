@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://ga6uccheibng"]
+
+[ext_resource type="Texture2D" uid="uid://bvf0e481lt2gc" path="res://assets/enemies/boss/metatron/parts/claw_left.png" id="claw_l"]
+[ext_resource type="Texture2D" uid="uid://bs6i8jrxlxpcj" path="res://assets/enemies/boss/metatron/parts/claw_right.png" id="claw_r"]
+[ext_resource type="Texture2D" uid="uid://bgxnhim16mtrq" path="res://assets/enemies/boss/metatron/parts/head.png" id="head"]
+[ext_resource type="Texture2D" uid="uid://bwbhgp5l85hal" path="res://assets/enemies/boss/metatron/parts/hood.png" id="hood"]
+[ext_resource type="Texture2D" uid="uid://c1uwxsa5cxanq" path="res://assets/enemies/boss/metatron/parts/lower_arm_left.png" id="lower_arm_l"]
+[ext_resource type="Texture2D" uid="uid://dmtqj58bnkn2u" path="res://assets/enemies/boss/metatron/parts/lower_arm_right.png" id="lower_arm_r"]
+[ext_resource type="Texture2D" uid="uid://jmby1k6wpqne" path="res://assets/enemies/boss/metatron/parts/neck.png" id="neck"]
+[ext_resource type="Texture2D" uid="uid://b1fwsxdjsx5wj" path="res://assets/enemies/boss/metatron/parts/robe_left.png" id="robe_l"]
+[ext_resource type="Texture2D" uid="uid://c5hrvnv2ty3xa" path="res://assets/enemies/boss/metatron/parts/robe_right.png" id="robe_r"]
+[ext_resource type="Script" uid="uid://j5jk3hlhlx56" path="res://scripts/enemies/metatron_puppet.gd" id="script"]
+[ext_resource type="Texture2D" uid="uid://bgcxg3h6qoorm" path="res://assets/enemies/boss/metatron/parts/shoulder_left.png" id="shoulder_l"]
+[ext_resource type="Texture2D" uid="uid://wt7tkeq7pl31" path="res://assets/enemies/boss/metatron/parts/shoulder_right.png" id="shoulder_r"]
+[ext_resource type="Texture2D" uid="uid://e80ll4beprwn" path="res://assets/enemies/boss/metatron/parts/torso.png" id="torso"]
+[ext_resource type="Texture2D" uid="uid://7i5asd2sl80r" path="res://assets/enemies/boss/metatron/parts/upper_arm_left.png" id="upper_arm_l"]
+[ext_resource type="Texture2D" uid="uid://cncvmlaws6vn2" path="res://assets/enemies/boss/metatron/parts/upper_arm_right.png" id="upper_arm_r"]
+
+[node name="MetatronPuppet" type="Node2D" unique_id=2070223493]
+position = Vector2(1769.0001, 904)
+scale = Vector2(1.13, 1.13)
+script = ExtResource("script")
+
+[node name="RobeLeft" type="Sprite2D" parent="." unique_id=424544071]
+position = Vector2(-174.11758, -60)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("robe_l")
+offset = Vector2(0, 90)
+
+[node name="RobeRight" type="Sprite2D" parent="." unique_id=75273093]
+position = Vector2(182.35294, -54.11766)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("robe_r")
+offset = Vector2(0, 90)
+
+[node name="Torso" type="Sprite2D" parent="." unique_id=880055743]
+position = Vector2(0, -20)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("torso")
+
+[node name="Neck" type="Sprite2D" parent="Torso" unique_id=648257381]
+position = Vector2(0, -255)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("neck")
+offset = Vector2(0, -10)
+
+[node name="Head" type="Sprite2D" parent="Torso/Neck" unique_id=1082809849]
+z_index = 1
+position = Vector2(6.1035156e-05, -64.99995)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("head")
+offset = Vector2(0, 37.94)
+
+[node name="Hood" type="Sprite2D" parent="Torso/Neck/Head" unique_id=1045248464]
+z_index = -1
+position = Vector2(0, -70)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("hood")
+offset = Vector2(0, 46.755)
+
+[node name="ShoulderLeft" type="Sprite2D" parent="Torso" unique_id=617730031]
+position = Vector2(-45.88235, -235.29411)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("shoulder_l")
+offset = Vector2(-20, 40)
+
+[node name="UpperArmLeft" type="Sprite2D" parent="Torso/ShoulderLeft" unique_id=665521875]
+position = Vector2(-55.294014, 91.76477)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("upper_arm_l")
+offset = Vector2(-25.12, 29.265)
+
+[node name="LowerArmLeft" type="Sprite2D" parent="Torso/ShoulderLeft/UpperArmLeft" unique_id=1466804721]
+position = Vector2(-55.29413, 69.41177)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("lower_arm_l")
+offset = Vector2(-93.255, 109.725)
+flip_h = true
+
+[node name="ClawLeft" type="Sprite2D" parent="Torso/ShoulderLeft/UpperArmLeft/LowerArmLeft" unique_id=1254922572]
+position = Vector2(-162.35297, 149.41177)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("claw_l")
+offset = Vector2(-56.55, 43.13)
+flip_h = true
+
+[node name="ShoulderRight" type="Sprite2D" parent="Torso" unique_id=894632282]
+position = Vector2(44.705883, -232.94116)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("shoulder_r")
+offset = Vector2(20, 40)
+
+[node name="UpperArmRight" type="Sprite2D" parent="Torso/ShoulderRight" unique_id=2017449977]
+position = Vector2(51.764717, 89.41183)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("upper_arm_r")
+offset = Vector2(26.055, 22.78)
+
+[node name="LowerArmRight" type="Sprite2D" parent="Torso/ShoulderRight/UpperArmRight" unique_id=1265484981]
+position = Vector2(60.000042, 57.647057)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("lower_arm_r")
+offset = Vector2(91.605, 117.61)
+flip_h = true
+
+[node name="ClawRight" type="Sprite2D" parent="Torso/ShoulderRight/UpperArmRight/LowerArmRight" unique_id=1436914792]
+position = Vector2(155.29414, 172.94113)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("claw_r")
+offset = Vector2(60.03, 38.82)
+flip_h = true
+
+[node name="BackShoulderLeft" type="Sprite2D" parent="Torso" unique_id=1199135875]
+modulate = Color(0.7, 0.7, 0.7, 1)
+z_index = -2
+position = Vector2(-31.764618, -288.23523)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("shoulder_l")
+offset = Vector2(-20, 40)
+
+[node name="BackUpperArmLeft" type="Sprite2D" parent="Torso/BackShoulderLeft" unique_id=581797595]
+position = Vector2(-55.29415, 84.70588)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("upper_arm_l")
+offset = Vector2(-25, 29)
+
+[node name="BackLowerArmLeft" type="Sprite2D" parent="Torso/BackShoulderLeft/BackUpperArmLeft" unique_id=994444557]
+position = Vector2(-57.64706, 59.999985)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("lower_arm_l")
+offset = Vector2(-93, -107.9)
+flip_h = true
+flip_v = true
+
+[node name="BackClawLeft" type="Sprite2D" parent="Torso/BackShoulderLeft/BackUpperArmLeft/BackLowerArmLeft" unique_id=153286722]
+position = Vector2(-136.47058, -129.4118)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("claw_l")
+offset = Vector2(-57, -42.95)
+flip_h = true
+flip_v = true
+
+[node name="BackShoulderRight" type="Sprite2D" parent="Torso" unique_id=1950067981]
+modulate = Color(0.7, 0.7, 0.7, 1)
+z_index = -2
+position = Vector2(28.235352, -291.76465)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("shoulder_r")
+offset = Vector2(20, 40)
+
+[node name="BackUpperArmRight" type="Sprite2D" parent="Torso/BackShoulderRight" unique_id=1877030183]
+position = Vector2(60.00003, 88.23531)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("upper_arm_r")
+offset = Vector2(26, 23)
+
+[node name="BackLowerArmRight" type="Sprite2D" parent="Torso/BackShoulderRight/BackUpperArmRight" unique_id=79448959]
+position = Vector2(64, 60)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("lower_arm_r")
+offset = Vector2(92, -117.765)
+flip_h = true
+flip_v = true
+
+[node name="BackClawRight" type="Sprite2D" parent="Torso/BackShoulderRight/BackUpperArmRight/BackLowerArmRight" unique_id=1904771845]
+position = Vector2(138.3529, -156.47058)
+scale = Vector2(1.13, 1.13)
+texture = ExtResource("claw_r")
+offset = Vector2(60, -39.66)
+flip_h = true
+flip_v = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1451393372]

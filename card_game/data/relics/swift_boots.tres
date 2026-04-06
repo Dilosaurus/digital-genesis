@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/swift_boots/swift_boots.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "swift_boots"
+display_name = "Swift Boots"
+description = "Start each combat with 2 Dexterity."
+rarity = 1
+icon = ExtResource("icon_tex")
+start_combat_dexterity = 2

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "netrunner"
+display_name = "GHOST"
+title = "Blade of the Net"
+character_class = 0
+backstory = "Kai Tanaka was seventeen when they first breached a corporate firewall. By twenty, they had dismantled three megacorps' security architectures from the inside. The authorities never caught them — Ghost doesn't leave traces.
+
+When the Angels seized the Nexus, Ghost saw it as the ultimate challenge: an encryption scheme designed by entities that think in terabytes per second. The GENESIS Protocol recruited them not for ideology but for ego. Ghost doesn't care about saving the uploaded dead. Ghost cares about proving that no system is unbreakable.
+
+Fast, reckless, and brilliant, Ghost fights with rapid-fire exploits and multi-vector attacks. The corruption that seeps in during deep dives doesn't worry them. After all, code is code — and Ghost has always been comfortable rewriting themselves."
+passive_name = "Neural Overclock"
+passive_description = "Draw 1 extra card each turn."
+starter_deck = Array[String](["strike", "strike", "strike", "defend", "defend", "twin_strike", "pommel_strike", "net_spike", "packet_storm", "backdoor"])
+starting_hp = 75
+starting_energy = 3
+color_primary = Color(0.2, 0.85, 0.95, 1)
+color_secondary = Color(0.1, 0.3, 0.55, 1)
+icon_text = "NR"

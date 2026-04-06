@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/skill_tree_screen.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/dark_cyber_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/MedievalSharp.ttf" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="4"]
+[ext_resource type="FontFile" path="res://assets/fonts/Lato-Regular.ttf" id="5"]
+
+[node name="SkillTreeScreen" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2")
+script = ExtResource("1")
+_font_medieval = ExtResource("3")
+_font_mono = ExtResource("4")
+_font_body = ExtResource("5")

@@ -1,20 +1,168 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/deck_viewer.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/dark_cyber_theme.tres" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/cards/card_visual.tscn" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/MedievalSharp.ttf" id="4"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="5"]
+
+; --- Panel background ---
+[sub_resource type="StyleBoxFlat" id="panel_bg"]
+bg_color = Color(0.05, 0.04, 0.08, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.50, 0.40, 0.25, 1.0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.80)
+shadow_size = 16
+shadow_offset = Vector2(0, 4)
+
+; --- Header strip ---
+[sub_resource type="StyleBoxFlat" id="header_strip"]
+bg_color = Color(0.06, 0.04, 0.12, 0.85)
+border_width_bottom = 1
+border_color = Color(0.45, 0.35, 0.25, 0.70)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+; --- Filter bar background ---
+[sub_resource type="StyleBoxFlat" id="filter_bar_bg"]
+bg_color = Color(0.06, 0.04, 0.10, 0.90)
+border_width_bottom = 1
+border_color = Color(0.35, 0.28, 0.20, 0.50)
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+
+; --- Active filter button ---
+[sub_resource type="StyleBoxFlat" id="filter_btn_active"]
+bg_color = Color(0.18, 0.12, 0.38, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.55, 0.45, 0.90, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+
+; --- Scroll area background ---
+[sub_resource type="StyleBoxFlat" id="scroll_area_bg"]
+bg_color = Color(0.04, 0.03, 0.09, 0.0)
+
+; --- Tooltip panel ---
+[sub_resource type="StyleBoxFlat" id="tooltip_bg"]
+bg_color = Color(0.06, 0.04, 0.14, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.38, 0.72, 0.90)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0.0, 0.0, 0.0, 0.70)
+shadow_size = 8
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+; --- Close button normal ---
+[sub_resource type="StyleBoxFlat" id="close_btn_normal"]
+bg_color = Color(0.14, 0.07, 0.07, 0.90)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.60, 0.22, 0.22, 0.80)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+
+; --- Close button hover ---
+[sub_resource type="StyleBoxFlat" id="close_btn_hover"]
+bg_color = Color(0.30, 0.08, 0.08, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.90, 0.30, 0.30, 1.0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+
+; --- Close button pressed ---
+[sub_resource type="StyleBoxFlat" id="close_btn_pressed"]
+bg_color = Color(0.20, 0.05, 0.05, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70, 0.22, 0.22, 0.90)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+
+; --- Footer strip ---
+[sub_resource type="StyleBoxFlat" id="footer_strip"]
+bg_color = Color(0.06, 0.04, 0.14, 1.0)
+border_width_top = 1
+border_color = Color(0.30, 0.25, 0.50, 0.50)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
 
 [node name="DeckViewer" type="Control"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource("2")
 script = ExtResource("1")
 
+; --- Semi-transparent full-screen dimmer ---
 [node name="Dimmer" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.0, 0.0, 0.05, 0.85)
+color = Color(0.0, 0.0, 0.04, 0.88)
 
+; --- Main centered panel (700 x 580) ---
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -22,44 +170,235 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -250.0
-offset_right = 250.0
-offset_bottom = 250.0
+offset_left = -350.0
+offset_top = -290.0
+offset_right = 350.0
+offset_bottom = 290.0
+theme_override_styles/panel = SubResource("panel_bg")
 
-[node name="TitleLabel" type="Label" parent="Panel"]
+; === Header ===
+[node name="Header" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 10.0
-offset_right = 480.0
-offset_bottom = 35.0
-horizontal_alignment = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 700.0
+offset_bottom = 54.0
+theme_override_styles/panel = SubResource("header_strip")
+
+[node name="TitleLabel" type="Label" parent="Panel/Header"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 520.0
+offset_bottom = 42.0
 text = "YOUR DECK"
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.45, 0.85, 1.00, 1.00)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.80)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 
-[node name="CountLabel" type="Label" parent="Panel"]
+[node name="CountLabel" type="Label" parent="Panel/Header"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 35.0
-offset_right = 480.0
-offset_bottom = 55.0
-horizontal_alignment = 1
-text = "10 cards"
+offset_left = 540.0
+offset_top = 10.0
+offset_right = 684.0
+offset_bottom = 40.0
+horizontal_alignment = 2
+text = "0 cards"
+theme_override_fonts/font = ExtResource("5")
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.55, 0.60, 0.72, 0.90)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+; === Filter / Sort Bar ===
+[node name="FilterBar" type="Panel" parent="Panel"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 60.0
-offset_right = 485.0
-offset_bottom = 440.0
+offset_left = 0.0
+offset_top = 54.0
+offset_right = 700.0
+offset_bottom = 94.0
+theme_override_styles/panel = SubResource("filter_bar_bg")
 
-[node name="CardList" type="VBoxContainer" parent="Panel/ScrollContainer"]
+[node name="FilterRow" type="HBoxContainer" parent="Panel/FilterBar"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 690.0
+offset_bottom = 34.0
+theme_override_constants/separation = 6
+
+[node name="LabelFilter" type="Label" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Filter:"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.55, 0.60, 0.72, 0.80)
+
+[node name="FilterAll" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "All"
+theme_override_styles/pressed = SubResource("filter_btn_active")
+button_group = null
+toggle_mode = true
+button_pressed = true
+focus_mode = 0
+
+[node name="FilterAttack" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Attack"
+toggle_mode = true
+focus_mode = 0
+
+[node name="FilterSkill" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Skill"
+toggle_mode = true
+focus_mode = 0
+
+[node name="FilterPower" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Power"
+toggle_mode = true
+focus_mode = 0
+
+[node name="FilterCurse" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Curse"
+toggle_mode = true
+focus_mode = 0
+
+[node name="Spacer" type="Control" parent="Panel/FilterBar/FilterRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="Panel"]
+[node name="LabelSort" type="Label" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Sort:"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.55, 0.60, 0.72, 0.80)
+
+[node name="SortCost" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Cost"
+toggle_mode = true
+button_pressed = false
+focus_mode = 0
+
+[node name="SortType" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Type"
+toggle_mode = true
+focus_mode = 0
+
+[node name="SortName" type="Button" parent="Panel/FilterBar/FilterRow"]
+layout_mode = 2
+text = "Name"
+toggle_mode = true
+button_pressed = true
+focus_mode = 0
+
+; === Scrollable card grid ===
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 180.0
-offset_top = 455.0
-offset_right = 320.0
-offset_bottom = 485.0
-text = "Close"
+offset_left = 0.0
+offset_top = 94.0
+offset_right = 700.0
+offset_bottom = 530.0
+theme_override_styles/panel = SubResource("scroll_area_bg")
+
+[node name="CardGrid" type="GridContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 4
+
+; === Footer ===
+[node name="Footer" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 530.0
+offset_right = 700.0
+offset_bottom = 580.0
+theme_override_styles/panel = SubResource("footer_strip")
+
+[node name="CloseButton" type="Button" parent="Panel/Footer"]
+layout_mode = 0
+offset_right = 120.0
+offset_top = 4.0
+offset_bottom = 40.0
+offset_left = 574.0
+text = "Close [Esc]"
+theme_override_styles/normal = SubResource("close_btn_normal")
+theme_override_styles/hover = SubResource("close_btn_hover")
+theme_override_styles/pressed = SubResource("close_btn_pressed")
+theme_override_colors/font_color = Color(1.00, 0.70, 0.70, 1.00)
+theme_override_colors/font_hover_color = Color(1.00, 0.88, 0.88, 1.00)
+theme_override_font_sizes/font_size = 13
+focus_mode = 0
+
+; === Hover tooltip (hidden until card hovered) ===
+[node name="CardTooltip" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 250.0
+offset_bottom = 260.0
+visible = false
+z_index = 10
+mouse_filter = 2
+theme_override_styles/panel = SubResource("tooltip_bg")
+
+[node name="TooltipName" type="Label" parent="Panel/CardTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 240.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.45, 0.85, 1.00, 1.00)
+text = "Card Name"
+theme_override_fonts/font = ExtResource("4")
+
+[node name="TooltipCost" type="Label" parent="Panel/CardTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 26.0
+offset_right = 240.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1.0, 0.92, 0.25, 1.0)
+theme_override_fonts/font = ExtResource("5")
+text = "Cost: 1"
+
+[node name="TooltipType" type="Label" parent="Panel/CardTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 46.0
+offset_right = 240.0
+offset_bottom = 62.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.75, 0.75, 0.78, 0.90)
+theme_override_fonts/font = ExtResource("5")
+text = "ATTACK"
+
+[node name="TooltipSep" type="HSeparator" parent="Panel/CardTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 65.0
+offset_right = 240.0
+offset_bottom = 67.0
+
+[node name="TooltipDesc" type="RichTextLabel" parent="Panel/CardTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 70.0
+offset_right = 240.0
+offset_bottom = 160.0
+fit_content = true
+scroll_active = false
+bbcode_enabled = true
+text = "Card description"
+theme_override_font_sizes/normal_font_size = 12
+theme_override_colors/default_color = Color(0.88, 0.84, 0.80, 1.0)

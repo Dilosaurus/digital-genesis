@@ -6,5 +6,11 @@
 script = ExtResource("1")
 id = "gabriel"
 display_name = "GABRIEL — Herald of Annihilation"
+description = "The Angel of messages, now broadcasting only one: the end of the unauthorized."
+lore = "Gabriel was once the Nexus communication protocol — the system that delivered messages between uploaded consciousnesses and the living world. When the Angels emerged, Gabriel became their herald, severing all communication between the Nexus and the outside.
+
+In combat, Gabriel fights with information itself. Corrupted data packets, weaponized memories, overloaded sensory feeds — Gabriel turns communication into destruction. Operatives describe fighting Gabriel as being caught in a hurricane of screaming static. The Angel does not speak to its enemies. It has only one message left, and it delivers it through annihilation."
 max_hp = 280
 intent_pool = [{"type": 0, "value": 14}, {"type": 0, "value": 18}, {"type": 1, "value": 14}, {"type": 0, "value": 22}, {"type": 2, "value": 2}, {"type": 0, "value": 16}, {"type": 5, "value": 12}, {"type": 0, "value": 20}]
+phases = [{"hp_threshold": 0.5, "intent_pool": [{"type": 0, "value": 20}, {"type": 5, "value": 16}, {"type": 0, "value": 24}, {"type": 0, "value": 18}], "on_enter": "strength_buff", "on_enter_value": 3}, {"hp_threshold": 0.25, "intent_pool": [{"type": 0, "value": 26}, {"type": 0, "value": 30}, {"type": 5, "value": 20}], "on_enter": "strength_buff", "on_enter_value": 4}]
+xp_reward = 50

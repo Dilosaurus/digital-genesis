@@ -1,39 +1,173 @@
-[gd_scene load_steps=2 format=3 uid="uid://corruption_meter"]
+[gd_scene load_steps=13 format=3 uid="uid://corruption_meter"]
 
 [ext_resource type="Script" path="res://scripts/ui/corruption_meter.gd" id="1_corrupt"]
+[ext_resource type="Theme" path="res://themes/combat_theme.tres" id="2_theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="3_font"]
+
+; --- Outer container background ------------------------------------------
+[sub_resource type="StyleBoxFlat" id="outer_bg"]
+bg_color = Color(0.05, 0.03, 0.10, 0.90)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.50, 0.38, 0.20, 0.60)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+
+; --- Bar track (background) ----------------------------------------------
+[sub_resource type="StyleBoxFlat" id="bar_track"]
+bg_color = Color(0.08, 0.05, 0.15, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.40, 0.30, 0.18, 0.80)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+; --- Bar fill — pure (golden) ---------------------------------------------
+[sub_resource type="StyleBoxFlat" id="fill_pure"]
+bg_color = Color(0.95, 0.82, 0.50, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+; --- Bar fill — tainted (amber) ------------------------------------------
+[sub_resource type="StyleBoxFlat" id="fill_tainted"]
+bg_color = Color(0.85, 0.60, 0.15, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+; --- Bar fill — corrupted (deep crimson) ----------------------------------
+[sub_resource type="StyleBoxFlat" id="fill_corrupted"]
+bg_color = Color(0.80, 0.20, 0.15, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+; --- Bar fill — demonic (red) --------------------------------------------
+[sub_resource type="StyleBoxFlat" id="fill_demonic"]
+bg_color = Color(0.90, 0.10, 0.10, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+; --- Glow border for warning state (high corruption) --------------------
+[sub_resource type="StyleBoxFlat" id="glow_border"]
+bg_color = Color(0.0, 0.0, 0.0, 0.0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.80, 0.20, 0.15, 0.0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="CorruptionMeter" type="Control"]
-custom_minimum_size = Vector2(200, 40)
-size = Vector2(200, 40)
+custom_minimum_size = Vector2(160, 52)
+size = Vector2(160, 52)
 script = ExtResource("1_corrupt")
+theme = ExtResource("2_theme")
 
-[node name="BarBG" type="ColorRect" parent="."]
-offset_left = 10.0
-offset_top = 2.0
-offset_right = 190.0
-offset_bottom = 18.0
-color = Color(0.15, 0.15, 0.15, 1.0)
+; Outer panel — also used as the glow ring (border animated by script)
+[node name="OuterPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 160.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("outer_bg")
+mouse_filter = 0
 
-[node name="BarFill" type="ColorRect" parent="BarBG"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+; Header row: icon + label
+[node name="HeaderRow" type="HBoxContainer" parent="OuterPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 154.0
+offset_bottom = 19.0
+
+[node name="IconLabel" type="Label" parent="OuterPanel/HeaderRow"]
+layout_mode = 2
+text = "☣"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.80, 0.20, 0.15, 1.0)
+
+[node name="TierLabel" type="Label" parent="OuterPanel/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PURE"
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.95, 0.82, 0.50, 1.0)
+
+[node name="ValueLabel" type="Label" parent="OuterPanel/HeaderRow"]
+layout_mode = 2
+text = "0/100"
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.60, 0.60, 0.72, 0.80)
+
+; Bar track
+[node name="BarTrack" type="Panel" parent="OuterPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 21.0
+offset_right = 154.0
+offset_bottom = 37.0
+theme_override_styles/panel = SubResource("bar_track")
+
+; Bar fill — width set by script via size.x
+[node name="BarFill" type="Panel" parent="OuterPanel/BarTrack"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
 offset_right = 0.0
-offset_bottom = 0.0
-color = Color(0.3, 0.8, 1.0, 1.0)
+offset_bottom = 16.0
+theme_override_styles/panel = SubResource("fill_pure")
 mouse_filter = 2
 
-[node name="TierLabel" type="Label" parent="."]
-offset_left = 10.0
-offset_top = 20.0
-offset_right = 190.0
-offset_bottom = 40.0
-horizontal_alignment = 1
-text = "PURE"
+; Tooltip trigger (invisible overlay over full meter)
+[node name="TooltipPanel" type="Panel" parent="OuterPanel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 160.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("glow_border")
+z_index = 10
+mouse_filter = 0
 
-[node name="ValueLabel" type="Label" parent="."]
-offset_left = 130.0
-offset_top = 2.0
-offset_right = 190.0
-offset_bottom = 18.0
-horizontal_alignment = 2
-text = "0 / 100"
+[node name="TooltipPopup" type="Panel" parent="OuterPanel/TooltipPanel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 56.0
+offset_right = 200.0
+offset_bottom = 116.0
+z_index = 200
+visible = false
+
+[node name="TooltipLabel" type="Label" parent="OuterPanel/TooltipPanel/TooltipPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.9, 0.88, 0.82, 1.0)
+autowrap_mode = 3

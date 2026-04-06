@@ -1,0 +1,92 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/arena_background.gd" id="1"]
+
+[node name="ArenaBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="ParallaxBG" type="ParallaxBackground" parent="."]
+
+[node name="L0" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.05, 0.05)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L0"]
+centered = false
+
+[node name="L1" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.15, 0.10)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L1"]
+centered = false
+
+[node name="L2" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.30, 0.20)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L2"]
+centered = false
+
+[node name="L3" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.45, 0.30)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L3"]
+centered = false
+
+[node name="L4" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.55, 0.40)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L4"]
+centered = false
+
+[node name="L5" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.65, 0.50)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L5"]
+centered = false
+
+[node name="L6" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(0.80, 0.65)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L6"]
+centered = false
+
+[node name="L7" type="ParallaxLayer" parent="ParallaxBG"]
+motion_scale = Vector2(1.0, 0.85)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBG/L7"]
+centered = false
+
+[node name="PrimaryParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 60
+
+[node name="SecondaryParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+
+[node name="AmbientParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+
+[node name="AmbientTint" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 1)
+
+[node name="ShaderOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="VignetteOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.3)

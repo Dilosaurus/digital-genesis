@@ -18,3 +18,5 @@ Thumbs.db
 
 # Claude worktrees
 .claude/worktrees/
+card_game/assets/sfx/horror_library.zip
+card_game/assets/models/enemies/Seraph.glb

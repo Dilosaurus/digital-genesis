@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/berserker_virus/berserker_virus_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "berserker_virus"
 display_name = "Berserker Virus"
 description = "Gain 3 Strength. Take 3 HP. Exhaust."
@@ -20,3 +22,5 @@ apply_weak = 0
 gain_strength = 3
 exhaust = true
 corruption_gain = 3
+tags = Array[int]([7])
+gem_sockets = 1

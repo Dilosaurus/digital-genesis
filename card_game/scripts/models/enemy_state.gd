@@ -11,6 +11,12 @@ var intent_index: int = 0
 var vulnerable: int = 0
 var weak: int = 0
 var strength: int = 0
+var marked: int = 0  # Turns of "marked" status (takes +50% damage from all sources)
+var shielded: bool = false  # When true, takes no damage (boss shield mechanic)
+
+# Phase system tracking
+var current_phase_index: int = -1  # -1 = base phase (no phase transition yet)
+var phase_intent_index: int = 0    # intent index within the current phase's pool
 
 func to_dict() -> Dictionary:
 	return {
@@ -23,4 +29,6 @@ func to_dict() -> Dictionary:
 		"vulnerable": vulnerable,
 		"weak": weak,
 		"strength": strength,
+		"marked": marked,
+		"shielded": shielded,
 	}

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "turret_deploy"
+display_name = "Turret Deploy"
+description = "Deal 5 damage 3 times."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 5
+block = 0
+heal = 0
+draw = 0
+hits = 3
+apply_vulnerable = 0
+apply_weak = 0
+tags = Array[int]([6])
+gem_sockets = 1

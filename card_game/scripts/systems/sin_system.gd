@@ -40,21 +40,22 @@ static func apply_punishment(ps: PlayerState, sin_type: int, enemies: Array) -> 
 			result["cards_lost"] = 2
 			result["description"] = "SLOTH — Heavenly lethargy! Draw 2 fewer cards next turn."
 		Enums.SinType.PRIDE:
-			# Pride: all healing halved for 2 turns
-			ps.pride_penalty = 2
+			# Pride: all healing halved for 2 turns (via modifier stack)
+			var mod = ModifierData.new()
+			mod.stat = Enums.Stat.HEALING
+			mod.operation = Enums.ModOp.PERCENT_MULT
+			mod.value = 0.5
+			mod.lifecycle = Enums.ModLifecycle.TURN
+			mod.duration = 2
+			mod.source_type = "sin"
+			mod.source_id = "pride"
+			ps.modifier_stack.add(mod)
 			result["heal_reduction"] = 50
 			result["description"] = "PRIDE — Angels mock your hubris! Healing halved for 2 turns."
 	return result
 
 # Tick down sin penalties at start of turn
+# Note: pride_penalty healing reduction is now handled via modifier stack (TURN lifecycle).
 static func tick_penalties(ps: PlayerState) -> void:
 	if ps.draw_penalty > 0:
 		ps.draw_penalty = 0  # One-turn effect, reset after applied
-	if ps.pride_penalty > 0:
-		ps.pride_penalty -= 1
-
-# Get healing multiplier (affected by Pride punishment)
-static func get_heal_multiplier(ps: PlayerState) -> float:
-	if ps.pride_penalty > 0:
-		return 0.5
-	return 1.0

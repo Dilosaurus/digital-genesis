@@ -16,14 +16,19 @@ const PactScreenScene = preload("res://scenes/ui/pact_screen.tscn")
 const CombatLogScene = preload("res://scenes/ui/combat_log.tscn")
 const TurnBannerScene = preload("res://scenes/ui/turn_banner.tscn")
 const RunSummaryScreenScene = preload("res://scenes/ui/run_summary_screen.tscn")
+const ResourceOrbScene = preload("res://scenes/ui/resource_orb.tscn")
+const EquipmentRewardScreenScene = preload("res://scenes/ui/equipment_reward_screen.tscn")
+const GemRewardScreenScene = preload("res://scenes/ui/gem_reward_screen.tscn")
 
 @onready var enemy_area: Control = $ShakeContainer/EnemyArea
 @onready var hand_display = $HandDisplay
 @onready var player_boards: HBoxContainer = $ShakeContainer/PlayerBoards
 @onready var end_turn_btn: Button = $HUD/EndTurnButton
 @onready var turn_label: Label = $HUD/TurnLabel
-@onready var deck_count_label: Label = $HUD/DeckPanel/DeckCount
-@onready var discard_count_label: Label = $HUD/DiscardPanel/DiscardCount
+@onready var _old_deck_panel: Control = $HUD/DeckPanel
+@onready var _old_discard_panel: Control = $HUD/DiscardPanel
+var deck_count_label: Label = null  # Created dynamically in _create_ui_elements
+var discard_count_label: Label = null  # Created dynamically in _create_ui_elements
 @onready var result_panel: Panel = $HUD/ResultPanel
 @onready var result_label: Label = $HUD/ResultPanel/ResultLabel
 @onready var continue_btn: Button = $HUD/ResultPanel/ContinueButton
@@ -51,18 +56,68 @@ var pact_screen = null
 var combat_log = null
 var turn_banner = null
 var run_summary_screen = null
+var hp_orb = null
+var mana_orb = null
+var hp_number: Label = null
+var mp_number: Label = null
+var block_display: Label = null
+var player_status_float: Control = null
+var _local_dmg_anchor: Control = null  # Visible anchor for local player damage numbers (near HP orb)
+var _ally_bar_nodes: Dictionary = {}  # peer_id -> Control (compact ally bars for remote players)
+
+var _vote_overlay: VoteOverlay = null
 
 var _end_turn_pulse_tween: Tween = null
+
+# 3D character display
+var _combat_3d_stage: Combat3DStage = null
+var _player_puppet_3d: PuppetBase3D = null
+var _enemy_puppets_3d: Dictionary = {}  # enemy_index -> PuppetBase3D
 
 # Targeting state for multi-enemy single-target card selection
 var _targeting_active: bool = false
 var _targeting_hand_index: int = -1
 # Tracks enemy indices for which a death animation has already been triggered.
 var _dead_enemies_animated: Array = []
+var _last_phase: int = -1  # Track phase transitions to avoid banner spam
+var _enemy_action_queue: Array = []  # Queue enemy actions for staggered playback
+var _playing_enemy_turn: bool = false
+var _deaths_door_aberration: ColorRect = null
+
+func _process(_delta: float) -> void:
+	_update_enemy_display_positions()
+
+func _update_enemy_display_positions() -> void:
+	# Project each enemy's 3D world position to 2D screen coords
+	if not _combat_3d_stage:
+		return
+	var camera: Camera3D = _combat_3d_stage.get_camera()
+	if not camera:
+		return
+	for i in _enemy_puppets_3d:
+		if not enemy_display_nodes.has(i):
+			continue
+		var puppet: Node3D = _enemy_puppets_3d[i]
+		var ed: Control = enemy_display_nodes[i]
+		if not is_instance_valid(puppet) or not is_instance_valid(ed):
+			continue
+		# Get the world position above the enemy's head
+		var world_pos: Vector3 = puppet.global_position + Vector3(0, 1.8, 0)
+		if camera.is_position_behind(world_pos):
+			ed.visible = false
+			continue
+		ed.visible = true
+		var screen_pos: Vector2 = camera.unproject_position(world_pos)
+		# Center the display horizontally on the projected point
+		ed.position = Vector2(screen_pos.x - ed.size.x / 2.0, screen_pos.y - ed.size.y)
 
 func _ready() -> void:
 	result_panel.visible = false
 	end_turn_btn.pressed.connect(_on_end_turn_pressed)
+	# Style the turn label — small, top-right, unobtrusive
+	turn_label.add_theme_font_size_override("font_size", 13)
+	turn_label.add_theme_color_override("font_color", Color(0.5, 0.5, 0.6, 0.6))
+	turn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	hand_display.card_selected.connect(_on_card_selected)
 	hand_display.targeting_started.connect(_on_targeting_started)
 	hand_display.targeting_cancelled.connect(_on_targeting_cancelled)
@@ -122,19 +177,17 @@ func _start_local_combat() -> void:
 		# Apply relic effects
 		if GameManager.current_run.relics.size() > 0:
 			RelicSystem.apply_start_of_combat(ps, GameManager.current_run.relics)
-			var bonus_draw = RelicSystem.get_bonus_draw(GameManager.current_run.relics)
-			if bonus_draw > 0:
-				DeckManager.draw(ps, bonus_draw)
 		_create_ui_elements_from_engine()
 		_refresh_all_ui()
 		_play_encounter_intro(GameManager.current_node_type)
 		SFXManager.play_ambient_hum()
+		MusicManager.play_combat_music(GameManager.current_enemies, GameManager.current_run.act if GameManager.current_run else 1)
 		return
 
-	# Solo / sandbox mode: 1 human + 3 bots vs a random enemy.
+	# Solo / sandbox mode: 1 player vs a random enemy.
 	var enemy = _pick_random_enemy()
 	current_enemy_id = enemy
-	var peer_ids: Array[int] = [1, 2, 3, 4]
+	var peer_ids: Array[int] = [1]
 	print("Solo combat: %d players vs %s" % [peer_ids.size(), enemy])
 	engine.initialize(peer_ids, enemy)
 	_create_ui_elements_from_engine()
@@ -149,23 +202,53 @@ func _play_encounter_intro(node_type: String) -> void:
 			SFXManager.play_elite_intro()
 
 func _pick_random_enemy() -> String:
-	var enemies = ["jaw_worm", "cultist", "louse_red", "michael"]
+	var enemies = ["seraph_drone", "jaw_worm", "cultist", "louse_red", "hexaghost", "quantum_ghost"]
 	return enemies[randi() % enemies.size()]
 
 func _start_networked_combat() -> void:
 	engine = CombatEngine.new()
 	_connect_engine_signals()
 	var peer_ids: Array[int] = NetworkManager.get_all_peer_ids()
-	var enemy = _pick_random_enemy()
-	current_enemy_id = enemy
-	print("Starting networked combat with peers: %s vs %s" % [str(peer_ids), enemy])
-	engine.initialize(peer_ids, enemy)
+
+	# Use campaign enemies if in a run, otherwise random
+	var enemies_list: Array = []
+	if GameManager.is_run_active():
+		enemies_list = GameManager.current_enemies.duplicate()
+	if enemies_list.is_empty():
+		enemies_list.append(_pick_random_enemy())
+	current_enemy_id = enemies_list[0]
+
+	print("Starting networked combat with peers: %s vs %s" % [str(peer_ids), str(enemies_list)])
+	engine.initialize_multi(peer_ids, enemies_list)
+
+	# Apply run state overrides for the host player
+	if GameManager.is_run_active():
+		var host_ps = engine.state.players.get(1)
+		if host_ps:
+			host_ps.draw_pile = GameManager.current_run.deck.duplicate()
+			host_ps.hand.clear()
+			host_ps.discard_pile.clear()
+			DeckManager.shuffle(host_ps.draw_pile)
+			host_ps.current_hp = GameManager.current_run.current_hp
+			host_ps.max_hp = GameManager.current_run.max_hp
+			host_ps.energy = host_ps.max_energy
+			DeckManager.draw(host_ps, 5)
+			if GameManager.current_run.relics.size() > 0:
+				RelicSystem.apply_start_of_combat(host_ps, GameManager.current_run.relics)
+
 	_create_ui_elements_from_engine()
 	_refresh_all_ui()
+	_play_encounter_intro(GameManager.current_node_type)
+	SFXManager.play_ambient_hum()
+
+	# Send setup to clients
 	var peer_id_array: Array = []
 	for pid in peer_ids:
 		peer_id_array.append(pid)
-	_client_setup_combat.rpc(peer_id_array, enemy)
+	var enemy_ids_for_rpc: Array = []
+	for eid in enemies_list:
+		enemy_ids_for_rpc.append(eid)
+	_client_setup_combat.rpc(peer_id_array, enemy_ids_for_rpc)
 	_broadcast_state()
 
 func _connect_engine_signals() -> void:
@@ -181,9 +264,22 @@ func _connect_engine_signals() -> void:
 	engine.boss_absorbed_souls.connect(_on_boss_absorbed_souls)
 	engine.tithe_demanded.connect(_on_tithe_demanded)
 	engine.pact_offered.connect(_on_pact_offered)
+	engine.boss_mechanic.connect(_on_boss_mechanic)
+
+	# Level-up notification broadcast
+	EventBus.player_leveled_up.connect(func(level: int, rewards: Dictionary):
+		if is_networked:
+			_client_level_up_notification.rpc(level, rewards)
+		else:
+			_client_level_up_notification(level, rewards)
+	)
 
 func _setup_client_ui() -> void:
-	pass
+	# Client waits for _client_setup_combat RPC to create displays
+	# Just ensure HUD is visible and ready
+	result_panel.visible = false
+	end_turn_btn.disabled = false
+	print("Client UI ready, waiting for server setup...")
 
 # === Juice: Damage Numbers ===
 
@@ -193,6 +289,16 @@ func _spawn_damage_number(parent: Control, value: int, type: String) -> void:
 	parent.add_child(label)
 	label.position = Vector2(parent.size.x / 2 - 20, parent.size.y / 2)
 	label.show_number(value, type)
+
+## Returns a visible parent node for spawning damage numbers on a player.
+## For the local player, uses the anchor near the HP orb (since the board is hidden).
+## For remote players, uses the ally bar or falls back to the board node.
+func _get_player_dmg_parent(peer_id: int) -> Control:
+	if peer_id == local_peer_id and _local_dmg_anchor:
+		return _local_dmg_anchor
+	if player_board_nodes.has(peer_id):
+		return player_board_nodes[peer_id]
+	return null
 
 # === Juice: Screen Shake ===
 
@@ -210,18 +316,31 @@ func _do_screen_shake(intensity: float = 8.0, duration: float = 0.25) -> void:
 # === RPCs: Server -> All Clients ===
 
 @rpc("authority", "call_local", "reliable")
-func _client_setup_combat(peer_ids: Array, _enemy_id: String) -> void:
+func _client_setup_combat(peer_ids: Array, enemy_ids: Array) -> void:
 	if is_server:
 		return
-	for i in 1:
+	# Create enemy displays for each enemy
+	for i in enemy_ids.size():
 		var ed = EnemyDisplayScene.instantiate()
 		enemy_area.add_child(ed)
+		ed.enemy_index = i
 		enemy_display_nodes[i] = ed
+	var c_ally_bar_y: float = 200.0
 	for peer_id in peer_ids:
-		var pb = PlayerBoardScene.instantiate()
-		player_boards.add_child(pb)
-		player_board_nodes[int(peer_id)] = pb
-	print("Client UI set up for %d players" % peer_ids.size())
+		var pid = int(peer_id)
+		if pid == local_peer_id:
+			var pb = PlayerBoardScene.instantiate()
+			pb.visible = false
+			player_boards.add_child(pb)
+			player_board_nodes[pid] = pb
+		else:
+			var ally_bar = _create_ally_bar(pid)
+			ally_bar.position = Vector2(10, c_ally_bar_y)
+			add_child(ally_bar)
+			player_board_nodes[pid] = ally_bar
+			_ally_bar_nodes[pid] = ally_bar
+			c_ally_bar_y += 36.0
+	print("Client UI set up: %d players vs %d enemies" % [peer_ids.size(), enemy_ids.size()])
 
 @rpc("authority", "call_local", "reliable")
 func _client_receive_state(state_dict: Dictionary) -> void:
@@ -229,10 +348,12 @@ func _client_receive_state(state_dict: Dictionary) -> void:
 	_refresh_ui_from_dict(state_dict)
 
 @rpc("authority", "reliable")
-func _client_receive_hand(hand_cards: Array, energy: int, draw_count: int, discard_count: int) -> void:
-	hand_display.update_hand(hand_cards, energy)
-	deck_count_label.text = "Deck: %d" % draw_count
-	discard_count_label.text = "Discard: %d" % discard_count
+func _client_receive_hand(hand_cards: Array, energy: int, draw_count: int, discard_count: int, cooldowns: Dictionary = {}) -> void:
+	hand_display.update_hand(hand_cards, energy, 0, null, cooldowns)
+	if deck_count_label:
+		deck_count_label.text = "Deck: %d" % draw_count
+	if discard_count_label:
+		discard_count_label.text = "Discard: %d" % discard_count
 
 @rpc("authority", "call_local", "reliable")
 func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, damage: int, block: int, heal: int, vuln: int, weak: int) -> void:
@@ -246,6 +367,7 @@ func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, da
 			_:                     SFXManager.play_card_curse()
 	else:
 		SFXManager.play_card()
+	_puppet_play_card_anim(cdata)
 
 	# Shake enemy on damage
 	if damage > 0 and enemy_display_nodes.has(target_index):
@@ -253,15 +375,22 @@ func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, da
 		_spawn_damage_number(enemy_display_nodes[target_index], damage, "damage")
 		_do_screen_shake(clampf(float(damage) * 0.8, 3.0, 15.0))
 		SFXManager.play_hit()
+		# 3D enemy hit reaction
+		if _enemy_puppets_3d.has(target_index):
+			_enemy_puppets_3d[target_index].play_hit()
 
 	# Block number on player
-	if block > 0 and player_board_nodes.has(peer_id):
-		_spawn_damage_number(player_board_nodes[peer_id], block, "block")
+	if block > 0:
+		var _dmg_p = _get_player_dmg_parent(peer_id)
+		if _dmg_p:
+			_spawn_damage_number(_dmg_p, block, "block")
 		SFXManager.play_block()
 
 	# Heal number on player
-	if heal > 0 and player_board_nodes.has(peer_id):
-		_spawn_damage_number(player_board_nodes[peer_id], heal, "heal")
+	if heal > 0:
+		var _dmg_p = _get_player_dmg_parent(peer_id)
+		if _dmg_p:
+			_spawn_damage_number(_dmg_p, heal, "heal")
 		SFXManager.play_heal()
 
 	# Vulnerable text on enemy
@@ -275,12 +404,20 @@ func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, da
 @rpc("authority", "call_local", "reliable")
 func _client_enemy_acted_fx(enemy_index: int, intent_type: int, value: int, target_peer_id: int, damage_dealt: int) -> void:
 	if intent_type == Enums.EnemyIntent.ATTACK and damage_dealt > 0:
-		if player_board_nodes.has(target_peer_id):
-			_spawn_damage_number(player_board_nodes[target_peer_id], damage_dealt, "damage")
+		var _dmg_p = _get_player_dmg_parent(target_peer_id)
+		if _dmg_p:
+			_spawn_damage_number(_dmg_p, damage_dealt, "damage")
 		SFXManager.play_hit()
-		# Shake screen when local player takes damage
+		# 3D puppet hit reaction + screen shake
 		if target_peer_id == local_peer_id:
+			if _player_puppet_3d:
+				_player_puppet_3d.play_hit()
+			if _combat_3d_stage:
+				_combat_3d_stage.do_camera_shake(0.08, 0.25)
 			_do_screen_shake(clampf(float(damage_dealt) * 1.0, 5.0, 20.0), 0.3)
+		# Enemy attack animation
+		if _combat_3d_stage and _enemy_puppets_3d.has(enemy_index):
+			_enemy_puppets_3d[enemy_index].play_attack()
 
 	# Hack challenge — only triggers for the targeted local player
 	if intent_type == Enums.EnemyIntent.HACK and target_peer_id == local_peer_id:
@@ -302,8 +439,9 @@ func _trigger_hack_challenge(hack_value: int, target_peer_id: int) -> void:
 					ps.block -= blocked
 					dmg -= blocked
 				ps.current_hp = maxi(ps.current_hp - dmg, 0)
-				if player_board_nodes.has(target_peer_id):
-					_spawn_damage_number(player_board_nodes[target_peer_id], hack_value, "damage")
+				var _dmg_p = _get_player_dmg_parent(target_peer_id)
+				if _dmg_p:
+					_spawn_damage_number(_dmg_p, hack_value, "damage")
 				_do_screen_shake(12.0, 0.4)
 				_refresh_all_ui()
 		else:
@@ -311,24 +449,43 @@ func _trigger_hack_challenge(hack_value: int, target_peer_id: int) -> void:
 			if engine and engine.state.players.has(target_peer_id):
 				var ps: PlayerState = engine.state.players[target_peer_id]
 				ps.block += 5
-				if player_board_nodes.has(target_peer_id):
-					_spawn_damage_number(player_board_nodes[target_peer_id], 5, "block")
+				var _dmg_p = _get_player_dmg_parent(target_peer_id)
+				if _dmg_p:
+					_spawn_damage_number(_dmg_p, 5, "block")
 				_refresh_all_ui()
 		hack_challenge.queue_free()
 		hack_challenge = null
 	)
 
 @rpc("authority", "call_local", "reliable")
+func _client_level_up_notification(level: int, rewards: Dictionary) -> void:
+	# Show level-up in combat log and as floating text
+	if combat_log:
+		combat_log.add_status("LEVEL UP! Now level %d (+%d HP, +%d SP)" % [
+			level, rewards.get("max_hp_bonus", 0), rewards.get("skill_points", 0)])
+	print("Level up! Level %d" % level)
+
+@rpc("authority", "call_local", "reliable")
 func _client_combat_over(won: bool) -> void:
 	SFXManager.stop_ambient_hum()
+	MusicManager.play("victory" if won else "defeat", 0.5)
 	end_turn_btn.disabled = true
 	result_panel.visible = true
 	if won:
 		if GameManager.is_run_active():
+			var run := GameManager.current_run
 			var gold_gained: int = 25 + randi() % 26  # 25-50 gold per win
-			GameManager.current_run.gold += gold_gained
-			GameManager.current_run.total_gold_earned += gold_gained
-			GameManager.current_run.enemies_defeated += engine.state.enemies.size()
+			CurrencyManager.add(run, CurrencyManager.Type.GOLD, gold_gained)
+			run.total_gold_earned += gold_gained
+			run.enemies_defeated += engine.state.enemies.size()
+
+			# Soul & crystal rewards for elite / boss kills
+			var _node_type := GameManager.current_node_type
+			if _node_type == "elite":
+				CurrencyManager.add(run, CurrencyManager.Type.SOULS, 1 + randi() % 2)  # 1-2 Souls
+			elif _node_type == "boss":
+				CurrencyManager.add(run, CurrencyManager.Type.SOULS, 3 + randi() % 3)  # 3-5 Souls
+				CurrencyManager.add(run, CurrencyManager.Type.CRYSTALS, 1)              # 1 Crystal
 
 		# Brief flash of "VICTORY!" before reward flow
 		result_panel.visible = true
@@ -355,6 +512,13 @@ func _client_combat_over(won: bool) -> void:
 		var is_boss = node_type == "boss"
 		if GameManager.is_run_active() and (is_elite or is_boss):
 			await _show_relic_reward()
+			await _show_equipment_reward()
+
+		# All victories can yield a gem reward (rarer for normal fights)
+		if GameManager.is_run_active():
+			var gem_chance = 1.0 if is_boss else (0.6 if is_elite else 0.25)
+			if randf() <= gem_chance:
+				await _show_gem_reward()
 
 		# Boss fights also award card absorption
 		if is_boss:
@@ -372,17 +536,20 @@ func _client_combat_over(won: bool) -> void:
 			if ps:
 				GameManager.current_run.current_hp = ps.current_hp
 			var run := GameManager.current_run
-			run.mark_node_complete(run.current_row, run.current_node_col)
 			run.floors_cleared += 1
 			var is_final_boss: bool = (run.current_row == run.map_data.size() - 1)
 			if is_final_boss:
 				# Victory run complete — show summary then return to menu
 				await _show_run_summary(true)
+				DungeonManager.exit_room(true)
 				GameManager.end_run()
+				DungeonManager.reset()
 				TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
 			else:
 				# Intermediate victory — show summary then continue to map
 				await _show_run_summary(true)
+				DungeonManager.exit_room(true)
+				DungeonManager.advance_act()
 				GameManager.save_run()
 				TransitionManager.transition_to_scene("res://scenes/map/map_screen.tscn")
 		else:
@@ -395,7 +562,9 @@ func _client_combat_over(won: bool) -> void:
 		# Defeat
 		if GameManager.is_run_active():
 			await _show_run_summary(false)
+			DungeonManager.fail_run()
 			GameManager.end_run()
+			DungeonManager.reset()
 			TransitionManager.transition_to_scene("res://scenes/main/main_menu.tscn")
 		else:
 			# Non-campaign defeat
@@ -427,6 +596,35 @@ func _show_relic_reward() -> void:
 			relic_display.set_anchors_preset(Control.PRESET_TOP_RIGHT)
 			relic_display.position = Vector2(-620.0, 35.0)
 		relic_display.update_relics(GameManager.current_run.relics)
+
+func _show_equipment_reward() -> void:
+	if not GameManager.is_run_active():
+		return
+	var run := GameManager.current_run
+	var equip_ids = EquipmentSystem.get_random_equipment_reward(run.equipment, 3)
+	if equip_ids.size() == 0:
+		return
+	var screen = EquipmentRewardScreenScene.instantiate()
+	add_child(screen)
+	screen.show_equipment(equip_ids)
+	var chosen_id = await screen.equipment_chosen
+	screen.queue_free()
+	if chosen_id != "" and GameManager.is_run_active():
+		EquipmentSystem.equip(run, chosen_id)
+
+func _show_gem_reward() -> void:
+	if not GameManager.is_run_active():
+		return
+	var gem_ids = GemSystem.get_random_gem_reward(3)
+	if gem_ids.size() == 0:
+		return
+	var screen = GemRewardScreenScene.instantiate()
+	add_child(screen)
+	screen.show_gems(gem_ids)
+	var chosen_id = await screen.gem_chosen
+	screen.queue_free()
+	if chosen_id != "" and GameManager.is_run_active():
+		GameManager.current_run.gems.append(chosen_id)
 
 # Shows the post-combat card reward screen; returns the chosen card_id or "" for skip.
 func _show_card_reward_screen(card_ids: Array[String]) -> String:
@@ -480,8 +678,8 @@ func _on_continue_pressed() -> void:
 		if ps:
 			GameManager.current_run.current_hp = ps.current_hp
 		var run := GameManager.current_run
-		# Mark the combat node as complete in the branching map
-		run.mark_node_complete(run.current_row, run.current_node_col)
+		# Mark the combat node as complete via DungeonManager
+		DungeonManager.exit_room(true)
 		run.floors_cleared += 1
 		# Show run summary before transitioning
 		await _show_run_summary(true)
@@ -494,7 +692,7 @@ func _on_continue_pressed() -> void:
 			else:
 				# Advance to next act
 				var completed_act: int = run.act
-				run.advance_act()
+				DungeonManager.advance_act()
 				GameManager.save_run()
 				_show_act_complete_screen(completed_act)
 		else:
@@ -646,6 +844,12 @@ func _server_end_turn() -> void:
 # === UI Element Creation ===
 
 func _create_ui_elements_from_engine() -> void:
+	# Hide old scene-based deck/discard panels (replaced by styled pills)
+	if _old_deck_panel:
+		_old_deck_panel.visible = false
+	if _old_discard_panel:
+		_old_discard_panel.visible = false
+
 	var enemy_count = engine.state.enemies.size()
 	for i in enemy_count:
 		var ed = EnemyDisplayScene.instantiate()
@@ -661,51 +865,151 @@ func _create_ui_elements_from_engine() -> void:
 	const AREA_PADDING: int = 20
 	var area_width = enemy_count * ENEMY_W + (enemy_count - 1) * ENEMY_GAP + AREA_PADDING * 2
 	area_width = maxi(area_width, 300)  # Minimum 300px for single enemy
-	enemy_area.offset_left = -area_width / 2.0
-	enemy_area.offset_right = area_width / 2.0
 
-	# Enable target-selection mode in hand_display when there are multiple enemies.
-	hand_display.needs_target_selection = enemy_count > 1
+	# Reparent enemy displays from the area container to the scene root
+	# so we can position each one individually above its 3D model.
+	for i in enemy_display_nodes:
+		var ed = enemy_display_nodes[i]
+		ed.get_parent().remove_child(ed)
+		add_child(ed)
+	enemy_area.visible = false
 
+	# Target selection disabled while using 3D models (TODO: add 3D click targeting)
+	hand_display.needs_target_selection = false
+
+	# Local player: hidden board (giant orbs replace it).
+	# Remote players: compact ally bars in top-left corner.
+	var ally_bar_y: float = 200.0  # Below corruption/sin/soul displays
 	for peer_id in engine.state.players:
-		var pb = PlayerBoardScene.instantiate()
-		player_boards.add_child(pb)
-		player_board_nodes[peer_id] = pb
+		if peer_id == local_peer_id:
+			# Local player — create board but hide it (orbs replace it)
+			var pb = PlayerBoardScene.instantiate()
+			pb.visible = false
+			player_boards.add_child(pb)
+			player_board_nodes[peer_id] = pb
+		else:
+			# Remote player — compact ally bar in top-left
+			var ally_bar = _create_ally_bar(peer_id)
+			ally_bar.position = Vector2(10, ally_bar_y)
+			add_child(ally_bar)
+			player_board_nodes[peer_id] = ally_bar
+			_ally_bar_nodes[peer_id] = ally_bar
+			ally_bar_y += 36.0
 
-	# M1 UI: Corruption meter + Sin display (top-left HUD)
+	# 3D character puppet (left side of combat)
+	_spawn_player_puppet_3d()
+
+	# Player status is shown via the orbs — no floating panel needed
+
+	# Top-left: corruption meter only (sin/souls hidden until relevant)
 	corruption_meter = CorruptionMeterScene.instantiate()
 	add_child(corruption_meter)
-	corruption_meter.position = Vector2(10, 40)
+	corruption_meter.position = Vector2(8, 4)
+	corruption_meter.scale = Vector2(0.7, 0.7)
 
+	# Sin and soul displays — hidden by default, shown when values > 0
 	sin_display = SinDisplayScene.instantiate()
 	add_child(sin_display)
-	sin_display.position = Vector2(10, 90)
+	sin_display.position = Vector2(8, 34)
+	sin_display.scale = Vector2(0.65, 0.65)
+	sin_display.visible = false  # Shown when sin > 0
 
-	# Death's Door overlay (hidden by default)
+	soul_display = SoulDisplayScene.instantiate()
+	add_child(soul_display)
+	soul_display.position = Vector2(8, 58)
+	soul_display.scale = Vector2(0.65, 0.65)
+	soul_display.visible = false  # Shown when souls > 0
+
 	deaths_door_overlay = DeathsDoorOverlayScene.instantiate()
 	add_child(deaths_door_overlay)
 
-	# M2 UI: Soul display
-	soul_display = SoulDisplayScene.instantiate()
-	add_child(soul_display)
-	soul_display.position = Vector2(10, 160)
-
-	# M2 UI: Tithe screen (modal on HUD layer so it renders above everything)
 	tithe_screen = TitheScreenScene.instantiate()
 	$HUD.add_child(tithe_screen)
 
-	# M2 UI: Pact screen (modal on HUD layer so it renders above everything)
 	pact_screen = PactScreenScene.instantiate()
 	$HUD.add_child(pact_screen)
 
-	# Combat log (bottom-left, above hand)
+	# Combat log — hidden by default, toggle with L key
 	combat_log = CombatLogScene.instantiate()
 	add_child(combat_log)
-	combat_log.position = Vector2(10, 580)
+	combat_log.position = Vector2(240, 500)
+	combat_log.scale = Vector2(0.75, 0.75)
+	combat_log.visible = false
 
 	# Turn banner (fullscreen overlay)
 	turn_banner = TurnBannerScene.instantiate()
 	add_child(turn_banner)
+
+	# ── Resource Orbs (bottom corners, clean layout) ──────────────
+	hp_orb = ResourceOrbScene.instantiate()
+	hp_orb.orb_color = Color(0.75, 0.08, 0.08)
+	hp_orb.label_text = "HP"
+	hp_orb.position = Vector2(10, 830)
+	hp_orb.scale = Vector2(2.6, 2.6)
+	add_child(hp_orb)
+
+	# HP number sits INSIDE the orb area — no duplicate below
+	hp_number = Label.new()
+	hp_number.name = "HPNumber"
+	hp_number.text = "80/80"
+	hp_number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hp_number.position = Vector2(10, 1040)
+	hp_number.size = Vector2(210, 30)
+	hp_number.add_theme_font_size_override("font_size", 16)
+	hp_number.add_theme_color_override("font_color", Color(0.9, 0.75, 0.75))
+	hp_number.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 1.0))
+	hp_number.add_theme_constant_override("shadow_offset_x", 1)
+	hp_number.add_theme_constant_override("shadow_offset_y", 1)
+	hp_number.visible = false  # Orb itself shows the fill level — number is backup
+	add_child(hp_number)
+
+	mana_orb = ResourceOrbScene.instantiate()
+	mana_orb.orb_color = Color(0.08, 0.25, 0.85)
+	mana_orb.label_text = "MP"
+	mana_orb.position = Vector2(1700, 830)
+	mana_orb.scale = Vector2(2.6, 2.6)
+	add_child(mana_orb)
+
+	mp_number = Label.new()
+	mp_number.name = "MPNumber"
+	mp_number.text = "10/10"
+	mp_number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	mp_number.position = Vector2(1700, 1040)
+	mp_number.size = Vector2(210, 30)
+	mp_number.add_theme_font_size_override("font_size", 16)
+	mp_number.add_theme_color_override("font_color", Color(0.75, 0.75, 0.9))
+	mp_number.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 1.0))
+	mp_number.add_theme_constant_override("shadow_offset_x", 1)
+	mp_number.add_theme_constant_override("shadow_offset_y", 1)
+	mp_number.visible = false
+	add_child(mp_number)
+
+	# Block display — compact, next to HP orb
+	block_display = Label.new()
+	block_display.position = Vector2(220, 900)
+	block_display.size = Vector2(100, 28)
+	block_display.add_theme_font_size_override("font_size", 18)
+	block_display.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
+	block_display.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.95))
+	block_display.add_theme_constant_override("shadow_offset_x", 1)
+	block_display.add_theme_constant_override("shadow_offset_y", 1)
+	block_display.visible = false
+	add_child(block_display)
+
+	_local_dmg_anchor = Control.new()
+	_local_dmg_anchor.name = "LocalDmgAnchor"
+	_local_dmg_anchor.position = Vector2(110, 840)
+	_local_dmg_anchor.size = Vector2(120, 60)
+	add_child(_local_dmg_anchor)
+
+	# ── Deck / Discard — small pills tucked next to orbs ──────────
+	var deck_bg = _make_hud_pill(Vector2(220, 960), "Deck: 0", Color(0.4, 0.6, 0.85))
+	add_child(deck_bg)
+	deck_count_label = deck_bg.get_node("Label")
+
+	var discard_bg = _make_hud_pill(Vector2(1580, 960), "Discard: 0", Color(0.7, 0.4, 0.4))
+	add_child(discard_bg)
+	discard_count_label = discard_bg.get_node("Label")
 
 	# Relic display (top-right of HUD, below deck count)
 	if GameManager.is_run_active() and GameManager.current_run.relics.size() > 0:
@@ -726,11 +1030,13 @@ func _broadcast_state() -> void:
 		var ps: PlayerState = engine.state.players[peer_id]
 		var hand = ps.hand.duplicate()
 		if is_networked and peer_id != 1:
-			_client_receive_hand.rpc_id(peer_id, hand, ps.energy, ps.draw_pile.size(), ps.discard_pile.size())
+			_client_receive_hand.rpc_id(peer_id, hand, ps.energy, ps.draw_pile.size(), ps.discard_pile.size(), ps.cooldowns.duplicate())
 		elif peer_id == local_peer_id:
-			hand_display.update_hand(hand, ps.energy, ps.corruption_tier)
-			deck_count_label.text = "Deck: %d" % ps.draw_pile.size()
-			discard_count_label.text = "Discard: %d" % ps.discard_pile.size()
+			hand_display.update_hand(hand, ps.energy, ps.corruption_tier, null, ps.cooldowns)
+			if deck_count_label:
+				deck_count_label.text = "Deck: %d" % ps.draw_pile.size()
+			if discard_count_label:
+				discard_count_label.text = "Discard: %d" % ps.discard_pile.size()
 
 # === UI Refresh ===
 
@@ -741,17 +1047,22 @@ func _refresh_all_ui() -> void:
 	_refresh_ui_from_dict(state_dict)
 	var local_ps: PlayerState = engine.state.players.get(local_peer_id)
 	if local_ps:
-		hand_display.update_hand(local_ps.hand, local_ps.energy, local_ps.corruption_tier)
-		deck_count_label.text = "Deck: %d" % local_ps.draw_pile.size()
-		discard_count_label.text = "Discard: %d" % local_ps.discard_pile.size()
-		if local_ps.exhaust_pile.size() > 0:
-			discard_count_label.text += " | Exhaust: %d" % local_ps.exhaust_pile.size()
+		hand_display.update_hand(local_ps.hand, local_ps.energy, local_ps.corruption_tier, null, local_ps.cooldowns)
+		if deck_count_label:
+			deck_count_label.text = "Deck: %d" % local_ps.draw_pile.size()
+		if discard_count_label:
+			discard_count_label.text = "Discard: %d" % local_ps.discard_pile.size()
+			if local_ps.exhaust_pile.size() > 0:
+				discard_count_label.text += " | Exhaust: %d" % local_ps.exhaust_pile.size()
 
 		# Update M1 UI
 		if corruption_meter:
 			corruption_meter.update_corruption(local_ps.corruption, local_ps.max_corruption, local_ps.corruption_tier)
 		if sin_display:
-			sin_display.update_sins(local_ps.sin_wrath, local_ps.sin_sloth, local_ps.sin_pride)
+			var has_sin := local_ps.sin_wrath > 0 or local_ps.sin_sloth > 0 or local_ps.sin_pride > 0
+			sin_display.visible = has_sin
+			if has_sin:
+				sin_display.update_sins(local_ps.sin_wrath, local_ps.sin_sloth, local_ps.sin_pride)
 		if deaths_door_overlay:
 			if local_ps.is_dead:
 				deaths_door_overlay.show_dead()
@@ -760,11 +1071,74 @@ func _refresh_all_ui() -> void:
 			else:
 				deaths_door_overlay.hide_overlay()
 
+		# Chromatic aberration on death's door
+		if local_ps.is_dead or not local_ps.is_on_deaths_door:
+			_set_deaths_door_visual(false)
+
 		# Update M2 UI
 		if soul_display:
-			soul_display.update_souls(engine.state.soul_fragments, engine.state.boss_absorbed_souls)
+			var has_souls := engine.state.soul_fragments > 0 or engine.state.boss_absorbed_souls > 0
+			soul_display.visible = has_souls
+			if has_souls:
+				soul_display.update_souls(engine.state.soul_fragments, engine.state.boss_absorbed_souls)
+
+		# Update resource orbs
+		if hp_orb:
+			hp_orb.max_value = local_ps.max_hp
+			hp_orb.set_value(local_ps.current_hp)
+		if mana_orb:
+			mana_orb.max_value = local_ps.max_energy
+			mana_orb.set_value(local_ps.energy)
+
+		# Update large number labels on orbs
+		if hp_number:
+			hp_number.text = "%d / %d" % [local_ps.current_hp, local_ps.max_hp]
+		if mp_number:
+			mp_number.text = "%d / %d" % [local_ps.energy, local_ps.max_energy]
+
+		# Update block display near HP orb
+		if block_display:
+			if local_ps.block > 0:
+				block_display.text = "BLOCK %d" % local_ps.block
+				block_display.visible = true
+			else:
+				block_display.visible = false
+
+		# Update floating status above player 3D model
+		if player_status_float:
+			var float_hp = player_status_float.get_node_or_null("FloatHP")
+			if float_hp:
+				float_hp.set_values(local_ps.current_hp, local_ps.max_hp)
+			var float_mp = player_status_float.get_node_or_null("FloatMP")
+			if float_mp:
+				float_mp.text = "MP: %d/%d" % [local_ps.energy, local_ps.max_energy]
+			var float_block = player_status_float.get_node_or_null("FloatBlock")
+			if float_block:
+				if local_ps.block > 0:
+					float_block.text = "Block: %d" % local_ps.block
+				else:
+					float_block.text = ""
+
+		# Update ally bars for remote players
+		for pid in _ally_bar_nodes:
+			var remote_ps: PlayerState = engine.state.players.get(pid)
+			if remote_ps and _ally_bar_nodes[pid]:
+				_update_ally_bar(_ally_bar_nodes[pid], {
+					"display_name": "Player %d" % pid,
+					"current_hp": remote_ps.current_hp,
+					"max_hp": remote_ps.max_hp,
+					"energy": remote_ps.energy,
+					"max_energy": remote_ps.max_energy,
+				})
+
+	# Re-hide 2D enemy art every refresh (update_enemy re-creates sprites)
+	if _combat_3d_stage:
+		for i in _enemy_puppets_3d:
+			_hide_enemy_2d_art(i)
 
 func _refresh_ui_from_dict(state_dict: Dictionary) -> void:
+	if not turn_label:
+		return
 	turn_label.text = "Turn %d" % state_dict["turn_number"]
 	for i in state_dict["enemies"].size():
 		if enemy_display_nodes.has(i):
@@ -781,17 +1155,55 @@ func _refresh_ui_from_dict(state_dict: Dictionary) -> void:
 	for peer_id in state_dict["players"]:
 		var pid = int(peer_id)
 		if player_board_nodes.has(pid):
-			player_board_nodes[pid].update_player(
-				state_dict["players"][peer_id],
-				pid == local_peer_id
-			)
+			var pb = player_board_nodes[pid]
+			if pb is Control and pb.has_method("update_player"):
+				pb.update_player(state_dict["players"][peer_id], pid == local_peer_id)
+			elif pb is Control:
+				_update_ally_bar(pb, state_dict["players"][peer_id])
 	var local_data = state_dict["players"].get(local_peer_id, state_dict["players"].get(str(local_peer_id), {}))
+	# Update resource orbs from dict state (client path)
+	if local_data:
+		if hp_orb:
+			hp_orb.max_value = int(local_data.get("max_hp", 1))
+			hp_orb.set_value(int(local_data.get("current_hp", 0)))
+		if mana_orb:
+			mana_orb.max_value = int(local_data.get("max_energy", 1))
+			mana_orb.set_value(int(local_data.get("energy", 0)))
+		# Update large number labels on orbs (client path)
+		if hp_number:
+			hp_number.text = "%d / %d" % [int(local_data.get("current_hp", 0)), int(local_data.get("max_hp", 1))]
+		if mp_number:
+			mp_number.text = "%d / %d" % [int(local_data.get("energy", 0)), int(local_data.get("max_energy", 1))]
+		# Update block display from dict state (client path)
+		if block_display:
+			var blk = int(local_data.get("block", 0))
+			if blk > 0:
+				block_display.text = "BLOCK %d" % blk
+				block_display.visible = true
+			else:
+				block_display.visible = false
+		# Update floating status above player 3D model (client path)
+		if player_status_float:
+			var float_hp = player_status_float.get_node_or_null("FloatHP")
+			if float_hp:
+				float_hp.set_values(int(local_data.get("current_hp", 0)), int(local_data.get("max_hp", 1)))
+			var float_mp = player_status_float.get_node_or_null("FloatMP")
+			if float_mp:
+				float_mp.text = "MP: %d/%d" % [int(local_data.get("energy", 0)), int(local_data.get("max_energy", 1))]
+			var float_block = player_status_float.get_node_or_null("FloatBlock")
+			if float_block:
+				var blk2 = int(local_data.get("block", 0))
+				if blk2 > 0:
+					float_block.text = "Block: %d" % blk2
+				else:
+					float_block.text = ""
 	if local_data and not local_data.get("has_ended_turn", true) and state_dict.get("phase", -1) == Enums.CombatPhase.PLAYER_TURN:
 		end_turn_btn.disabled = false
 		_start_end_turn_pulse()
 	else:
 		end_turn_btn.disabled = true
 		_stop_end_turn_pulse()
+
 
 func _start_end_turn_pulse() -> void:
 	if _end_turn_pulse_tween and _end_turn_pulse_tween.is_valid():
@@ -820,6 +1232,12 @@ func _on_card_selected(hand_index: int, target_index: int) -> void:
 	_targeting_active = false
 	_targeting_hand_index = -1
 
+	# Animate card flying to target (optimistic — fires before engine resolves)
+	var target_pos: Vector2 = Vector2(960, 400)  # Center screen for self-target
+	if target_index >= 0 and enemy_display_nodes.has(target_index):
+		target_pos = enemy_display_nodes[target_index].global_position + Vector2(100, 80)
+	hand_display.animate_card_play(hand_index, target_pos)
+
 	if is_networked:
 		if is_server:
 			engine.try_play_card(local_peer_id, hand_index, target_index)
@@ -827,8 +1245,6 @@ func _on_card_selected(hand_index: int, target_index: int) -> void:
 			_server_play_card.rpc_id(1, hand_index, target_index)
 	else:
 		engine.try_play_card(local_peer_id, hand_index, target_index)
-		if not GameManager.is_run_active():
-			_bot_play_turn()
 
 # --- Multi-enemy targeting flow ---
 
@@ -874,21 +1290,31 @@ func _on_end_turn_pressed() -> void:
 			_server_end_turn.rpc_id(1)
 	else:
 		engine.player_end_turn(local_peer_id)
-		if not GameManager.is_run_active():
-			for pid in engine.state.players:
-				if pid != local_peer_id:
-					engine.player_end_turn(pid)
 
 # === Engine Signal Handlers (server only) ===
 
 func _on_state_changed() -> void:
 	if is_server:
-		if engine.state.phase == Enums.CombatPhase.PLAYER_TURN:
+		var current_phase: int = engine.state.phase
+		var phase_changed: bool = current_phase != _last_phase
+		_last_phase = current_phase
+
+		if current_phase == Enums.CombatPhase.PLAYER_TURN and phase_changed:
+			# Defer YOUR TURN banner AND hand refresh until enemy animations finish
+			if _playing_enemy_turn:
+				pass  # _play_enemy_actions() will show banner + refresh when done
+			else:
+				if turn_banner:
+					turn_banner.show_banner("YOUR TURN", Color(0.2, 0.9, 0.3))
+				SFXManager.play_card_draw()
+				_refresh_all_ui()
+		elif current_phase == Enums.CombatPhase.ENEMY_TURN and phase_changed:
 			if turn_banner:
-				turn_banner.show_banner("YOUR TURN", Color(0.2, 0.9, 0.3))
-			# Cards are drawn at the start of each player turn
-			SFXManager.play_card_draw()
-		_refresh_all_ui()
+				turn_banner.show_enemy_turn()
+			hand_display.animate_discard_all()
+			_refresh_all_ui()
+		else:
+			_refresh_all_ui()
 		if is_networked:
 			_broadcast_state()
 
@@ -922,19 +1348,68 @@ func _get_enemy_log_name(enemy_index: int) -> String:
 	return "Enemy"
 
 func _on_enemy_acted(enemy_index: int, intent_type: int, value: int, target_peer_id: int, damage_dealt: int) -> void:
-	if is_networked:
-		_client_enemy_acted_fx.rpc(enemy_index, intent_type, value, target_peer_id, damage_dealt)
-	else:
-		_client_enemy_acted_fx(enemy_index, intent_type, value, target_peer_id, damage_dealt)
+	# Queue enemy actions for staggered playback instead of instant
+	_enemy_action_queue.append({
+		"enemy_index": enemy_index, "intent_type": intent_type,
+		"value": value, "target_peer_id": target_peer_id, "damage_dealt": damage_dealt,
+	})
+	# Start playback if not already running
+	if not _playing_enemy_turn:
+		_play_enemy_actions()
 
-	if combat_log:
-		var ename = _get_enemy_log_name(enemy_index)
-		if intent_type == Enums.EnemyIntent.ATTACK and damage_dealt > 0:
-			combat_log.add_damage(ename, "P%d" % target_peer_id, damage_dealt)
-		elif intent_type == Enums.EnemyIntent.DEFEND:
-			combat_log.add_block(ename, value)
-		elif intent_type == Enums.EnemyIntent.BUFF:
-			combat_log.add_status("%s buffed: +%d STR" % [ename, value])
+
+func _play_enemy_actions() -> void:
+	_playing_enemy_turn = true
+	# Brief pause before enemies start acting (let "ENEMY TURN" banner show)
+	await get_tree().create_timer(0.8).timeout
+
+	while _enemy_action_queue.size() > 0:
+		var action: Dictionary = _enemy_action_queue.pop_front()
+		var ei: int = action["enemy_index"]
+		var it: int = action["intent_type"]
+		var val: int = action["value"]
+		var tpid: int = action["target_peer_id"]
+		var dd: int = action["damage_dealt"]
+
+		# Play the enemy's attack/defend/buff animation on the 3D model
+		if _enemy_puppets_3d.has(ei):
+			match it:
+				Enums.EnemyIntent.ATTACK: _enemy_puppets_3d[ei].play_attack()
+				Enums.EnemyIntent.DEFEND: _enemy_puppets_3d[ei].play_block()
+				Enums.EnemyIntent.BUFF:   _enemy_puppets_3d[ei].play_buff()
+				_:                        _enemy_puppets_3d[ei].play_cast()
+
+		# Brief wind-up pause so the animation plays before impact
+		await get_tree().create_timer(0.4).timeout
+
+		# Now show the FX (damage numbers, screen shake, etc.)
+		if is_networked:
+			_client_enemy_acted_fx.rpc(ei, it, val, tpid, dd)
+		else:
+			_client_enemy_acted_fx(ei, it, val, tpid, dd)
+
+		# Log it
+		if combat_log:
+			var ename = _get_enemy_log_name(ei)
+			if it == Enums.EnemyIntent.ATTACK and dd > 0:
+				combat_log.add_damage(ename, "P%d" % tpid, dd)
+			elif it == Enums.EnemyIntent.DEFEND:
+				combat_log.add_block(ename, val)
+			elif it == Enums.EnemyIntent.BUFF:
+				combat_log.add_status("%s buffed: +%d STR" % [ename, val])
+
+		_refresh_all_ui()
+
+		# Pause between enemy actions so each one is visible
+		await get_tree().create_timer(0.6).timeout
+
+	_playing_enemy_turn = false
+	# NOW show YOUR TURN banner (after all enemy animations finished)
+	if engine and engine.state.phase == Enums.CombatPhase.PLAYER_TURN:
+		if turn_banner:
+			turn_banner.show_banner("YOUR TURN", Color(0.2, 0.9, 0.3))
+		SFXManager.play_card_draw()
+		_refresh_all_ui()
 
 func _on_combat_ended(won: bool) -> void:
 	if is_networked:
@@ -946,10 +1421,11 @@ func _on_combat_ended(won: bool) -> void:
 
 func _on_sin_punished(peer_id: int, sin_result: Dictionary) -> void:
 	# Show sin punishment as a big damage number / status text
-	if player_board_nodes.has(peer_id):
+	var _dmg_p = _get_player_dmg_parent(peer_id)
+	if _dmg_p:
 		var dmg = sin_result.get("damage", 0)
 		if dmg > 0:
-			_spawn_damage_number(player_board_nodes[peer_id], dmg, "damage")
+			_spawn_damage_number(_dmg_p, dmg, "damage")
 			if peer_id == local_peer_id:
 				_do_screen_shake(10.0, 0.3)
 	# Print punishment text
@@ -962,6 +1438,7 @@ func _on_player_entered_deaths_door(peer_id: int) -> void:
 		if ps:
 			deaths_door_overlay.show_deaths_door(ps.deaths_door_turns)
 		_do_screen_shake(15.0, 0.5)
+		_set_deaths_door_visual(true)
 
 func _on_player_died(peer_id: int) -> void:
 	print("Player %d has died!" % peer_id)
@@ -975,6 +1452,7 @@ func _on_corruption_tier_changed(peer_id: int, new_tier: int) -> void:
 	if peer_id == local_peer_id:
 		SFXManager.play_corruption()
 		_do_screen_shake(6.0, 0.2)
+		_flash_glitch_effect()
 
 # === M2 Signal Handlers ===
 
@@ -1005,14 +1483,16 @@ func _on_tithe_demanded(cost: int) -> void:
 		if accepted:
 			var paid = TitheSystem.apply_tithe_evenly(engine.state, cost)
 			for pid in paid:
-				if paid[pid] > 0 and player_board_nodes.has(pid):
-					_spawn_damage_number(player_board_nodes[pid], paid[pid], "damage")
+				var _dmg_p = _get_player_dmg_parent(pid)
+				if paid[pid] > 0 and _dmg_p:
+					_spawn_damage_number(_dmg_p, paid[pid], "damage")
 			print("Tithe paid: %s" % str(paid))
 		else:
 			var lost = TitheSystem.apply_tithe_refusal(engine.state)
 			for pid in lost:
-				if lost[pid] != "" and player_board_nodes.has(pid):
-					_spawn_damage_number(player_board_nodes[pid], 1, "weak")
+				var _dmg_p = _get_player_dmg_parent(pid)
+				if lost[pid] != "" and _dmg_p:
+					_spawn_damage_number(_dmg_p, 1, "weak")
 			print("Tithe refused — cards lost: %s" % str(lost))
 		_refresh_all_ui()
 
@@ -1029,11 +1509,272 @@ func _on_pact_offered(peer_id: int, pact: Dictionary) -> void:
 				var result = PactSystem.accept_pact(pact, ps, engine.state.players)
 				print("Pact accepted: %s — %s" % [pact["title"], str(result["effects"])])
 				# Show damage number for HP cost
-				if pact.get("hp_cost", 0) > 0 and player_board_nodes.has(peer_id):
-					_spawn_damage_number(player_board_nodes[peer_id], pact["hp_cost"], "damage")
+				if pact.get("hp_cost", 0) > 0:
+					var _dmg_p = _get_player_dmg_parent(peer_id)
+					if _dmg_p:
+						_spawn_damage_number(_dmg_p, pact["hp_cost"], "damage")
 		else:
 			print("Pact declined: %s" % pact["title"])
 		_refresh_all_ui()
+
+# === Boss Mechanic Handlers ===
+
+func _on_boss_mechanic(mechanic_name: String, data: Dictionary) -> void:
+	# Log to combat log
+	if combat_log:
+		var desc = data.get("description", mechanic_name.replace("_", " ").to_upper())
+		combat_log.add_status(desc)
+
+	# Check if this mechanic requires a vote
+	if data.get("requires_vote", false):
+		_handle_boss_vote(mechanic_name, data)
+		return
+
+	# Non-vote mechanics: show visual feedback
+	match mechanic_name:
+		"divine_trumpet":
+			if turn_banner:
+				turn_banner.show_banner("DIVINE TRUMPET!", Color(1.0, 0.85, 0.2))
+			var target_pid = data.get("target_peer_id", local_peer_id)
+			var dmg = data.get("damage", 0)
+			if dmg > 0:
+				var _dmg_p = _get_player_dmg_parent(target_pid)
+				if _dmg_p:
+					_spawn_damage_number(_dmg_p, dmg, "damage")
+				if target_pid == local_peer_id:
+					_do_screen_shake(12.0, 0.4)
+					SFXManager.play_hit()
+
+		"blessing_of_worthy":
+			if turn_banner:
+				turn_banner.show_banner("BLESSING!", Color(0.2, 0.9, 0.3))
+			var target_pid = data.get("target_peer_id", local_peer_id)
+			var heal = data.get("heal", 0)
+			if heal > 0:
+				var _dmg_p = _get_player_dmg_parent(target_pid)
+				if _dmg_p:
+					_spawn_damage_number(_dmg_p, heal, "heal")
+				SFXManager.play_heal()
+
+		"holy_fire_burn":
+			if turn_banner:
+				turn_banner.show_banner("HOLY FIRE!", Color(1.0, 0.5, 0.1))
+			var player_dmg = data.get("player_damage", {})
+			for pid in player_dmg:
+				var dmg = player_dmg[pid]
+				if dmg > 0:
+					var _dmg_p = _get_player_dmg_parent(int(pid))
+					if _dmg_p:
+						_spawn_damage_number(_dmg_p, dmg, "damage")
+			_do_screen_shake(10.0, 0.35)
+			SFXManager.play_hit()
+
+		"twin_swords":
+			if turn_banner:
+				turn_banner.show_banner("TWIN SWORDS!", Color(0.9, 0.3, 0.3))
+			_do_screen_shake(8.0, 0.3)
+			SFXManager.play_hit()
+
+		"shield_raised":
+			if turn_banner:
+				turn_banner.show_banner("SHIELD RAISED!", Color(0.4, 0.75, 1.0))
+			_flash_aberration()
+
+		"death_mark_applied":
+			if turn_banner:
+				turn_banner.show_banner("DEATH MARK!", Color(0.6, 0.1, 0.6))
+			var target_pid = data.get("target_peer_id", -1)
+			if target_pid == local_peer_id:
+				_do_screen_shake(15.0, 0.5)
+
+		"death_mark_tick":
+			pass  # Already logged to combat_log above
+
+		"death_mark_triggered":
+			if turn_banner:
+				turn_banner.show_banner("DEATH MARK TRIGGERED!", Color(0.8, 0.0, 0.0))
+			_do_screen_shake(20.0, 0.6)
+			SFXManager.play_death()
+
+		"soul_harvest":
+			if turn_banner:
+				turn_banner.show_banner("SOUL HARVEST!", Color(0.5, 0.0, 0.5))
+			var hp_loss = data.get("hp_loss_per_player", 0)
+			if hp_loss > 0:
+				for pid in engine.state.players:
+					var _dmg_p = _get_player_dmg_parent(pid)
+					if _dmg_p:
+						_spawn_damage_number(_dmg_p, hp_loss, "damage")
+			_do_screen_shake(12.0, 0.4)
+
+		"death_mark_transferred":
+			if turn_banner:
+				turn_banner.show_banner("MARK TRANSFERRED!", Color(0.6, 0.4, 0.8))
+
+		"final_convergence_start":
+			if turn_banner:
+				turn_banner.show_banner("FINAL CONVERGENCE!", Color(1.0, 0.0, 0.0))
+			_do_screen_shake(20.0, 0.7)
+			_flash_aberration(0.5, 8.0)
+
+		"final_convergence_end":
+			if turn_banner:
+				turn_banner.show_banner("CONVERGENCE ENDS!", Color(0.2, 0.9, 0.5))
+
+		"reality_split":
+			if turn_banner:
+				turn_banner.show_banner("REALITY SPLIT!", Color(0.8, 0.2, 0.8))
+			_do_screen_shake(15.0, 0.5)
+
+	_refresh_all_ui()
+
+
+func _handle_boss_vote(mechanic_name: String, data: Dictionary) -> void:
+	var options: Array[String] = []
+	for opt in data.get("options", []):
+		options.append(str(opt))
+
+	var voter_ids: Array[int] = []
+	for vid in data.get("voter_peer_ids", [local_peer_id]):
+		voter_ids.append(int(vid))
+
+	var prompt_text = data.get("description", "The boss demands a choice!")
+	var ctx = VoteSystem.create_vote(mechanic_name, prompt_text, options, voter_ids)
+
+	# Create and show vote overlay
+	_vote_overlay = VoteOverlay.new()
+	add_child(_vote_overlay)
+	_vote_overlay.show_vote(ctx)
+
+	# In solo mode, just wait for local vote. In co-op, collect from all players.
+	_vote_overlay.vote_cast.connect(func(option_index: int):
+		VoteSystem.cast_vote(ctx, local_peer_id, option_index)
+		# In solo mode, resolve immediately
+		if not is_networked or VoteSystem.all_voted(ctx):
+			_resolve_boss_vote(mechanic_name, ctx)
+	)
+
+	_vote_overlay.vote_timed_out.connect(func():
+		_resolve_boss_vote(mechanic_name, ctx)
+	)
+
+
+func _resolve_boss_vote(mechanic_name: String, ctx: VoteSystem.VoteContext) -> void:
+	var result_index = VoteSystem.resolve(ctx)
+
+	if combat_log:
+		combat_log.add_status("Vote result: %s" % ctx.options[result_index])
+
+	# Call the appropriate resolve method on the boss encounter
+	if engine.boss_encounter:
+		match mechanic_name:
+			"judgment":
+				var result = engine.boss_encounter.resolve_judgment(result_index == 0)
+				if turn_banner:
+					if result_index == 0:
+						turn_banner.show_banner("SHIELD BROKEN!", Color(1.0, 0.5, 0.0))
+					else:
+						turn_banner.show_banner("SHIELD ENDURES!", Color(0.4, 0.4, 0.8))
+			"holy_fire":
+				var result = engine.boss_encounter.resolve_holy_fire(result_index == 0)
+				if turn_banner:
+					if result_index == 0:
+						turn_banner.show_banner("FIRE EXTINGUISHED!", Color(0.2, 0.9, 0.5))
+					else:
+						turn_banner.show_banner("FLAMES ENDURE!", Color(1.0, 0.3, 0.0))
+			"the_cube":
+				var result = engine.boss_encounter.resolve_cube(result_index)
+				if turn_banner:
+					var face_names = ["PAIN", "FRAILTY", "CORRUPTION", "VOID"]
+					if result_index >= 0 and result_index < face_names.size():
+						turn_banner.show_banner("FACE OF %s!" % face_names[result_index], Color(0.8, 0.2, 0.8))
+		_do_screen_shake(10.0, 0.3)
+
+	# Clean up vote overlay
+	if _vote_overlay:
+		_vote_overlay.close()
+		_vote_overlay = null
+
+	_refresh_all_ui()
+
+# === Styled HUD Pill (used for Deck/Discard counters) ===
+
+func _make_hud_pill(pos: Vector2, text: String, accent: Color) -> Control:
+	var container = Control.new()
+	container.position = pos
+	container.size = Vector2(120, 32)
+
+	var bg = ColorRect.new()
+	bg.color = Color(0.06, 0.05, 0.12, 0.85)
+	bg.size = Vector2(120, 32)
+	container.add_child(bg)
+
+	var lbl = Label.new()
+	lbl.name = "Label"
+	lbl.text = text
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.position = Vector2(0, 0)
+	lbl.size = Vector2(120, 32)
+	lbl.add_theme_font_size_override("font_size", 14)
+	lbl.add_theme_color_override("font_color", accent)
+	lbl.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
+	lbl.add_theme_constant_override("shadow_offset_x", 1)
+	lbl.add_theme_constant_override("shadow_offset_y", 1)
+	container.add_child(lbl)
+
+	return container
+
+# === Compact Ally Bars (for remote players in co-op) ===
+
+func _create_ally_bar(peer_id: int) -> Control:
+	var bar = Control.new()
+	bar.custom_minimum_size = Vector2(180, 32)
+	bar.name = "AllyBar_%d" % peer_id
+
+	var bg = ColorRect.new()
+	bg.color = Color(0.08, 0.07, 0.12, 0.75)
+	bg.size = Vector2(180, 32)
+	bar.add_child(bg)
+
+	var name_lbl = Label.new()
+	name_lbl.name = "NameLabel"
+	name_lbl.text = "Player %d" % peer_id
+	name_lbl.position = Vector2(4, 1)
+	name_lbl.size = Vector2(80, 14)
+	name_lbl.add_theme_font_size_override("font_size", 10)
+	name_lbl.add_theme_color_override("font_color", Color(0.7, 0.7, 0.8))
+	bar.add_child(name_lbl)
+
+	var hp_bar_node = preload("res://scenes/ui/hp_bar.tscn").instantiate()
+	hp_bar_node.name = "HPBar"
+	hp_bar_node.position = Vector2(4, 16)
+	hp_bar_node.size = Vector2(120, 12)
+	hp_bar_node.custom_minimum_size = Vector2(120, 12)
+	bar.add_child(hp_bar_node)
+
+	var energy_lbl = Label.new()
+	energy_lbl.name = "EnergyLabel"
+	energy_lbl.text = "10"
+	energy_lbl.position = Vector2(130, 8)
+	energy_lbl.size = Vector2(46, 20)
+	energy_lbl.add_theme_font_size_override("font_size", 11)
+	energy_lbl.add_theme_color_override("font_color", Color(0.4, 0.65, 1.0))
+	energy_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	bar.add_child(energy_lbl)
+
+	return bar
+
+func _update_ally_bar(bar: Control, state_dict: Dictionary) -> void:
+	var name_lbl = bar.get_node_or_null("NameLabel")
+	if name_lbl:
+		name_lbl.text = state_dict.get("display_name", "Ally")
+	var hp_bar_node = bar.get_node_or_null("HPBar")
+	if hp_bar_node:
+		hp_bar_node.set_values(state_dict.get("current_hp", 0), state_dict.get("max_hp", 1))
+	var energy_lbl = bar.get_node_or_null("EnergyLabel")
+	if energy_lbl:
+		energy_lbl.text = "%d/%d" % [state_dict.get("energy", 0), state_dict.get("max_energy", 10)]
 
 # === Bot AI (solo mode only) ===
 
@@ -1066,3 +1807,107 @@ func _get_first_living_enemy_index() -> int:
 			if engine.state.enemies[i].current_hp > 0:
 				return i
 	return -1
+
+# === 3D Character Puppet ===
+
+func _spawn_player_puppet_3d() -> void:
+	var character_id := "knight"
+	if GameManager.is_run_active() and GameManager.current_run:
+		character_id = GameManager.current_run.character_id
+
+	_combat_3d_stage = Combat3DStage.new()
+	_combat_3d_stage.name = "Combat3DStage"
+	_combat_3d_stage.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_combat_3d_stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	shake_container.add_child(_combat_3d_stage)
+	shake_container.move_child(_combat_3d_stage, 0)
+
+	# Spawn player
+	_player_puppet_3d = _combat_3d_stage.spawn_player(character_id)
+
+	# Spawn enemies as 3D models and hide 2D artwork
+	if engine:
+		var enemy_count = engine.state.enemies.size()
+		for i in enemy_count:
+			var enemy_id = engine.state.enemies[i].enemy_data_id
+			var enemy_puppet = _combat_3d_stage.spawn_enemy(enemy_id, i, enemy_count)
+			_enemy_puppets_3d[i] = enemy_puppet
+			# Hide 2D enemy artwork after a frame so it catches dynamically loaded sprites
+			if enemy_display_nodes.has(i):
+				_hide_enemy_2d_art.call_deferred(i)
+
+func _hide_enemy_2d_art(enemy_index: int) -> void:
+	if not enemy_display_nodes.has(enemy_index):
+		return
+	var ed = enemy_display_nodes[enemy_index]
+	# Hide all visual children but keep UI elements (HP bar, intent, name, etc.)
+	for child in ed.get_children():
+		if child is ColorRect or child is TextureRect or child.name == "EnemySprite" or child.name == "ShadowRect":
+			child.visible = false
+		# Hide 2D puppet if loaded
+		if child.name.contains("puppet") or child.name.contains("Puppet"):
+			child.visible = false
+
+func _puppet_play_card_anim(card_data) -> void:
+	if not _player_puppet_3d:
+		return
+	if not card_data:
+		_player_puppet_3d.play_attack()
+		return
+	match card_data.card_type:
+		Enums.CardType.ATTACK: _player_puppet_3d.play_attack()
+		Enums.CardType.SKILL:  _player_puppet_3d.play_cast()
+		Enums.CardType.POWER:  _player_puppet_3d.play_buff()
+		_:                     _player_puppet_3d.play_cast()
+
+# === Shader VFX Helpers ===
+
+func _flash_glitch_effect(duration: float = 0.4) -> void:
+	var overlay = ColorRect.new()
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.color = Color(1, 1, 1, 1)
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var mat = ShaderMaterial.new()
+	mat.shader = load("res://shaders/glitch_distortion.gdshader")
+	mat.set_shader_parameter("tear_intensity", 0.04)
+	mat.set_shader_parameter("tear_frequency", 8.0)
+	mat.set_shader_parameter("chromatic_shift", 0.008)
+	mat.set_shader_parameter("glitch_chance", 0.8)
+	overlay.material = mat
+	add_child(overlay)
+	# Auto-remove after duration
+	var tw = create_tween()
+	tw.tween_interval(duration)
+	tw.tween_property(overlay, "modulate:a", 0.0, 0.15)
+	tw.tween_callback(overlay.queue_free)
+
+func _set_deaths_door_visual(active: bool) -> void:
+	if active and not _deaths_door_aberration:
+		_deaths_door_aberration = ColorRect.new()
+		_deaths_door_aberration.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_deaths_door_aberration.color = Color(1, 1, 1, 1)
+		_deaths_door_aberration.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var mat = ShaderMaterial.new()
+		mat.shader = load("res://shaders/chromatic_aberration.gdshader")
+		mat.set_shader_parameter("aberration_amount", 3.0)
+		add_child(_deaths_door_aberration)
+	elif not active and _deaths_door_aberration:
+		_deaths_door_aberration.queue_free()
+		_deaths_door_aberration = null
+
+func _flash_aberration(duration: float = 0.3, intensity: float = 5.0) -> void:
+	var overlay = ColorRect.new()
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	overlay.color = Color(1, 1, 1, 1)
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var mat = ShaderMaterial.new()
+	mat.shader = load("res://shaders/chromatic_aberration.gdshader")
+	mat.set_shader_parameter("aberration_amount", intensity)
+	overlay.material = mat
+	add_child(overlay)
+	var tw = create_tween()
+	tw.tween_method(func(val: float):
+		if is_instance_valid(overlay) and overlay.material:
+			overlay.material.set_shader_parameter("aberration_amount", val)
+	, intensity, 0.0, duration)
+	tw.tween_callback(overlay.queue_free)

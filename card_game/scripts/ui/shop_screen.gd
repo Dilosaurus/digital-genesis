@@ -14,6 +14,12 @@ const REMOVE_PRICE_STEP := 25   # Price increase per removal already done this r
 # ── State ─────────────────────────────────────────────────────────────────────
 var shop_cards:  Array[String] = []
 var shop_relics: Array[String] = []
+var shop_equipment: Array[String] = []
+var shop_gems: Array[String] = []
+
+# ── Node refs ─────────────────────────────────────────────────────────────────
+@onready var item_container: VBoxContainer = $Panel/ScrollContainer/ItemContainer
+@onready var gold_label: Label = $Panel/HeaderPanel/HeaderRow/GoldRow/GoldLabel
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 func _ready() -> void:
@@ -28,6 +34,8 @@ func open_shop() -> void:
 func _generate_shop() -> void:
 	shop_cards.clear()
 	shop_relics.clear()
+	shop_equipment.clear()
+	shop_gems.clear()
 
 	# Cards: 5 random non-curse non-upgraded cards
 	var all_cards = GameManager.card_database.keys()
@@ -46,31 +54,62 @@ func _generate_shop() -> void:
 	for rid in relic_rewards:
 		shop_relics.append(rid)
 
+	# Equipment: 2 random
+	var equip_rewards = EquipmentSystem.get_random_equipment_reward(run.equipment if run else {}, 2)
+	for eid in equip_rewards:
+		shop_equipment.append(eid)
+
+	# Gems: 3 random
+	var gem_rewards = GemSystem.get_random_gem_reward(3)
+	for gid in gem_rewards:
+		shop_gems.append(gid)
+
 # ── UI Build ──────────────────────────────────────────────────────────────────
 func _build_ui() -> void:
-	for child in $Panel/ItemContainer.get_children():
+	for child in item_container.get_children():
 		child.queue_free()
 
 	var run = GameManager.current_run
-	$Panel/GoldLabel.text = "Gold: %d" % run.gold
+	gold_label.text = "%dg  |  %d Souls  |  %d Crystals  |  %d Essence" % [run.gold, run.souls, run.crystals, run.corruption_essence]
+	gold_label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.3))
 
-	_build_section_label("── Cards ──────────────────────")
+	_build_section_label("CARDS", Color(0.90, 0.30, 0.30, 1.00))
 	_build_card_items(run)
 
-	_build_section_label("── Relics ─────────────────────")
+	_build_section_label("RELICS", Color(1.00, 0.75, 0.15, 1.00))
 	_build_relic_items(run)
 
-	_build_section_label("── Services ───────────────────")
+	_build_section_label("EQUIPMENT", Color(0.40, 0.75, 1.00, 1.00))
+	_build_equipment_items(run)
+
+	_build_section_label("GEMS", Color(0.35, 0.80, 0.45, 1.00))
+	_build_gem_items(run)
+
+	_build_section_label("SERVICES", Color(0.55, 0.60, 0.72, 1.00))
 	_build_service_items(run)
 
 	_build_leave_button()
 
-func _build_section_label(text: String) -> void:
+func _build_section_label(text: String, accent_color: Color) -> void:
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_top", 6)
+	margin.add_theme_constant_override("margin_bottom", 2)
+	margin.custom_minimum_size = Vector2(520, 28)
+
 	var lbl = Label.new()
-	lbl.text = text
-	lbl.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
-	lbl.custom_minimum_size = Vector2(380, 24)
-	$Panel/ItemContainer.add_child(lbl)
+	lbl.text = "  %s" % text
+	lbl.add_theme_font_size_override("font_size", 11)
+	lbl.add_theme_color_override("font_color", accent_color)
+
+	# Bottom border rule via a child separator
+	var vbox := VBoxContainer.new()
+	vbox.add_child(lbl)
+	var sep := HSeparator.new()
+	sep.add_theme_color_override("separation_color", Color(accent_color.r, accent_color.g, accent_color.b, 0.35))
+	vbox.add_child(sep)
+
+	margin.add_child(vbox)
+	item_container.add_child(margin)
 
 func _build_card_items(run: RunState) -> void:
 	for cid in shop_cards:
@@ -81,24 +120,24 @@ func _build_card_items(run: RunState) -> void:
 		var btn = Button.new()
 		var type_str = _get_card_type_str(cd)
 		var energy_str = "[%d]" % cd.energy_cost if cd.energy_cost >= 0 else "[X]"
-		btn.text = "%s %s  (%s) — %dg" % [energy_str, cd.display_name, type_str, CARD_PRICE]
-		btn.custom_minimum_size = Vector2(380, 38)
+		btn.text = "  %s  %s  (%s)     %dg  " % [energy_str, cd.display_name, type_str, CARD_PRICE]
+		btn.custom_minimum_size = Vector2(520, 40)
 		btn.disabled = run.gold < CARD_PRICE
 
-		# Tint button to reflect card type
 		var col = _get_card_color(cd)
 		btn.add_theme_color_override("font_color", col)
 
 		btn.pressed.connect(_buy_card.bind(cid))
-		$Panel/ItemContainer.add_child(btn)
+		item_container.add_child(btn)
 
 func _build_relic_items(run: RunState) -> void:
 	if shop_relics.is_empty():
 		var lbl = Label.new()
 		lbl.text = "  (no relics available)"
-		lbl.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
-		lbl.custom_minimum_size = Vector2(380, 30)
-		$Panel/ItemContainer.add_child(lbl)
+		lbl.add_theme_color_override("font_color", Color(0.45, 0.45, 0.52, 1.0))
+		lbl.add_theme_font_size_override("font_size", 12)
+		lbl.custom_minimum_size = Vector2(520, 30)
+		item_container.add_child(lbl)
 		return
 
 	for rid in shop_relics:
@@ -109,53 +148,108 @@ func _build_relic_items(run: RunState) -> void:
 		var price = _relic_price(relic.rarity)
 		var rarity_str = _rarity_str(relic.rarity)
 		var btn = Button.new()
-		btn.text = "%s  [%s] — %dg" % [relic.display_name, rarity_str, price]
+		btn.text = "  %s  [%s]     %dg  " % [relic.display_name, rarity_str, price]
 		btn.tooltip_text = relic.description
-		btn.custom_minimum_size = Vector2(380, 38)
+		btn.custom_minimum_size = Vector2(520, 40)
 		btn.disabled = run.gold < price or rid in run.relics
 
-		var rarity_col = _rarity_color(relic.rarity)
-		btn.add_theme_color_override("font_color", rarity_col)
-
+		btn.add_theme_color_override("font_color", _rarity_color(relic.rarity))
 		btn.pressed.connect(_buy_relic.bind(rid))
-		$Panel/ItemContainer.add_child(btn)
+		item_container.add_child(btn)
+
+func _build_equipment_items(run: RunState) -> void:
+	if shop_equipment.is_empty():
+		var lbl = Label.new()
+		lbl.text = "  (no equipment available)"
+		lbl.add_theme_color_override("font_color", Color(0.45, 0.45, 0.52, 1.0))
+		lbl.add_theme_font_size_override("font_size", 12)
+		lbl.custom_minimum_size = Vector2(520, 30)
+		item_container.add_child(lbl)
+		return
+
+	for eid in shop_equipment:
+		var equip = EquipmentSystem.get_equipment(eid)
+		if not equip:
+			continue
+		var price = EquipmentSystem.get_price(equip.rarity)
+		var slot_name = _equip_slot_name(equip.slot)
+		var btn = Button.new()
+		btn.text = "  %s  [%s]  (%s)     %dg  " % [equip.display_name, slot_name, _rarity_str(equip.rarity), price]
+		btn.tooltip_text = equip.description
+		btn.custom_minimum_size = Vector2(520, 40)
+		btn.disabled = run.gold < price
+		btn.add_theme_color_override("font_color", _rarity_color(equip.rarity))
+		btn.pressed.connect(_buy_equipment.bind(eid))
+		item_container.add_child(btn)
+
+func _build_gem_items(run: RunState) -> void:
+	if shop_gems.is_empty():
+		var lbl = Label.new()
+		lbl.text = "  (no gems available)"
+		lbl.add_theme_color_override("font_color", Color(0.45, 0.45, 0.52, 1.0))
+		lbl.add_theme_font_size_override("font_size", 12)
+		lbl.custom_minimum_size = Vector2(520, 30)
+		item_container.add_child(lbl)
+		return
+
+	for gid in shop_gems:
+		var gem = GemSystem.get_gem(gid)
+		if not gem:
+			continue
+		var price = GemSystem.get_price(gem.rarity)
+		var btn = Button.new()
+		btn.text = "  %s  (%s)     %dg  " % [gem.display_name, _rarity_str(gem.rarity), price]
+		btn.tooltip_text = gem.description
+		btn.custom_minimum_size = Vector2(520, 40)
+		btn.disabled = run.gold < price
+		btn.add_theme_color_override("font_color", _rarity_color(gem.rarity))
+		btn.pressed.connect(_buy_gem.bind(gid))
+		item_container.add_child(btn)
 
 func _build_service_items(run: RunState) -> void:
 	var remove_price = BASE_REMOVE_PRICE + run.remove_count * REMOVE_PRICE_STEP
 
-	# Card removal
 	var remove_btn = Button.new()
-	remove_btn.text = "Remove a card — %dg  (removes random card from deck)" % remove_price
-	remove_btn.custom_minimum_size = Vector2(380, 38)
+	remove_btn.text = "  Remove a card from deck     %dg  " % remove_price
+	remove_btn.custom_minimum_size = Vector2(520, 40)
 	remove_btn.disabled = run.gold < remove_price or run.deck.size() <= 5
 	remove_btn.pressed.connect(_remove_card)
-	$Panel/ItemContainer.add_child(remove_btn)
+	item_container.add_child(remove_btn)
 
-	# Card upgrade service
 	var upgradeable_count = _count_upgradeable(run)
 	var upgrade_btn = Button.new()
-	upgrade_btn.text = "Upgrade a random card — %dg" % UPGRADE_PRICE
-	upgrade_btn.custom_minimum_size = Vector2(380, 38)
-	upgrade_btn.disabled = run.gold < UPGRADE_PRICE or upgradeable_count == 0
+	upgrade_btn.text = "  Upgrade a random card     %dg  " % UPGRADE_PRICE
 	if upgradeable_count == 0:
-		upgrade_btn.text += "  (no upgradeable cards)"
+		upgrade_btn.text = "  Upgrade a random card  (none upgradeable)     %dg  " % UPGRADE_PRICE
+	upgrade_btn.custom_minimum_size = Vector2(520, 40)
+	upgrade_btn.disabled = run.gold < UPGRADE_PRICE or upgradeable_count == 0
 	upgrade_btn.pressed.connect(_upgrade_card)
-	$Panel/ItemContainer.add_child(upgrade_btn)
+	item_container.add_child(upgrade_btn)
 
 func _build_leave_button() -> void:
 	# Spacer
 	var spacer = Control.new()
-	spacer.custom_minimum_size = Vector2(380, 8)
-	$Panel/ItemContainer.add_child(spacer)
+	spacer.custom_minimum_size = Vector2(520, 10)
+	item_container.add_child(spacer)
+
+	var sep := HSeparator.new()
+	item_container.add_child(sep)
 
 	var leave_btn = Button.new()
 	leave_btn.text = "Leave Shop"
-	leave_btn.custom_minimum_size = Vector2(380, 40)
+	leave_btn.custom_minimum_size = Vector2(520, 44)
+	# Give it a distinct danger-red tint to differentiate from buy buttons
+	leave_btn.add_theme_color_override("font_color", Color(1.00, 0.70, 0.70, 1.00))
 	leave_btn.pressed.connect(func():
 		visible = false
 		shop_closed.emit()
 	)
-	$Panel/ItemContainer.add_child(leave_btn)
+	item_container.add_child(leave_btn)
+
+	# Bottom padding
+	var pad = Control.new()
+	pad.custom_minimum_size = Vector2(520, 8)
+	item_container.add_child(pad)
 
 # ── Purchase handlers ──────────────────────────────────────────────────────────
 func _buy_card(card_id: String) -> void:
@@ -208,6 +302,32 @@ func _upgrade_card() -> void:
 		run.deck[idx] = old_cd.upgrade_id
 	_build_ui()
 
+func _buy_equipment(equip_id: String) -> void:
+	var run = GameManager.current_run
+	var equip = EquipmentSystem.get_equipment(equip_id)
+	if not equip:
+		return
+	var price = EquipmentSystem.get_price(equip.rarity)
+	if run.gold < price:
+		return
+	run.gold -= price
+	EquipmentSystem.equip(run, equip_id)
+	shop_equipment.erase(equip_id)
+	_build_ui()
+
+func _buy_gem(gem_id: String) -> void:
+	var run = GameManager.current_run
+	var gem = GemSystem.get_gem(gem_id)
+	if not gem:
+		return
+	var price = GemSystem.get_price(gem.rarity)
+	if run.gold < price:
+		return
+	run.gold -= price
+	run.gems.append(gem_id)
+	shop_gems.erase(gem_id)
+	_build_ui()
+
 # ── Utilities ─────────────────────────────────────────────────────────────────
 func _relic_price(rarity: int) -> int:
 	match rarity:
@@ -225,10 +345,10 @@ func _rarity_str(rarity: int) -> String:
 
 func _rarity_color(rarity: int) -> Color:
 	match rarity:
-		0: return Color(0.85, 0.85, 0.85)        # white-grey
-		1: return Color(0.25, 0.85, 0.50)        # green
-		2: return Color(0.95, 0.80, 0.20)        # gold
-		_: return Color(0.85, 0.85, 0.85)
+		0: return Color(0.75, 0.75, 0.78)   # silver-grey
+		1: return Color(0.35, 0.80, 0.45)   # green
+		2: return Color(1.00, 0.75, 0.15)   # gold
+		_: return Color(0.75, 0.75, 0.78)
 
 func _get_card_type_str(cd: CardData) -> String:
 	match cd.card_type:
@@ -241,12 +361,20 @@ func _get_card_type_str(cd: CardData) -> String:
 
 func _get_card_color(cd: CardData) -> Color:
 	match cd.card_type:
-		Enums.CardType.ATTACK:  return Color(0.90, 0.30, 0.30)
-		Enums.CardType.SKILL:   return Color(0.30, 0.60, 0.90)
-		Enums.CardType.POWER:   return Color(0.75, 0.45, 0.95)
-		Enums.CardType.CURSE:   return Color(0.45, 0.45, 0.45)
-		Enums.CardType.STATUS:  return Color(0.55, 0.55, 0.55)
+		Enums.CardType.ATTACK:  return Color(0.90, 0.40, 0.40)
+		Enums.CardType.SKILL:   return Color(0.40, 0.70, 1.00)
+		Enums.CardType.POWER:   return Color(0.95, 0.80, 0.20)
+		Enums.CardType.CURSE:   return Color(0.60, 0.45, 0.70)
+		Enums.CardType.STATUS:  return Color(0.55, 0.55, 0.60)
 	return Color(0.90, 0.90, 0.90)
+
+func _equip_slot_name(slot: int) -> String:
+	match slot:
+		Enums.EquipSlot.HEAD: return "Head"
+		Enums.EquipSlot.CHEST: return "Chest"
+		Enums.EquipSlot.WEAPON: return "Weapon"
+		Enums.EquipSlot.ACCESSORY: return "Accessory"
+	return "?"
 
 func _count_upgradeable(run: RunState) -> int:
 	var count = 0

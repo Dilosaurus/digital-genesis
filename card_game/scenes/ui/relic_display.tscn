@@ -1,13 +1,110 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/relic_display.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/dark_cyber_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/MedievalSharp.ttf" id="4"]
+
+; --- Relic slot normal background ---
+[sub_resource type="StyleBoxFlat" id="slot_bg"]
+bg_color = Color(0.06, 0.05, 0.08, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.35, 0.22, 0.7)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+; --- Relic slot hover ---
+[sub_resource type="StyleBoxFlat" id="slot_hover"]
+bg_color = Color(0.10, 0.08, 0.06, 1.0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.70, 0.40, 1.0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+shadow_color = Color(0.85, 0.70, 0.40, 0.45)
+shadow_size = 4
+
+; --- Tooltip panel ---
+[sub_resource type="StyleBoxFlat" id="tooltip_bg"]
+bg_color = Color(0.06, 0.05, 0.08, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.50, 0.40, 0.25, 0.90)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.70)
+shadow_size = 8
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
 
 [node name="RelicDisplay" type="Control"]
-custom_minimum_size = Vector2(600, 30)
+custom_minimum_size = Vector2(600, 40)
+theme = ExtResource("2")
 script = ExtResource("1")
 
+; RelicContainer — MUST keep this exact node name (referenced by @onready in script)
 [node name="RelicContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 600.0
-offset_bottom = 30.0
-theme_override_constants/separation = 10
+offset_bottom = 40.0
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+; Floating tooltip — shown on relic hover, hidden by default
+[node name="RelicTooltip" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = -90.0
+offset_right = 220.0
+offset_bottom = -4.0
+visible = false
+z_index = 20
+mouse_filter = 2
+theme_override_styles/panel = SubResource("tooltip_bg")
+
+[node name="TooltipName" type="Label" parent="RelicTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 220.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 13
+theme_override_fonts/font = ExtResource("4")
+theme_override_colors/font_color = Color(0.95, 0.82, 0.50, 1.00)
+text = "Relic Name"
+
+[node name="TooltipDesc" type="RichTextLabel" parent="RelicTooltip"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 26.0
+offset_right = 220.0
+offset_bottom = 80.0
+fit_content = true
+scroll_active = false
+bbcode_enabled = true
+theme_override_font_sizes/normal_font_size = 11
+theme_override_colors/default_color = Color(0.88, 0.84, 0.80, 1.0)
+text = "Relic description"

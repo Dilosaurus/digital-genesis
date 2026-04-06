@@ -6,5 +6,10 @@
 script = ExtResource("1")
 id = "hexaghost"
 display_name = "Hex Phantom"
+description = "A powerful digital specter formed from six merged corrupted souls."
+lore = "Hex Phantoms are among the most disturbing entities in the Nexus. Each one is a forced merger of six uploaded consciousnesses, their individual identities dissolved and reconstituted into a single howling construct. The hexagonal structure of their code is a mockery of efficiency — six minds compressed into a weapon.
+
+The Angels create Hex Phantoms as elite sentinels, stationing them at critical junctions in the Nexus architecture. They are capable of phasing between data layers, making them difficult to pin down. Operatives who have survived encounters report hearing six distinct voices speaking in unison — each one begging for release."
 max_hp = 260
 intent_pool = [{"type": 0, "value": 2}, {"type": 0, "value": 12}, {"type": 1, "value": 12}, {"type": 0, "value": 6}, {"type": 0, "value": 6}, {"type": 0, "value": 18}]
+xp_reward = 50

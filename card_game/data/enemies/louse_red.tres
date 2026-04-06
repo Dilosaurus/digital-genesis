@@ -6,5 +6,10 @@
 script = ExtResource("1")
 id = "louse_red"
 display_name = "Malware Drone"
+description = "An aggressive viral construct that attacks anything not bearing angelic encryption."
+lore = "Malware Drones are the Angels' answer to conventional antivirus — fast, aggressive programs that swarm unauthorized code signatures. They were likely derived from pre-Breach military cyberweapons that the Angels found stored in the Nexus archives.
+
+Small and individually fragile, Drones rely on speed and numbers. Their red chromatic signature marks them as attack-class constructs. GENESIS operatives sometimes encounter blue variants (defensive) and gold variants (scouts), but the red ones are by far the most common — and the most hostile."
 max_hp = 30
 intent_pool = [{"type": 0, "value": 6}, {"type": 0, "value": 5}, {"type": 1, "value": 4}]
+xp_reward = 10

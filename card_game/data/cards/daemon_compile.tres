@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/daemon_compile/daemon_compile_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "daemon_compile"
+display_name = "Daemon Compile"
+description = "Deal 6 damage. Create a Daemon Fragment."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 6
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 0
+tags = Array[int]([6, 5])
+gem_sockets = 1

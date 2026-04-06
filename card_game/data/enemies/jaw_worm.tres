@@ -6,5 +6,10 @@
 script = ExtResource("1")
 id = "jaw_worm"
 display_name = "Corrupted Crawler"
+description = "A basic Nexus maintenance drone, repurposed as a guardian by the Angels."
+lore = "Crawlers were the janitorial staff of the Nexus — simple programs designed to clean corrupted data sectors and maintain system integrity. When the Angels took control, they reprogrammed the Crawlers into attack drones, weaponizing their data-scrubbing protocols.
+
+A Corrupted Crawler still tries to 'clean' what it encounters. Unfortunately, it now classifies all unauthorized operatives as corrupted data in need of purging. They are individually weak but relentless, and the deeper sectors of the Nexus teem with them."
 max_hp = 46
 intent_pool = [{"type": 0, "value": 11}, {"type": 0, "value": 7}, {"type": 1, "value": 6}]
+xp_reward = 10

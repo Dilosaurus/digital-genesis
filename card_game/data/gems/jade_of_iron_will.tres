@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/jade_of_iron_will/jade_of_iron_will.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "jade_iron_will_block"
+stat = 1
+operation = 0
+value = 5.0
+lifecycle = 3
+duration = -1
+
+[resource]
+script = ExtResource("1")
+id = "jade_of_iron_will"
+display_name = "Jade of Iron Will"
+description = "+5 block when played"
+rarity = 0
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1")]

@@ -1,20 +1,63 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/card_visual.gd" id="1"]
+[ext_resource type="Shader" path="res://shaders/card_glow.gdshader" id="2"]
 
-[sub_resource type="StyleBoxFlat" id="card_style"]
-bg_color = Color(0.18, 0.13, 0.26, 1)
+[sub_resource type="StyleBoxFlat" id="card_bg"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color(0, 0, 0, 0)
+shadow_color = Color(0, 0, 0, 0)
+shadow_size = 0
+
+[sub_resource type="StyleBoxFlat" id="inner_frame_style"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="cost_orb"]
+bg_color = Color(0.05, 0.03, 0.12, 0.85)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.5, 0.45, 0.35, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-shadow_color = Color(0, 0, 0, 0.5)
-shadow_size = 4
+border_color = Color(0.95, 0.82, 0.3, 1.0)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.9, 0.7, 0.1, 0.5)
+shadow_size = 5
+
+[sub_resource type="CanvasItemMaterial" id="frame_blend"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="name_banner_style"]
+bg_color = Color(0.03, 0.02, 0.06, 0.0)
+border_width_bottom = 0
+border_color = Color(0.55, 0.45, 0.3, 0.0)
+content_margin_left = 4.0
+content_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="desc_box_style"]
+bg_color = Color(0.03, 0.02, 0.06, 0.0)
+border_width_top = 0
+border_color = Color(0.5, 0.42, 0.28, 0.0)
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="type_strip_style"]
+bg_color = Color(0.75, 0.18, 0.13, 0.45)
+content_margin_left = 6.0
+content_margin_right = 6.0
 
 [sub_resource type="StyleBoxFlat" id="glow_style"]
 bg_color = Color(0, 0, 0, 0)
@@ -22,121 +65,275 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.3, 0.9, 1.0, 0.85)
-corner_radius_top_left = 9
-corner_radius_top_right = 9
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 9
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+border_color = Color(0.95, 0.75, 0.35, 0.85)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxFlat" id="cost_style"]
-bg_color = Color(0.15, 0.1, 0.2, 1)
+[sub_resource type="StyleBoxFlat" id="selected_border_style"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1.0, 0.85, 0.4, 1.0)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="rarity_strip_style"]
+bg_color = Color(0.55, 0.55, 0.55, 0.9)
+
+[sub_resource type="StyleBoxFlat" id="socket_style"]
+bg_color = Color(0.18, 0.14, 0.22, 1.0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.5, 0.45, 0.35, 1)
-corner_radius_top_left = 11
-corner_radius_top_right = 11
-corner_radius_bottom_right = 11
-corner_radius_bottom_left = 11
+border_color = Color(0.55, 0.48, 0.65, 0.85)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
+[sub_resource type="ShaderMaterial" id="glow_shader_mat"]
+shader = ExtResource("2")
+shader_parameter/glow_color = Color(0.95, 0.75, 0.35, 1.0)
+shader_parameter/glow_intensity = 1.4
+shader_parameter/glow_radius = 0.028
+shader_parameter/pulse_speed = 0.0
+shader_parameter/pulse_min = 0.6
+shader_parameter/pulse_max = 1.0
+shader_parameter/vignette_strength = 0.20
+shader_parameter/corner_radius = 0.048
+
+; ── Root (240x352 — matches template aspect ratio 0.68) ──────────────
 [node name="CardVisual" type="Control"]
-custom_minimum_size = Vector2(150, 210)
-size = Vector2(150, 210)
+custom_minimum_size = Vector2(240, 352)
+size = Vector2(240, 352)
 mouse_filter = 0
 script = ExtResource("1")
 
+; ── Card background (transparent — frame IS the card) ────────────────
 [node name="Background" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 150.0
-offset_bottom = 210.0
+offset_right = 240.0
+offset_bottom = 352.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("card_style")
+theme_override_styles/panel = SubResource("card_bg")
 
-[node name="GlowBorder" type="Panel" parent="."]
+; ── Card art area (mapped from template window: 17.6%-82.4% x, 13.3%-52.0% y) ──
+[node name="CardArt" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 152.0
-offset_bottom = 212.0
+offset_left = 42.0
+offset_top = 47.0
+offset_right = 198.0
+offset_bottom = 183.0
 mouse_filter = 2
-modulate = Color(1, 1, 1, 0)
-theme_override_styles/panel = SubResource("glow_style")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="TypeBanner" type="ColorRect" parent="."]
+; ── Frame overlay (custom template, normal blend, full opacity) ──────
+[node name="FrameOverlay" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 150.0
+offset_right = 240.0
+offset_bottom = 352.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+; ── Inner frame (disabled) ───────────────────────────────────────────
+[node name="InnerFrame" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 352.0
+mouse_filter = 2
+visible = false
+theme_override_styles/panel = SubResource("inner_frame_style")
+
+; ── Name banner (transparent — text only) ────────────────────────────
+[node name="NameBanner" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 240.0
 offset_bottom = 48.0
 mouse_filter = 2
-color = Color(0.75, 0.18, 0.13, 1)
+theme_override_styles/panel = SubResource("name_banner_style")
 
+; ── Card name label ───────────────────────────────────────────────────
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 52.0
 offset_top = 6.0
-offset_right = 144.0
-offset_bottom = 40.0
+offset_right = 234.0
+offset_bottom = 44.0
 mouse_filter = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 text = "Card Name"
-theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(1, 0.95, 0.85, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+autowrap_mode = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 0.97, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1.0)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
 
+; ── Cost orb ──────────────────────────────────────────────────────────
 [node name="CostBG" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 5.0
 offset_top = 4.0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_right = 47.0
+offset_bottom = 46.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("cost_style")
+theme_override_styles/panel = SubResource("cost_orb")
 
 [node name="CostLabel" type="Label" parent="CostBG"]
 layout_mode = 0
-offset_right = 26.0
-offset_bottom = 26.0
+offset_right = 42.0
+offset_bottom = 42.0
 mouse_filter = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 text = "1"
-theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 0.92, 0.25, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 1
 
-[node name="Divider" type="ColorRect" parent="."]
+; ── Type strip (ATTACK / SKILL / POWER) ───────────────────────────────
+[node name="TypeStrip" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 50.0
-offset_right = 142.0
-offset_bottom = 52.0
+offset_left = 42.0
+offset_top = 186.0
+offset_right = 198.0
+offset_bottom = 206.0
 mouse_filter = 2
-color = Color(0.4, 0.4, 0.5, 0.5)
+theme_override_styles/panel = SubResource("type_strip_style")
 
-[node name="DescLabel" type="RichTextLabel" parent="."]
+[node name="TypeLabel" type="Label" parent="TypeStrip"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 56.0
-offset_right = 142.0
-offset_bottom = 202.0
+offset_right = 156.0
+offset_bottom = 20.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "ATTACK"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.95, 0.92, 0.85, 1.0)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+
+; ── Description box ───────────────────────────────────────────────────
+[node name="DescBox" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 206.0
+offset_right = 198.0
+offset_bottom = 330.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("desc_box_style")
+
+[node name="DescLabel" type="RichTextLabel" parent="DescBox"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 146.0
+offset_bottom = 118.0
 mouse_filter = 2
 text = "Card description"
 fit_content = false
 scroll_active = false
-theme_override_font_sizes/normal_font_size = 11
-theme_override_colors/default_color = Color(0.88, 0.86, 0.82, 1)
+theme_override_font_sizes/normal_font_size = 13
+theme_override_colors/default_color = Color(0.9, 0.87, 0.82, 1)
 
+; ── Rarity strip (hidden — frame handles card border) ────────────────
+[node name="RarityStrip" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 330.0
+offset_right = 198.0
+offset_bottom = 340.0
+mouse_filter = 2
+visible = false
+theme_override_styles/panel = SubResource("rarity_strip_style")
+
+; ── Gem sockets ───────────────────────────────────────────────────────
+[node name="SocketContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 310.0
+offset_right = 198.0
+offset_bottom = 326.0
+mouse_filter = 2
+theme_override_constants/separation = 3
+alignment = 2
+visible = false
+
+[node name="Socket1" type="Panel" parent="SocketContainer"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("socket_style")
+
+[node name="Socket2" type="Panel" parent="SocketContainer"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("socket_style")
+
+; ── Corruption overlay ────────────────────────────────────────────────
+[node name="CorruptionOverlay" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 352.0
+mouse_filter = 2
+color = Color(0.45, 0.0, 0.65, 0.0)
+visible = true
+
+; ── Glow border (disabled — frame template handles card visuals) ──────
+[node name="GlowBorder" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 245.0
+offset_bottom = 357.0
+mouse_filter = 2
+visible = false
+modulate = Color(1, 1, 1, 0)
+material = SubResource("glow_shader_mat")
+theme_override_styles/panel = SubResource("glow_style")
+
+; ── Selected border (disabled — frame template handles card visuals) ──
+[node name="SelectedBorder" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 245.0
+offset_bottom = 357.0
+mouse_filter = 2
+visible = false
+modulate = Color(1, 1, 1, 0)
+theme_override_styles/panel = SubResource("selected_border_style")
+
+; ── Hover highlight (disabled — frame template handles card visuals) ──
 [node name="HoverHighlight" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 150.0
-offset_bottom = 210.0
+offset_right = 240.0
+offset_bottom = 352.0
 mouse_filter = 2
+visible = false
 color = Color(1, 1, 1, 0)

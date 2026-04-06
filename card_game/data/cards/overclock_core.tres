@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/overclock_core/overclock_core_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "overclock_core"
 display_name = "Overclock Core"
 description = "Gain 2 Strength."
@@ -19,3 +21,5 @@ apply_vulnerable = 0
 apply_weak = 0
 exhaust = true
 gain_strength = 2
+tags = Array[int]([6])
+gem_sockets = 1

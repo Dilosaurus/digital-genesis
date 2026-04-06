@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "smite"
+display_name = "Smite"
+description = "Deal 12 damage. Apply 1 Weak."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 12
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 1
+tags = Array[int]([4])
+gem_sockets = 1

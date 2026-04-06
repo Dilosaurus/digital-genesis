@@ -1,0 +1,291 @@
+[
+  {
+    "id": "iron_fist",
+    "display_name": "Iron Fist",
+    "description": "+2 Damage",
+    "tier": 0,
+    "cost": 1,
+    "prerequisites": [],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 2.0
+      }
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "id": "thick_skin",
+    "display_name": "Thick Skin",
+    "description": "+3 Block",
+    "tier": 0,
+    "cost": 1,
+    "prerequisites": [],
+    "modifier_specs": [
+      {
+        "stat": "BLOCK",
+        "operation": "FLAT_ADD",
+        "value": 3.0
+      }
+    ],
+    "position": {
+      "x": 1.0,
+      "y": 0.0
+    }
+  },
+  {
+    "id": "vitality",
+    "display_name": "Vitality",
+    "description": "+5 Max HP",
+    "tier": 0,
+    "cost": 1,
+    "prerequisites": [],
+    "modifier_specs": [
+      {
+        "stat": "MAX_HP",
+        "operation": "FLAT_ADD",
+        "value": 5.0
+      }
+    ],
+    "position": {
+      "x": 2.0,
+      "y": 0.0
+    }
+  },
+  {
+    "id": "weapon_mastery",
+    "display_name": "Weapon Mastery",
+    "description": "+10% Melee Damage",
+    "tier": 1,
+    "cost": 1,
+    "prerequisites": [
+      "iron_fist"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.1,
+        "required_card_tags": [
+          "MELEE"
+        ]
+      }
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 1.0
+    }
+  },
+  {
+    "id": "tech_affinity",
+    "display_name": "Tech Affinity",
+    "description": "+10% Tech Damage",
+    "tier": 1,
+    "cost": 1,
+    "prerequisites": [
+      "iron_fist"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.1,
+        "required_card_tags": [
+          "TECH"
+        ]
+      }
+    ],
+    "position": {
+      "x": 1.0,
+      "y": 1.0
+    }
+  },
+  {
+    "id": "resilience",
+    "display_name": "Resilience",
+    "description": "+1 Energy per Turn",
+    "tier": 1,
+    "cost": 1,
+    "prerequisites": [
+      "thick_skin"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "MAX_ENERGY",
+        "operation": "FLAT_ADD",
+        "value": 1.0
+      }
+    ],
+    "position": {
+      "x": 2.0,
+      "y": 1.0
+    }
+  },
+  {
+    "id": "inner_fire",
+    "display_name": "Inner Fire",
+    "description": "+15% Fire Damage",
+    "tier": 1,
+    "cost": 1,
+    "prerequisites": [
+      "vitality"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.15,
+        "required_card_tags": [
+          "FIRE"
+        ]
+      }
+    ],
+    "position": {
+      "x": 3.0,
+      "y": 1.0
+    }
+  },
+  {
+    "id": "berserker",
+    "display_name": "Berserker",
+    "description": "+25% Damage below 50% HP",
+    "tier": 2,
+    "cost": 2,
+    "prerequisites": [
+      "weapon_mastery",
+      "tech_affinity"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.25,
+        "only_when_hp_below_pct": 0.5
+      }
+    ],
+    "position": {
+      "x": 0.0,
+      "y": 2.0
+    }
+  },
+  {
+    "id": "fortress",
+    "display_name": "Fortress",
+    "description": "+20% Block",
+    "tier": 2,
+    "cost": 2,
+    "prerequisites": [
+      "resilience",
+      "thick_skin"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "BLOCK",
+        "operation": "PERCENT_ADD",
+        "value": 0.2
+      }
+    ],
+    "position": {
+      "x": 1.0,
+      "y": 2.0
+    }
+  },
+  {
+    "id": "shadow_arts",
+    "display_name": "Shadow Arts",
+    "description": "+4 Damage vs Vulnerable",
+    "tier": 2,
+    "cost": 2,
+    "prerequisites": [
+      "weapon_mastery",
+      "resilience"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 4.0,
+        "only_vs_vulnerable": true
+      }
+    ],
+    "position": {
+      "x": 2.0,
+      "y": 2.0
+    }
+  },
+  {
+    "id": "divine_healing",
+    "display_name": "Divine Healing",
+    "description": "+30% Healing",
+    "tier": 2,
+    "cost": 2,
+    "prerequisites": [
+      "vitality",
+      "inner_fire"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "HEALING",
+        "operation": "PERCENT_ADD",
+        "value": 0.3
+      }
+    ],
+    "position": {
+      "x": 3.0,
+      "y": 2.0
+    }
+  },
+  {
+    "id": "warlord",
+    "display_name": "Warlord",
+    "description": "x1.2 All Damage",
+    "tier": 3,
+    "cost": 3,
+    "prerequisites": [
+      "berserker",
+      "shadow_arts"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "DAMAGE",
+        "operation": "PERCENT_MULT",
+        "value": 1.2
+      }
+    ],
+    "position": {
+      "x": 1.0,
+      "y": 3.0
+    }
+  },
+  {
+    "id": "immortal",
+    "display_name": "Immortal",
+    "description": "+15 Max HP, +10% Block",
+    "tier": 3,
+    "cost": 3,
+    "prerequisites": [
+      "fortress",
+      "divine_healing"
+    ],
+    "modifier_specs": [
+      {
+        "stat": "MAX_HP",
+        "operation": "FLAT_ADD",
+        "value": 15.0
+      },
+      {
+        "stat": "BLOCK",
+        "operation": "PERCENT_ADD",
+        "value": 0.1
+      }
+    ],
+    "position": {
+      "x": 2.0,
+      "y": 3.0
+    }
+  }
+]

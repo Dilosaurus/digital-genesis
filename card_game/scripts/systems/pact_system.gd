@@ -85,8 +85,17 @@ static func accept_pact(pact: Dictionary, ps: PlayerState, all_players: Dictiona
 			ps.draw_penalty -= pact.get("draw_gain", 3)  # Negative penalty = bonus draws
 			result["effects"].append("Draw %d extra next turn" % pact.get("draw_gain", 3))
 		"damage":
-			ps.pact_damage_boost = pact.get("damage_boost_turns", 2)
-			result["effects"].append("+50%% damage for %d turns" % pact.get("damage_boost_turns", 2))
+			var turns = pact.get("damage_boost_turns", 2)
+			var mod = ModifierData.new()
+			mod.stat = Enums.Stat.DAMAGE
+			mod.operation = Enums.ModOp.PERCENT_MULT
+			mod.value = 1.5
+			mod.lifecycle = Enums.ModLifecycle.TURN
+			mod.duration = turns
+			mod.source_type = "pact"
+			mod.source_id = "hellfire_pact"
+			ps.modifier_stack.add(mod)
+			result["effects"].append("+50%% damage for %d turns" % turns)
 		"heal":
 			ps.current_hp = ps.max_hp
 			# Lose random cards
@@ -111,12 +120,7 @@ static func accept_pact(pact: Dictionary, ps: PlayerState, all_players: Dictiona
 	return result
 
 # Tick down pact effects at start of turn
-static func tick_pact_effects(ps: PlayerState) -> void:
-	if ps.pact_damage_boost > 0:
-		ps.pact_damage_boost -= 1
-
-# Get pact damage multiplier
-static func get_pact_damage_multiplier(ps: PlayerState) -> float:
-	if ps.pact_damage_boost > 0:
-		return 1.5
-	return 1.0
+# Note: pact_damage_boost is now handled via modifier stack (TURN lifecycle).
+# This function is kept for any future non-modifier pact effects.
+static func tick_pact_effects(_ps: PlayerState) -> void:
+	pass

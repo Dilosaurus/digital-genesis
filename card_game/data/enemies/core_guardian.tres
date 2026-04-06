@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "core_guardian"
+display_name = "Core Guardian"
+description = "A massive defensive construct that protects the innermost sectors of the Nexus Core."
+lore = "Core Guardians are the last line of defense before the Angels' sanctum. These enormous constructs were built from the Nexus infrastructure itself — load-bearing data structures repurposed into mobile fortresses. Each Guardian carries the computational weight of an entire server cluster, making them incredibly durable and powerful.
+
+Core Guardians fight with methodical precision. They alternate between building impenetrable shields and delivering crushing blows that can shatter an operative's defenses in a single strike. Their self-buffing routines compound over time, making prolonged engagements increasingly dangerous. GENESIS strategists advise taking them down quickly — every turn a Core Guardian survives, it becomes exponentially harder to destroy."
+max_hp = 65
+intent_pool = [{"type": 1, "value": 12}, {"type": 0, "value": 12}, {"type": 2, "value": 2}, {"type": 1, "value": 10}, {"type": 0, "value": 15}, {"type": 2, "value": 2}]
+xp_reward = 20

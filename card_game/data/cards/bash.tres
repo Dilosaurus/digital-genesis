@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/bash/bash_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "bash"
 display_name = "Overclock"
 description = "Deal 10 damage. Apply 2 Vulnerable."
@@ -19,3 +21,5 @@ apply_vulnerable = 2
 apply_weak = 0
 corruption_gain = 1
 upgrade_id = "bash_plus"
+tags = Array[int]([0])
+gem_sockets = 1

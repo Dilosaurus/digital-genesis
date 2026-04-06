@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "quantum_ghost"
+display_name = "Quantum Ghost"
+description = "A phase-shifting entity that exists in multiple states simultaneously, making it maddeningly difficult to pin down."
+lore = "Quantum Ghosts are the remnants of the Nexus quantum computing subsystem — processes that operated on superposition principles, existing in multiple states at once. When the Angels took control, these processes were freed from their constraints and became autonomous entities that flicker between existence and nonexistence.
+
+Fighting a Quantum Ghost is like fighting smoke. It phases between defensive and offensive states unpredictably, and its attacks seem to come from nowhere. Operatives report that Quantum Ghosts appear to learn from combat, adapting their phase patterns to counter the strategies used against them. The deeper Core sectors are thick with them, forming shimmering walls of flickering data."
+max_hp = 50
+intent_pool = [{"type": 0, "value": 11}, {"type": 1, "value": 8}, {"type": 0, "value": 13}, {"type": 1, "value": 10}, {"type": 0, "value": 15}]
+xp_reward = 20

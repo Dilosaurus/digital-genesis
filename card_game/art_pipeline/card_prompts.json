@@ -1,0 +1,598 @@
+{
+  "meta": {
+    "version": "2.0",
+    "description": "Digital Genesis card art prompt database for ComfyUI batch generation with multi-LoRA tag system",
+    "resolution": {"width": 512, "height": 768},
+    "total_cards": 55
+  },
+
+  "lora_library": {
+    "neon_cyberpunk_splash": {
+      "filename": "neon_cyberpunk_splash_art_xl.safetensors",
+      "trigger": "mad-cbrpnksplshrt",
+      "description": "Core cyberpunk neon glow, orange/teal palette",
+      "source": "https://civitai.com/models/351631",
+      "default_strength": 0.55
+    },
+    "sacred_geometry": {
+      "filename": "sacred_geometry_sdxl.safetensors",
+      "trigger": "sacred geometry",
+      "description": "Divine geometric patterns, mandalas, halos",
+      "source": "https://civitai.com/models/228907",
+      "default_strength": 0.4
+    },
+    "holographic_style": {
+      "filename": "holographic_style_sdxl.safetensors",
+      "trigger": "ral-hlgrphic",
+      "description": "Holographic shimmer for tech/data effects",
+      "source": "https://civitai.com/models/535934",
+      "default_strength": 0.25
+    },
+    "seraphim_style": {
+      "filename": "seraphim_style_sdxl.safetensors",
+      "trigger": "seraphim style",
+      "description": "Angelic divine ethereal aesthetic",
+      "source": "https://civitai.com/models/238276",
+      "default_strength": 0.35
+    },
+    "eldritch_digital": {
+      "filename": "eldritch_digital_art.safetensors",
+      "trigger": "eldritch digital art",
+      "description": "Eldritch void, dark corruption energy",
+      "source": "https://civitai.com/models/303233",
+      "default_strength": 0.4
+    },
+    "glowing_style": {
+      "filename": "glowing_style_xl.safetensors",
+      "trigger": "glowing",
+      "description": "Neon glow effects on any subject",
+      "source": "https://civitai.com/models/138581",
+      "default_strength": 0.3
+    },
+    "datastream": {
+      "filename": "neon_cyberpunk_datastream_xl.safetensors",
+      "trigger": "datastream",
+      "description": "Data stream visualization, digital flow",
+      "source": "https://civitai.com/models/588233",
+      "default_strength": 0.35
+    },
+    "dark_gothic_fantasy": {
+      "filename": "dark_gothic_fantasy_xl_3.01.safetensors",
+      "trigger": "",
+      "description": "Dark fantasy ink style (legacy, already installed)",
+      "source": "local",
+      "default_strength": 0.7
+    }
+  },
+
+  "tag_lora_mapping": {
+    "_comment": "Maps card tags to LoRA stacks. Each entry is [lora_key, strength]. Cards inherit LoRAs from ALL their tags (combined, capped at max_loras). The 'base' stack applies to every card.",
+    "max_loras": 3,
+    "base": [
+      ["datastream", 0.4],
+      ["glowing_style", 0.25]
+    ],
+    "MELEE": [
+      ["glowing_style", 0.25]
+    ],
+    "RANGED": [
+      ["glowing_style", 0.25]
+    ],
+    "FIRE": [
+      ["glowing_style", 0.3]
+    ],
+    "ICE": [
+      ["holographic_style", 0.25]
+    ],
+    "HOLY": [
+      ["sacred_geometry", 0.4],
+      ["seraphim_style", 0.3]
+    ],
+    "SHADOW": [
+      ["dark_gothic_fantasy", 0.4]
+    ],
+    "TECH": [
+      ["datastream", 0.3],
+      ["holographic_style", 0.2]
+    ],
+    "EXPLOIT": [
+      ["datastream", 0.3]
+    ],
+    "CURSE": [
+      ["dark_gothic_fantasy", 0.5]
+    ]
+  },
+
+  "type_lora_overrides": {
+    "_comment": "Optional per-type LoRA adjustments. These modify the base strength of the cyberpunk LoRA.",
+    "CURSE": {
+      "datastream": 0.25
+    }
+  },
+
+  "tag_styles": {
+    "MELEE": {
+      "id": 0,
+      "keywords": "close combat, glowing fists, energy blade, cybernetic arms, melee strike, physical impact, close range",
+      "color_accent": "#FF4400"
+    },
+    "RANGED": {
+      "id": 1,
+      "keywords": "data projectiles, laser beam, ranged attack, thrown code construct, trajectory trail, distant strike",
+      "color_accent": "#00CCFF"
+    },
+    "FIRE": {
+      "id": 2,
+      "keywords": "digital fire, burning circuits, thermal overload, flame particles, heat distortion, molten energy",
+      "color_accent": "#FF6600"
+    },
+    "ICE": {
+      "id": 3,
+      "keywords": "crystallized data, frozen process, blue-white shards, cryo energy, frost particles, ice formation",
+      "color_accent": "#88DDFF"
+    },
+    "HOLY": {
+      "id": 4,
+      "keywords": "golden light, geometric halo, divine radiance, white energy, sacred geometry, angelic glow, cleansing light",
+      "color_accent": "#FFD700"
+    },
+    "SHADOW": {
+      "id": 5,
+      "keywords": "void energy, dark tendrils, purple corruption, glitch distortion, shadow matter, darkness seeping",
+      "color_accent": "#8B00FF"
+    },
+    "TECH": {
+      "id": 6,
+      "keywords": "circuit board patterns, holographic interface, code terminal, digital readout, tech components, data streams",
+      "color_accent": "#00FF88"
+    },
+    "EXPLOIT": {
+      "id": 7,
+      "keywords": "broken firewall, injected code, system breach, vulnerability exploit, hack visualization, security bypass",
+      "color_accent": "#FF0066"
+    },
+    "CURSE": {
+      "id": 8,
+      "keywords": "visual glitching, chromatic aberration, data decay, corrupted pixels, reality distortion, entropy",
+      "color_accent": "#9900CC"
+    }
+  },
+
+  "type_styles": {
+    "ATTACK": {
+      "border_color": "#FF3300",
+      "mood": "aggressive, violent, dynamic motion, red-orange energy trails, impact moment",
+      "accent_keywords": "red energy glow, orange sparks, attack motion blur"
+    },
+    "SKILL": {
+      "border_color": "#0088FF",
+      "mood": "protective, technical, precise, blue-cyan energy, calculated",
+      "accent_keywords": "cyan energy glow, blue aura, defensive shimmer"
+    },
+    "POWER": {
+      "border_color": "#FFD700",
+      "mood": "sustained, powerful, emanating, golden persistent aura, ongoing",
+      "accent_keywords": "golden energy glow, yellow radiance, power aura"
+    },
+    "CURSE": {
+      "border_color": "#660099",
+      "mood": "corrupted, unstable, decaying, purple-black distortion, broken",
+      "accent_keywords": "purple glitch artifacts, chromatic aberration, data corruption"
+    }
+  },
+
+  "corruption_tiers": {
+    "0": {
+      "name": "Clean",
+      "denoise": 0.0,
+      "prompt_addition": "",
+      "suffix": "_base"
+    },
+    "1": {
+      "name": "Tainted",
+      "denoise": 0.35,
+      "prompt_addition": "purple edge glow, glitch artifacts at edges, data corruption veins, color shift toward purple, scan lines, digital noise at borders, tainted energy",
+      "suffix": "_corrupt_t1"
+    },
+    "2": {
+      "name": "Corrupted",
+      "denoise": 0.55,
+      "prompt_addition": "heavy glitch distortion, strong color shift toward purple and black, data decay particles everywhere, corrupted visual artifacts, broken pixels spreading, chromatic aberration, VHS tracking errors, corrupted data overlay",
+      "suffix": "_corrupt_t2"
+    },
+    "3": {
+      "name": "Demonic",
+      "denoise": 0.75,
+      "prompt_addition": "fully corrupted demonic transformation, massive red-purple energy cracks across entire image, reality breaking apart, extreme chromatic aberration, void energy consuming everything, hellish distortion, dark purple-red color palette, glowing corruption veins, digital hellfire, broken beyond recognition",
+      "suffix": "_corrupt_t3"
+    }
+  },
+
+  "cards": {
+    "strike": {
+      "display_name": "System Strike",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "cyberpunk warrior slashing with glowing energy blade, close combat strike, red energy trail, neon-lit dark environment",
+      "has_plus": true
+    },
+    "strike_plus": {
+      "display_name": "System Strike+",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "cyberpunk warrior delivering devastating energy blade slash, enhanced power, brighter red energy trail, more intense neon glow, upgraded attack",
+      "has_plus": false
+    },
+    "defend": {
+      "display_name": "Defend",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "holographic hexagonal shield barrier materializing, blue force field energy, defensive stance, data stream particles flowing around shield",
+      "has_plus": true
+    },
+    "defend_plus": {
+      "display_name": "Defend+",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "reinforced holographic shield barrier, multiple layered hexagonal force fields, intense blue energy, stronger defensive barrier, upgraded protection",
+      "has_plus": false
+    },
+    "bash": {
+      "display_name": "Bash",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "massive cybernetic fist smashing downward with shockwave, ground cracking with energy release, brutal impact, debris flying",
+      "has_plus": true
+    },
+    "bash_plus": {
+      "display_name": "Bash+",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "massive enhanced cybernetic fist smashing with devastating shockwave, amplified energy release, stronger impact with wider destruction radius",
+      "has_plus": false
+    },
+    "twin_strike": {
+      "display_name": "Twin Strike",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "two parallel energy blades slashing in an X pattern, dual strike attack, twin neon trails crossing, synchronized melee assault",
+      "has_plus": true
+    },
+    "twin_strike_plus": {
+      "display_name": "Twin Strike+",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "two enhanced parallel energy blades slashing with greater power, dual strike with intensified neon trails, upgraded twin assault",
+      "has_plus": false
+    },
+    "pommel_strike": {
+      "display_name": "Pommel Strike",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "sword pommel smashing through digital data wall, quick precise strike, concussive energy burst, data fragments scattering",
+      "has_plus": true
+    },
+    "pommel_strike_plus": {
+      "display_name": "Pommel Strike+",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "enhanced sword pommel smashing with amplified concussive force, stronger data disruption, upgraded quick strike technique",
+      "has_plus": false
+    },
+    "iron_wave": {
+      "display_name": "Iron Wave",
+      "card_type": "ATTACK",
+      "tags": ["MELEE", "TECH"],
+      "prompt": "wave of metallic shards and energy surging forward, iron particle storm, cybernetic tidal wave attack, metal and data fusion",
+      "has_plus": true
+    },
+    "iron_wave_plus": {
+      "display_name": "Iron Wave+",
+      "card_type": "ATTACK",
+      "tags": ["MELEE", "TECH"],
+      "prompt": "massive wave of metallic shards surging with amplified energy, enhanced iron particle storm, upgraded cybernetic tidal wave",
+      "has_plus": false
+    },
+    "heavy_blade": {
+      "display_name": "Heavy Blade",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "enormous glowing cybernetic greatsword being brought down with immense force, heavy weapon overhead strike, massive energy trail",
+      "has_plus": false
+    },
+    "cleave": {
+      "display_name": "Cleave",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "wide sweeping energy blade arc cutting through multiple holographic targets, area attack, broad slash, energy wave spreading outward",
+      "has_plus": false
+    },
+    "body_slam": {
+      "display_name": "Body Slam",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "armored cyberpunk figure charging forward with full body force, shield-first charge attack, kinetic energy explosion on impact",
+      "has_plus": false
+    },
+    "uppercut": {
+      "display_name": "Uppercut",
+      "card_type": "ATTACK",
+      "tags": ["MELEE"],
+      "prompt": "rising cybernetic fist uppercut with explosive upward energy trail, lifting strike, vertical energy column, devastating upward blow",
+      "has_plus": false
+    },
+    "shrug_it_off": {
+      "display_name": "Shrug It Off",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "cyberpunk figure casually deflecting incoming attacks, armor fragments falling away, nonchalant defensive posture, energy dissipating harmlessly",
+      "has_plus": false
+    },
+    "backdoor": {
+      "display_name": "Backdoor",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "EXPLOIT"],
+      "prompt": "hacker breaching digital firewall through hidden dark doorway, green code streams, system vulnerability exploit, shadow entry point",
+      "has_plus": false
+    },
+    "cache_flush": {
+      "display_name": "Cache Flush",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "torrent of cached data being purged in a massive digital flood, data particles streaming outward, system memory clearing, blue-white data rush",
+      "has_plus": false
+    },
+    "data_shield": {
+      "display_name": "Data Shield",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "wall of protective scrolling code forming a barrier, firewall visualization, defensive data matrix, green and blue code streams forming shield",
+      "has_plus": false
+    },
+    "digital_fortress": {
+      "display_name": "Digital Fortress",
+      "card_type": "POWER",
+      "tags": ["TECH"],
+      "prompt": "imposing fortress constructed of data walls and code architecture, persistent digital stronghold, towering cybernetic castle, sustained defense",
+      "has_plus": false
+    },
+    "power_surge": {
+      "display_name": "Power Surge",
+      "card_type": "POWER",
+      "tags": ["TECH"],
+      "prompt": "raw electrical energy overloading a power conduit, energy surge crackling through circuits, power amplification, lightning coursing through systems",
+      "has_plus": false
+    },
+    "overclock_core": {
+      "display_name": "Overclock Core",
+      "card_type": "POWER",
+      "tags": ["TECH"],
+      "prompt": "glowing processor core pushed beyond limits, overheating with sparks and energy arcs, maximum overdrive, red-hot circuitry, system at breaking point",
+      "has_plus": false
+    },
+    "kernel_panic": {
+      "display_name": "Kernel Panic",
+      "card_type": "SKILL",
+      "tags": ["TECH", "EXPLOIT"],
+      "prompt": "catastrophic system crash visualization, red warning screens cascading, cascading failure spreading, digital chaos, error messages exploding outward",
+      "has_plus": false
+    },
+    "malware_inject": {
+      "display_name": "Malware Inject",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "EXPLOIT"],
+      "prompt": "syringe of corrupted malicious code being injected into system, dark purple payload, viral infection spreading through circuit veins",
+      "has_plus": false
+    },
+    "memory_leak": {
+      "display_name": "Memory Leak",
+      "card_type": "SKILL",
+      "tags": ["TECH", "EXPLOIT"],
+      "prompt": "corrupted data dripping and dissolving like acid, memory addresses leaking luminous data, system resources hemorrhaging, digital erosion",
+      "has_plus": false
+    },
+    "null_pointer": {
+      "display_name": "Null Pointer",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "EXPLOIT"],
+      "prompt": "void-tipped data dagger piercing through digital reality, null reference attack, reality unraveling at point of impact, void spreading",
+      "has_plus": false
+    },
+    "infinite_loop": {
+      "display_name": "Infinite Loop",
+      "card_type": "ATTACK",
+      "tags": ["TECH"],
+      "prompt": "ouroboros of endless striking energy spiraling infinitely, looping attack pattern, recursive energy ring, perpetual motion assault",
+      "has_plus": false
+    },
+    "recursive_loop": {
+      "display_name": "Recursive Loop",
+      "card_type": "ATTACK",
+      "tags": ["TECH"],
+      "prompt": "spiraling energy repeating and multiplying fractally, recursive code visualization, self-replicating attack pattern, each iteration stronger",
+      "has_plus": false
+    },
+    "trojan_horse": {
+      "display_name": "Trojan Horse",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "EXPLOIT"],
+      "prompt": "dark mechanical horse construct with hidden blades emerging from within, deceptive package opening to reveal lethal payload, cybernetic trojan",
+      "has_plus": false
+    },
+    "berserker_virus": {
+      "display_name": "Berserker Virus",
+      "card_type": "POWER",
+      "tags": ["SHADOW", "TECH"],
+      "prompt": "raging virus entity tearing through digital systems uncontrollably, berserk malware rampaging, red-eyed viral construct, sustained digital rampage",
+      "has_plus": false
+    },
+    "system_restore": {
+      "display_name": "System Restore",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "glowing restoration circle with clockwork gears turning backward, time rewind effect, system recovery process, blue-green healing energy",
+      "has_plus": false
+    },
+    "full_reboot": {
+      "display_name": "Full Reboot",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "system restart sequence with surging power cycling through circuits, boot sequence visualization, fresh start energy pulse, full system renewal",
+      "has_plus": false
+    },
+    "flaming_sword": {
+      "display_name": "Flaming Sword",
+      "card_type": "ATTACK",
+      "tags": ["MELEE", "FIRE"],
+      "prompt": "blazing cybernetic sword wreathed in digital hellfire, flaming blade being swung, fire and data particles trailing, molten energy weapon",
+      "has_plus": false
+    },
+    "holy_wrath": {
+      "display_name": "Holy Wrath",
+      "card_type": "ATTACK",
+      "tags": ["FIRE", "HOLY"],
+      "prompt": "devastating beam of golden divine light raining down from above, angelic geometry surrounding the blast, holy fire and sacred energy, wrathful radiance",
+      "has_plus": false
+    },
+    "divine_shield": {
+      "display_name": "Divine Shield",
+      "card_type": "SKILL",
+      "tags": ["HOLY"],
+      "prompt": "radiant golden barrier with angelic rune inscriptions, sacred geometric shield, divine protection manifesting, white-gold force field",
+      "has_plus": false
+    },
+    "phantom_firewall": {
+      "display_name": "Phantom Firewall",
+      "card_type": "SKILL",
+      "tags": ["TECH", "SHADOW"],
+      "prompt": "ghostly transparent barrier of spectral flame, phantom digital firewall, ethereal protection layer, semi-visible security barrier with ghostly fire",
+      "has_plus": false
+    },
+    "adaptive_shield": {
+      "display_name": "Adaptive Shield",
+      "card_type": "POWER",
+      "tags": ["TECH"],
+      "prompt": "morphing adaptive shield that reshapes to counter each incoming threat, dynamic defense system, shape-shifting barrier, reactive protection",
+      "has_plus": false
+    },
+    "curse_glitch": {
+      "display_name": "Glitch",
+      "card_type": "CURSE",
+      "tags": ["CURSE"],
+      "prompt": "corrupted data fragment tearing reality apart, purple void energy consuming the image, broken pixels and scan lines, digital entropy, visual noise and distortion",
+      "has_plus": false
+    },
+    "curse_hellfire": {
+      "display_name": "Hellfire",
+      "card_type": "CURSE",
+      "tags": ["FIRE", "CURSE"],
+      "prompt": "demonic digital flames consuming everything from below, hellfire eruption, cursed infernal blaze, corrupted fire with purple-red energy, destruction rising",
+      "has_plus": false
+    },
+    "net_spike": {
+      "display_name": "Net Spike",
+      "card_type": "ATTACK",
+      "tags": ["RANGED", "TECH"],
+      "prompt": "dual data projectiles firing simultaneously, cyan tracer rounds cutting through cyberspace, network attack visualization, twin data lances",
+      "character": "Netrunner"
+    },
+    "packet_storm": {
+      "display_name": "Packet Storm",
+      "card_type": "ATTACK",
+      "tags": ["RANGED", "TECH"],
+      "prompt": "massive barrage of data packets raining down like a storm, overwhelming network assault, hundreds of glowing data fragments, packet flood attack",
+      "character": "Netrunner"
+    },
+    "firewall_protocol": {
+      "display_name": "Firewall Protocol",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "massive energy barrier wall materializing, blue-white shield grid with honeycomb pattern, impenetrable defense protocol, system administrator firewall",
+      "character": "Sysadmin"
+    },
+    "hardened_kernel": {
+      "display_name": "Hardened Kernel",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "armored system core surrounded by healing energy pulse, reinforced kernel with protective layers, hardened defense with regeneration, fortified heart of the system",
+      "character": "Sysadmin"
+    },
+    "dark_compile": {
+      "display_name": "Dark Compile",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "EXPLOIT"],
+      "prompt": "shadow code materializing into a dark weapon, void energy compilation process, dark purple code streams assembling into lethal construct, forbidden programming",
+      "character": "Cryptomancer"
+    },
+    "void_channel": {
+      "display_name": "Void Channel",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW"],
+      "prompt": "massive void energy wave expanding outward hitting everything, channel to the void opening, dark energy pulse affecting all targets, area devastation",
+      "character": "Cryptomancer"
+    },
+    "purge_routine": {
+      "display_name": "Purge Routine",
+      "card_type": "ATTACK",
+      "tags": ["HOLY"],
+      "prompt": "cleansing white-gold light cutting through darkness and corruption, holy energy strike purifying, divine code execution, purification beam",
+      "character": "White Hat"
+    },
+    "sanctify": {
+      "display_name": "Sanctify",
+      "card_type": "SKILL",
+      "tags": ["HOLY"],
+      "prompt": "holy barrier of pure light expanding outward purging all corruption, sanctification ritual, golden protective dome with cleansing energy, corruption dissolving",
+      "character": "White Hat"
+    },
+    "bandage": {
+      "display_name": "Bandage",
+      "card_type": "SKILL",
+      "tags": ["TECH"],
+      "prompt": "glowing digital healing bandages wrapping around wounds, soft green restoration energy, simple repair routine, basic system patch being applied",
+      "character": "Shared"
+    },
+    "daemon_compile": {
+      "display_name": "Daemon Compile",
+      "card_type": "ATTACK",
+      "tags": ["TECH", "SHADOW"],
+      "prompt": "dark code daemon being compiled from void and circuit energy, magenta and purple compilation ritual, digital construct emerging from raw corrupted code streams, half-formed daemon materializing",
+      "character": "Technomancer"
+    },
+    "flux_shift": {
+      "display_name": "Flux Shift",
+      "card_type": "SKILL",
+      "tags": ["TECH", "EXPLOIT"],
+      "prompt": "reality shifting and phase-walking through digital space, figure flickering between physical and digital existence, magenta phase trails, dimensional displacement effect",
+      "character": "Technomancer"
+    },
+    "code_summon": {
+      "display_name": "Code Summon",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "TECH"],
+      "prompt": "summoning digital daemon constructs from corrupted code, twin daemon spirits bursting from compiled sigils, magenta and void-black energy constructs attacking in tandem",
+      "character": "Technomancer"
+    },
+    "reality_patch": {
+      "display_name": "Reality Patch",
+      "card_type": "SKILL",
+      "tags": ["TECH", "HOLY"],
+      "prompt": "patching reality tears with golden code threads, digital seamstress weaving light into broken space, protective golden-magenta barrier sealing corruption rifts",
+      "character": "Technomancer"
+    },
+    "daemon_swarm": {
+      "display_name": "Daemon Swarm",
+      "card_type": "ATTACK",
+      "tags": ["SHADOW", "TECH"],
+      "prompt": "swarm of small daemon constructs attacking in unison, dozens of magenta-void micro-daemons converging on target, digital locust swarm of corrupted code fragments",
+      "character": "Technomancer"
+    },
+    "god_compiler": {
+      "display_name": "God Compiler",
+      "card_type": "POWER",
+      "tags": ["TECH", "HOLY", "SHADOW"],
+      "prompt": "massive compilation ritual merging divine and corrupt code, figure surrounded by orbiting daemon constructs and angelic geometry, magenta-gold-void energy convergence, reality rewriting itself",
+      "character": "Technomancer"
+    }
+  }
+}

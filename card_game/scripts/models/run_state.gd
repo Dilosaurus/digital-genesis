@@ -1,15 +1,38 @@
 class_name RunState
 extends RefCounted
 
+var character_id: String = "netrunner"
 var deck: Array[String] = []
 var current_hp: int = 80
 var max_hp: int = 80
 var gold: int = 0
+var souls: int = 0
+var crystals: int = 0
+var corruption_essence: int = 0
 var current_node: int = 0
 var act: int = 1
 var completed_nodes: Array[int] = []
 var relics: Array[String] = []
 var remove_count: int = 0  # Tracks how many cards removed at shop (raises price)
+
+# XP / Leveling
+var xp: int = 0
+var level: int = 1
+var max_mana_bonus: int = 0  # Accumulated mana bonus from leveling (applied during combat)
+
+# Equipment & gems
+var equipment: Dictionary = {}          # EquipSlot (int) -> equipment_id (String)
+var gems: Array[String] = []            # Owned gem IDs
+var gem_assignments: Dictionary = {}    # card_id (String) -> Array[String] of gem IDs
+
+# Skill tree
+var skill_points: int = 0
+var unlocked_skills: Array[String] = []
+
+# Corruption shrine
+var shrine_corrupted_cards: Array[String] = []
+var run_corruption: int = 0
+var max_corruption: int = 100
 
 # Run statistics
 var enemies_defeated: int = 0
@@ -22,15 +45,28 @@ var map_data: Array = []         # Array of rows; each row = Array of node dicts
 var current_row: int = -1        # -1 = hasn't started yet
 var current_node_col: int = -1   # column within current_row
 
-static func new_run() -> RunState:
+static func new_run(p_character_id: String = "netrunner") -> RunState:
 	var rs = RunState.new()
-	for i in 4:
-		rs.deck.append("strike")
-	for i in 3:
-		rs.deck.append("defend")
-	rs.deck.append("bash")
-	rs.deck.append("iron_wave")
-	rs.deck.append("pommel_strike")
+	rs.character_id = p_character_id
+	var char_data: CharacterData = load("res://data/characters/%s.tres" % p_character_id)
+	if char_data:
+		rs.deck = char_data.starter_deck.duplicate()
+		rs.max_hp = char_data.starting_hp
+		rs.current_hp = char_data.starting_hp
+	else:
+		# Fallback to legacy starter deck
+		for i in 4:
+			rs.deck.append("strike")
+		for i in 3:
+			rs.deck.append("defend")
+		rs.deck.append("bash")
+		rs.deck.append("iron_wave")
+		rs.deck.append("pommel_strike")
+	# Cryptomancer passive: start at 15 corruption
+	if p_character_id == "cryptomancer":
+		rs.run_corruption = 15
+	# Technomancer passive: start with 4 energy (handled via character data starting_energy)
+	# No special run_state init needed — Daemon Forge is resolved in combat_engine
 	rs.map_data = RunState.generate_map(1)
 	return rs
 
@@ -49,18 +85,21 @@ static func generate_map(act_number: int) -> Array:
 	rng.randomize()
 
 	# --- enemy pools per act ---
-	var fight_pool: Array[String] = ["jaw_worm", "louse_red", "cultist"]
+	var fight_pool: Array[String]
 	var elite_pool: Array[String]
 	var boss_pool: Array[String]
 	match act_number:
 		1:
+			fight_pool = ["jaw_worm", "louse_red", "cultist"]
 			elite_pool = ["hexaghost"]
 			boss_pool  = ["michael"]
 		2:
-			elite_pool = ["gabriel"]
+			fight_pool = ["data_leech", "firewall_sentinel", "memory_worm"]
+			elite_pool = ["gabriel", "fallen_archangel"]
 			boss_pool  = ["raphael"]
 		_:
-			elite_pool = ["uriel", "azrael"]
+			fight_pool = ["quantum_ghost", "seraph_drone", "core_guardian"]
+			elite_pool = ["uriel", "azrael", "corrupted_throne"]
 			boss_pool  = ["metatron"]
 
 	# --- row type templates (7 rows: 0-6) ---
@@ -73,9 +112,9 @@ static func generate_map(act_number: int) -> Array:
 	# Row 6 : boss (single node)
 	var row_type_pools: Array = [
 		["fight", "fight", "fight"],                            # row 0
-		["fight", "fight", "event", "shop"],                    # row 1
-		["fight", "fight", "elite", "event"],                   # row 2
-		["fight", "event", "shop", "elite", "fight"],           # row 3
+		["fight", "fight", "event", "shop", "forge"],              # row 1
+		["fight", "fight", "elite", "event", "altar", "shrine"], # row 2
+		["fight", "event", "shop", "elite", "fight", "jeweler", "altar"],  # row 3
 		["rest"],                                               # row 4
 		["fight", "fight", "elite"],                            # row 5
 		["boss"],                                               # row 6
@@ -191,6 +230,15 @@ func add_relic(relic_id: String) -> void:
 func heal(amount: int) -> void:
 	current_hp = mini(current_hp + amount, max_hp)
 
+## Apply penalty for a full party wipe (all players truly dead in combat).
+## Loses 15% of gold (minimum 10 gold lost if gold > 0).
+func apply_combat_loss_penalty() -> void:
+	var gold_loss = maxi(int(gold * 0.15), mini(gold, 10))
+	gold = maxi(gold - gold_loss, 0)
+	# Note: progress loss (back to last rest point) would be handled by
+	# reverting current_row to last rest row, but this needs careful
+	# map traversal logic. For now, just the gold penalty.
+
 # Returns the list of (row, col) pairs the player can visit next.
 func get_accessible_nodes() -> Array:
 	if current_row == -1:
@@ -250,10 +298,14 @@ func save_to_file() -> void:
 		serialized_map.append(srow)
 
 	var data = {
+		"character_id": character_id,
 		"deck": deck,
 		"current_hp": current_hp,
 		"max_hp": max_hp,
 		"gold": gold,
+		"souls": souls,
+		"crystals": crystals,
+		"corruption_essence": corruption_essence,
 		"current_node": current_node,
 		"act": act,
 		"completed_nodes": completed_nodes,
@@ -262,10 +314,21 @@ func save_to_file() -> void:
 		"current_row": current_row,
 		"current_node_col": current_node_col,
 		"remove_count": remove_count,
+		"equipment": equipment,
+		"gems": gems,
+		"gem_assignments": gem_assignments,
 		"enemies_defeated": enemies_defeated,
 		"floors_cleared": floors_cleared,
 		"total_gold_earned": total_gold_earned,
 		"total_damage_dealt": total_damage_dealt,
+		"skill_points": skill_points,
+		"unlocked_skills": unlocked_skills,
+		"shrine_corrupted_cards": shrine_corrupted_cards,
+		"run_corruption": run_corruption,
+		"max_corruption": max_corruption,
+		"xp": xp,
+		"level": level,
+		"max_mana_bonus": max_mana_bonus,
 	}
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	if file:
@@ -285,10 +348,14 @@ static func load_from_file() -> RunState:
 		return null
 	var data = json.data
 	var rs = RunState.new()
+	rs.character_id = data.get("character_id", "netrunner")
 	rs.deck.assign(data.get("deck", []))
 	rs.current_hp = data.get("current_hp", 80)
 	rs.max_hp = data.get("max_hp", 80)
 	rs.gold = data.get("gold", 0)
+	rs.souls = data.get("souls", 0)
+	rs.crystals = data.get("crystals", 0)
+	rs.corruption_essence = data.get("corruption_essence", 0)
 	rs.current_node = data.get("current_node", 0)
 	rs.act = data.get("act", 1)
 	for n in data.get("completed_nodes", []):
@@ -298,10 +365,24 @@ static func load_from_file() -> RunState:
 	rs.current_row = data.get("current_row", -1)
 	rs.current_node_col = data.get("current_node_col", -1)
 	rs.remove_count = data.get("remove_count", 0)
+	rs.equipment = data.get("equipment", {})
+	for g in data.get("gems", []):
+		rs.gems.append(str(g))
+	rs.gem_assignments = data.get("gem_assignments", {})
 	rs.enemies_defeated = data.get("enemies_defeated", 0)
 	rs.floors_cleared = data.get("floors_cleared", 0)
 	rs.total_gold_earned = data.get("total_gold_earned", 0)
 	rs.total_damage_dealt = data.get("total_damage_dealt", 0)
+	rs.skill_points = data.get("skill_points", 0)
+	for s in data.get("unlocked_skills", []):
+		rs.unlocked_skills.append(str(s))
+	for sc in data.get("shrine_corrupted_cards", []):
+		rs.shrine_corrupted_cards.append(str(sc))
+	rs.run_corruption = data.get("run_corruption", 0)
+	rs.max_corruption = data.get("max_corruption", 100)
+	rs.xp = data.get("xp", 0)
+	rs.level = data.get("level", 1)
+	rs.max_mana_bonus = data.get("max_mana_bonus", 0)
 
 	# Deserialize map_data
 	var raw_map = data.get("map_data", [])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "firewall_sentinel"
+display_name = "Firewall Sentinel"
+description = "A heavily armored security construct that guards the deep sectors of the Rift."
+lore = "Firewall Sentinels are the Angels' answer to GENESIS incursions into the Rift. Built from repurposed security protocols, these constructs are walking fortresses — slow but nearly impenetrable. Their defensive routines can generate layers of protection that absorb enormous amounts of damage before cracking.
+
+What makes Sentinels truly dangerous is their patience. Unlike most Nexus constructs, Sentinels do not rush to attack. They build their defenses methodically, layer by layer, and only strike when their shields are at maximum capacity. Operatives who try to outlast a Sentinel find themselves facing an increasingly armored opponent that hits harder with each passing turn."
+max_hp = 55
+intent_pool = [{"type": 1, "value": 10}, {"type": 0, "value": 9}, {"type": 1, "value": 8}, {"type": 2, "value": 2}, {"type": 0, "value": 12}]
+xp_reward = 15

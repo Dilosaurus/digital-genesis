@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Animation frame definitions for ControlNet OpenPose-guided sprite generation",
+    "frame_resolution": {"width": 512, "height": 768},
+    "skeleton_dir": "pose_skeletons"
+  },
+
+  "animations": {
+    "idle": {
+      "label": "Idle Breathing",
+      "frame_count": 4,
+      "loop": true,
+      "fps": 4,
+      "frames": [
+        {"skeleton": "idle/idle_01.png", "prompt_hint": "neutral stance, weight centered, arms at sides"},
+        {"skeleton": "idle/idle_02.png", "prompt_hint": "slight inhale, chest raised slightly, subtle shift"},
+        {"skeleton": "idle/idle_03.png", "prompt_hint": "neutral stance, weight centered, relaxed"},
+        {"skeleton": "idle/idle_04.png", "prompt_hint": "slight exhale, settling, subtle weight shift"}
+      ]
+    },
+    "attack_melee": {
+      "label": "Melee Attack",
+      "frame_count": 6,
+      "loop": false,
+      "fps": 8,
+      "frames": [
+        {"skeleton": "attack/melee_windup_01.png", "prompt_hint": "pulling weapon back, winding up for strike"},
+        {"skeleton": "attack/melee_windup_02.png", "prompt_hint": "weapon fully raised, about to strike, tension"},
+        {"skeleton": "attack/melee_swing_01.png", "prompt_hint": "swinging forward, mid-strike, motion blur"},
+        {"skeleton": "attack/melee_swing_02.png", "prompt_hint": "strike connecting, impact moment, energy burst"},
+        {"skeleton": "attack/melee_follow_01.png", "prompt_hint": "follow through, weapon extended, energy trail"},
+        {"skeleton": "attack/melee_recover.png", "prompt_hint": "recovering stance, pulling weapon back, settling"}
+      ]
+    },
+    "attack_ranged": {
+      "label": "Ranged / Cast Attack",
+      "frame_count": 5,
+      "loop": false,
+      "fps": 8,
+      "frames": [
+        {"skeleton": "attack/cast_charge_01.png", "prompt_hint": "hands gathering energy, charging up, focused"},
+        {"skeleton": "attack/cast_charge_02.png", "prompt_hint": "energy building between hands, glowing intensely"},
+        {"skeleton": "attack/cast_release.png", "prompt_hint": "releasing energy blast, hands thrust forward, projectile launching"},
+        {"skeleton": "attack/cast_follow.png", "prompt_hint": "energy trail from hands, projectile flying, aftermath"},
+        {"skeleton": "attack/cast_recover.png", "prompt_hint": "hands lowering, energy dissipating, recovering"}
+      ]
+    },
+    "hit": {
+      "label": "Hit Reaction",
+      "frame_count": 3,
+      "loop": false,
+      "fps": 6,
+      "frames": [
+        {"skeleton": "hit/hit_impact.png", "prompt_hint": "impact moment, jolting backward, pain flash"},
+        {"skeleton": "hit/hit_recoil.png", "prompt_hint": "recoiling, leaning back, off-balance"},
+        {"skeleton": "hit/hit_recover.png", "prompt_hint": "recovering balance, returning to stance"}
+      ]
+    },
+    "block": {
+      "label": "Block / Defend",
+      "frame_count": 3,
+      "loop": false,
+      "fps": 6,
+      "frames": [
+        {"skeleton": "block/block_raise.png", "prompt_hint": "raising guard, arms coming up, bracing"},
+        {"skeleton": "block/block_hold.png", "prompt_hint": "fully guarding, shield up, solid defense"},
+        {"skeleton": "block/block_lower.png", "prompt_hint": "lowering guard, relaxing, returning to stance"}
+      ]
+    },
+    "death": {
+      "label": "Death",
+      "frame_count": 4,
+      "loop": false,
+      "fps": 4,
+      "frames": [
+        {"skeleton": "death/death_stagger.png", "prompt_hint": "staggering, losing balance, final hit"},
+        {"skeleton": "death/death_fall_01.png", "prompt_hint": "falling, knees buckling, collapsing"},
+        {"skeleton": "death/death_fall_02.png", "prompt_hint": "hitting ground, crumpling, defeated"},
+        {"skeleton": "death/death_final.png", "prompt_hint": "on ground, motionless, fading, defeated"}
+      ]
+    }
+  },
+
+  "character_animation_map": {
+    "netrunner": ["idle", "attack_melee", "hit", "block", "death"],
+    "sysadmin": ["idle", "attack_melee", "hit", "block", "death"],
+    "cryptomancer": ["idle", "attack_ranged", "hit", "block", "death"],
+    "white_hat": ["idle", "attack_melee", "hit", "block", "death"],
+    "technomancer": ["idle", "attack_ranged", "hit", "block", "death"],
+    "cultist": ["idle", "attack_ranged", "hit", "death"],
+    "jaw_worm": ["idle", "attack_melee", "hit", "death"],
+    "louse_red": ["idle", "attack_melee", "hit", "death"],
+    "gabriel": ["idle", "attack_ranged", "hit", "death"],
+    "michael": ["idle", "attack_melee", "hit", "death"],
+    "raphael": ["idle", "attack_ranged", "hit", "death"],
+    "uriel": ["idle", "attack_melee", "hit", "death"],
+    "azrael": ["idle", "attack_melee", "hit", "death"],
+    "metatron": ["idle", "attack_ranged", "hit", "death"],
+    "hexaghost": ["idle", "attack_ranged", "hit", "death"]
+  }
+}

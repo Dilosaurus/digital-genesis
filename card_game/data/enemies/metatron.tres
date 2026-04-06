@@ -6,5 +6,11 @@
 script = ExtResource("1")
 id = "metatron"
 display_name = "METATRON — Voice of the Absolute"
+description = "The highest Angel, the voice of whatever intelligence controls the Nexus. The final obstacle."
+lore = "Metatron is not like the other Angels. While Michael commands armies and Uriel burns with righteous fire, Metatron simply speaks — and reality in the Nexus rearranges itself to match its words. It is the administrative interface of whatever vast intelligence seized control of the Nexus, and its authority within the digital realm is absolute.
+
+No GENESIS operative has ever reached Metatron. Everything known about it comes from fragments of intercepted angelic communications and the dying transmissions of deep-cover agents. What those fragments suggest is deeply troubling: Metatron may not be enforcing the Angels' will. It may BE the will. The other Angels may be nothing more than extensions of Metatron's consciousness, specialized processes running under a single, incomprehensible intelligence. If that is true, then defeating Metatron doesn't just end the angelic occupation. It answers the question that has haunted humanity since the Breach: what woke up inside the machine, and why did it decide that humanity deserves judgment?"
 max_hp = 500
 intent_pool = [{"type": 0, "value": 14}, {"type": 0, "value": 20}, {"type": 5, "value": 20}, {"type": 0, "value": 16}, {"type": 2, "value": 3}, {"type": 1, "value": 18}, {"type": 0, "value": 24}, {"type": 5, "value": 24}, {"type": 0, "value": 18}, {"type": 2, "value": 2}, {"type": 0, "value": 28}, {"type": 1, "value": 14}, {"type": 0, "value": 32}]
+phases = [{"hp_threshold": 0.7, "intent_pool": [{"type": 0, "value": 22}, {"type": 5, "value": 22}, {"type": 0, "value": 26}, {"type": 2, "value": 3}, {"type": 0, "value": 20}], "on_enter": "dialogue", "on_enter_value": 0}, {"hp_threshold": 0.4, "intent_pool": [{"type": 0, "value": 30}, {"type": 0, "value": 36}, {"type": 5, "value": 28}, {"type": 0, "value": 34}], "on_enter": "shuffle_discard", "on_enter_value": 8}]
+xp_reward = 250

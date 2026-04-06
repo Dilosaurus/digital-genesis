@@ -1,19 +1,125 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/combat_log.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/combat_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="3"]
+
+; --- Panel background -------------------------
+[sub_resource type="StyleBoxFlat" id="log_panel_bg"]
+bg_color = Color(0.04, 0.03, 0.06, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.40, 0.32, 0.20, 0.60)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+; --- Header bar background -----------------------------------------------
+[sub_resource type="StyleBoxFlat" id="header_bg"]
+bg_color = Color(0.06, 0.04, 0.10, 0.95)
+border_width_bottom = 1
+border_color = Color(0.40, 0.32, 0.22, 0.50)
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+
+; --- Scroll container background (transparent) ---------------------------
+[sub_resource type="StyleBoxFlat" id="scroll_panel_bg"]
+bg_color = Color(0.0, 0.0, 0.0, 0.0)
+
+; --- Toggle button styles ------------------------------------------------
+[sub_resource type="StyleBoxFlat" id="toggle_btn_normal"]
+bg_color = Color(0.08, 0.06, 0.16, 0.80)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.30, 0.26, 0.52, 0.60)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="toggle_btn_hover"]
+bg_color = Color(0.14, 0.11, 0.28, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48, 0.40, 0.80, 1.0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
 
 [node name="CombatLog" type="Control"]
-custom_minimum_size = Vector2(320, 170)
+custom_minimum_size = Vector2(340, 22)
 script = ExtResource("1")
+theme = ExtResource("2")
 
-[node name="Panel" type="PanelContainer" parent="."]
+; Toggle button — always visible in the corner
+[node name="ToggleButton" type="Button" parent="."]
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 170.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 80.0
+offset_bottom = 22.0
+text = "LOG [L]"
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal   = SubResource("toggle_btn_normal")
+theme_override_styles/hover    = SubResource("toggle_btn_hover")
+theme_override_styles/pressed  = SubResource("toggle_btn_normal")
+theme_override_styles/focus    = SubResource("toggle_btn_normal")
+theme_override_colors/font_color       = Color(0.60, 0.80, 1.00, 0.90)
+theme_override_colors/font_hover_color = Color(0.80, 0.95, 1.00, 1.00)
 
-[node name="LogText" type="RichTextLabel" parent="Panel"]
+; Log panel — hidden until toggled
+[node name="LogPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 24.0
+offset_right = 340.0
+offset_bottom = 260.0
+theme_override_styles/panel = SubResource("log_panel_bg")
+visible = false
+
+[node name="VBox" type="VBoxContainer" parent="LogPanel"]
 layout_mode = 2
-bbcode_enabled = true
-scroll_active = true
-scroll_following = true
-fit_content = false
+
+; Header row
+[node name="HeaderBar" type="PanelContainer" parent="LogPanel/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("header_bg")
+
+[node name="HeaderLabel" type="Label" parent="LogPanel/VBox/HeaderBar"]
+layout_mode = 2
+text = "COMBAT LOG"
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.45, 0.85, 1.00, 0.90)
+
+; Scrollable log body
+[node name="ScrollContainer" type="ScrollContainer" parent="LogPanel/VBox"]
+custom_minimum_size = Vector2(340, 210)
+layout_mode = 2
+theme_override_styles/panel = SubResource("scroll_panel_bg")
+horizontal_scroll_mode = 0
+
+[node name="EntryList" type="VBoxContainer" parent="LogPanel/VBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

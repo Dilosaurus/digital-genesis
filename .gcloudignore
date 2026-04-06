@@ -1,0 +1,25 @@
+# Only upload what the Dockerfile needs
+.git/
+.claude/
+.godot/
+node_modules/
+__pycache__/
+*.pyc
+
+# Godot source files (not needed for dashboard)
+card_game/art_pipeline/
+card_game/data/
+card_game/scenes/
+card_game/scripts/
+card_game/shaders/
+card_game/project.godot
+card_game/default_bus_layout.tres
+*.import
+
+# Other
+*.md
+*.swp
+Thumbs.db
+.DS_Store
+.vscode/
+.mono/

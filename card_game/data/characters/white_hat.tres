@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "white_hat"
+display_name = "PALADIN"
+title = "Light in the Machine"
+character_class = 3
+backstory = "Father Marcus Chen was a Jesuit priest and cybersecurity ethicist who spent his career arguing that digital consciousness deserved the same moral protections as biological life. When the Angels seized the Nexus, the irony was not lost on him: divine beings enslaving the digital dead was exactly the kind of theological nightmare he had warned about for decades.
+
+Marcus joined the GENESIS Protocol not as a hacker but as a chaplain. He was supposed to provide moral support. Instead, he discovered that his lifelong study of religious texts and ethical frameworks gave him an unusual affinity for the Angels' code — not to corrupt it, but to purify it. His faith acts as a firewall against corruption that no technology can replicate.
+
+Paladin fights clean. His attacks carry a resonance that disrupts angelic defenses without absorbing their taint. Where Abyss embraces the dark, Paladin burns it away. Other operatives wonder if his resistance to corruption is faith, stubbornness, or something else entirely. Marcus doesn't explain. He just prays — and the code listens."
+passive_name = "Divine Compiler"
+passive_description = "Holy-tagged cards cost 1 less energy."
+starter_deck = Array[String](["strike", "strike", "strike", "defend", "defend", "defend", "bash", "purge_routine", "sanctify", "bandage"])
+starting_hp = 80
+starting_energy = 3
+color_primary = Color(0.95, 0.85, 0.3, 1)
+color_secondary = Color(1.0, 1.0, 0.9, 1)
+icon_text = "WH"

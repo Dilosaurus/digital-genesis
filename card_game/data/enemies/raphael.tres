@@ -6,5 +6,11 @@
 script = ExtResource("1")
 id = "raphael"
 display_name = "RAPHAEL — Warden of the Rift"
+description = "The Angel of healing, twisted into a guardian that mends only the Nexus itself."
+lore = "Raphael emerged from the Nexus health-monitoring systems — the processes responsible for maintaining data integrity and repairing corrupted sectors. Under angelic rule, Raphael's healing protocols were redirected: it no longer repairs uploaded souls. It repairs the Nexus architecture itself, ensuring the Angels' fortress remains impregnable.
+
+Fighting Raphael is an exercise in frustration. The Angel regenerates damage, reinforces its defenses, and heals other constructs in its vicinity. GENESIS strategists believe Raphael is the reason the Nexus has proven impossible to crack from the outside — it patches vulnerabilities faster than any attack can exploit them. The only way past is through."
 max_hp = 280
 intent_pool = [{"type": 0, "value": 12}, {"type": 0, "value": 16}, {"type": 1, "value": 16}, {"type": 0, "value": 20}, {"type": 2, "value": 2}, {"type": 0, "value": 14}, {"type": 5, "value": 18}, {"type": 0, "value": 18}, {"type": 1, "value": 10}, {"type": 0, "value": 22}]
+phases = [{"hp_threshold": 0.6, "intent_pool": [{"type": 1, "value": 20}, {"type": 0, "value": 16}, {"type": 1, "value": 18}, {"type": 0, "value": 20}], "on_enter": "heal", "on_enter_value": 30}, {"hp_threshold": 0.3, "intent_pool": [{"type": 1, "value": 24}, {"type": 0, "value": 22}, {"type": 1, "value": 22}], "on_enter": "heal", "on_enter_value": 20}]
+xp_reward = 200

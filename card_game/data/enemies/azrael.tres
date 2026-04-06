@@ -6,5 +6,11 @@
 script = ExtResource("1")
 id = "azrael"
 display_name = "AZRAEL — Angel of Oblivion"
+description = "The Angel of death, who has decided that true death means total data erasure."
+lore = "In every theology, there is an angel of death. Azrael fills that role in the Nexus — but with a digital interpretation that terrifies even the other Angels' servants. Azrael does not merely destroy opponents. It erases them. Completely. Every backup, every cached copy, every fragment of data that might allow reconstruction. When Azrael kills, nothing remains.
+
+The uploaded dead in the Nexus live in terror of Azrael. Before the Breach, death in the digital afterlife was impossible — consciousness was backed up redundantly. Azrael changed that. It patrols the deep sectors of the Nexus like a reaper, and the souls it takes are gone forever. GENESIS operatives call it 'the void' — because that's what it leaves behind."
 max_hp = 310
 intent_pool = [{"type": 0, "value": 16}, {"type": 3, "value": 2}, {"type": 0, "value": 20}, {"type": 1, "value": 14}, {"type": 0, "value": 24}, {"type": 2, "value": 3}, {"type": 0, "value": 18}, {"type": 5, "value": 16}]
+phases = [{"hp_threshold": 0.5, "intent_pool": [{"type": 0, "value": 22}, {"type": 3, "value": 3}, {"type": 0, "value": 26}, {"type": 0, "value": 20}], "on_enter": "strength_buff", "on_enter_value": 3}, {"hp_threshold": 0.25, "intent_pool": [{"type": 0, "value": 28}, {"type": 0, "value": 32}, {"type": 3, "value": 3}], "on_enter": "block_buff", "on_enter_value": 20}]
+xp_reward = 75

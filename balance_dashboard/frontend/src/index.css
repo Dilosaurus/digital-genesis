@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DIGITAL GENESIS — Balance Dashboard Design System
+   Gaming dashboard with cyberpunk undertones
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ---------------------------------------------------------------------------
+   Font stack
+   --------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Core palette */
+  --bg-deep: #0a0a0f;
+  --bg-base: #0f1019;
+  --bg-surface: #151621;
+  --bg-elevated: #1c1d2e;
+  --bg-hover: #242538;
+
+  /* Accent */
+  --accent-purple: #a855f7;
+  --accent-purple-dim: #7c3aed;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+
+  /* Glow intensities */
+  --glow-sm: 0 0 10px;
+  --glow-md: 0 0 20px;
+  --glow-lg: 0 0 40px;
+
+  /* Grid pattern */
+  --grid-color: rgba(139, 92, 246, 0.03);
+  --grid-size: 40px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+html {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: #e2e8f0;
+}
+
+/* Subtle grid background for main content area */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* ---------------------------------------------------------------------------
+   Scrollbar
+   --------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.45);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.25) transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   Glow utilities
+   --------------------------------------------------------------------------- */
+.glow-purple {
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.15), 0 0 3px rgba(168, 85, 247, 0.1);
+}
+.glow-purple-md {
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.2), 0 0 5px rgba(168, 85, 247, 0.15);
+}
+.glow-purple-lg {
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.25), 0 0 10px rgba(168, 85, 247, 0.2);
+}
+.glow-blue {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.15), 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.glow-red {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15), 0 0 3px rgba(239, 68, 68, 0.1);
+}
+.glow-green {
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.15), 0 0 3px rgba(34, 197, 94, 0.1);
+}
+.glow-yellow {
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.15), 0 0 3px rgba(234, 179, 8, 0.1);
+}
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15), 0 0 3px rgba(6, 182, 212, 0.1);
+}
+.glow-orange {
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.15), 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* ---------------------------------------------------------------------------
+   Gradient utilities
+   --------------------------------------------------------------------------- */
+.gradient-purple {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+}
+.gradient-surface {
+  background: linear-gradient(180deg, var(--bg-surface), var(--bg-base));
+}
+.gradient-header {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(59, 130, 246, 0.05), transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Card / panel styling
+   --------------------------------------------------------------------------- */
+.panel {
+  background: var(--bg-surface);
+  border: 1px solid rgba(139, 92, 246, 0.08);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.panel:hover {
+  border-color: rgba(139, 92, 246, 0.15);
+}
+.panel-elevated {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+}
+
+/* Top accent stripe on panels */
+.panel-accent-purple {
+  border-top: 2px solid rgba(168, 85, 247, 0.5);
+}
+.panel-accent-red {
+  border-top: 2px solid rgba(239, 68, 68, 0.5);
+}
+.panel-accent-blue {
+  border-top: 2px solid rgba(59, 130, 246, 0.5);
+}
+.panel-accent-green {
+  border-top: 2px solid rgba(34, 197, 94, 0.5);
+}
+
+/* ---------------------------------------------------------------------------
+   Badge styles
+   --------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: box-shadow 0.2s;
+}
+
+/* Rarity badges */
+.badge-common {
+  background: rgba(107, 114, 128, 0.15);
+  color: #9ca3af;
+  border-color: rgba(107, 114, 128, 0.2);
+}
+.badge-uncommon {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+.badge-rare {
+  background: rgba(234, 179, 8, 0.1);
+  color: #fbbf24;
+  border-color: rgba(234, 179, 8, 0.25);
+  text-shadow: 0 0 8px rgba(234, 179, 8, 0.3);
+}
+
+/* ---------------------------------------------------------------------------
+   Monospace (for numbers / stats)
+   --------------------------------------------------------------------------- */
+.font-mono, code, .stat-value {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Smooth transitions everywhere
+   --------------------------------------------------------------------------- */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, box-shadow, opacity;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+/* Opt-out for animations that set their own timing */
+.no-transition,
+[class*="animate-"] {
+  transition: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Selection
+   --------------------------------------------------------------------------- */
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: white;
+}
+
+/* ---------------------------------------------------------------------------
+   Component-level hover glows (for elements using custom CSS glow classes)
+   --------------------------------------------------------------------------- */
+.reload-btn:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 5px rgba(168, 85, 247, 0.2);
+}

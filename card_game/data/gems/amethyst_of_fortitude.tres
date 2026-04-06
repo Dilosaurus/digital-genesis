@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/amethyst_of_fortitude/amethyst_of_fortitude.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "amethyst_fortitude_block"
+stat = 1
+operation = 0
+value = 4.0
+lifecycle = 3
+duration = -1
+required_card_type = 1
+
+[resource]
+script = ExtResource("1")
+id = "amethyst_of_fortitude"
+display_name = "Amethyst of Fortitude"
+description = "+4 block on Skill cards"
+rarity = 1
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1")]

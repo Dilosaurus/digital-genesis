@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/nano_heart/nano_heart.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "nano_heart"
+display_name = "Nano Heart"
+description = "+15 Max HP."
+rarity = 0
+icon = ExtResource("icon_tex")
+bonus_max_hp = 15

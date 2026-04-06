@@ -1,0 +1,368 @@
+[
+  {
+    "id": "azrael",
+    "display_name": "AZRAEL \u2014 Angel of Oblivion",
+    "max_hp": 310,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 16
+      },
+      {
+        "intent": "DEBUFF",
+        "value": 2
+      },
+      {
+        "intent": "ATTACK",
+        "value": 20
+      },
+      {
+        "intent": "DEFEND",
+        "value": 14
+      },
+      {
+        "intent": "ATTACK",
+        "value": 24
+      },
+      {
+        "intent": "BUFF",
+        "value": 3
+      },
+      {
+        "intent": "ATTACK",
+        "value": 18
+      },
+      {
+        "intent": "HACK",
+        "value": 16
+      }
+    ]
+  },
+  {
+    "id": "cultist",
+    "display_name": "Rogue Process",
+    "max_hp": 50,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 6
+      },
+      {
+        "intent": "ATTACK",
+        "value": 7
+      },
+      {
+        "intent": "DEBUFF",
+        "value": 2
+      },
+      {
+        "intent": "ATTACK",
+        "value": 6
+      },
+      {
+        "intent": "BUFF",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "gabriel",
+    "display_name": "GABRIEL \u2014 Herald of Annihilation",
+    "max_hp": 280,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 14
+      },
+      {
+        "intent": "ATTACK",
+        "value": 18
+      },
+      {
+        "intent": "DEFEND",
+        "value": 14
+      },
+      {
+        "intent": "ATTACK",
+        "value": 22
+      },
+      {
+        "intent": "BUFF",
+        "value": 2
+      },
+      {
+        "intent": "ATTACK",
+        "value": 16
+      },
+      {
+        "intent": "HACK",
+        "value": 12
+      },
+      {
+        "intent": "ATTACK",
+        "value": 20
+      }
+    ]
+  },
+  {
+    "id": "hexaghost",
+    "display_name": "Hex Phantom",
+    "max_hp": 260,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 2
+      },
+      {
+        "intent": "ATTACK",
+        "value": 12
+      },
+      {
+        "intent": "DEFEND",
+        "value": 12
+      },
+      {
+        "intent": "ATTACK",
+        "value": 6
+      },
+      {
+        "intent": "ATTACK",
+        "value": 6
+      },
+      {
+        "intent": "ATTACK",
+        "value": 18
+      }
+    ]
+  },
+  {
+    "id": "jaw_worm",
+    "display_name": "Corrupted Crawler",
+    "max_hp": 46,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 11
+      },
+      {
+        "intent": "ATTACK",
+        "value": 7
+      },
+      {
+        "intent": "DEFEND",
+        "value": 6
+      }
+    ]
+  },
+  {
+    "id": "louse_red",
+    "display_name": "Malware Drone",
+    "max_hp": 30,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 6
+      },
+      {
+        "intent": "ATTACK",
+        "value": 5
+      },
+      {
+        "intent": "DEFEND",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "metatron",
+    "display_name": "METATRON \u2014 Voice of the Absolute",
+    "max_hp": 500,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 14
+      },
+      {
+        "intent": "ATTACK",
+        "value": 20
+      },
+      {
+        "intent": "HACK",
+        "value": 20
+      },
+      {
+        "intent": "ATTACK",
+        "value": 16
+      },
+      {
+        "intent": "BUFF",
+        "value": 3
+      },
+      {
+        "intent": "DEFEND",
+        "value": 18
+      },
+      {
+        "intent": "ATTACK",
+        "value": 24
+      },
+      {
+        "intent": "HACK",
+        "value": 24
+      },
+      {
+        "intent": "ATTACK",
+        "value": 18
+      },
+      {
+        "intent": "BUFF",
+        "value": 2
+      },
+      {
+        "intent": "ATTACK",
+        "value": 28
+      },
+      {
+        "intent": "DEFEND",
+        "value": 14
+      },
+      {
+        "intent": "ATTACK",
+        "value": 32
+      }
+    ]
+  },
+  {
+    "id": "michael",
+    "display_name": "MICHAEL \u2014 Archangel of War",
+    "max_hp": 300,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 8
+      },
+      {
+        "intent": "ATTACK",
+        "value": 14
+      },
+      {
+        "intent": "HACK",
+        "value": 15
+      },
+      {
+        "intent": "DEFEND",
+        "value": 16
+      },
+      {
+        "intent": "ATTACK",
+        "value": 20
+      },
+      {
+        "intent": "BUFF",
+        "value": 2
+      },
+      {
+        "intent": "HACK",
+        "value": 20
+      },
+      {
+        "intent": "ATTACK",
+        "value": 12
+      },
+      {
+        "intent": "DEFEND",
+        "value": 10
+      },
+      {
+        "intent": "ATTACK",
+        "value": 25
+      }
+    ]
+  },
+  {
+    "id": "raphael",
+    "display_name": "RAPHAEL \u2014 Warden of the Rift",
+    "max_hp": 280,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 12
+      },
+      {
+        "intent": "ATTACK",
+        "value": 16
+      },
+      {
+        "intent": "DEFEND",
+        "value": 16
+      },
+      {
+        "intent": "ATTACK",
+        "value": 20
+      },
+      {
+        "intent": "BUFF",
+        "value": 2
+      },
+      {
+        "intent": "ATTACK",
+        "value": 14
+      },
+      {
+        "intent": "HACK",
+        "value": 18
+      },
+      {
+        "intent": "ATTACK",
+        "value": 18
+      },
+      {
+        "intent": "DEFEND",
+        "value": 10
+      },
+      {
+        "intent": "ATTACK",
+        "value": 22
+      }
+    ]
+  },
+  {
+    "id": "uriel",
+    "display_name": "URIEL \u2014 Flame of the Void",
+    "max_hp": 300,
+    "intent_pool": [
+      {
+        "intent": "ATTACK",
+        "value": 18
+      },
+      {
+        "intent": "ATTACK",
+        "value": 24
+      },
+      {
+        "intent": "BUFF",
+        "value": 3
+      },
+      {
+        "intent": "ATTACK",
+        "value": 20
+      },
+      {
+        "intent": "HACK",
+        "value": 10
+      },
+      {
+        "intent": "ATTACK",
+        "value": 26
+      },
+      {
+        "intent": "DEFEND",
+        "value": 12
+      },
+      {
+        "intent": "ATTACK",
+        "value": 22
+      }
+    ]
+  }
+]

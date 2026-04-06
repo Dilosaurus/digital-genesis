@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="RelicData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/lantern/lantern.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
@@ -8,4 +9,5 @@ id = "lantern"
 display_name = "Lantern"
 description = "+1 max Energy."
 rarity = 2
+icon = ExtResource("icon_tex")
 bonus_max_energy = 1

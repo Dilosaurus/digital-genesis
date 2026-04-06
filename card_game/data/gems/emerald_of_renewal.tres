@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/emerald_of_renewal/emerald_of_renewal.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "emerald_renewal_heal"
+stat = 2
+operation = 0
+value = 2.0
+lifecycle = 3
+duration = -1
+
+[resource]
+script = ExtResource("1")
+id = "emerald_of_renewal"
+display_name = "Emerald of Renewal"
+description = "+2 healing when this card is played"
+rarity = 0
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1")]

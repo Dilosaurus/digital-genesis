@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/divine_shield/divine_shield_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "divine_shield"
 display_name = "Divine Shield"
 description = "Michael's protection. Gain 16 Block."
@@ -17,3 +19,5 @@ draw = 0
 hits = 1
 apply_vulnerable = 0
 apply_weak = 0
+tags = Array[int]([4])
+gem_sockets = 2

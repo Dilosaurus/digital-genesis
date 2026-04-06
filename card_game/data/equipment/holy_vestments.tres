@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/holy_vestments/holy_vestments.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "holy_vestments_heal"
+stat = 2
+operation = 0
+value = 2.0
+lifecycle = 0
+duration = -1
+
+[sub_resource type="Resource" id="mod2"]
+script = ExtResource("2")
+id = "holy_vestments_resist"
+stat = 8
+operation = 0
+value = 5.0
+lifecycle = 0
+duration = -1
+
+[resource]
+script = ExtResource("1")
+id = "holy_vestments"
+display_name = "Holy Vestments"
+description = "+2 healing, +5 corruption resistance"
+slot = 1
+rarity = 1
+icon = ExtResource("icon_tex")
+modifiers = [SubResource("mod1"), SubResource("mod2")]

@@ -1,0 +1,141 @@
+[
+  {
+    "id": "amethyst_of_fortitude",
+    "display_name": "Amethyst of Fortitude",
+    "description": "+4 block on Skill cards",
+    "rarity": "UNCOMMON",
+    "on_play_modifiers": [
+      {
+        "id": "amethyst_fortitude_block",
+        "stat": "BLOCK",
+        "operation": "FLAT_ADD",
+        "value": 4.0,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1,
+        "required_card_type": "SKILL"
+      }
+    ]
+  },
+  {
+    "id": "crimson_opal",
+    "display_name": "Crimson Opal",
+    "description": "x1.5 damage vs vulnerable enemies",
+    "rarity": "RARE",
+    "on_play_modifiers": [
+      {
+        "id": "crimson_opal_dmg",
+        "stat": "DAMAGE",
+        "operation": "PERCENT_MULT",
+        "value": 1.5,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1,
+        "only_vs_vulnerable": true
+      }
+    ]
+  },
+  {
+    "id": "diamond_of_efficiency",
+    "display_name": "Diamond of Efficiency",
+    "description": "+2 damage and +2 block when this card is played",
+    "rarity": "UNCOMMON",
+    "on_play_modifiers": [
+      {
+        "id": "diamond_efficiency_block",
+        "stat": "BLOCK",
+        "operation": "FLAT_ADD",
+        "value": 2.0,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1
+      },
+      {
+        "id": "diamond_efficiency_dmg",
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 2.0,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "emerald_of_renewal",
+    "display_name": "Emerald of Renewal",
+    "description": "+2 healing when this card is played",
+    "rarity": "COMMON",
+    "on_play_modifiers": [
+      {
+        "id": "emerald_renewal_heal",
+        "stat": "HEALING",
+        "operation": "FLAT_ADD",
+        "value": 2.0,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "obsidian_shard",
+    "display_name": "Obsidian Shard",
+    "description": "+25% damage when this card is played (dark power)",
+    "rarity": "UNCOMMON",
+    "on_play_modifiers": [
+      {
+        "id": "obsidian_shard_dmg",
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.25,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "ruby_of_fury",
+    "display_name": "Ruby of Fury",
+    "description": "+15% damage when this card is played",
+    "rarity": "COMMON",
+    "on_play_modifiers": [
+      {
+        "id": "ruby_fury_dmg",
+        "stat": "DAMAGE",
+        "operation": "PERCENT_ADD",
+        "value": 0.15,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "sapphire_of_shielding",
+    "display_name": "Sapphire of Shielding",
+    "description": "+3 block when this card is played",
+    "rarity": "COMMON",
+    "on_play_modifiers": [
+      {
+        "id": "sapphire_shield_block",
+        "stat": "BLOCK",
+        "operation": "FLAT_ADD",
+        "value": 3.0,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1
+      }
+    ]
+  },
+  {
+    "id": "topaz_of_wrath",
+    "display_name": "Topaz of Wrath",
+    "description": "+4 damage on Attack cards",
+    "rarity": "UNCOMMON",
+    "on_play_modifiers": [
+      {
+        "id": "topaz_wrath_dmg",
+        "stat": "DAMAGE",
+        "operation": "FLAT_ADD",
+        "value": 4.0,
+        "lifecycle": "CARD_PLAY",
+        "duration": -1,
+        "required_card_type": "ATTACK"
+      }
+    ]
+  }
+]

@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://deaths_door_overlay"]
+[gd_scene load_steps=9 format=3 uid="uid://deaths_door_overlay"]
 
 [ext_resource type="Script" path="res://scripts/ui/deaths_door_overlay.gd" id="1_ddoor"]
+[ext_resource type="FontFile" path="res://assets/fonts/CinzelDecorative-Regular.ttf" id="2_font"]
+
+; --- Radial vignette gradient (dark edges, transparent center) -----------
+; We use four corner ColorRects instead of a shader for broad compatibility.
+; The script blends their alpha based on HP ratio.
+
+; --- Inner glow fill (crimson, fills from edges inward) ------------------
+[sub_resource type="StyleBoxFlat" id="inner_panel_bg"]
+bg_color = Color(0.0, 0.0, 0.0, 0.0)
+
+; --- Status label panel style --------------------------------------------
+[sub_resource type="StyleBoxFlat" id="status_bg"]
+bg_color = Color(0.10, 0.0, 0.0, 0.75)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70, 0.10, 0.10, 0.80)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
 
 [node name="DeathsDoorOverlay" type="Control"]
 anchor_right = 1.0
@@ -13,24 +39,82 @@ mouse_filter = 2
 visible = false
 script = ExtResource("1_ddoor")
 
-[node name="Vignette" type="ColorRect" parent="."]
+; ---- Full-screen dim layer (dark, semi-transparent) --------------------
+[node name="DimLayer" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3, 0.0, 0.0, 0.2)
+color = Color(0.0, 0.0, 0.0, 0.0)
 mouse_filter = 2
 
-[node name="StatusLabel" type="Label" parent="."]
-anchor_left = 0.0
-anchor_top = 0.0
+; ---- Vignette — top edge -----------------------------------------------
+[node name="VignetteTop" type="ColorRect" parent="."]
 anchor_right = 1.0
-anchor_bottom = 0.0
-offset_top = 50.0
-offset_bottom = 80.0
+offset_top = 0.0
+offset_bottom = 300.0
 grow_horizontal = 2
-horizontal_alignment = 1
+color = Color(0.25, 0.0, 0.0, 0.0)
 mouse_filter = 2
+
+; ---- Vignette — bottom edge --------------------------------------------
+[node name="VignetteBottom" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_bottom = 0.0
+grow_horizontal = 2
+color = Color(0.25, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+; ---- Vignette — left edge ----------------------------------------------
+[node name="VignetteLeft" type="ColorRect" parent="."]
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_right = 300.0
+grow_vertical = 2
+color = Color(0.25, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+; ---- Vignette — right edge ---------------------------------------------
+[node name="VignetteRight" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_right = 0.0
+grow_vertical = 2
+color = Color(0.25, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+; ---- Status text --------------------------------------------------------
+[node name="StatusContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 50.0
+offset_right = 180.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("status_bg")
+visible = false
+mouse_filter = 2
+
+[node name="StatusLabel" type="Label" parent="StatusContainer"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
 text = ""
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1.0, 0.30, 0.25, 1.0)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 1.0)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+mouse_filter = 2

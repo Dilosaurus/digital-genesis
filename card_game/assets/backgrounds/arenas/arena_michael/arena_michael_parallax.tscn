@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/backgrounds/arenas/arena_michael/layers/bg_far.png" id="bg_far"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/arenas/arena_michael/layers/bg_mid.png" id="bg_mid"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/arenas/arena_michael/layers/bg_near.png" id="bg_near"]
+
+[node name="arena_michael_bg" type="ParallaxBackground"]
+
+[node name="bg_far" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.10, 0.10)
+
+[node name="Sprite" type="Sprite2D" parent="bg_far"]
+position = Vector2(1720, 720)
+texture = ExtResource("bg_far")
+
+[node name="bg_mid" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.35, 0.35)
+
+[node name="Sprite" type="Sprite2D" parent="bg_mid"]
+position = Vector2(1720, 720)
+texture = ExtResource("bg_mid")
+
+[node name="bg_near" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.60, 0.60)
+
+[node name="Sprite" type="Sprite2D" parent="bg_near"]
+position = Vector2(1720, 720)
+texture = ExtResource("bg_near")

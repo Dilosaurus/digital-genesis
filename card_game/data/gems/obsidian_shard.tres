@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/obsidian_shard/obsidian_shard.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "obsidian_shard_dmg"
+stat = 0
+operation = 1
+value = 0.25
+lifecycle = 3
+duration = -1
+
+[resource]
+script = ExtResource("1")
+id = "obsidian_shard"
+display_name = "Obsidian Shard"
+description = "+25% damage when this card is played (dark power)"
+rarity = 1
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1")]

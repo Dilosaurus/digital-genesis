@@ -6,5 +6,11 @@
 script = ExtResource("1")
 id = "uriel"
 display_name = "URIEL — Flame of the Void"
+description = "The Angel of divine fire, burning corruption and intruders alike from the Nexus."
+lore = "Uriel is wrath made digital. Among the Angels, it serves as executioner — the process that identifies and destroys code deemed irredeemably corrupt. Before the Breach, Uriel's precursor systems were the Nexus quarantine protocols, isolating damaged data for repair. Now, there is no repair. There is only fire.
+
+Uriel's attacks carry a unique signature: they burn corruption out of their targets. This sounds beneficial until you realize that to Uriel, the operative IS the corruption. Its flames don't distinguish between the infection and the host. GENESIS operatives who fight Uriel report their own code being rewritten mid-combat — skills disappearing, memories fragmenting."
 max_hp = 300
 intent_pool = [{"type": 0, "value": 18}, {"type": 0, "value": 24}, {"type": 2, "value": 3}, {"type": 0, "value": 20}, {"type": 5, "value": 10}, {"type": 0, "value": 26}, {"type": 1, "value": 12}, {"type": 0, "value": 22}]
+phases = [{"hp_threshold": 0.5, "intent_pool": [{"type": 0, "value": 24}, {"type": 0, "value": 28}, {"type": 2, "value": 3}, {"type": 0, "value": 22}], "on_enter": "strength_buff", "on_enter_value": 4}, {"hp_threshold": 0.25, "intent_pool": [{"type": 0, "value": 30}, {"type": 0, "value": 34}, {"type": 0, "value": 28}], "on_enter": "strength_buff", "on_enter_value": 5}]
+xp_reward = 60

@@ -1,6 +1,99 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/pact_screen.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/dark_cyber_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/MedievalSharp.ttf" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/dark_fantasy/Window_07.png" id="5_frame"]
+[ext_resource type="Texture2D" path="res://assets/ui/dark_fantasy/Divider_03.png" id="6_divider"]
+[ext_resource type="Texture2D" path="res://assets/ui/dark_fantasy/Button_05.png" id="7_btn_accept"]
+[ext_resource type="Texture2D" path="res://assets/ui/dark_fantasy/Button_01.png" id="8_btn_decline"]
+
+; --- Dark solid panel bg (the frame texture goes on top) ---
+[sub_resource type="StyleBoxFlat" id="panel_bg"]
+bg_color = Color(0.04, 0.03, 0.06, 0.98)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+; --- Accept button (crimson, sits over the button texture) ---
+[sub_resource type="StyleBoxFlat" id="accept_normal"]
+bg_color = Color(0.20, 0.06, 0.06, 0.70)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="accept_hover"]
+bg_color = Color(0.35, 0.08, 0.08, 0.80)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="accept_pressed"]
+bg_color = Color(0.15, 0.04, 0.04, 0.90)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+; --- Decline button (muted, sits over the button texture) ---
+[sub_resource type="StyleBoxFlat" id="decline_normal"]
+bg_color = Color(0.06, 0.06, 0.10, 0.70)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="decline_hover"]
+bg_color = Color(0.12, 0.10, 0.20, 0.80)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="decline_pressed"]
+bg_color = Color(0.06, 0.05, 0.12, 0.90)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+; --- Separator (unused, replaced by divider texture) ---
+[sub_resource type="StyleBoxFlat" id="sep_line"]
+bg_color = Color(0.45, 0.20, 0.20, 0.50)
+content_margin_top = 1.0
+content_margin_bottom = 1.0
 
 [node name="PactScreen" type="Control"]
 layout_mode = 3
@@ -8,6 +101,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource("2")
 script = ExtResource("1")
 
 [node name="Dimmer" type="ColorRect" parent="."]
@@ -15,9 +109,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.15, 0.0, 0.05, 0.85)
+color = Color(0.10, 0.00, 0.03, 0.88)
 mouse_filter = 2
 
+; --- Panel background (dark solid, frame goes on top) ---
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -25,58 +120,137 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = -125.0
-offset_right = 210.0
-offset_bottom = 125.0
+offset_left = -240.0
+offset_top = -160.0
+offset_right = 240.0
+offset_bottom = 160.0
+theme_override_styles/panel = SubResource("panel_bg")
 
-[node name="TitleLabel" type="Label" parent="Panel"]
+; --- DECORATIVE FRAME — subtle ornate border overlay ---
+[node name="FrameOverlay" type="TextureRect" parent="Panel"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 15.0
-offset_right = 200.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+texture = ExtResource("5_frame")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+modulate = Color(0.60, 0.35, 0.25, 0.50)
+
+; --- Content (sits above the frame) ---
+
+; Header label
+[node name="TitleLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = 464.0
+offset_bottom = 50.0
 horizontal_alignment = 1
 text = ">> INFERNAL PACT <<"
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.90, 0.35, 0.25, 1.00)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.80)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 
+; --- Decorative divider texture instead of flat HSeparator ---
+[node name="DividerTop" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 52.0
+offset_right = 440.0
+offset_bottom = 68.0
+texture = ExtResource("6_divider")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+modulate = Color(0.85, 0.55, 0.40, 0.65)
+
+; Pact name
 [node name="PactNameLabel" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 50.0
-offset_right = 200.0
-offset_bottom = 75.0
+layout_mode = 0
+offset_left = 16.0
+offset_top = 72.0
+offset_right = 464.0
+offset_bottom = 96.0
 horizontal_alignment = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.90, 0.40, 0.10, 1.00)
 
+; Description body text
 [node name="DescLabel" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -180.0
-offset_top = 90.0
-offset_right = 180.0
-offset_bottom = 175.0
+layout_mode = 0
+offset_left = 30.0
+offset_top = 102.0
+offset_right = 450.0
+offset_bottom = 210.0
 horizontal_alignment = 1
 autowrap_mode = 3
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.88, 0.82, 0.78, 0.95)
 
+; --- Decorative button texture behind Accept button ---
+[node name="AcceptBtnFrame" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 218.0
+offset_right = 226.0
+offset_bottom = 268.0
+texture = ExtResource("7_btn_accept")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+modulate = Color(0.80, 0.50, 0.40, 0.65)
+
+; Accept button (on top of the texture)
 [node name="AcceptButton" type="Button" parent="Panel"]
-layout_mode = 1
-offset_left = 60.0
-offset_top = 190.0
-offset_right = 190.0
-offset_bottom = 230.0
-text = "Accept"
+layout_mode = 0
+offset_left = 40.0
+offset_top = 222.0
+offset_right = 216.0
+offset_bottom = 264.0
+text = "Accept Pact"
+theme_override_styles/normal = SubResource("accept_normal")
+theme_override_styles/hover = SubResource("accept_hover")
+theme_override_styles/pressed = SubResource("accept_pressed")
+theme_override_colors/font_color = Color(1.00, 0.70, 0.70, 1.00)
+theme_override_colors/font_hover_color = Color(1.00, 0.88, 0.88, 1.00)
+theme_override_font_sizes/font_size = 14
+focus_mode = 0
 
+; --- Decorative button texture behind Decline button ---
+[node name="DeclineBtnFrame" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 254.0
+offset_top = 218.0
+offset_right = 450.0
+offset_bottom = 268.0
+texture = ExtResource("8_btn_decline")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+modulate = Color(0.60, 0.60, 0.70, 0.55)
+
+; Decline button (on top of the texture)
 [node name="DeclineButton" type="Button" parent="Panel"]
-layout_mode = 1
-offset_left = 230.0
-offset_top = 190.0
-offset_right = 360.0
-offset_bottom = 230.0
+layout_mode = 0
+offset_left = 264.0
+offset_top = 222.0
+offset_right = 440.0
+offset_bottom = 264.0
 text = "Decline"
+theme_override_styles/normal = SubResource("decline_normal")
+theme_override_styles/hover = SubResource("decline_hover")
+theme_override_styles/pressed = SubResource("decline_pressed")
+theme_override_colors/font_color = Color(0.80, 0.85, 1.00, 1.00)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 1.00, 1.00)
+theme_override_font_sizes/font_size = 14
+focus_mode = 0

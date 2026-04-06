@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "emp_blast"
+display_name = "EMP Blast"
+description = "Deal 10 damage to ALL enemies. Apply 1 Weak."
+energy_cost = 3
+card_type = 0
+target_type = 2
+damage = 10
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 1
+tags = Array[int]([6, 7])
+gem_sockets = 2

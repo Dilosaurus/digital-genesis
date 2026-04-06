@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/turn_banner.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/combat_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/CinzelDecorative-Regular.ttf" id="3"]
+
+; --- Banner background gradient ------------------------------------------
+[sub_resource type="StyleBoxFlat" id="banner_bg"]
+bg_color = Color(0.04, 0.02, 0.10, 0.0)
+
+[sub_resource type="StyleBoxFlat" id="panel_bg"]
+bg_color = Color(0.04, 0.02, 0.10, 0.82)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+
+; --- Left fade strip -----------------------------------------------------
+[sub_resource type="StyleBoxFlat" id="left_fade"]
+bg_color = Color(0.04, 0.02, 0.10, 0.0)
+
+; --- Right fade strip ----------------------------------------------------
+[sub_resource type="StyleBoxFlat" id="right_fade"]
+bg_color = Color(0.04, 0.02, 0.10, 0.0)
+
+; --- Decorative separator line -------------------------------------------
+[sub_resource type="StyleBoxFlat" id="separator_style"]
+bg_color = Color(0.55, 0.45, 0.90, 0.70)
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+
+; --- Glow border around text area ----------------------------------------
+[sub_resource type="StyleBoxFlat" id="text_border"]
+bg_color = Color(0.0, 0.0, 0.0, 0.0)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
 
 [node name="TurnBanner" type="Control"]
 anchors_preset = 15
@@ -8,19 +47,93 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("1")
+theme = ExtResource("2")
 
-[node name="Panel" type="Panel" parent="."]
+; Full-screen blocker (mouse passthrough)
+[node name="BannerContainer" type="Control" parent="."]
 layout_mode = 0
-offset_left = 1920.0
-offset_top = 80.0
-offset_right = 2320.0
-offset_bottom = 140.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="Panel"]
+; Dark center band — the actual banner strip
+[node name="BandPanel" type="Panel" parent="BannerContainer"]
+layout_mode = 0
+offset_left = -1920.0
+offset_top = 430.0
+offset_right = -1.0
+offset_bottom = 570.0
+theme_override_styles/panel = SubResource("panel_bg")
+mouse_filter = 2
+
+; Left edge vignette (ColorRect fading from transparent to dark)
+[node name="LeftVignette" type="ColorRect" parent="BannerContainer/BandPanel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 80.0
+offset_bottom = 140.0
+color = Color(0.0, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+; Right edge vignette
+[node name="RightVignette" type="ColorRect" parent="BannerContainer/BandPanel"]
+layout_mode = 0
+offset_left = 1840.0
+offset_top = 0.0
+offset_right = 1921.0
+offset_bottom = 140.0
+color = Color(0.0, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+; Decorative top separator line
+[node name="TopLine" type="HSeparator" parent="BannerContainer/BandPanel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1921.0
+offset_bottom = 2.0
+theme_override_styles/separator = SubResource("separator_style")
+mouse_filter = 2
+
+; Decorative bottom separator line
+[node name="BottomLine" type="HSeparator" parent="BannerContainer/BandPanel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 138.0
+offset_right = 1921.0
+offset_bottom = 140.0
+theme_override_styles/separator = SubResource("separator_style")
+mouse_filter = 2
+
+; Main turn text label
+[node name="TurnLabel" type="Label" parent="BannerContainer/BandPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 0.0
+offset_bottom = 120.0
 horizontal_alignment = 1
 vertical_alignment = 1
 text = "YOUR TURN"
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 52
+theme_override_colors/font_color = Color(0.92, 0.88, 0.60, 1.0)
+theme_override_colors/font_shadow_color = Color(0.55, 0.45, 0.90, 0.80)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_as_outline = 0
+mouse_filter = 2
+
+; Sub-decoration line below text
+[node name="DecoLine" type="HSeparator" parent="BannerContainer/BandPanel"]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 100.0
+offset_right = 1240.0
+offset_bottom = 102.0
+theme_override_styles/separator = SubResource("separator_style")
+mouse_filter = 2

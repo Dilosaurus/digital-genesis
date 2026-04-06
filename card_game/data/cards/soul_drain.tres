@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "soul_drain"
+display_name = "Soul Drain"
+description = "Deal 8 damage. Heal 4 HP."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 8
+block = 0
+heal = 4
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 0
+tags = Array[int]([5])
+gem_sockets = 1

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/corrupted_core/corrupted_core.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "corrupted_core"
+display_name = "Corrupted Core"
+description = "+15 Corruption Resistance."
+rarity = 1
+icon = ExtResource("icon_tex")
+corruption_resistance = 15

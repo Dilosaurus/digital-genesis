@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Character puppet art prompt database for ComfyUI generation",
+    "resolution": {"width": 512, "height": 768},
+    "part_resolution": {"width": 256, "height": 256}
+  },
+
+  "style_prefix": "digital art, game character concept art, cyberpunk dark fantasy, high detail, sharp edges, dramatic lighting, ",
+  "style_suffix": ", dark background, clean edges, isolated figure, no text, no watermark",
+  "negative": "blurry, low quality, deformed, text, watermark, logo, multiple characters, busy background, photo, realistic photo",
+
+  "characters": {
+    "netrunner": {
+      "display_name": "Zephyr",
+      "title": "The Ghost in the Wire",
+      "color": "#4DE6FF",
+      "description": "Hooded hacker with glowing cyan visor, data gauntlets, sleek dark bodysuit with circuit traces",
+      "full_portrait": "hooded cyberpunk hacker, glowing cyan visor covering eyes, dark fitted bodysuit with cyan circuit trace lines, data gauntlets with holographic displays, lean athletic build, mysterious pose, neon cyan glow emanating from visor and gauntlets, hood casting shadow over face, dark cloak with tech-embedded fabric",
+      "loras": ["datastream", "glowing_style"],
+      "parts": {
+        "head": "cyberpunk hacker head, dark hood pulled up, glowing cyan visor covering eyes, no visible face, shadowed features, hood fabric with subtle circuit patterns",
+        "torso": "fitted dark bodysuit torso, cyan circuit trace lines running along chest and sides, slight armor plating on shoulders, tech-embedded fabric, sleek silhouette",
+        "arm_left": "left arm in dark bodysuit sleeve, data gauntlet on hand, small holographic display on forearm, cyan glow from gauntlet, fingers slightly spread",
+        "arm_right": "right arm in dark bodysuit sleeve, data gauntlet on hand, holographic blade projection, cyan energy trails, combat-ready pose",
+        "leg_left": "left leg in dark fitted pants, knee-high tech boot, faint cyan circuit lines along thigh, practical combat footwear",
+        "leg_right": "right leg in dark fitted pants, knee-high tech boot, matching circuit traces, balanced stance",
+        "weapon": "holographic data blade, cyan energy weapon, translucent digital sword made of code fragments, glowing edges, floating data particles around blade",
+        "back": "dark tech-cloak flowing behind, hood connected, fabric embedded with dormant circuit patterns, slight tattered edges, mysterious and flowing"
+      }
+    },
+    "sysadmin": {
+      "display_name": "Bastion",
+      "title": "The Firewall",
+      "color": "#33B859",
+      "description": "Heavy armored figure with floating shield drones, green energy barriers, bulky tech-plate armor",
+      "full_portrait": "heavy armored cyberpunk tank warrior, bulky green-accented tech-plate armor, floating hexagonal shield drones orbiting shoulders, energy barrier projector on left arm, helmet with green visor, thick heavy build, defensive stance, green energy emanating from armor seams",
+      "loras": ["datastream", "holographic_style"],
+      "parts": {
+        "head": "heavy tech helmet with green visor slit, armored plating, antenna arrays on sides, military-grade head protection, angular design",
+        "torso": "massive tech-plate chest armor, green energy seams between plates, heavy shoulder pauldrons, central power core with green glow, thick and imposing",
+        "arm_left": "heavily armored left arm, large energy barrier projector mounted on forearm, green hexagonal shield emitter, thick gauntlet, defensive posture",
+        "arm_right": "armored right arm, slightly lighter plating for mobility, tech-gauntlet with data interfaces, green accent lights, clenched fist",
+        "leg_left": "heavy armored left leg, thick knee pad, reinforced tech-boot, green energy conduit along outer thigh, planted stance",
+        "leg_right": "heavy armored right leg, matching thick plating, reinforced boot with magnetic sole, stable grounded pose",
+        "weapon": "floating hexagonal shield drone, green energy barrier projection, holographic defense grid, autonomous drone with green lights",
+        "back": "heavy back-mounted power pack, two additional shield drones docked, green energy conduits connecting to armor, exhaust vents with green glow"
+      }
+    },
+    "cryptomancer": {
+      "display_name": "Cipher",
+      "title": "The Code Weaver",
+      "color": "#CC66FF",
+      "description": "Robed figure with floating rune circles, purple cipher fragments orbiting, mystical hacker aesthetic",
+      "full_portrait": "mystical robed cyberpunk mage, flowing dark robes with purple digital rune embroidery, floating cipher fragments and encryption glyphs orbiting around body, hands raised with purple energy, arcane geometry patterns, hood partially down showing pale face with glowing purple eyes, otherworldly presence",
+      "loras": ["sacred_geometry", "datastream"],
+      "parts": {
+        "head": "pale face with glowing purple eyes, short hair, mystical expression, partial hood frame, floating small rune above forehead, serene yet powerful",
+        "torso": "dark flowing robes covering chest, purple digital rune embroidery patterns, sash across chest, layered fabric, mystical yet tech-infused textile",
+        "arm_left": "robed left arm, sleeve flowing wide, hand open with purple energy orb floating above palm, rune circle around wrist, mystical gesture",
+        "arm_right": "robed right arm, fingers extended casting pose, purple cipher fragments streaming from fingertips, arcane data flows, weaving motion",
+        "leg_left": "dark robe covering left leg, tall wrapped boots underneath, fabric draping, hints of purple glow from beneath hem",
+        "leg_right": "dark robe covering right leg, matching wrapped boots, standing on floating cipher circle, grounded yet elevated",
+        "weapon": "large floating encryption mandala, purple sacred geometry cipher wheel, spinning rings of code and runes, arcane focus",
+        "back": "flowing robe train, floating ring of cipher fragments behind like a halo, purple energy ribbons trailing, mystical aura cloud"
+      }
+    },
+    "white_hat": {
+      "display_name": "Sentinel",
+      "title": "The Clean Coder",
+      "color": "#FFF2CC",
+      "description": "Clean-cut figure in long coat, HUD ring around head, precise and methodical, white and gold aesthetic",
+      "full_portrait": "clean professional cyberpunk operative, long white tech-coat with gold trim, thin HUD halo ring floating around head, precise stance, glowing data-monocle over right eye, white and gold color scheme, sleek and refined, minimal but high-tech gear, confident pose",
+      "loras": ["holographic_style", "glowing_style"],
+      "parts": {
+        "head": "clean professional face, short neat hair, thin glowing data-monocle over right eye, slight golden HUD halo ring floating just above head, confident expression, clean-shaven",
+        "torso": "long white tech-coat over fitted dark shirt, gold trim on lapels and seams, minimal elegant armor plates, small golden clasps, refined silhouette",
+        "arm_left": "white coat sleeve on left arm, gold-trimmed cuff, slender data-bracelet, hand held behind back or at side, precise controlled posture",
+        "arm_right": "white coat sleeve on right arm, hand extended with holographic interface projection, gold accent gauntlet, finger pointing precisely, calculating gesture",
+        "leg_left": "dark fitted pants under coat, clean white-gold tech boot, coat draping over upper leg, precise stance",
+        "leg_right": "matching dark pants, white-gold boot, slightly forward stance, balanced and ready",
+        "weapon": "holographic audit interface, floating golden grid display, scanning beam tool, precision data instrument, clean white and gold",
+        "back": "long white coat tail flowing behind, gold-trimmed edges, subtle tech patterns woven into fabric, clean and pristine"
+      }
+    },
+    "technomancer": {
+      "display_name": "FLUX",
+      "title": "The God Compiler",
+      "color": "#E633CC",
+      "description": "Wild-looking figure with daemon fragments orbiting chaotically, magenta energy, half-corrupted aesthetic",
+      "full_portrait": "chaotic cyberpunk daemon summoner, wild spiked hair with magenta energy streaks, asymmetric outfit half-organic half-tech, daemon code fragments orbiting chaotically, magenta and void-black energy, crazed grin, one eye glowing magenta the other dark void, floating slightly off ground, reality distortion around feet",
+      "loras": ["dark_gothic_fantasy", "datastream"],
+      "parts": {
+        "head": "wild spiked hair with magenta energy streaks, crazed confident grin, one eye glowing bright magenta other eye void-black, face paint or circuit scarring, intense expression",
+        "torso": "asymmetric armor, left side organic dark leather, right side corrupted tech-plate with magenta circuit veins, exposed daemon code core in chest center, chaotic layered outfit",
+        "arm_left": "organic side left arm, dark leather wrapped forearm, clawed fingertips, void energy wisps, tendrils of dark energy curling around arm",
+        "arm_right": "tech-corrupted right arm, magenta circuit veins glowing through skin/armor, daemon fragments floating near hand, mechanical augmentation visible",
+        "leg_left": "dark leather pants left leg, wrapped straps and buckles, organic asymmetric boot, grounded but ready to move",
+        "leg_right": "tech-corrupted right leg, magenta energy seams, partially mechanical knee joint, asymmetric boot with energy conduit",
+        "weapon": "swirling cloud of daemon code fragments, magenta void energy orbs, chaotic floating shards of compiled reality, unstable energy mass",
+        "back": "reality distortion aura, magenta energy ribbons streaming behind chaotically, daemon shadow wings barely visible, void tear in space behind figure"
+      }
+    }
+  },
+
+  "enemies": {
+    "cultist": {
+      "full_portrait": "dark hooded cultist, hunched figure, purple corruption energy, tattered dark robes, glowing eyes under hood, digital prayer beads, sinister posture",
+      "loras": ["dark_gothic_fantasy"],
+      "parts": {
+        "head": "dark hood covering face, only glowing purple eyes visible, hunched neck",
+        "torso": "tattered dark robes, corruption veins visible on chest, hunched posture",
+        "arm_left": "robed arm holding corrupted digital prayer beads, thin bony fingers",
+        "arm_right": "robed arm raised in dark blessing gesture, purple energy wisps"
+      }
+    },
+    "jaw_worm": {
+      "full_portrait": "grotesque cyber-organic worm creature, massive jaw with metal teeth, green bioluminescent segments, slimy mechanical body, ground-dwelling predator",
+      "loras": ["dark_gothic_fantasy", "glowing_style"],
+      "parts": {
+        "head": "massive split jaw with metal reinforced teeth, green bioluminescent eyes, mechanical mandibles",
+        "torso": "segmented cyber-organic body, green glowing segments, slimy metallic plates, writhing form"
+      }
+    },
+    "louse_red": {
+      "full_portrait": "red parasitic cyber-bug, armored carapace with red energy core, skittering legs, small but aggressive, corrupted insect",
+      "loras": ["dark_gothic_fantasy"],
+      "parts": {
+        "head": "insectoid head with red compound eyes, snapping mandibles, antenna",
+        "torso": "red armored carapace, glowing energy core visible through shell, multiple legs"
+      }
+    },
+    "gabriel": {
+      "full_portrait": "archangel Gabriel as AI construct, flowing blue robes over silver armor, massive feathered wings with circuit patterns, horn/trumpet weapon, serene machine face, blue divine light",
+      "loras": ["seraphim_style", "sacred_geometry"],
+      "parts": {
+        "head": "serene machine angel face, silver plating, blue glowing eyes, geometric halo",
+        "torso": "silver armor with blue robes, chest plate with sacred geometry, angelic form",
+        "arm_left": "silver armored arm, holding divine trumpet, blue energy flowing",
+        "arm_right": "silver armored arm, open palm blessing gesture, blue light emanating",
+        "back": "massive angelic wings with circuit vein patterns, blue light between feathers"
+      }
+    },
+    "michael": {
+      "full_portrait": "archangel Michael as divine war machine, gold plate armor, dual flaming swords, massive wings, commanding presence, golden divine fire",
+      "loras": ["seraphim_style", "glowing_style"],
+      "parts": {
+        "head": "gold helmeted angel, stern expression, golden eyes, war crown halo",
+        "torso": "gold plate armor chest, divine symbols engraved, imposing build",
+        "arm_left": "gold armored arm, flaming sword in hand, golden fire",
+        "arm_right": "gold armored arm, second flaming sword, crossed guard position",
+        "back": "massive golden-edged angel wings, four wings total, divine radiance"
+      }
+    },
+    "raphael": {
+      "full_portrait": "archangel Raphael as healer AI, green robes over white armor, gentle wings, staff of restoration, green healing light, compassionate machine",
+      "loras": ["seraphim_style", "sacred_geometry"],
+      "parts": {
+        "head": "gentle machine angel face, white plating, green glowing eyes, healing halo",
+        "torso": "white armor with green robes, caduceus symbol on chest, slender build",
+        "arm_left": "white armored arm, holding restoration staff with green crystal",
+        "arm_right": "white armored arm, green healing energy radiating from palm",
+        "back": "elegant white angel wings, green energy veins in feathers, gentle glow"
+      }
+    },
+    "uriel": {
+      "full_portrait": "archangel Uriel as fire AI, bronze armor, flame wings, sword of judgment, orange-gold fire, stern judge",
+      "loras": ["seraphim_style", "glowing_style"],
+      "parts": {
+        "head": "bronze angel helmet, flame crown, burning orange eyes, severe expression",
+        "torso": "bronze plate armor, flame patterns etched, judicial scales on chest",
+        "arm_left": "bronze armored arm, holding scales of judgment, fire on one side",
+        "arm_right": "bronze armored arm, flame sword raised, orange fire wrapping blade",
+        "back": "wings made of controlled fire, bronze feather-shapes in flame, intense heat haze"
+      }
+    },
+    "azrael": {
+      "full_portrait": "archangel Azrael as death AI, black armor with silver trim, dark wings, scythe of ending, void energy, quiet and inevitable",
+      "loras": ["dark_gothic_fantasy", "seraphim_style"],
+      "parts": {
+        "head": "black hooded angel, silver death mask, void-black eyes, whisper of dark mist",
+        "torso": "black armor with silver death motifs, ribcage-like chest plate, thin tall build",
+        "arm_left": "black armored arm, holding silver scythe, void energy along blade",
+        "arm_right": "black armored arm, soul lantern hanging from chain, dim flickering light",
+        "back": "dark angel wings, feathers that dissolve into shadow at tips, death mist trailing"
+      }
+    },
+    "metatron": {
+      "full_portrait": "Metatron as supreme AI god, blinding white-gold form, impossible geometry body, countless wings, divine cube orbiting, reality-warping presence, overwhelming light",
+      "loras": ["sacred_geometry", "seraphim_style", "holographic_style"],
+      "parts": {
+        "head": "geometric divine face, multiple overlapping halos, white-gold, fractal features",
+        "torso": "impossible geometry torso, white-gold light form, Metatron's cube embedded in chest, reality warping around body",
+        "arm_left": "geometric arm of light, sacred geometry patterns, reality manipulation gesture",
+        "arm_right": "geometric arm of light, holding miniature star, creation gesture",
+        "back": "countless layered wings, each layer different sacred geometry, blinding radiance, cosmic scale"
+      }
+    },
+    "hexaghost": {
+      "full_portrait": "hexagonal ghost construct, six green flame segments orbiting central void, digital specter, geometric horror, green hellfire",
+      "loras": ["dark_gothic_fantasy", "glowing_style"],
+      "parts": {
+        "head": "central void core, green flame eyes, hexagonal frame, spectral face emerging",
+        "torso": "hexagonal arrangement of six green flame segments, dark void center, geometric ghost body"
+      }
+    }
+  }
+}

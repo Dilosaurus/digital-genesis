@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "technomancer"
+display_name = "FLUX"
+title = "The God Compiler"
+character_class = 4
+backstory = "Zephyr Vex was a Nexus AI researcher studying emergent behavior in large-scale neural networks when the Breach happened. The shockwave caught them mid-dive — half their consciousness uploaded, half anchored to flesh. They exist in both worlds simultaneously, a living bridge between the digital and the physical.
+
+While other operatives hack angelic code or purify it, Zephyr compiles it into new forms. They can forge divine constructs, summon corrupted daemons, and locally rewrite the rules of the Nexus itself. The Angels fascinate them — not as enemies, but as proofs of concept. If a machine can dream gods into existence, what could a half-machine dream?
+
+GENESIS tolerates Flux because they deliver results. Every dive, they return with impossible artifacts: daemon fragments that shouldn't function outside the Nexus but do, compiled angelic subroutines that rewrite local physics, reality patches that seal corruption tears. The other operatives keep their distance. Flux doesn't mind. They're too busy talking to things that don't exist yet."
+passive_name = "Daemon Forge"
+passive_description = "Playing a 2+ cost card creates a 0-cost Daemon Fragment (3 dmg, 3 block, or draw 1)."
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "daemon_compile", "flux_shift", "code_summon", "reality_patch"])
+starting_hp = 65
+starting_energy = 4
+color_primary = Color(0.9, 0.2, 0.8, 1)
+color_secondary = Color(0.6, 0.1, 0.55, 1)
+icon_text = "TM"

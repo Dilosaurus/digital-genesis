@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Digital Genesis item art prompt database for ComfyUI batch generation — equipment, gems, and relics",
+    "resolution": {"width": 512, "height": 512},
+    "total_items": 28
+  },
+
+  "style_prefix": "cyberpunk digital item icon, dark background, centered object, detailed illustration, neon glow, holographic sheen, Tron Legacy aesthetic, game icon art, single isolated object, studio lighting",
+  "style_negative": "text, words, letters, numbers, watermark, signature, blurry, low quality, person, character, hand, fingers, face, body, multiple objects, cluttered, background scene, landscape, 3d render, photo, photorealistic, out of frame, cropped",
+
+  "item_types": {
+    "equipment": {
+      "keywords": "cybernetic gear, futuristic equipment, sci-fi armor piece",
+      "slots": {
+        "HEAD": {
+          "keywords": "helmet, headgear, visor, circlet, cranial implant, neural interface",
+          "accent": "#4488FF"
+        },
+        "CHEST": {
+          "keywords": "body armor, chestplate, vest, torso plating, armored jacket",
+          "accent": "#44FF88"
+        },
+        "WEAPON": {
+          "keywords": "weapon, blade, gauntlet, arm-mounted device, combat tool",
+          "accent": "#FF4444"
+        },
+        "ACCESSORY": {
+          "keywords": "amulet, pendant, charm, wrist device, accessory module",
+          "accent": "#FF88FF"
+        }
+      }
+    },
+    "gem": {
+      "keywords": "gemstone, crystal, faceted jewel, translucent, glowing inner core, floating gem, prismatic light refraction",
+      "lora_tags": ["HOLY"]
+    },
+    "relic": {
+      "keywords": "ancient artifact, mystical relic, arcane object, mysterious power source, legendary item",
+      "lora_tags": ["SHADOW", "HOLY"]
+    }
+  },
+
+  "rarity_styles": {
+    "0": {
+      "label": "Common",
+      "keywords": "simple design, worn metal, utilitarian, basic construction, matte finish",
+      "glow": "subtle dim glow, faint luminescence"
+    },
+    "1": {
+      "label": "Uncommon",
+      "keywords": "ornate design, polished surface, detailed engravings, quality craftsmanship, brushed metal",
+      "glow": "moderate cyan glow, soft energy aura, light particles"
+    },
+    "2": {
+      "label": "Rare",
+      "keywords": "legendary design, radiant surface, intricate filigree, pulsing energy veins, masterwork construction",
+      "glow": "intense golden glow, particle effects, energy corona, blazing aura"
+    }
+  },
+
+  "items": {
+    "iron_helm": {
+      "type": "equipment",
+      "slot": "HEAD",
+      "rarity": 0,
+      "display_name": "Iron Helm",
+      "prompt": "rugged iron cyberpunk helmet with basic visor slit, dull metal plating, simple riveted construction, faint blue indicator light"
+    },
+    "holy_circlet": {
+      "type": "equipment",
+      "slot": "HEAD",
+      "rarity": 1,
+      "display_name": "Holy Circlet",
+      "prompt": "ornate golden circlet headband with sacred geometry engravings, divine white light emanating from center gem, angelic tech aesthetic, floating halo element"
+    },
+    "tech_visor": {
+      "type": "equipment",
+      "slot": "HEAD",
+      "rarity": 1,
+      "display_name": "Tech Visor",
+      "prompt": "sleek cyberpunk heads-up display visor, holographic readout projected from lens, green scanning laser, data overlay, circuit board patterns along frame"
+    },
+    "leather_vest": {
+      "type": "equipment",
+      "slot": "CHEST",
+      "rarity": 0,
+      "display_name": "Leather Vest",
+      "prompt": "worn leather tactical vest with reinforced panels, basic ballistic plating, utility pouches, cyberpunk street-level armor, weathered surface"
+    },
+    "blessed_armor": {
+      "type": "equipment",
+      "slot": "CHEST",
+      "rarity": 1,
+      "display_name": "Blessed Armor",
+      "prompt": "white and gold armored chestplate with sacred circuit engravings, divine energy pulsing through armor veins, angelic tech plating, soft golden glow"
+    },
+    "shadow_cloak": {
+      "type": "equipment",
+      "slot": "CHEST",
+      "rarity": 2,
+      "display_name": "Shadow Cloak",
+      "prompt": "flowing dark cloak made of living shadow data, edges dissolving into void particles, purple energy crackling along seams, stealth camouflage tech weave"
+    },
+    "rusty_blade": {
+      "type": "equipment",
+      "slot": "WEAPON",
+      "rarity": 0,
+      "display_name": "Rusty Blade",
+      "prompt": "battered cyberpunk short sword with corroded edge, faint orange energy line along blade, simple hilt with worn grip tape, utilitarian combat weapon"
+    },
+    "flame_gauntlets": {
+      "type": "equipment",
+      "slot": "WEAPON",
+      "rarity": 1,
+      "display_name": "Flame Gauntlets",
+      "prompt": "armored combat gauntlets with built-in flame emitters, orange fire licking from knuckle vents, heat distortion, thermal conduit lines glowing red-orange"
+    },
+    "berserker_gauntlet": {
+      "type": "equipment",
+      "slot": "WEAPON",
+      "rarity": 2,
+      "display_name": "Berserker Gauntlet",
+      "prompt": "massive spiked power gauntlet crackling with crimson berserker energy, oversized knuckle spikes, blood-red energy veins pulsing through dark metal, savage design"
+    },
+    "corrupt_amulet": {
+      "type": "equipment",
+      "slot": "ACCESSORY",
+      "rarity": 2,
+      "display_name": "Corrupt Amulet",
+      "prompt": "dark pendant with swirling void energy trapped in central crystal, corruption tendrils seeping from edges, purple-black energy aura, ominous dark power source"
+    },
+
+    "ruby_of_fury": {
+      "type": "gem",
+      "rarity": 0,
+      "display_name": "Ruby of Fury",
+      "prompt": "brilliant red ruby gemstone with inner fire, faceted cut catching light, warm crimson glow from within, floating with faint ember particles"
+    },
+    "emerald_of_renewal": {
+      "type": "gem",
+      "rarity": 0,
+      "display_name": "Emerald of Renewal",
+      "prompt": "deep green emerald crystal with healing energy swirling inside, soft verdant glow, nature circuit patterns visible within, gentle green light particles"
+    },
+    "sapphire_of_shielding": {
+      "type": "gem",
+      "rarity": 0,
+      "display_name": "Sapphire of Shielding",
+      "prompt": "cool blue sapphire gem with protective energy lattice visible inside, hexagonal shield pattern refracting through facets, steady blue defensive glow"
+    },
+    "topaz_of_wrath": {
+      "type": "gem",
+      "rarity": 0,
+      "display_name": "Topaz of Wrath",
+      "prompt": "blazing yellow-orange topaz gemstone crackling with lightning energy, aggressive inner light, electric arcs dancing across faceted surface, wrathful intensity"
+    },
+    "amethyst_of_fortitude": {
+      "type": "gem",
+      "rarity": 0,
+      "display_name": "Amethyst of Fortitude",
+      "prompt": "rich purple amethyst crystal radiating steady resilient energy, deep violet core glow, sturdy crystalline structure, enduring presence"
+    },
+    "crimson_opal": {
+      "type": "gem",
+      "rarity": 0,
+      "display_name": "Crimson Opal",
+      "prompt": "iridescent crimson opal with shifting red-orange fire patterns inside, opalescent surface shimmer, strength energy pulsing from core"
+    },
+    "obsidian_shard": {
+      "type": "gem",
+      "rarity": 1,
+      "display_name": "Obsidian Shard",
+      "prompt": "jagged obsidian crystal shard with dark void energy trapped inside, sharp angular facets, purple-black inner glow, shadowy power emanating, dangerous edge"
+    },
+    "diamond_of_efficiency": {
+      "type": "gem",
+      "rarity": 1,
+      "display_name": "Diamond of Efficiency",
+      "prompt": "flawless clear diamond with prismatic rainbow light refraction, perfect geometric cut, white-blue energy core, balanced dual-purpose radiance, precision crafted"
+    },
+
+    "vajra": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "Vajra",
+      "prompt": "ancient vajra thunderbolt scepter with cybernetic enhancements, symmetrical prong design, crackling with contained lightning energy, bronze and steel construction"
+    },
+    "oddly_smooth_stone": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "Oddly Smooth Stone",
+      "prompt": "perfectly smooth oval stone with an inexplicable inner shimmer, simple yet uncanny, faint cyan data patterns flowing beneath surface, mysteriously polished"
+    },
+    "blood_vial": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "Blood Vial",
+      "prompt": "small glass vial containing luminous red liquid data, cork sealed with circuitry, gentle healing glow, medical tech aesthetic, crimson fluid swirling"
+    },
+    "burning_blood": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "Burning Blood",
+      "prompt": "ornate vial of blazing red-orange liquid that burns with inner fire, heat distortion around glass, molten data fluid, intense regenerative energy"
+    },
+    "bag_of_prep": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "Bag of Preparation",
+      "prompt": "tactical utility satchel with holographic inventory display, organized compartments glowing with ready equipment, preparedness tech bag, data readout on flap"
+    },
+    "war_paint": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "War Paint",
+      "prompt": "small container of glowing tribal war paint, neon circuit patterns on container surface, crimson luminous pigment, warrior ritual aesthetic"
+    },
+    "anchor": {
+      "type": "relic",
+      "rarity": 1,
+      "display_name": "Anchor",
+      "prompt": "miniature cybernetic anchor artifact with stabilization field, grounding energy waves emanating outward, teal protective aura, anti-corruption ward device"
+    },
+    "horn_cleat": {
+      "type": "relic",
+      "rarity": 1,
+      "display_name": "Horn Cleat",
+      "prompt": "curved horn-shaped metal cleat with defensive energy field projector, blue shield energy crackling between prongs, nautical-tech hybrid design, sturdy construction"
+    },
+    "lantern": {
+      "type": "relic",
+      "rarity": 2,
+      "display_name": "Lantern",
+      "prompt": "ornate cyberpunk lantern radiating intense golden energy light, intricate metalwork housing, blazing power core visible through glass panels, legendary luminosity, energy overflow"
+    },
+    "red_skull": {
+      "type": "relic",
+      "rarity": 2,
+      "display_name": "Red Skull",
+      "prompt": "menacing crimson crystallized skull artifact pulsing with dark power, red energy veins across bone surface, glowing eye sockets, ominous strength aura, corruption ward runes etched into forehead"
+    }
+  }
+}

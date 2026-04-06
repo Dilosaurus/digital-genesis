@@ -1,13 +1,19 @@
 ; Engine configuration file.
 ; It's best edited using the editor UI and not directly,
-; but it can also be edited directly via Claude Code.
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
 
 [application]
 
 config/name="Top-Down RPG"
 config/description="A top-down 2D RPG/adventure built iteratively with Claude Code"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.6")
+config/features=PackedStringArray("4.5")
 config/icon="res://icon.svg"
 
 [display]

@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/recursive_loop/recursive_loop_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "recursive_loop"
 display_name = "Recursive Loop"
 description = "Deal 3 damage 4 times."
@@ -17,3 +19,5 @@ draw = 0
 hits = 4
 apply_vulnerable = 0
 apply_weak = 0
+tags = Array[int]([6])
+gem_sockets = 1

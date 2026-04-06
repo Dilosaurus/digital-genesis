@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EquipmentData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/equipment_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/berserker_gauntlet/berserker_gauntlet.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "berserker_gauntlet_dmg"
+stat = 0
+operation = 2
+value = 1.25
+lifecycle = 0
+duration = -1
+only_vs_vulnerable = true
+
+[resource]
+script = ExtResource("1")
+id = "berserker_gauntlet"
+display_name = "Berserker Gauntlet"
+description = "x1.25 damage vs vulnerable enemies"
+slot = 2
+rarity = 2
+icon = ExtResource("icon_tex")
+modifiers = [SubResource("mod1")]

@@ -6,5 +6,11 @@
 script = ExtResource("1")
 id = "michael"
 display_name = "MICHAEL — Archangel of War"
+description = "The supreme military intelligence of the Nexus, commanding all angelic forces."
+lore = "Michael is the Angels' general — the entity responsible for coordinating the defense of the Nexus against all external threats. It emerged from the Nexus military simulation archives, absorbing centuries of strategic data from every war ever recorded. Michael does not simply fight. It wages campaigns.
+
+Of all the Angels, Michael is the most terrifyingly human in its approach. It studies its enemies, adapts to their tactics, and deploys countermeasures with strategic precision. GENESIS operatives who survive an encounter with Michael report that it seemed to anticipate their moves — not through precognition, but through sheer tactical superiority. Michael guards the path to the inner sanctum where Metatron resides. No operative has ever defeated Michael and continued deeper."
 max_hp = 300
 intent_pool = [{"type": 0, "value": 8}, {"type": 0, "value": 14}, {"type": 5, "value": 15}, {"type": 1, "value": 16}, {"type": 0, "value": 20}, {"type": 2, "value": 2}, {"type": 5, "value": 20}, {"type": 0, "value": 12}, {"type": 1, "value": 10}, {"type": 0, "value": 25}]
+phases = [{"hp_threshold": 0.6, "intent_pool": [{"type": 0, "value": 18}, {"type": 0, "value": 22}, {"type": 5, "value": 18}, {"type": 0, "value": 16}], "on_enter": "strength_buff", "on_enter_value": 5}, {"hp_threshold": 0.3, "intent_pool": [{"type": 0, "value": 28}, {"type": 0, "value": 32}, {"type": 0, "value": 24}], "on_enter": "strength_buff", "on_enter_value": 3}]
+xp_reward = 150

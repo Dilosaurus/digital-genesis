@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "daemon_process"
+display_name = "Daemon Process"
+description = "Gain 2 Strength. Exhaust."
+energy_cost = 2
+card_type = 2
+target_type = 1
+damage = 0
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 0
+exhaust = true
+gain_strength = 2
+tags = Array[int]([6, 5])
+gem_sockets = 1

@@ -7,7 +7,32 @@
       "Bash(\"C:/Program Files/Godot/Godot_v4.6.1-stable_win64.exe\" --path \"E:/godot_games/card_game\" --headless --import)",
       "Bash(\"C:/Program Files/Godot/Godot_v4.6.1-stable_win64.exe\" --path \"E:/godot_games/card_game\" -- --solo)",
       "Bash(echo \"Exit: $?\")",
-      "Bash(grep -A2 \"max_hp\" E:/godot_games/card_game/data/enemies/*.tres)"
+      "Bash(grep -A2 \"max_hp\" E:/godot_games/card_game/data/enemies/*.tres)",
+      "WebSearch",
+      "Read(//e/ComfyUI/**)",
+      "Bash(python -c \"import diffusers; print\\(''diffusers'', diffusers.__version__\\)\")",
+      "Bash(python -c \"import accelerate; print\\(''accelerate'', accelerate.__version__\\)\")",
+      "Bash(python -c \"import cv2; print\\(''cv2'', cv2.__version__\\)\")",
+      "Bash(python -c \"import sklearn; print\\(''sklearn'', sklearn.__version__\\)\")",
+      "Bash(python -m pip install accelerate scikit-learn)",
+      "Bash(python -c \"from rembg import remove; print\\(''rembg OK''\\)\")",
+      "Bash(python -c \"import torch; print\\(''CUDA:'', torch.cuda.is_available\\(\\), torch.cuda.get_device_name\\(0\\)\\)\")",
+      "Bash(python -c \"from segment_anything import sam_model_registry; print\\(''SAM OK''\\)\")",
+      "Bash(python -m pip install segment-anything)",
+      "Bash(find E:/ComfyUI/models -name sam* -o -name SAM*)",
+      "Bash(mkdir -p \"E:/ComfyUI/models/sam\")",
+      "Bash(python -c \":*)",
+      "Bash(python split_puppet.py azrael)",
+      "Bash(python split_puppet.py michael)",
+      "Read(//e/godot_games/balance_dashboard/frontend/**)",
+      "Bash(npm create:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(py -c \":*)",
+      "Bash(py -c \"import json; d=json.load\\(open\\(''E:/godot_games/balance_dashboard/data/relics.json''\\)\\); print\\([r[''rarity''] for r in d]\\)\")",
+      "Bash(curl -s -X POST http://localhost:5000/api/reload)",
+      "Bash(npx tsc:*)",
+      "Bash(curl -s http://localhost:5000/api/graph)",
+      "Bash(python -c \"import tres_writer; import change_log; import export_from_tres; print\\(''All imports OK''\\)\")"
     ]
   }
 }

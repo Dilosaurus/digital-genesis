@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/digital_crown/digital_crown.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "digital_crown"
+display_name = "Digital Crown"
+description = "Start each combat with 2 Strength."
+rarity = 1
+icon = ExtResource("icon_tex")
+start_combat_strength = 2

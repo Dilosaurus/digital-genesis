@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/medic_drone/medic_drone.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "medic_drone"
+display_name = "Medic Drone"
+description = "Heal 10 HP after each combat."
+rarity = 1
+icon = ExtResource("icon_tex")
+heal_on_combat_end = 10

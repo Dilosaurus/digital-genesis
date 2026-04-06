@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/bloodstone_of_sacrifice/bloodstone_of_sacrifice.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "bloodstone_sacrifice_dmg"
+stat = 0
+operation = 1
+value = 0.3
+lifecycle = 3
+duration = -1
+only_when_hp_below_pct = 0.5
+
+[sub_resource type="Resource" id="mod2"]
+script = ExtResource("2")
+id = "bloodstone_sacrifice_block"
+stat = 1
+operation = 1
+value = 0.3
+lifecycle = 3
+duration = -1
+only_when_hp_below_pct = 0.5
+
+[resource]
+script = ExtResource("1")
+id = "bloodstone_of_sacrifice"
+display_name = "Bloodstone of Sacrifice"
+description = "+30% damage and block when below 50% HP"
+rarity = 2
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1"), SubResource("mod2")]

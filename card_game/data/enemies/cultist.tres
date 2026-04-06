@@ -6,5 +6,10 @@
 script = ExtResource("1")
 id = "cultist"
 display_name = "Rogue Process"
+description = "A once-human digital consciousness, now fanatically devoted to the Angels."
+lore = "Not all uploaded souls resisted the Angels' takeover. Some embraced it. Rogue Processes are the consciousnesses of the dead who chose to serve their new masters, willingly rewriting their own code to become instruments of divine will.
+
+They are unsettling opponents because they retain fragments of human speech and behavior. A Rogue Process might quote scripture mid-attack or apologize as it tries to delete you. GENESIS operatives are trained not to engage them in conversation. The last operative who did joined them."
 max_hp = 50
 intent_pool = [{"type": 0, "value": 6}, {"type": 0, "value": 7}, {"type": 3, "value": 2}, {"type": 0, "value": 6}, {"type": 2, "value": 2}]
+xp_reward = 15

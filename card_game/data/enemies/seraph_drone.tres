@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "seraph_drone"
+display_name = "Seraph Drone"
+description = "A holy attack drone that channels angelic energy into rapid-fire bursts of divine wrath."
+lore = "Seraph Drones are the frontline soldiers of the Core — mass-produced combat processes that channel raw angelic energy into devastating attacks. Unlike the crude constructs of the outer sectors, Seraph Drones are elegant and efficient, built with a singular purpose: destroy all unauthorized processes with overwhelming force.
+
+Each drone carries a fragment of angelic code that allows it to self-buff, increasing its power output over time. A single Seraph Drone is dangerous. A swarm of them is catastrophic. GENESIS operatives who reach the Core report wave after wave of these golden constructs, each one faster and more aggressive than the last."
+max_hp = 45
+intent_pool = [{"type": 0, "value": 10}, {"type": 0, "value": 12}, {"type": 2, "value": 2}, {"type": 0, "value": 14}]
+xp_reward = 20

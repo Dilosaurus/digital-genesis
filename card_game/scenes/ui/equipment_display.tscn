@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/equipment_display.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/dark_cyber_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="chip_bg"]
+bg_color = Color(0.07, 0.05, 0.14, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.24, 0.42, 0.60)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+
+[node name="EquipmentDisplay" type="Control"]
+custom_minimum_size = Vector2(600, 28)
+theme = ExtResource("2")
+script = ExtResource("1")
+_font_mono = ExtResource("3")
+
+[node name="EquipContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 28.0
+theme_override_constants/separation = 5

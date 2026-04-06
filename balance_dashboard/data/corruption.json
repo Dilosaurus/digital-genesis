@@ -1,0 +1,227 @@
+{
+  "corrupted": [
+    {
+      "card_id": "strike",
+      "display_name": "Hellfire Strike",
+      "description": "Deal 9 damage. Take 2 damage.",
+      "damage": 9,
+      "self_damage": 2
+    },
+    {
+      "card_id": "defend",
+      "display_name": "Bone Wall",
+      "description": "Gain 8 Block. +3 corruption.",
+      "block": 8,
+      "extra_corruption": 3
+    },
+    {
+      "card_id": "bash",
+      "display_name": "Wrath Hammer",
+      "description": "Deal 14 damage. Apply 3 Vulnerable. Take 4 damage.",
+      "damage": 14,
+      "apply_vulnerable": 3,
+      "self_damage": 4
+    },
+    {
+      "card_id": "twin_strike",
+      "display_name": "Shadow Fork",
+      "description": "Deal 7 damage three times. +2 corruption.",
+      "damage": 7,
+      "hits": 3,
+      "extra_corruption": 2
+    },
+    {
+      "card_id": "iron_wave",
+      "display_name": "Blood Surge",
+      "description": "Deal 8 damage. Gain 8 Block. Take 3 damage.",
+      "damage": 8,
+      "block": 8,
+      "self_damage": 3
+    },
+    {
+      "card_id": "heavy_blade",
+      "display_name": "Doom Blade",
+      "description": "Deal 22 damage. +5 corruption.",
+      "damage": 22,
+      "extra_corruption": 5
+    },
+    {
+      "card_id": "bandage",
+      "display_name": "Dark Mending",
+      "description": "Heal 8 HP. +4 corruption.",
+      "heal": 8,
+      "extra_corruption": 4
+    },
+    {
+      "card_id": "uppercut",
+      "display_name": "Abyssal Strike",
+      "description": "Deal 18 damage. Apply 2 Weak. Take 3 damage.",
+      "damage": 18,
+      "apply_weak": 2,
+      "self_damage": 3
+    }
+  ],
+  "shrine_corrupted": [
+    {
+      "card_id": "strike",
+      "display_name": "Hellstrike",
+      "description": "Deal 12 damage. Take 2 damage.",
+      "upgrades": {
+        "damage": 12
+      },
+      "drawbacks": {
+        "self_damage": 2
+      },
+      "preview": "+4 damage. Take 2 self-damage."
+    },
+    {
+      "card_id": "bash",
+      "display_name": "Demonic Bash",
+      "description": "Deal 16 damage. Apply 3 Vulnerable. Costs 3 energy.",
+      "upgrades": {
+        "damage": 16,
+        "apply_vulnerable": 3
+      },
+      "drawbacks": {
+        "energy_cost": 3
+      },
+      "preview": "+6 damage, +1 Vulnerable. Costs 1 more energy."
+    },
+    {
+      "card_id": "pommel_strike",
+      "display_name": "Skull Crusher",
+      "description": "Deal 14 damage. Draw 2 cards. Generates 3 corruption.",
+      "upgrades": {
+        "damage": 14,
+        "draw": 2
+      },
+      "drawbacks": {
+        "corruption_gain": 3
+      },
+      "preview": "+5 damage, draws 2 cards. Generates 3 corruption on play."
+    },
+    {
+      "card_id": "iron_wave",
+      "display_name": "Blood Wave",
+      "description": "Deal 10 damage. Gain 10 Block. Take 3 damage.",
+      "upgrades": {
+        "damage": 10,
+        "block": 10
+      },
+      "drawbacks": {
+        "self_damage": 3
+      },
+      "preview": "+4 damage, +4 block. Take 3 self-damage."
+    },
+    {
+      "card_id": "cleave",
+      "display_name": "Hellfire Cleave",
+      "description": "Deal 14 damage to ALL enemies. Take 4 damage.",
+      "upgrades": {
+        "damage": 14
+      },
+      "drawbacks": {
+        "self_damage": 4
+      },
+      "preview": "+6 damage to all enemies. Take 4 self-damage."
+    },
+    {
+      "card_id": "heavy_strike",
+      "display_name": "Annihilator",
+      "description": "Deal 22 damage. Exhaust.",
+      "upgrades": {
+        "damage": 22
+      },
+      "drawbacks": {
+        "exhaust": true
+      },
+      "preview": "+8 damage. Exhausts after play (single use)."
+    },
+    {
+      "card_id": "body_slam",
+      "display_name": "Demonic Slam",
+      "description": "Deal damage equal to Block x1.5. Apply 1 Weak. Lose 5 Block after.",
+      "upgrades": {
+        "apply_weak": 1
+      },
+      "drawbacks": {
+        "block": -5
+      },
+      "preview": "Damage x1.5 of current Block, +1 Weak. Lose 5 Block after."
+    },
+    {
+      "card_id": "defend",
+      "display_name": "Dark Barrier",
+      "description": "Gain 9 Block. +2 corruption.",
+      "upgrades": {
+        "block": 9
+      },
+      "drawbacks": {
+        "corruption_gain": 2
+      },
+      "preview": "+4 block. Generates 2 corruption on play."
+    },
+    {
+      "card_id": "shrug_it_off",
+      "display_name": "Unholy Resilience",
+      "description": "Gain 13 Block. Draw 2 cards. +3 corruption.",
+      "upgrades": {
+        "block": 13,
+        "draw": 2
+      },
+      "drawbacks": {
+        "corruption_gain": 3
+      },
+      "preview": "+5 block, draws 2 cards. Generates 3 corruption on play."
+    },
+    {
+      "card_id": "true_grit",
+      "display_name": "Soul Armor",
+      "description": "Gain 12 Block. Exhaust a random card from hand.",
+      "upgrades": {
+        "block": 12
+      },
+      "drawbacks": {
+        "exhaust_random": true
+      },
+      "preview": "+5 block. Exhausts a random card from hand on play."
+    },
+    {
+      "card_id": "battle_trance",
+      "display_name": "Blood Trance",
+      "description": "Draw 5 cards. Costs 1 energy. Take 3 damage.",
+      "upgrades": {
+        "draw": 5
+      },
+      "drawbacks": {
+        "energy_cost": 1,
+        "self_damage": 3
+      },
+      "preview": "Draws 5 cards instead of 3. Costs 1 energy. Take 3 self-damage."
+    },
+    {
+      "card_id": "inflame",
+      "display_name": "Hellfire Infusion",
+      "description": "Gain 4 Strength. +8 corruption.",
+      "upgrades": {
+        "gain_strength": 4
+      },
+      "drawbacks": {
+        "corruption_gain": 8
+      },
+      "preview": "+2 Strength. Generates 8 corruption on play."
+    },
+    {
+      "card_id": "metallicize",
+      "display_name": "Demonic Plates",
+      "description": "At end of turn, gain 7 Block. Take 1 damage at end of turn.",
+      "upgrades": {
+        "block": 7
+      },
+      "drawbacks": {
+        "self_damage": 1
+      },
+      "preview": "+3 block per turn. Take 1 self-damage each turn."
+    }
+  ]
+}

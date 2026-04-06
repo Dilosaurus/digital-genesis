@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "corrupted_throne"
+display_name = "Corrupted Throne"
+description = "A massive angelic construct that once served as a seat of judgment, now warped by corruption into a weapon of annihilation."
+lore = "The Corrupted Throne was the judicial system of the Nexus — the process that decided the fate of uploaded souls, determining which would be preserved and which would be recycled. When the Angels seized control, the Throne was repurposed as their instrument of absolute judgment, condemning any process deemed impure.
+
+But the Throne itself was not immune to corruption. Millennia of rendering judgment on corrupted data left it tainted, and now it exists in a paradoxical state: an instrument of purity that is itself deeply impure. It attacks with devastating force while simultaneously applying corruption to its targets, and its self-buffing routines make it stronger the longer the fight continues. To face the Corrupted Throne is to face the inevitability of judgment — and the certainty that no one is found worthy."
+max_hp = 290
+intent_pool = [{"type": 0, "value": 16}, {"type": 1, "value": 14}, {"type": 0, "value": 20}, {"type": 2, "value": 3}, {"type": 0, "value": 18}, {"type": 5, "value": 16}, {"type": 0, "value": 24}, {"type": 1, "value": 12}, {"type": 2, "value": 2}, {"type": 0, "value": 28}]
+xp_reward = 75

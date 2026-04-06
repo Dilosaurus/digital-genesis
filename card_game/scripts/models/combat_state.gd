@@ -7,6 +7,7 @@ var players: Dictionary = {}  # peer_id -> PlayerState
 var enemies: Array[EnemyState] = []
 var soul_fragments: int = 0
 var boss_absorbed_souls: int = 0
+var turn_damage: Dictionary = {}  # peer_id -> damage dealt this turn
 
 func to_public_dict() -> Dictionary:
 	var players_dict = {}
@@ -24,4 +25,5 @@ func to_public_dict() -> Dictionary:
 		"enemies": enemies_array,
 		"soul_fragments": soul_fragments,
 		"boss_absorbed_souls": boss_absorbed_souls,
+		"turn_damage": turn_damage,
 	}

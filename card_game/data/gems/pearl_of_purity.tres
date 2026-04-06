@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/pearl_of_purity/pearl_of_purity.png" id="icon_tex"]
+
+[sub_resource type="Resource" id="mod1"]
+script = ExtResource("2")
+id = "pearl_purity_resist"
+stat = 8
+operation = 0
+value = 5.0
+lifecycle = 3
+duration = -1
+
+[resource]
+script = ExtResource("1")
+id = "pearl_of_purity"
+display_name = "Pearl of Purity"
+description = "+5 corruption resistance when played"
+rarity = 1
+icon = ExtResource("icon_tex")
+on_play_modifiers = [SubResource("mod1")]

@@ -1,0 +1,73 @@
+[
+  {
+    "id": "anchor",
+    "display_name": "Anchor",
+    "description": "Start combat with 10 Block.",
+    "rarity": "UNCOMMON",
+    "start_combat_block": 10
+  },
+  {
+    "id": "bag_of_prep",
+    "display_name": "Bag of Preparation",
+    "description": "Draw 1 additional card at start.",
+    "rarity": "COMMON",
+    "bonus_draw": 1
+  },
+  {
+    "id": "blood_vial",
+    "display_name": "Blood Vial",
+    "description": "Heal 2 HP after each combat.",
+    "rarity": "COMMON",
+    "heal_on_combat_end": 2
+  },
+  {
+    "id": "burning_blood",
+    "display_name": "Burning Blood",
+    "description": "Heal 6 HP after each combat.",
+    "rarity": "COMMON",
+    "heal_on_combat_end": 6
+  },
+  {
+    "id": "horn_cleat",
+    "display_name": "Horn Cleat",
+    "description": "Start combat with 14 Block.",
+    "rarity": "UNCOMMON",
+    "start_combat_block": 14
+  },
+  {
+    "id": "lantern",
+    "display_name": "Lantern",
+    "description": "+1 max Energy.",
+    "rarity": "RARE",
+    "bonus_max_energy": 1
+  },
+  {
+    "id": "oddly_smooth_stone",
+    "display_name": "Oddly Smooth Stone",
+    "description": "Start with 1 Dexterity.",
+    "rarity": "COMMON",
+    "start_combat_dexterity": 1
+  },
+  {
+    "id": "red_skull",
+    "display_name": "Red Skull",
+    "description": "+3 Strength at combat start. +10 corruption resistance.",
+    "rarity": "RARE",
+    "start_combat_strength": 3,
+    "corruption_resistance": 10
+  },
+  {
+    "id": "vajra",
+    "display_name": "Vajra",
+    "description": "Start each combat with 1 Strength.",
+    "rarity": "COMMON",
+    "start_combat_strength": 1
+  },
+  {
+    "id": "war_paint",
+    "display_name": "War Paint",
+    "description": "+10 max HP.",
+    "rarity": "UNCOMMON",
+    "bonus_max_hp": 10
+  }
+]

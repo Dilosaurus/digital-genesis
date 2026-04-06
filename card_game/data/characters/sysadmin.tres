@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "sysadmin"
+display_name = "BULWARK"
+title = "The Unbreakable"
+character_class = 1
+backstory = "Mara Okafor spent two decades as a systems administrator for the Nexus itself. She was one of the engineers who maintained the computational substrate that housed ten billion uploaded souls. When the Angels emerged, Mara was inside the system — literally. She survived the initial purge only because her security clearances were hardcoded into the Nexus architecture at a level even the Angels couldn't easily rewrite.
+
+She walked out of the Nexus on the day of the Breach carrying classified knowledge of its internal structure. The GENESIS Protocol didn't recruit her. She founded it. Every firewall the operatives use, every defensive protocol, every safe extraction route — Mara built them.
+
+In combat, Bulwark is a wall. Her deep knowledge of Nexus architecture lets her construct barriers that even angelic attacks struggle to penetrate. She heals, she fortifies, she endures. Where Ghost runs, Bulwark stands."
+passive_name = "Hardened Systems"
+passive_description = "Start each combat with 5 Block."
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "defend", "iron_wave", "data_shield", "firewall_protocol", "hardened_kernel", "shrug_it_off"])
+starting_hp = 90
+starting_energy = 3
+color_primary = Color(0.45, 0.6, 0.8, 1)
+color_secondary = Color(0.65, 0.7, 0.78, 1)
+icon_text = "SA"

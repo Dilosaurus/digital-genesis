@@ -1,0 +1,272 @@
+{
+  "last_node_id": 50,
+  "last_link_id": 55,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [50, 50],
+      "size": [315, 98],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [2], "slot_index": 1},
+        {"name": "VAE", "type": "VAE", "links": [10], "slot_index": 2}
+      ],
+      "properties": {"Node name for S&R": "CheckpointLoaderSimple"},
+      "widgets_values": ["sd_xl_base_1.0.safetensors"],
+      "title": "SDXL Checkpoint"
+    },
+    {
+      "id": 10,
+      "type": "LoraLoader",
+      "pos": [50, 220],
+      "size": [315, 126],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 1},
+        {"name": "clip", "type": "CLIP", "link": 2}
+      ],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [3], "slot_index": 0},
+        {"name": "CLIP", "type": "CLIP", "links": [4, 5], "slot_index": 1}
+      ],
+      "properties": {"Node name for S&R": "LoraLoader"},
+      "widgets_values": ["dark_gothic_fantasy_xl_3.01.safetensors", 0.7, 0.7],
+      "title": "Style LoRA (swap for cyberpunk LoRA)"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [450, 50],
+      "size": [420, 164],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": 4}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [6], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["cyberpunk warrior slashing with glowing energy blade, close combat strike, red energy trail, neon-lit dark environment, cyberpunk digital realm, neon glow, circuit patterns, holographic, dark background, detailed illustration, card game art, centered composition, close combat, glowing fists, energy blade, cybernetic arms, melee strike, physical impact, close range, aggressive, violent, dynamic motion, red-orange energy trails, impact moment, red energy glow, orange sparks, attack motion blur"],
+      "title": "Positive Prompt (EDIT PER CARD)"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [450, 280],
+      "size": [420, 164],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": 5}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [7], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["text, words, letters, numbers, frame, border, card border, card frame, UI elements, HUD, watermark, signature, blurry, low quality, deformed hands, extra fingers, mutated, disfigured, bad anatomy, 3d render, photo, photorealistic, out of frame, cropped, multiple views, split image, collage"],
+      "title": "Negative Prompt (DO NOT CHANGE)"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [450, 510],
+      "size": [315, 106],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {"name": "LATENT", "type": "LATENT", "links": [8], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "EmptyLatentImage"},
+      "widgets_values": [512, 768, 1],
+      "title": "Card Resolution (512x768 portrait)"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [900, 50],
+      "size": [315, 262],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 3},
+        {"name": "positive", "type": "CONDITIONING", "link": 6},
+        {"name": "negative", "type": "CONDITIONING", "link": 7},
+        {"name": "latent_image", "type": "LATENT", "link": 8}
+      ],
+      "outputs": [
+        {"name": "LATENT", "type": "LATENT", "links": [9], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [42, "fixed", 35, 7.5, "dpmpp_2m", "karras", 1.0],
+      "title": "Base Art Sampler"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [900, 380],
+      "size": [210, 46],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 9},
+        {"name": "vae", "type": "VAE", "link": 10}
+      ],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [11, 20, 30], "slot_index": 0}
+      ],
+      "properties": {"Node name for S&R": "VAEDecode"},
+      "title": "VAE Decode"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [1250, 50],
+      "size": [315, 270],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 11}
+      ],
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["cards/CARDNAME/CARDNAME_base"],
+      "title": "Save Base Art (rename per card)"
+    },
+
+    {
+      "id": 40,
+      "type": "Note",
+      "pos": [50, 420],
+      "size": [350, 200],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "properties": {"text": ""},
+      "widgets_values": [
+        "=== DIGITAL GENESIS CARD ART TEMPLATE ===\n\nHOW TO USE:\n1. Edit the Positive Prompt node with your card's prompt\n2. Rename the Save Image filename prefix\n3. Change the seed or set to 'randomize'\n4. Queue the prompt\n\nFor batch generation, use the Python CLI:\n  python generate_cards.py --all\n  python generate_cards.py --card strike\n  python generate_cards.py --card strike --corrupt\n\nSee CARD_ART_README.md for full docs."
+      ],
+      "title": "INSTRUCTIONS"
+    },
+
+    {
+      "id": 41,
+      "type": "Note",
+      "pos": [450, 690],
+      "size": [420, 260],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "properties": {"text": ""},
+      "widgets_values": [
+        "=== TAG STYLE REFERENCE ===\n\nMELEE: close combat, glowing fists, energy blade, cybernetic arms\nRANGED: data projectiles, laser beam, thrown code construct\nFIRE: digital fire, burning circuits, thermal overload\nICE: crystallized data, frozen process, blue-white shards\nHOLY: golden light, geometric halo, divine radiance, white energy\nSHADOW: void energy, dark tendrils, purple corruption, glitch distortion\nTECH: circuit board patterns, holographic interface, code terminal\nEXPLOIT: broken firewall, injected code, system breach\nCURSE: visual glitching, chromatic aberration, data decay\n\n=== TYPE MOODS ===\nATTACK: aggressive, violent, dynamic, red-orange energy\nSKILL: protective, technical, precise, blue-cyan energy\nPOWER: sustained, powerful, emanating, golden aura\nCURSE: corrupted, unstable, decaying, purple-black"
+      ],
+      "title": "TAG & TYPE REFERENCE"
+    },
+
+    {
+      "id": 42,
+      "type": "Note",
+      "pos": [900, 690],
+      "size": [350, 200],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "properties": {"text": ""},
+      "widgets_values": [
+        "=== CORRUPTION VARIANTS ===\n\nTo generate corruption variants:\n1. Save the base art first\n2. Load it with a LoadImage node\n3. VAE Encode it\n4. Feed into a KSampler with denoise < 1.0\n\nTier 1 (Tainted):  denoise 0.25\n  + subtle purple edge glow, minor glitch artifacts\n\nTier 2 (Corrupted): denoise 0.45\n  + heavy glitch distortion, purple/black color shift\n\nTier 3 (Demonic):  denoise 0.65\n  + full corruption, red-purple energy cracks, reality breaking\n\nOr use the Python CLI: python generate_cards.py --corrupt"
+      ],
+      "title": "CORRUPTION TIERS"
+    },
+
+    {
+      "id": 43,
+      "type": "Note",
+      "pos": [1250, 380],
+      "size": [315, 200],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "properties": {"text": ""},
+      "widgets_values": [
+        "=== LAYER SPLITTING (POST) ===\n\nAfter generating base art, run KomikoAI\nfor layer separation:\n\nForeground: character/main effect\nMidground: energy particles/aura\nBackground: environment/atmosphere\n\nUse the Python postprocess:\n  python generate_cards.py --card strike --split-layers\n\nOutputs:\n  strike_base_fg.png\n  strike_base_mg.png  \n  strike_base_bg.png"
+      ],
+      "title": "KOMIKO LAYER SPLIT"
+    },
+
+    {
+      "id": 50,
+      "type": "Note",
+      "pos": [50, 680],
+      "size": [350, 280],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "properties": {"text": ""},
+      "widgets_values": [
+        "=== PROMPT TEMPLATE ===\n\n{card_specific_prompt},\ncyberpunk digital realm, neon glow,\ncircuit patterns, holographic,\ndark background,\n{tag_style_keywords},\n{type_mood_keywords},\ndetailed illustration, card game art,\ncentered composition\n\n=== EXAMPLE: holy_wrath ===\ndevastating beam of golden divine light\nraining down from above, angelic geometry\nsurrounding the blast, holy fire and\nsacred energy, wrathful radiance,\ncyberpunk digital realm, neon glow,\ncircuit patterns, holographic,\ndark background,\ndigital fire, burning circuits,\nthermal overload, golden light,\ngeometric halo, divine radiance,\naggressive, violent, dynamic motion,\nred energy glow, orange sparks"
+      ],
+      "title": "PROMPT CONSTRUCTION"
+    }
+  ],
+  "links": [
+    [1, 4, 0, 10, 0, "MODEL"],
+    [2, 4, 1, 10, 1, "CLIP"],
+    [3, 10, 0, 3, 0, "MODEL"],
+    [4, 10, 1, 6, 0, "CLIP"],
+    [5, 10, 1, 7, 0, "CLIP"],
+    [6, 6, 0, 3, 1, "CONDITIONING"],
+    [7, 7, 0, 3, 2, "CONDITIONING"],
+    [8, 5, 0, 3, 3, "LATENT"],
+    [9, 3, 0, 8, 0, "LATENT"],
+    [10, 4, 2, 8, 1, "VAE"],
+    [11, 8, 0, 9, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "Model Loading",
+      "bounding": [30, 10, 360, 380],
+      "color": "#3f789e"
+    },
+    {
+      "title": "Prompt Engineering",
+      "bounding": [430, 10, 440, 660],
+      "color": "#2a363b"
+    },
+    {
+      "title": "Sampling & Output",
+      "bounding": [880, 10, 360, 440],
+      "color": "#8A2BE2"
+    },
+    {
+      "title": "Documentation & Reference",
+      "bounding": [30, 400, 1560, 580],
+      "color": "#444"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [0, 0]
+    },
+    "info": {
+      "name": "Digital Genesis Card Art Template",
+      "author": "Digital Genesis Art Pipeline",
+      "description": "SDXL card art generation workflow for cyberpunk deck-builder. See CARD_ART_README.md for full documentation.",
+      "version": "1.0",
+      "category": "card_art"
+    }
+  }
+}

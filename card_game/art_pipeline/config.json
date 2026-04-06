@@ -1,0 +1,76 @@
+{
+    "comfyui_path": "E:/ComfyUI",
+    "comfyui_url": "http://127.0.0.1:8188",
+    "output_base": "E:/godot_games/card_game/assets",
+    "raw_output": "E:/godot_games/card_game/assets/generated/raw",
+    "processed_output": "E:/godot_games/card_game/assets/generated/processed",
+    "default_model": "sd_xl_base_1.0.safetensors",
+    "default_vae": "",
+    "style_lora": "dark_gothic_fantasy_xl_3.01.safetensors",
+    "style_lora_strength": 0.7,
+    "generation_defaults": {
+        "width": 1024,
+        "height": 1024,
+        "steps": 30,
+        "cfg": 7.0,
+        "sampler": "euler_ancestral",
+        "scheduler": "normal",
+        "denoise": 1.0,
+        "batch_size": 1
+    },
+    "style_prefix": "dark fantasy illustration, heavy black ink lines, crosshatched shadows, grimy muted colors, thick outlines, hand-drawn appearance, parchment texture, ",
+    "style_negative": "3d render, photo, photorealistic, anime, cartoon, bright colors, clean, smooth shading, gradient, blurry, watermark, signature, text, low quality, deformed",
+
+    "card_art_style_prefix": "cyberpunk digital realm, neon glow, circuit patterns, holographic, dark background, detailed illustration, card game art, centered composition, Tron Legacy aesthetic, data streams, glowing edges",
+    "card_art_negative": "text, words, letters, numbers, frame, border, card border, card frame, UI elements, HUD, watermark, signature, blurry, low quality, deformed hands, extra fingers, mutated, disfigured, bad anatomy, 3d render, photo, photorealistic, out of frame, cropped, multiple views, split image, collage",
+    "card_art_lora": "dark_gothic_fantasy_xl_3.01.safetensors",
+    "card_art_lora_strength": 0.7,
+    "card_art_multi_lora_enabled": true,
+    "card_art_multi_lora_note": "When multi-LoRA is enabled, per-tag LoRA stacks from card_prompts.json are used. card_art_lora above is the fallback when no tag LoRAs are installed.",
+    "card_art_defaults": {
+        "width": 512,
+        "height": 768,
+        "steps": 35,
+        "cfg": 7.5,
+        "sampler": "dpmpp_2m",
+        "scheduler": "karras"
+    },
+    "card_art_output": "E:/godot_games/card_game/assets/cards/illustrations",
+
+    "pose_defaults": {
+        "width": 512,
+        "height": 768,
+        "steps": 35,
+        "cfg": 7.5,
+        "ipadapter_strength": 0.45,
+        "sampler": "dpmpp_2m",
+        "scheduler": "karras"
+    },
+    "animation_defaults": {
+        "width": 512,
+        "height": 768,
+        "steps": 35,
+        "cfg": 7.5,
+        "ipadapter_strength": 0.8,
+        "controlnet_strength": 0.85,
+        "sampler": "dpmpp_2m",
+        "scheduler": "karras"
+    },
+    "turnaround_defaults": {
+        "steps": 4,
+        "cfg": 1.0,
+        "note": "Qwen Lightning uses 4 steps with euler sampler"
+    },
+
+    "ipadapter_model": "ip-adapter-plus_sdxl_vit-h.safetensors",
+    "clip_vision_model": "clip_vit_h.safetensors",
+    "controlnet_openpose_model": "OpenPoseXL2.safetensors",
+
+    "qwen_models": {
+        "diffusion": "qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+        "text_encoder": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+        "vae": "qwen_image_vae.safetensors",
+        "lora_angles": "Qwen-Edit-2509-Multiple-angles.safetensors",
+        "lora_lightning": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors"
+    }
+}

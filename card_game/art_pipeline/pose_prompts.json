@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Character pose definitions for multi-pose generation via IPAdapter",
+    "resolution": {"width": 512, "height": 768}
+  },
+
+  "common_poses": {
+    "idle": {
+      "label": "Idle",
+      "prompt_suffix": "standing relaxed, neutral pose, weight on one leg, calm expression, ready stance",
+      "negative_extra": ""
+    },
+    "attack": {
+      "label": "Attack",
+      "prompt_suffix": "aggressive attack pose, striking forward, dynamic action pose, motion blur on weapon, intense expression, mid-swing",
+      "negative_extra": "static, stiff, relaxed"
+    },
+    "hit": {
+      "label": "Hit Reaction",
+      "prompt_suffix": "recoiling from impact, pain expression, knocked back, defensive flinch, taking damage, off-balance",
+      "negative_extra": "calm, relaxed, attacking"
+    },
+    "block": {
+      "label": "Block / Defend",
+      "prompt_suffix": "defensive stance, arms raised blocking, bracing for impact, shield up, guarding pose, protective posture",
+      "negative_extra": "attacking, relaxed, falling"
+    },
+    "cast": {
+      "label": "Cast / Channel",
+      "prompt_suffix": "channeling energy, hands glowing with power, magical casting pose, energy gathering around hands, focused concentration, arcane gesture",
+      "negative_extra": "physical combat, weapon swing"
+    },
+    "death": {
+      "label": "Death / Defeated",
+      "prompt_suffix": "collapsing, falling backward, defeated pose, fading away, dissolving, losing consciousness, crumpling to ground",
+      "negative_extra": "standing, alert, attacking, healthy"
+    },
+    "victory": {
+      "label": "Victory",
+      "prompt_suffix": "triumphant pose, weapon raised high, victorious stance, confident expression, celebrating",
+      "negative_extra": "defeated, damaged, scared"
+    }
+  },
+
+  "character_overrides": {
+    "netrunner": {
+      "attack": "slashing with holographic data blade, cyan energy trail, fast precise strike, assassin-like lunge",
+      "cast": "both hands raised typing in air, holographic screens appearing, hacking gesture, data streams flowing from fingertips",
+      "block": "deploying holographic firewall shield, crouching behind data barrier, cyan defensive grid",
+      "death": "glitching and pixelating, digital dissolution, fragmenting into data particles"
+    },
+    "sysadmin": {
+      "attack": "shield bash forward, heavy armored charge, green energy shockwave from shield, powerful slam",
+      "cast": "deploying shield drones, hexagonal barriers expanding outward, fortifying pose, green energy dome forming",
+      "block": "massive shield raised, hexagonal barrier fully deployed, immovable stance, green energy wall",
+      "death": "armor cracking and falling apart, shield drones sparking and crashing, heavy collapse"
+    },
+    "cryptomancer": {
+      "attack": "hurling purple cipher orb, arcane projectile launch, runes spiraling outward from hands, magical blast",
+      "cast": "floating in air, surrounded by spinning cipher rings, deep meditation, purple mandala expanding, eyes glowing",
+      "block": "cipher shield mandala spinning in front, runic barrier, sacred geometry defense grid",
+      "death": "cipher fragments scattering, robe collapsing empty, dissolving into purple mist and rune fragments"
+    },
+    "white_hat": {
+      "attack": "precise holographic blade thrust, surgical strike, golden data lance, calculated attack",
+      "cast": "golden audit interface expanding, scanning beam sweeping, analytical pose, data monocle projecting",
+      "block": "coat spread wide, golden barrier projected from monocle, pristine shield of light",
+      "death": "halo ring shattering, coat tearing, data monocle cracking, clean collapse"
+    },
+    "technomancer": {
+      "attack": "daemon fragments launching chaotically, magenta void bolts, reality-tearing strike, wild attack",
+      "cast": "reality warping around body, daemon code compiling, void tear opening behind, chaotic energy surge, maniacal grin",
+      "block": "daemon swarm forming chaotic barrier, magenta energy wall of compiled code, unstable shield",
+      "death": "reality snapping back, void imploding, daemons scattering, consumed by own void energy"
+    },
+
+    "cultist": {
+      "attack": "dark energy blast from hands, corrupt prayer beads whipping forward, purple corruption beam",
+      "hit": "stumbling backward, hood falling, corruption flaring",
+      "death": "crumbling to dust, corruption dissipating, robes collapsing empty"
+    },
+    "jaw_worm": {
+      "attack": "massive jaw lunging forward, metal teeth snapping, bioluminescent surge, pouncing strike",
+      "hit": "recoiling, segments contracting, green glow flickering",
+      "death": "segments splitting apart, bioluminescence fading, mechanical parts sparking"
+    },
+    "louse_red": {
+      "attack": "skittering charge, mandibles snapping, red energy core flaring, aggressive lunge",
+      "hit": "flipped onto side, legs flailing, carapace cracking",
+      "death": "carapace shattering, energy core exploding, legs curling inward"
+    },
+    "gabriel": {
+      "attack": "trumpet blast shockwave, divine sound wave, blue energy cone, herald strike",
+      "cast": "floating with wings spread, trumpet raised, divine blue light pouring down, blessing pose",
+      "death": "wings folding, silver plating cracking, blue light fading, graceful descent"
+    },
+    "michael": {
+      "attack": "dual flaming swords cross-slash, golden fire X-strike, explosive divine attack",
+      "cast": "swords raised forming golden cross, divine judgment pose, blinding golden light, four wings spread",
+      "death": "swords extinguishing, golden armor dimming, wings disintegrating, solemn fall"
+    },
+    "raphael": {
+      "attack": "staff sweep with healing turned to harm, green energy reversed to acid, corrupted restoration strike",
+      "cast": "staff glowing, green healing aura expanding, gentle restoration pose, compassionate gesture",
+      "death": "staff breaking, green light scattering like fireflies, peaceful dissolution"
+    },
+    "uriel": {
+      "attack": "flame sword downward judgment strike, scales tipping, fire cascade, wrathful slash",
+      "cast": "scales of judgment floating before, weighing souls, orange fire surrounding, stern arbitration",
+      "death": "flames extinguishing, scales shattering, bronze melting, resigned collapse"
+    },
+    "azrael": {
+      "attack": "scythe sweep, void arc, death energy crescent, silent lethal strike",
+      "cast": "soul lantern opening, death mist expanding, inevitable approach, whispering shadows",
+      "death": "scythe dissolving, death mask cracking, shadow wings dispersing, quiet fading"
+    },
+    "metatron": {
+      "attack": "reality-warping blast, Metatron's cube expanding destructively, divine geometry attack, cosmic energy lance",
+      "cast": "impossible geometry forming, countless wings spreading, miniature star growing, creation pose, reality bending",
+      "death": "geometry collapsing, halos shattering, light imploding, fractal dissolution into cosmic dust"
+    },
+    "hexaghost": {
+      "attack": "six green flame segments converging into blast, hexagonal fire beam, concentrated hellfire",
+      "hit": "segments scattering, flame flickering, void core pulsing erratically",
+      "death": "segments extinguishing one by one, central void collapsing, final green flash"
+    }
+  },
+
+  "enemy_default_poses": ["idle", "attack", "hit", "death"],
+  "player_default_poses": ["idle", "attack", "hit", "block", "cast", "death"]
+}

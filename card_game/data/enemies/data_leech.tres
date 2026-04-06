@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "data_leech"
+display_name = "Data Leech"
+description = "A parasitic subroutine that drains energy from active processes to fuel its own growth."
+lore = "Data Leeches evolved in the corrupted sectors of the Rift — the unstable boundary between the Nexus proper and the void beyond. They are not truly alive, but they behave like living parasites: latching onto active processes, siphoning computational resources, and leaving their hosts weakened and sluggish.
+
+GENESIS operatives dread Data Leeches not for their damage output, which is moderate, but for their ability to drain energy mid-combat. A Leech that attaches successfully can reduce an operative's combat efficiency by half. They hunt in the data streams between sectors, and the deeper into the Rift you go, the larger and more aggressive they become."
+max_hp = 40
+intent_pool = [{"type": 0, "value": 8}, {"type": 5, "value": 10}, {"type": 0, "value": 10}, {"type": 3, "value": 2}]
+xp_reward = 15

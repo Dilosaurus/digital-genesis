@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://dc51xbwiqf650"]
+
+[ext_resource type="Texture2D" uid="uid://c4jc4kp8v4uul" path="res://assets/enemies/boss/michael/parts/cape.png" id="cape"]
+[ext_resource type="Texture2D" uid="uid://dqr7y64cdut46" path="res://assets/enemies/boss/michael/parts/chest_plate.png" id="chest_plate"]
+[ext_resource type="Texture2D" uid="uid://dfkl4pru1brw1" path="res://assets/enemies/boss/michael/parts/head.png" id="head"]
+[ext_resource type="Texture2D" uid="uid://c4fsqu4xoeqxt" path="res://assets/enemies/boss/michael/parts/leg_left.png" id="leg_left"]
+[ext_resource type="Texture2D" uid="uid://bfbpj5q7nf3v6" path="res://assets/enemies/boss/michael/parts/leg_right.png" id="leg_right"]
+[ext_resource type="Texture2D" uid="uid://bis3mef8skq8x" path="res://assets/enemies/boss/michael/parts/leg_skirt.png" id="leg_skirt"]
+[ext_resource type="Script" uid="uid://tcmeq2r87l8a" path="res://scripts/enemies/michael_puppet.gd" id="script"]
+[ext_resource type="Texture2D" uid="uid://ch4oba3b2aolv" path="res://assets/enemies/boss/michael/parts/shoulder_left.png" id="shoulder_l"]
+[ext_resource type="Texture2D" uid="uid://c8exnjojl26qq" path="res://assets/enemies/boss/michael/parts/shoulder_right.png" id="shoulder_r"]
+[ext_resource type="Texture2D" uid="uid://2gyp127roar1" path="res://assets/enemies/boss/michael/parts/sword_left.png" id="sword_l"]
+[ext_resource type="Texture2D" uid="uid://bhvxs5bgkj0qa" path="res://assets/enemies/boss/michael/parts/sword_right.png" id="sword_r"]
+[ext_resource type="Texture2D" uid="uid://c770dbeq8bo24" path="res://assets/enemies/boss/michael/parts/torso.png" id="torso"]
+[ext_resource type="Texture2D" uid="uid://c2mmtdhbp4x5" path="res://assets/enemies/boss/michael/parts/upper_arm_left.png" id="upper_arm_l"]
+[ext_resource type="Texture2D" uid="uid://dcy41ud71u3kg" path="res://assets/enemies/boss/michael/parts/upper_leg_left.png" id="upper_leg_l"]
+[ext_resource type="Texture2D" uid="uid://b82qc1nxmajwy" path="res://assets/enemies/boss/michael/parts/upper_leg_right.png" id="upper_leg_r"]
+[ext_resource type="Texture2D" uid="uid://143mxfxo7s8" path="res://assets/enemies/boss/michael/parts/wing_inner_left.png" id="wing_inner_l"]
+[ext_resource type="Texture2D" uid="uid://cayviidjw1oii" path="res://assets/enemies/boss/michael/parts/wing_inner_right.png" id="wing_inner_r"]
+[ext_resource type="Texture2D" uid="uid://tcoda42cvwi0" path="res://assets/enemies/boss/michael/parts/wing_left.png" id="wing_l"]
+[ext_resource type="Texture2D" uid="uid://bpdivdw2aloj1" path="res://assets/enemies/boss/michael/parts/wing_right.png" id="wing_r"]
+
+[node name="MichaelPuppet" type="Node2D" unique_id=1848075412]
+scale = Vector2(1.06, 1.06)
+script = ExtResource("script")
+
+[node name="Cape" type="Sprite2D" parent="." unique_id=1733266851]
+z_index = -3
+position = Vector2(-12.941229, 22.352936)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("cape")
+offset = Vector2(0, 60)
+
+[node name="UpperLegLeft" type="Sprite2D" parent="." unique_id=1550833060]
+z_index = -1
+position = Vector2(-54.41177, 123.82363)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("upper_leg_l")
+offset = Vector2(0, 40)
+
+[node name="LegLeft" type="Sprite2D" parent="UpperLegLeft" unique_id=1989843885]
+position = Vector2(0.029369354, 109.147095)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("leg_left")
+offset = Vector2(4.6765137, 80.852905)
+
+[node name="UpperLegRight" type="Sprite2D" parent="." unique_id=138086895]
+z_index = -1
+position = Vector2(60.882362, 122.64712)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("upper_leg_r")
+offset = Vector2(0, 40)
+
+[node name="LegRight" type="Sprite2D" parent="UpperLegRight" unique_id=392216760]
+position = Vector2(0.029388428, 112.67651)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("leg_right")
+offset = Vector2(-2.3823242, 77.32349)
+
+[node name="LegSkirt" type="Sprite2D" parent="." unique_id=413308616]
+position = Vector2(5.882362, 50.588318)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("leg_skirt")
+offset = Vector2(-14.147095, 107.32349)
+
+[node name="Torso" type="Sprite2D" parent="." unique_id=634813420]
+position = Vector2(7.1525574e-07, -37.647064)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("torso")
+
+[node name="ChestPlate" type="Sprite2D" parent="Torso" unique_id=1113398051]
+position = Vector2(-1.7762184e-05, -85.882355)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("chest_plate")
+
+[node name="Head" type="Sprite2D" parent="Torso" unique_id=2041755118]
+z_index = 2
+position = Vector2(-1.1764704, -221.17648)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("head")
+offset = Vector2(0, -20)
+
+[node name="ShoulderLeft" type="Sprite2D" parent="Torso" unique_id=1650876650]
+position = Vector2(-82.35294, -141.17647)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("shoulder_r")
+offset = Vector2(-20, 0)
+
+[node name="UpperArmLeft" type="Sprite2D" parent="Torso/ShoulderLeft" unique_id=1755693934]
+z_index = -1
+position = Vector2(8.235294, -8.235298)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("upper_arm_l")
+offset = Vector2(-30, 50)
+
+[node name="SwordLeft" type="Sprite2D" parent="Torso/ShoulderLeft/UpperArmLeft" unique_id=606321508]
+z_index = 2
+position = Vector2(-60.000046, 118.82355)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("sword_l")
+offset = Vector2(-78.82349, 137.64703)
+flip_h = true
+
+[node name="ShoulderRight" type="Sprite2D" parent="Torso" unique_id=1656557076]
+z_index = 2
+position = Vector2(79.99999, -141.17648)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("shoulder_l")
+offset = Vector2(20, 0)
+
+[node name="UpperArmRight" type="Sprite2D" parent="Torso/ShoulderRight" unique_id=454416738]
+z_index = -1
+position = Vector2(0, 4.705879)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("upper_arm_l")
+offset = Vector2(30, 50)
+flip_h = true
+
+[node name="SwordRight" type="Sprite2D" parent="Torso/ShoulderRight/UpperArmRight" unique_id=915376379]
+z_index = 2
+position = Vector2(63.52945, 111.764694)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("sword_r")
+offset = Vector2(78.82349, 118.82355)
+flip_h = true
+
+[node name="WingInnerLeft" type="Sprite2D" parent="Torso" unique_id=1394051748]
+z_index = -2
+position = Vector2(-65.8823, -138.82352)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("wing_inner_l")
+offset = Vector2(-34.705933, 46.47058)
+
+[node name="WingInnerRight" type="Sprite2D" parent="Torso" unique_id=1785021514]
+z_index = -2
+position = Vector2(67.05893, -134.11761)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("wing_inner_r")
+offset = Vector2(40.588135, 35.882324)
+
+[node name="WingLeft" type="Sprite2D" parent="Torso" unique_id=758006459]
+z_index = -3
+position = Vector2(-49.411808, -177.64702)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("wing_l")
+offset = Vector2(-114.20593, 104.55878)
+
+[node name="WingRight" type="Sprite2D" parent="Torso" unique_id=543301489]
+z_index = -3
+position = Vector2(36.47042, -185.88235)
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("wing_r")
+offset = Vector2(122.26465, 116.32355)

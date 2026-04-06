@@ -16,6 +16,9 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 	# Deduct energy
 	player.energy -= card.energy_cost
 
+	# Activate gem modifiers for this card (CARD_PLAY lifecycle)
+	GemSystem.activate_gems_for_card(player, card.id)
+
 	# Check for corrupted card overrides
 	var c_overrides = {}
 	if CardCorruption.should_corrupt(card.id, player.corruption_tier):
@@ -25,52 +28,47 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 	var effective_damage = c_overrides.get("damage", card.damage)
 	if card.id == "body_slam":
 		effective_damage = player.block
-	if effective_damage > 0:
-		effective_damage += player.strength
 	var effective_hits = c_overrides.get("hits", card.hits)
 	var effective_block = c_overrides.get("block", card.block)
-	if effective_block > 0:
-		effective_block += player.dexterity
 	var effective_heal = c_overrides.get("heal", card.heal)
 	var effective_vuln = c_overrides.get("apply_vulnerable", card.apply_vulnerable)
 	var effective_weak = c_overrides.get("apply_weak", card.apply_weak)
 
-	# Apply damage
+	# Damage — fully resolved through StatResolver (strength, corruption,
+	# pact, equipment, gems, vulnerable, weak all handled in pipeline)
 	if effective_damage > 0 and target:
-		var total_damage = 0
-		for hit_i in effective_hits:
-			var dmg = effective_damage
-			# Corruption damage bonus
-			dmg = int(dmg * CorruptionSystem.get_damage_multiplier(player))
-			# Pact damage boost
-			dmg = int(dmg * PactSystem.get_pact_damage_multiplier(player))
-			# Vulnerable: target takes 50% more damage
-			if target.vulnerable > 0:
-				dmg = int(dmg * 1.5)
-			# Weak: player deals 25% less damage
-			if player.weak > 0:
-				dmg = int(dmg * 0.75)
-			# Apply through block
-			if target.block > 0:
-				var blocked = mini(dmg, target.block)
-				target.block -= blocked
-				dmg -= blocked
-			target.current_hp -= dmg
-			total_damage += dmg
-		target.current_hp = maxi(target.current_hp, 0)
-		result["damage_dealt"] = total_damage
-		# Track total damage dealt in run stats
-		if GameManager.is_run_active():
-			GameManager.current_run.total_damage_dealt += total_damage
+		if target.shielded:
+			# Boss shield absorbs all damage — no HP change
+			result["damage_dealt"] = 0
+		else:
+			var total_damage = 0
+			for hit_i in effective_hits:
+				var dmg = StatResolver.resolve_damage(effective_damage, player, target, card)
+				# Marked enemy takes +50% damage from all sources
+				if target.marked > 0:
+					dmg = int(dmg * 1.5)
+				# Apply through block
+				if target.block > 0:
+					var blocked = mini(dmg, target.block)
+					target.block -= blocked
+					dmg -= blocked
+				target.current_hp -= dmg
+				total_damage += dmg
+			target.current_hp = maxi(target.current_hp, 0)
+			result["damage_dealt"] = total_damage
+			# Track total damage dealt in run stats
+			if GameManager.is_run_active():
+				GameManager.current_run.total_damage_dealt += total_damage
 
-	# Apply block
+	# Block — fully resolved through StatResolver (dexterity, equipment, gems)
 	if effective_block > 0:
-		player.block += effective_block
-		result["block_gained"] = effective_block
+		var final_block = StatResolver.resolve_block(effective_block, player, card)
+		player.block += final_block
+		result["block_gained"] = final_block
 
-	# Apply heal (affected by Pride sin penalty)
+	# Heal — fully resolved through StatResolver (sin penalty, equipment, gems)
 	if effective_heal > 0:
-		var heal_amount = int(effective_heal * SinSystem.get_heal_multiplier(player))
+		var heal_amount = StatResolver.resolve_healing(effective_heal, player, card)
 		var actual_heal = mini(heal_amount, player.max_hp - player.current_hp)
 		player.current_hp += actual_heal
 		result["heal_amount"] = actual_heal
@@ -94,5 +92,23 @@ static func resolve(card: CardData, player: PlayerState, target: EnemyState) -> 
 	if card.gain_dexterity > 0:
 		player.dexterity += card.gain_dexterity
 		result["dexterity_gained"] = card.gain_dexterity
+
+	# Deactivate gem modifiers
+	GemSystem.deactivate_gems(player)
+
+	# Set cooldown if card has one
+	CooldownTracker.set_cooldown(player, card.id)
+
+	# Party effect flags (processed by CombatEngine after resolve)
+	result["party_heal"] = card.party_heal
+	result["party_draw"] = card.party_draw
+	result["party_damage"] = card.party_damage
+	result["share_block"] = card.share_block
+	result["transfer_mana"] = card.transfer_mana
+	result["mark_target"] = card.mark_target
+
+	# Revival flags (processed by CombatEngine._process_revive)
+	result["revive_ally"] = card.revive_ally
+	result["revive_hp"] = card.revive_hp
 
 	return result

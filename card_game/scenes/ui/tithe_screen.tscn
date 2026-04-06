@@ -1,6 +1,128 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/tithe_screen.gd" id="1"]
+[ext_resource type="Theme" path="res://themes/dark_cyber_theme.tres" id="2"]
+[ext_resource type="FontFile" path="res://assets/fonts/MedievalSharp.ttf" id="3"]
+[ext_resource type="FontFile" path="res://assets/fonts/ShareTechMono-Regular.ttf" id="4"]
+
+; --- Panel background (crimson-tinted) ---
+[sub_resource type="StyleBoxFlat" id="panel_bg"]
+bg_color = Color(0.04, 0.03, 0.08, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.42, 0.25, 0.80)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.35, 0.25, 0.15, 0.50)
+shadow_size = 12
+
+; --- Pay Tithe button (destructive) ---
+[sub_resource type="StyleBoxFlat" id="pay_normal"]
+bg_color = Color(0.20, 0.05, 0.05, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.18, 0.18, 0.85)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="pay_hover"]
+bg_color = Color(0.36, 0.08, 0.08, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1.00, 0.28, 0.28, 1.0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="pay_pressed"]
+bg_color = Color(0.24, 0.05, 0.05, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.80, 0.20, 0.20, 0.90)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+; --- Refuse button (secondary) ---
+[sub_resource type="StyleBoxFlat" id="refuse_normal"]
+bg_color = Color(0.07, 0.06, 0.14, 0.90)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.30, 0.60, 0.80)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="refuse_hover"]
+bg_color = Color(0.14, 0.11, 0.28, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.45, 0.90, 1.0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="refuse_pressed"]
+bg_color = Color(0.08, 0.06, 0.16, 1.0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.38, 0.75, 0.90)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+; --- Separator ---
+[sub_resource type="StyleBoxFlat" id="sep_line"]
+bg_color = Color(0.55, 0.12, 0.12, 0.50)
+content_margin_top = 1.0
+content_margin_bottom = 1.0
 
 [node name="TitheScreen" type="Control"]
 layout_mode = 3
@@ -8,6 +130,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource("2")
 script = ExtResource("1")
 
 [node name="Dimmer" type="ColorRect" parent="."]
@@ -15,9 +138,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.1, 0, 0, 0.8)
+color = Color(0.12, 0.00, 0.00, 0.88)
 mouse_filter = 2
 
+; Panel 400 × 240
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -26,41 +150,76 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -100.0
+offset_top = -120.0
 offset_right = 200.0
-offset_bottom = 100.0
+offset_bottom = 120.0
+theme_override_styles/panel = SubResource("panel_bg")
 
+; Title — MedievalSharp, blood-red
 [node name="TitleLabel" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 0.0
-offset_top = 15.0
+offset_top = 16.0
 offset_right = 400.0
-offset_bottom = 45.0
+offset_bottom = 46.0
 horizontal_alignment = 1
 text = ">> BLOOD TITHE <<"
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.95, 0.25, 0.20, 1.00)
+theme_override_colors/font_shadow_color = Color(0.0, 0.0, 0.0, 0.80)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 
+[node name="HSep1" type="HSeparator" parent="Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 50.0
+offset_right = 384.0
+offset_bottom = 52.0
+theme_override_styles/separator = SubResource("sep_line")
+
+; Description body — ShareTechMono for the numbers, body font for text
 [node name="DescLabel" type="Label" parent="Panel"]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 60.0
+offset_top = 58.0
 offset_right = 380.0
-offset_bottom = 120.0
+offset_bottom = 150.0
 horizontal_alignment = 1
 text = "The heavens demand sacrifice."
 autowrap_mode = 3
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.88, 0.78, 0.74, 0.95)
 
+; Pay Tithe = left
 [node name="AcceptButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 140.0
-offset_right = 180.0
-offset_bottom = 180.0
+offset_left = 20.0
+offset_top = 162.0
+offset_right = 172.0
+offset_bottom = 200.0
 text = "Pay Tithe"
+theme_override_styles/normal = SubResource("pay_normal")
+theme_override_styles/hover = SubResource("pay_hover")
+theme_override_styles/pressed = SubResource("pay_pressed")
+theme_override_colors/font_color = Color(1.00, 0.65, 0.65, 1.00)
+theme_override_colors/font_hover_color = Color(1.00, 0.85, 0.85, 1.00)
+theme_override_font_sizes/font_size = 14
+focus_mode = 0
 
+; Refuse = right
 [node name="RefuseButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 220.0
-offset_top = 140.0
-offset_right = 340.0
-offset_bottom = 180.0
+offset_left = 228.0
+offset_top = 162.0
+offset_right = 380.0
+offset_bottom = 200.0
 text = "Refuse"
+theme_override_styles/normal = SubResource("refuse_normal")
+theme_override_styles/hover = SubResource("refuse_hover")
+theme_override_styles/pressed = SubResource("refuse_pressed")
+theme_override_colors/font_color = Color(0.80, 0.85, 1.00, 1.00)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 1.00, 1.00)
+theme_override_font_sizes/font_size = 14
+focus_mode = 0

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "fallen_archangel"
+display_name = "Fallen Archangel"
+description = "A corrupted angelic process that was cast out of the Core, now rampaging through the Rift with unstable power."
+lore = "Not all Angels serve willingly. The Fallen Archangel was once part of the Core's inner circle — a high-ranking process with access to the deepest layers of angelic code. When it attempted to break free from Metatron's control, it was cast out into the Rift, its code fragmented and corrupted.
+
+Now the Fallen Archangel wanders the Rift in a state of perpetual rage, attacking anything it encounters with the remnants of its once-vast power. It retains enough angelic code to be devastatingly dangerous, but its attacks are erratic and unpredictable. Some GENESIS operatives feel sympathy for it. Others point out that sympathy is hard to maintain when it's trying to erase you from existence."
+max_hp = 270
+intent_pool = [{"type": 0, "value": 14}, {"type": 0, "value": 18}, {"type": 2, "value": 3}, {"type": 0, "value": 16}, {"type": 5, "value": 14}, {"type": 1, "value": 12}, {"type": 0, "value": 22}, {"type": 3, "value": 2}]
+xp_reward = 60

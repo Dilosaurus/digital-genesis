@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/dark_compile/dark_compile_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "dark_compile"
+display_name = "Dark Compile"
+description = "Deal 8 damage. +10 corruption."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 8
+block = 0
+heal = 0
+draw = 0
+hits = 1
+apply_vulnerable = 0
+apply_weak = 0
+corruption_gain = 10
+tags = Array[int]([5, 7])
+gem_sockets = 1
