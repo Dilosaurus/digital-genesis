@@ -25,15 +25,17 @@ export function MarkdownPage({ body, accentColor }: Props) {
   const components: Components = {
     h1: ({ children }) => (
       <h1
-        className="mt-14 mb-6"
+        className="mt-10 md:mt-14 mb-5 md:mb-6"
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(2.6rem, 6vw, 5rem)',
+          fontSize: 'clamp(1.9rem, 8vw, 5rem)',
           lineHeight: 0.95,
-          letterSpacing: '0.05em',
+          letterSpacing: '0.04em',
           color: 'var(--bone)',
           fontWeight: 600,
           textTransform: 'uppercase',
+          wordBreak: 'break-word',
+          overflowWrap: 'anywhere',
         }}
       >
         {children}
@@ -41,26 +43,29 @@ export function MarkdownPage({ body, accentColor }: Props) {
     ),
     h2: ({ children }) => (
       <h2
-        className="mt-14 mb-5 flex items-baseline gap-4"
+        className="mt-10 md:mt-14 mb-4 md:mb-5 flex items-baseline gap-3 md:gap-4"
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(1.8rem, 3.2vw, 2.6rem)',
+          fontSize: 'clamp(1.4rem, 5.4vw, 2.6rem)',
           lineHeight: 1,
-          letterSpacing: '0.1em',
+          letterSpacing: '0.08em',
           color: accentColor ?? 'var(--oxidized-gold)',
           fontWeight: 600,
           textTransform: 'uppercase',
+          wordBreak: 'break-word',
+          overflowWrap: 'anywhere',
         }}
       >
         <span
           aria-hidden
+          className="shrink-0"
           style={{
             display: 'inline-block',
-            width: 36,
+            width: 24,
             borderTop: `2px solid ${accentColor ?? 'var(--oxidized-gold)'}`,
           }}
         />
-        {children}
+        <span className="min-w-0">{children}</span>
       </h2>
     ),
     h3: ({ children }) => (
@@ -82,11 +87,13 @@ export function MarkdownPage({ body, accentColor }: Props) {
       <p
         style={{
           fontFamily: 'var(--font-body)',
-          fontSize: 19,
-          lineHeight: 1.62,
+          fontSize: 'clamp(16px, 4.4vw, 19px)',
+          lineHeight: 1.6,
           color: 'var(--ink)',
           marginBottom: '1.4em',
           maxWidth: '66ch',
+          wordBreak: 'break-word',
+          overflowWrap: 'anywhere',
         }}
       >
         {children}
@@ -94,15 +101,17 @@ export function MarkdownPage({ body, accentColor }: Props) {
     ),
     blockquote: ({ children }) => (
       <blockquote
-        className="my-8 py-2 pl-8 pr-6"
+        className="my-6 md:my-8 py-2 pl-5 md:pl-8 pr-4 md:pr-6"
         style={{
           borderLeft: '3px double var(--burnt-brass)',
           fontFamily: 'var(--font-body)',
           fontStyle: 'italic',
-          fontSize: 'clamp(1.15rem, 1.8vw, 1.4rem)',
+          fontSize: 'clamp(1.05rem, 3.6vw, 1.4rem)',
           lineHeight: 1.4,
           color: 'var(--halo)',
           maxWidth: '60ch',
+          wordBreak: 'break-word',
+          overflowWrap: 'anywhere',
         }}
       >
         {children}
@@ -148,10 +157,12 @@ export function MarkdownPage({ body, accentColor }: Props) {
         style={{
           listStyle: 'none',
           fontFamily: 'var(--font-body)',
-          fontSize: 17,
+          fontSize: 'clamp(15px, 4vw, 17px)',
           color: 'var(--bone-dim)',
           lineHeight: 1.55,
           maxWidth: '66ch',
+          wordBreak: 'break-word',
+          overflowWrap: 'anywhere',
         }}
       >
         {children}
@@ -164,10 +175,12 @@ export function MarkdownPage({ body, accentColor }: Props) {
           listStyle: 'none',
           counterReset: 'item',
           fontFamily: 'var(--font-body)',
-          fontSize: 17,
+          fontSize: 'clamp(15px, 4vw, 17px)',
           color: 'var(--bone-dim)',
           lineHeight: 1.55,
           maxWidth: '66ch',
+          wordBreak: 'break-word',
+          overflowWrap: 'anywhere',
         }}
       >
         {children}
@@ -200,7 +213,7 @@ export function MarkdownPage({ body, accentColor }: Props) {
   }
 
   return (
-    <div className="manuscript-page max-w-[clamp(60ch,70vw,80ch)]">
+    <div className="manuscript-page min-w-0 w-full max-w-full md:max-w-[clamp(60ch,70vw,80ch)]">
       <ReactMarkdown components={components}>{body}</ReactMarkdown>
     </div>
   )
