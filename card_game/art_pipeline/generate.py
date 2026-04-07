@@ -1,5 +1,5 @@
 """
-Digital Genesis Art Asset Generator
+deus.exe Art Asset Generator
 Main CLI tool for generating game art via ComfyUI.
 
 Usage:
@@ -372,7 +372,7 @@ def list_assets(category=None):
 
 def main():
     if len(sys.argv) < 2:
-        print("Digital Genesis Art Pipeline")
+        print("deus.exe Art Pipeline")
         print("=" * 40)
         print("\nUsage:")
         print("  python generate.py <category> <key>     Generate single asset")

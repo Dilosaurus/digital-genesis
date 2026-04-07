@@ -226,7 +226,7 @@ theme_override_constants/separation = 8
 
 [node name="TitleLabel" type="Label" parent="ContentRoot/MainColumn/TitleBlock"]
 layout_mode = 2
-text = "DIGITAL GENESIS"
+text = "deus.exe"
 horizontal_alignment = 1
 theme_override_fonts/font = ExtResource("3_font_title")
 theme_override_font_sizes/font_size = 54
@@ -431,7 +431,7 @@ offset_left = -160.0
 offset_top = -28.0
 offset_right = -10.0
 offset_bottom = -8.0
-text = "v0.6  |  Digital Genesis"
+text = "v0.6  |  deus.exe"
 horizontal_alignment = 2
 theme_override_fonts/font = ExtResource("5_font_mono")
 theme_override_font_sizes/font_size = 10

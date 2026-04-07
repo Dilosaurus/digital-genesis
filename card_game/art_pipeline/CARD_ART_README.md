@@ -1,4 +1,4 @@
-# Digital Genesis Card Art Pipeline
+# deus.exe Card Art Pipeline
 
 Batch-generates card art for all 49 cards using ComfyUI + SDXL, with **multi-LoRA tag-based style stacking**, card-type accent moods, corruption tier overlays, and KomikoAI layer splitting.
 

@@ -1,0 +1,234 @@
+# ===========================================================================
+# deus.exe // codex — auto-deploy to Cloud Run on push to master
+#
+# What this workflow does:
+#   1. Checks out the repo (with enough history for the changelog cache).
+#   2. Pre-generates the changelog cache from `git log` so the backend
+#      doesn't need `git` or `.git` in the container.
+#   3. Authenticates to GCP using a service account JSON key stored as a
+#      repository secret (GCP_SA_KEY).
+#   4. Writes a tailored .dockerignore + .gcloudignore (the stale
+#      Flask-era ignore files in the repo exclude exactly the files the
+#      new parser needs — we override for the deploy and don't commit).
+#   5. Submits the source tree to Cloud Build + Cloud Run.
+#   6. Comments the deployed URL on the commit.
+#
+# Setup: see balance_dashboard/DEPLOY.md for the one-time service account
+# + repo secret setup. After that, every push to master that touches the
+# paths below triggers a deploy.
+# ===========================================================================
+
+name: deploy codex
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'balance_dashboard/**'
+      - 'card_game/data/**'
+      - 'card_game/scripts/data/**'
+      - 'card_game/scripts/systems/**'
+      - 'card_game/themes/**'
+      - 'card_game/resources/**'
+      - 'card_game/assets/cards/**'
+      - 'card_game/assets/items/**'
+      - '.github/workflows/deploy-codex.yml'
+  workflow_dispatch:  # allow manual runs from the GitHub Actions tab
+
+concurrency:
+  # Only one deploy at a time. If a new push arrives, cancel the in-flight
+  # run (Cloud Run keeps the old revision live until the new one is healthy).
+  group: deploy-codex
+  cancel-in-progress: true
+
+env:
+  SERVICE_NAME: balance-dashboard
+  REGION: us-central1
+  MEMORY: 1Gi
+  CPU: '1'
+
+jobs:
+  deploy:
+    name: Build & deploy to Cloud Run
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # ─── Checkout with history ─────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # We need enough history to generate the changelog cache. 500
+          # commits is plenty for a project this size.
+          fetch-depth: 500
+
+      # ─── Generate the changelog cache ──────────────────────────────
+      # Must match _LOG_FORMAT in backend/app/services/git.py EXACTLY.
+      - name: Generate changelog cache
+        run: |
+          mkdir -p balance_dashboard/backend/.cache
+          git log -200 --format='%h<<<DEUS_FIELD>>>%H<<<DEUS_FIELD>>>%s<<<DEUS_FIELD>>>%b<<<DEUS_FIELD>>>%an<<<DEUS_FIELD>>>%aI<<<DEUS_FIELD>>>%as<<<DEUS_COMMIT_END>>>' \
+            > balance_dashboard/backend/.cache/changelog.txt
+          echo "wrote $(wc -l < balance_dashboard/backend/.cache/changelog.txt) lines, $(du -h balance_dashboard/backend/.cache/changelog.txt | cut -f1)"
+
+      # ─── Write build-context ignore files ─────────────────────────
+      # The repo's existing .dockerignore / .gcloudignore are Flask-era
+      # and exclude card_game/data/ + card_game/scripts/ — which are
+      # exactly what the new parser reads. We override them for the
+      # duration of the job (CI is ephemeral so nothing is committed).
+      - name: Write tailored ignore files
+        run: |
+          cat > .dockerignore <<'EOF'
+          # Version control
+          .git
+          .gitignore
+          .gitattributes
+          .claude
+          .cursor
+          .vscode
+          .idea
+          .github
+
+          # Python runtime
+          **/__pycache__
+          **/*.pyc
+          **/*.pyo
+          **/.pytest_cache
+          **/.venv
+          **/venv
+          **/*.egg-info
+
+          # Node
+          **/node_modules
+          balance_dashboard/frontend/dist
+          balance_dashboard/frontend/.vite
+
+          # Godot engine + cache
+          .godot
+          **/*.import
+          **/*.tres.uid
+          **/*.gdshader.uid
+          **/*.gd.uid
+
+          # Root-level Godot project — separate from card_game/
+          /project.godot
+          /default_env.tres
+          /icon.svg
+          /icon.svg.import
+          /scenes
+          /scripts
+          /sprites
+          /assets
+
+          # Old Flask-era backend files
+          balance_dashboard/backend/app.py
+          balance_dashboard/backend/data_loader.py
+          balance_dashboard/backend/graph_builder.py
+          balance_dashboard/backend/simulator.py
+          balance_dashboard/backend/tres_writer.py
+          balance_dashboard/backend/export_from_tres.py
+          balance_dashboard/backend/requirements.txt
+          balance_dashboard/data
+          balance_dashboard/backups
+
+          # card_game — include only what the parser reads
+          card_game/art_pipeline
+          card_game/scenes
+          card_game/shaders
+          card_game/tests
+          card_game/addons
+          card_game/downloaded-packs
+          card_game/.godot
+          card_game/default_bus_layout.tres
+          card_game/*.png
+          card_game/*.png.import
+
+          # card_game/assets subdirs we don't need (cards + items only)
+          card_game/assets/sfx
+          card_game/assets/music
+          card_game/assets/models
+          card_game/assets/backgrounds
+          card_game/assets/ui
+          card_game/assets/fonts
+          card_game/assets/enemies
+          card_game/assets/characters
+          card_game/assets/cc0_characters
+          card_game/assets/generated
+          card_game/assets/kenney_roguelike
+          card_game/assets/icons
+          card_game/assets/player
+          card_game/assets/relics
+          card_game/assets/DOWNLOAD_GUIDE.md
+
+          # Old root Dockerfile (Flask-era)
+          /Dockerfile
+
+          # Top-level docs
+          /README.md
+          /CHANGELOG.md
+          /LICENSE
+          /LICENSE.md
+          card_game/*.md
+          balance_dashboard/*.md
+
+          # Misc OS / editor
+          **/.DS_Store
+          **/Thumbs.db
+          **/*.swp
+          **/*.bak
+
+          # IMPORTANT: keep the pre-generated changelog cache
+          !balance_dashboard/backend/.cache
+          !balance_dashboard/backend/.cache/changelog.txt
+          EOF
+          cp .dockerignore .gcloudignore
+
+      # ─── Authenticate to GCP ──────────────────────────────────────
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      # ─── Deploy ───────────────────────────────────────────────────
+      - name: Deploy to Cloud Run
+        id: deploy
+        run: |
+          gcloud run deploy "$SERVICE_NAME" \
+            --source . \
+            --dockerfile balance_dashboard/Dockerfile \
+            --region "$REGION" \
+            --allow-unauthenticated \
+            --port 8080 \
+            --memory "$MEMORY" \
+            --cpu "$CPU" \
+            --min-instances 0 \
+            --max-instances 3 \
+            --timeout 300 \
+            --quiet
+
+          # Capture the URL for downstream steps / commit comment
+          URL=$(gcloud run services describe "$SERVICE_NAME" \
+            --region "$REGION" \
+            --format='value(status.url)')
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "::notice title=Deployed::$URL"
+
+      # ─── Summary ──────────────────────────────────────────────────
+      - name: Write job summary
+        if: always()
+        run: |
+          {
+            echo "## deus.exe // codex deploy"
+            echo ""
+            echo "| field | value |"
+            echo "|---|---|"
+            echo "| service | \`$SERVICE_NAME\` |"
+            echo "| region | \`$REGION\` |"
+            echo "| revision | \`$GITHUB_SHA\` |"
+            if [[ -n "${{ steps.deploy.outputs.url }}" ]]; then
+              echo "| url | ${{ steps.deploy.outputs.url }} |"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

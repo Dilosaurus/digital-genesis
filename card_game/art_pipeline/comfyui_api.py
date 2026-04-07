@@ -1,5 +1,5 @@
 """
-ComfyUI API Client for Digital Genesis Art Pipeline
+ComfyUI API Client for deus.exe Art Pipeline
 Sends workflow prompts to ComfyUI server and retrieves generated images.
 """
 

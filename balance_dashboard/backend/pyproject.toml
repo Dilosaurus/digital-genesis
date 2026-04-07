@@ -1,0 +1,29 @@
+[project]
+name = "deus-exe-codex-backend"
+version = "0.1.0"
+description = "FastAPI backend for the deus.exe // codex game bible. Reads .tres files from the Godot project as source of truth."
+requires-python = ">=3.11"
+
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.9.0",
+    # Phase 7 — draft layer
+    "sqlmodel>=0.0.22",
+    # Phase 9 — auth (deferred but listed so we install once)
+    "python-multipart>=0.0.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "httpx>=0.28.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+exclude = ["tests*"]

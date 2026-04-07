@@ -1,5 +1,5 @@
 ## ui_constants.gd
-## Centralised color, font, and layout constants for the Digital Genesis UI.
+## Centralised color, font, and layout constants for the deus.exe UI.
 ## All hardcoded values scattered across scenes should eventually reference this file.
 class_name UIConstants
 

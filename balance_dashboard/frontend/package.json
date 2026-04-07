@@ -1,7 +1,7 @@
 {
-  "name": "frontend",
+  "name": "deus-exe-codex",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,10 +12,13 @@
   "dependencies": {
     "@dagrejs/dagre": "^3.0.0",
     "@tailwindcss/vite": "^4.2.2",
+    "@tanstack/react-query": "^5.62.0",
     "@tanstack/react-table": "^8.21.3",
     "@xyflow/react": "^12.10.2",
+    "motion": "^11.15.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^7.14.0",
     "tailwindcss": "^4.2.2",
     "zustand": "^5.0.12"

@@ -1,68 +1,51 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AppLayout } from './components/Layout/AppLayout'
-import Overview from './pages/Overview'
-import Tables from './pages/Tables'
-import Graph from './pages/Graph'
-import Simulator from './pages/Simulator'
-import CardGallery from './pages/CardGallery'
-import ItemGallery from './pages/ItemGallery'
+import { Frame } from './components/shell/Frame'
+import { Vision } from './pages/Vision'
+import { Stub } from './pages/Stub'
+import { CodexCards } from './pages/CodexCards'
+import { CardDetail } from './pages/CardDetail'
+import { CodexGems } from './pages/CodexGems'
+import { CodexRelics } from './pages/CodexRelics'
+import { CodexEquipment } from './pages/CodexEquipment'
+import { CodexEnemies } from './pages/CodexEnemies'
+import { Characters } from './pages/Characters'
+import { CharacterDetail } from './pages/CharacterDetail'
+import { Lore } from './pages/Lore'
+import { Depths } from './pages/Depths'
+import { Mechanics } from './pages/Mechanics'
+import { Changelog } from './pages/Changelog'
+import { Roadmap } from './pages/Roadmap'
+import { Decisions } from './pages/Decisions'
 
-// ---------------------------------------------------------------------------
-// Placeholder page — shown until real page components are built in Phase 2
-// ---------------------------------------------------------------------------
+// ─── deus.exe // codex — router ───────────────────────────────────────────
 
-interface PlaceholderPageProps {
-  title: string
-}
-
-function PlaceholderPage({ title }: PlaceholderPageProps) {
-  return (
-    <div className="flex flex-col items-center justify-center flex-1 gap-4 p-12 text-center">
-      <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-8 h-8 text-purple-400"
-          aria-hidden
-        >
-          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-          <path d="M2 17l10 5 10-5" />
-          <path d="M2 12l10 5 10-5" />
-        </svg>
-      </div>
-      <h1 className="text-2xl font-semibold text-gray-100">{title}</h1>
-      <p className="text-gray-500 max-w-sm text-sm">
-        This page will be implemented in Phase 2. The routing, layout, types,
-        hooks, and simulator utilities are ready.
-      </p>
-    </div>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// App root with React Router
-// ---------------------------------------------------------------------------
-
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<Overview />} />
-          <Route path="tables" element={<Tables />} />
-          <Route path="gallery" element={<CardGallery />} />
-          <Route path="items" element={<ItemGallery />} />
-          <Route path="graph" element={<Graph />} />
-          <Route path="simulator" element={<Simulator />} />
+        <Route element={<Frame />}>
+          <Route index element={<Vision />} />
+          <Route path="lore" element={<Lore />} />
+          <Route path="characters" element={<Characters />} />
+          <Route path="characters/:id" element={<CharacterDetail />} />
+          <Route path="depths" element={<Depths />} />
+          <Route path="mechanics" element={<Mechanics />} />
+          <Route path="codex/cards" element={<CodexCards />} />
+          <Route path="codex/cards/:id" element={<CardDetail />} />
+          <Route path="codex/gems" element={<CodexGems />} />
+          <Route path="codex/relics" element={<CodexRelics />} />
+          <Route path="codex/equipment" element={<CodexEquipment />} />
+          <Route path="codex/enemies" element={<CodexEnemies />} />
+          <Route path="roadmap" element={<Roadmap />} />
+          <Route path="changelog" element={<Changelog />} />
+          <Route path="decisions" element={<Decisions />} />
+          <Route path="lab/tables" element={<Stub />} />
+          <Route path="lab/simulator" element={<Stub />} />
+          <Route path="lab/graph" element={<Stub />} />
+          <Route path="drafts" element={<Stub />} />
+          <Route path="*" element={<Stub />} />
         </Route>
       </Routes>
     </BrowserRouter>
   )
 }
-
-export default App

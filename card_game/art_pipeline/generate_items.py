@@ -1,5 +1,5 @@
 """
-Digital Genesis Item Art Batch Generator
+deus.exe Item Art Batch Generator
 CLI tool for generating equipment, gem, and relic art via ComfyUI API.
 
 Usage:
@@ -73,7 +73,7 @@ def list_items(item_prompts: dict):
         by_type[itype].append((iid, data))
 
     print(f"\n{'='*60}")
-    print(f"  Digital Genesis Item Art — {len(items)} Items")
+    print(f"  deus.exe Item Art — {len(items)} Items")
     print(f"{'='*60}\n")
 
     for itype in ["equipment", "gem", "relic"]:
@@ -130,7 +130,7 @@ def generate_item(client, item_id: str, seed: int,
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Digital Genesis Item Art Batch Generator",
+        description="deus.exe Item Art Batch Generator",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -211,7 +211,7 @@ def main():
 
     # Summary
     print(f"\n{'='*60}")
-    print(f"  Digital Genesis Item Art Generator")
+    print(f"  deus.exe Item Art Generator")
     print(f"{'='*60}")
     print(f"  Items:  {len(item_ids)} images")
     print(f"  Output: {output_dir}")

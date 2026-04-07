@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "2.0",
-    "description": "Digital Genesis card art prompt database for ComfyUI batch generation with multi-LoRA tag system",
+    "description": "deus.exe card art prompt database for ComfyUI batch generation with multi-LoRA tag system",
     "resolution": {"width": 512, "height": 768},
     "total_cards": 55
   },

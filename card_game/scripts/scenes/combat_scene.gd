@@ -7,28 +7,23 @@ const RewardScreenScene = preload("res://scenes/ui/reward_screen.tscn")
 const RelicRewardScreenScene = preload("res://scenes/ui/relic_reward_screen.tscn")
 const RelicDisplayScene = preload("res://scenes/ui/relic_display.tscn")
 const HackChallengeScene = preload("res://scenes/ui/hack_challenge.tscn")
-const CorruptionMeterScene = preload("res://scenes/ui/corruption_meter.tscn")
-const SinDisplayScene = preload("res://scenes/ui/sin_display.tscn")
 const DeathsDoorOverlayScene = preload("res://scenes/ui/deaths_door_overlay.tscn")
-const SoulDisplayScene = preload("res://scenes/ui/soul_display.tscn")
 const TitheScreenScene = preload("res://scenes/ui/tithe_screen.tscn")
 const PactScreenScene = preload("res://scenes/ui/pact_screen.tscn")
 const CombatLogScene = preload("res://scenes/ui/combat_log.tscn")
 const TurnBannerScene = preload("res://scenes/ui/turn_banner.tscn")
 const RunSummaryScreenScene = preload("res://scenes/ui/run_summary_screen.tscn")
-const ResourceOrbScene = preload("res://scenes/ui/resource_orb.tscn")
 const EquipmentRewardScreenScene = preload("res://scenes/ui/equipment_reward_screen.tscn")
 const GemRewardScreenScene = preload("res://scenes/ui/gem_reward_screen.tscn")
+const Combat3DStageScene = preload("res://scenes/combat/combat_3d_stage.tscn")
 
 @onready var enemy_area: Control = $ShakeContainer/EnemyArea
 @onready var hand_display = $HandDisplay
 @onready var player_boards: HBoxContainer = $ShakeContainer/PlayerBoards
 @onready var end_turn_btn: Button = $HUD/EndTurnButton
 @onready var turn_label: Label = $HUD/TurnLabel
-@onready var _old_deck_panel: Control = $HUD/DeckPanel
-@onready var _old_discard_panel: Control = $HUD/DiscardPanel
-var deck_count_label: Label = null  # Created dynamically in _create_ui_elements
-var discard_count_label: Label = null  # Created dynamically in _create_ui_elements
+@onready var deck_count_label: Label = $DeckPill/Label
+@onready var discard_count_label: Label = $DiscardPill/Label
 @onready var result_panel: Panel = $HUD/ResultPanel
 @onready var result_label: Label = $HUD/ResultPanel/ResultLabel
 @onready var continue_btn: Button = $HUD/ResultPanel/ContinueButton
@@ -47,22 +42,22 @@ var reward_screen = null
 var relic_reward_screen = null
 var relic_display = null
 var hack_challenge = null
-var corruption_meter = null
-var sin_display = null
+@onready var corruption_meter = $CorruptionMeter
+@onready var sin_display = $SinDisplay
 var deaths_door_overlay = null
-var soul_display = null
+@onready var soul_display = $SoulDisplay
 var tithe_screen = null
 var pact_screen = null
 var combat_log = null
 var turn_banner = null
 var run_summary_screen = null
-var hp_orb = null
-var mana_orb = null
-var hp_number: Label = null
-var mp_number: Label = null
-var block_display: Label = null
+@onready var hp_orb = $HPOrb
+@onready var mana_orb = $ManaOrb
+@onready var hp_number: Label = $HPNumber
+@onready var mp_number: Label = $MPNumber
+@onready var block_display: Label = $BlockDisplay
 var player_status_float: Control = null
-var _local_dmg_anchor: Control = null  # Visible anchor for local player damage numbers (near HP orb)
+@onready var _local_dmg_anchor: Control = $LocalDmgAnchor  # Visible anchor for local player damage numbers (near HP orb)
 var _ally_bar_nodes: Dictionary = {}  # peer_id -> Control (compact ally bars for remote players)
 
 var _vote_overlay: VoteOverlay = null
@@ -201,7 +196,14 @@ func _play_encounter_intro(node_type: String) -> void:
 		"elite":
 			SFXManager.play_elite_intro()
 
+## Sandbox enemy picker. Set DEBUG_SANDBOX_ENEMY to a specific enemy id
+## (e.g. "michael", "gabriel") to force every F6 of combat_scene.tscn to
+## fight that enemy. Empty string = random from the pool.
+const DEBUG_SANDBOX_ENEMY: String = ""
+
 func _pick_random_enemy() -> String:
+	if DEBUG_SANDBOX_ENEMY != "":
+		return DEBUG_SANDBOX_ENEMY
 	var enemies = ["seraph_drone", "jaw_worm", "cultist", "louse_red", "hexaghost", "quantum_ghost"]
 	return enemies[randi() % enemies.size()]
 
@@ -785,7 +787,7 @@ func _show_victory_screen() -> void:
 	vbox.add_child(spacer)
 
 	var sub := Label.new()
-	sub.text = "DIGITAL GENESIS COMPLETE"
+	sub.text = "deus.exe COMPLETE"
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	sub.add_theme_font_size_override("font_size", 24)
 	sub.add_theme_color_override("font_color", Color(0.85, 0.85, 1.0))
@@ -844,12 +846,6 @@ func _server_end_turn() -> void:
 # === UI Element Creation ===
 
 func _create_ui_elements_from_engine() -> void:
-	# Hide old scene-based deck/discard panels (replaced by styled pills)
-	if _old_deck_panel:
-		_old_deck_panel.visible = false
-	if _old_discard_panel:
-		_old_discard_panel.visible = false
-
 	var enemy_count = engine.state.enemies.size()
 	for i in enemy_count:
 		var ed = EnemyDisplayScene.instantiate()
@@ -900,25 +896,9 @@ func _create_ui_elements_from_engine() -> void:
 	_spawn_player_puppet_3d()
 
 	# Player status is shown via the orbs — no floating panel needed
-
-	# Top-left: corruption meter only (sin/souls hidden until relevant)
-	corruption_meter = CorruptionMeterScene.instantiate()
-	add_child(corruption_meter)
-	corruption_meter.position = Vector2(8, 4)
-	corruption_meter.scale = Vector2(0.7, 0.7)
-
-	# Sin and soul displays — hidden by default, shown when values > 0
-	sin_display = SinDisplayScene.instantiate()
-	add_child(sin_display)
-	sin_display.position = Vector2(8, 34)
-	sin_display.scale = Vector2(0.65, 0.65)
-	sin_display.visible = false  # Shown when sin > 0
-
-	soul_display = SoulDisplayScene.instantiate()
-	add_child(soul_display)
-	soul_display.position = Vector2(8, 58)
-	soul_display.scale = Vector2(0.65, 0.65)
-	soul_display.visible = false  # Shown when souls > 0
+	# Note: corruption_meter, sin_display, soul_display, hp_orb, mana_orb,
+	# hp_number, mp_number, block_display, DeckPill, DiscardPill, LocalDmgAnchor
+	# all live in combat_scene.tscn as static nodes (visible in the editor).
 
 	deaths_door_overlay = DeathsDoorOverlayScene.instantiate()
 	add_child(deaths_door_overlay)
@@ -939,77 +919,6 @@ func _create_ui_elements_from_engine() -> void:
 	# Turn banner (fullscreen overlay)
 	turn_banner = TurnBannerScene.instantiate()
 	add_child(turn_banner)
-
-	# ── Resource Orbs (bottom corners, clean layout) ──────────────
-	hp_orb = ResourceOrbScene.instantiate()
-	hp_orb.orb_color = Color(0.75, 0.08, 0.08)
-	hp_orb.label_text = "HP"
-	hp_orb.position = Vector2(10, 830)
-	hp_orb.scale = Vector2(2.6, 2.6)
-	add_child(hp_orb)
-
-	# HP number sits INSIDE the orb area — no duplicate below
-	hp_number = Label.new()
-	hp_number.name = "HPNumber"
-	hp_number.text = "80/80"
-	hp_number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hp_number.position = Vector2(10, 1040)
-	hp_number.size = Vector2(210, 30)
-	hp_number.add_theme_font_size_override("font_size", 16)
-	hp_number.add_theme_color_override("font_color", Color(0.9, 0.75, 0.75))
-	hp_number.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 1.0))
-	hp_number.add_theme_constant_override("shadow_offset_x", 1)
-	hp_number.add_theme_constant_override("shadow_offset_y", 1)
-	hp_number.visible = false  # Orb itself shows the fill level — number is backup
-	add_child(hp_number)
-
-	mana_orb = ResourceOrbScene.instantiate()
-	mana_orb.orb_color = Color(0.08, 0.25, 0.85)
-	mana_orb.label_text = "MP"
-	mana_orb.position = Vector2(1700, 830)
-	mana_orb.scale = Vector2(2.6, 2.6)
-	add_child(mana_orb)
-
-	mp_number = Label.new()
-	mp_number.name = "MPNumber"
-	mp_number.text = "10/10"
-	mp_number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	mp_number.position = Vector2(1700, 1040)
-	mp_number.size = Vector2(210, 30)
-	mp_number.add_theme_font_size_override("font_size", 16)
-	mp_number.add_theme_color_override("font_color", Color(0.75, 0.75, 0.9))
-	mp_number.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 1.0))
-	mp_number.add_theme_constant_override("shadow_offset_x", 1)
-	mp_number.add_theme_constant_override("shadow_offset_y", 1)
-	mp_number.visible = false
-	add_child(mp_number)
-
-	# Block display — compact, next to HP orb
-	block_display = Label.new()
-	block_display.position = Vector2(220, 900)
-	block_display.size = Vector2(100, 28)
-	block_display.add_theme_font_size_override("font_size", 18)
-	block_display.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
-	block_display.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.95))
-	block_display.add_theme_constant_override("shadow_offset_x", 1)
-	block_display.add_theme_constant_override("shadow_offset_y", 1)
-	block_display.visible = false
-	add_child(block_display)
-
-	_local_dmg_anchor = Control.new()
-	_local_dmg_anchor.name = "LocalDmgAnchor"
-	_local_dmg_anchor.position = Vector2(110, 840)
-	_local_dmg_anchor.size = Vector2(120, 60)
-	add_child(_local_dmg_anchor)
-
-	# ── Deck / Discard — small pills tucked next to orbs ──────────
-	var deck_bg = _make_hud_pill(Vector2(220, 960), "Deck: 0", Color(0.4, 0.6, 0.85))
-	add_child(deck_bg)
-	deck_count_label = deck_bg.get_node("Label")
-
-	var discard_bg = _make_hud_pill(Vector2(1580, 960), "Discard: 0", Color(0.7, 0.4, 0.4))
-	add_child(discard_bg)
-	discard_count_label = discard_bg.get_node("Label")
 
 	# Relic display (top-right of HUD, below deck count)
 	if GameManager.is_run_active() and GameManager.current_run.relics.size() > 0:
@@ -1697,34 +1606,6 @@ func _resolve_boss_vote(mechanic_name: String, ctx: VoteSystem.VoteContext) -> v
 
 	_refresh_all_ui()
 
-# === Styled HUD Pill (used for Deck/Discard counters) ===
-
-func _make_hud_pill(pos: Vector2, text: String, accent: Color) -> Control:
-	var container = Control.new()
-	container.position = pos
-	container.size = Vector2(120, 32)
-
-	var bg = ColorRect.new()
-	bg.color = Color(0.06, 0.05, 0.12, 0.85)
-	bg.size = Vector2(120, 32)
-	container.add_child(bg)
-
-	var lbl = Label.new()
-	lbl.name = "Label"
-	lbl.text = text
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	lbl.position = Vector2(0, 0)
-	lbl.size = Vector2(120, 32)
-	lbl.add_theme_font_size_override("font_size", 14)
-	lbl.add_theme_color_override("font_color", accent)
-	lbl.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
-	lbl.add_theme_constant_override("shadow_offset_x", 1)
-	lbl.add_theme_constant_override("shadow_offset_y", 1)
-	container.add_child(lbl)
-
-	return container
-
 # === Compact Ally Bars (for remote players in co-op) ===
 
 func _create_ally_bar(peer_id: int) -> Control:
@@ -1815,12 +1696,26 @@ func _spawn_player_puppet_3d() -> void:
 	if GameManager.is_run_active() and GameManager.current_run:
 		character_id = GameManager.current_run.character_id
 
-	_combat_3d_stage = Combat3DStage.new()
+	_combat_3d_stage = Combat3DStageScene.instantiate() as Combat3DStage
 	_combat_3d_stage.name = "Combat3DStage"
 	_combat_3d_stage.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_combat_3d_stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	shake_container.add_child(_combat_3d_stage)
 	shake_container.move_child(_combat_3d_stage, 0)
+
+	# Load a dungeon variant for this combat. Phase 1: pick by whether the
+	# first enemy is a boss, else use the Act 1 server crypt variants.
+	var variant := _pick_dungeon_variant()
+	if variant:
+		var seed_val: int = 1
+		if GameManager.is_run_active() and GameManager.current_run:
+			# Hash (act, floors_cleared) so each room in a run varies
+			# deterministically without needing a dedicated run seed field.
+			var r = GameManager.current_run
+			seed_val = (int(r.act) * 10007) ^ (int(r.floors_cleared) * 31)
+			if seed_val == 0:
+				seed_val = 1
+		_combat_3d_stage.load_dungeon(variant, seed_val)
 
 	# Spawn player
 	_player_puppet_3d = _combat_3d_stage.spawn_player(character_id)
@@ -1835,6 +1730,58 @@ func _spawn_player_puppet_3d() -> void:
 			# Hide 2D enemy artwork after a frame so it catches dynamically loaded sprites
 			if enemy_display_nodes.has(i):
 				_hide_enemy_2d_art.call_deferred(i)
+
+## Pick a DungeonVariant for the current combat.
+## Phase 1: if the first enemy is "michael" return the Michael boss arena; if
+## any enemy is flagged boss return the boss variant; otherwise pick between
+## the Act 1 crypt pristine/worn variants based on floor depth.
+func _pick_dungeon_variant() -> Resource:
+	if not engine or engine.state.enemies.is_empty():
+		return load("res://resources/dungeons/variants/act1_server_crypt_pristine.tres")
+
+	var first_enemy_id: String = engine.state.enemies[0].enemy_data_id
+	if first_enemy_id == "michael":
+		return load("res://resources/dungeons/variants/boss_michael_judgment_hall.tres")
+
+	# Floor depth decides pristine vs worn on Act 1.
+	var floor_depth: int = 0
+	if GameManager.is_run_active() and GameManager.current_run:
+		floor_depth = int(GameManager.current_run.floors_cleared)
+
+	if floor_depth >= 5:
+		return load("res://resources/dungeons/variants/act1_server_crypt_worn.tres")
+	return load("res://resources/dungeons/variants/act1_server_crypt_pristine.tres")
+
+
+## Debug: hot-swap the loaded dungeon variant without restarting combat.
+## (F-keys collide with the Godot debugger; use Ctrl+number instead.)
+##   Ctrl+1 → server crypt pristine
+##   Ctrl+2 → server crypt worn
+##   Ctrl+3 → Michael's judgment hall (boss)
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not (event is InputEventKey) or not event.pressed or event.echo:
+		return
+	if not event.ctrl_pressed:
+		return
+	if not _combat_3d_stage:
+		return
+	var path := ""
+	match event.keycode:
+		KEY_1:
+			path = "res://resources/dungeons/variants/act1_server_crypt_pristine.tres"
+		KEY_2:
+			path = "res://resources/dungeons/variants/act1_server_crypt_worn.tres"
+		KEY_3:
+			path = "res://resources/dungeons/variants/boss_michael_judgment_hall.tres"
+		_:
+			return
+	var variant: Resource = load(path)
+	if not variant:
+		push_warning("Dungeon debug swap: could not load %s" % path)
+		return
+	_combat_3d_stage.load_dungeon(variant, randi() % 100000 + 1)
+	print("[DEBUG] Swapped dungeon → %s" % path.get_file())
+
 
 func _hide_enemy_2d_art(enemy_index: int) -> void:
 	if not enemy_display_nodes.has(enemy_index):

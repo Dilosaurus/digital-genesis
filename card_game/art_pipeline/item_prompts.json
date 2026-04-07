@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0",
-    "description": "Digital Genesis item art prompt database for ComfyUI batch generation — equipment, gems, and relics",
+    "description": "deus.exe item art prompt database for ComfyUI batch generation — equipment, gems, and relics",
     "resolution": {"width": 512, "height": 512},
     "total_items": 28
   },

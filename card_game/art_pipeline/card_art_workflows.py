@@ -1,5 +1,5 @@
 """
-Digital Genesis Card Art Workflow Builder
+deus.exe Card Art Workflow Builder
 Generates ComfyUI API-format workflows for card art with:
 - Multi-LoRA tag-based style stacking
 - Tag-based prompt injection

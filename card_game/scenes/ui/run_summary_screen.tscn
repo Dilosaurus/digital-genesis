@@ -38,7 +38,7 @@ theme_override_constants/separation = 12
 [node name="TitleLabel" type="Label" parent="Panel/VBox"]
 layout_mode = 2
 horizontal_alignment = 1
-text = "DIGITAL GENESIS COMPLETE"
+text = "deus.exe COMPLETE"
 theme_override_font_sizes/font_size = 36
 theme_override_colors/font_color = Color(0.15, 0.95, 0.35, 1)
 

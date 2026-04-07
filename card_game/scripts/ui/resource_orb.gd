@@ -1,3 +1,4 @@
+@tool
 extends Control
 ## Reusable resource orb (HP, Mana, etc.) driven by the liquid_orb shader.
 ##
@@ -39,10 +40,20 @@ signal value_full()
 		if _label:
 			_label.text = v
 
+## Ornate frame texture overlaid on top of the liquid orb. Set per-instance
+## (e.g. health.png for HP, mp.png for mana). The transparent glass center of
+## the frame lets the liquid fill show through.
+@export var frame_texture: Texture2D = null :
+	set(v):
+		frame_texture = v
+		if _frame:
+			_frame.texture = v
+
 # ── Internal ──────────────────────────────────────────────────────────────────
 @onready var _orb_rect : ColorRect = $OrbRect
 @onready var _value_label : Label  = $ValueLabel
 @onready var _label       : Label  = $TypeLabel
+@onready var _frame       : TextureRect = $FrameOverlay
 
 var _material : ShaderMaterial
 var _tween    : Tween
@@ -54,15 +65,23 @@ const _SHADER_FULL  : float =  1.0
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 func _ready() -> void:
-	# CRITICAL: duplicate the material so each orb instance has its own shader state.
-	# Without this, all orbs share one ShaderMaterial and overwrite each other's fill/color.
-	_orb_rect.material = _orb_rect.material.duplicate()
-	_material = _orb_rect.material as ShaderMaterial
+	# In the editor, don't duplicate the material — that would mark the scene
+	# dirty on every open. Just bind the existing one so colors/fill preview.
+	if Engine.is_editor_hint():
+		_material = _orb_rect.material as ShaderMaterial
+	else:
+		# CRITICAL: duplicate the material so each orb instance has its own shader state.
+		# Without this, all orbs share one ShaderMaterial and overwrite each other's fill/color.
+		_orb_rect.material = _orb_rect.material.duplicate()
+		_material = _orb_rect.material as ShaderMaterial
 	_apply_orb_color()
 	_refresh_shader()
 	_refresh_label()
 	if _label:
 		_label.text = label_text
+	# Apply the per-instance frame texture if one was assigned before _ready.
+	if _frame and frame_texture != null:
+		_frame.texture = frame_texture
 
 # ── Public API ────────────────────────────────────────────────────────────────
 

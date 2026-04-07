@@ -1,96 +1,104 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://b5bt4ye872hfo"]
 
-[ext_resource type="Script" path="res://scripts/scenes/combat_scene.gd" id="1"]
+[ext_resource type="Script" uid="uid://oxyomupb7les" path="res://scripts/scenes/combat_scene.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/cards/hand_display.tscn" id="2"]
-[ext_resource type="Theme" path="res://themes/combat_theme.tres" id="3_theme"]
+[ext_resource type="Theme" uid="uid://43jqnvh646cr" path="res://themes/combat_theme.tres" id="3_theme"]
+[ext_resource type="PackedScene" path="res://scenes/ui/resource_orb.tscn" id="4_orb"]
+[ext_resource type="PackedScene" path="res://scenes/ui/corruption_meter.tscn" id="5_corrupt"]
+[ext_resource type="PackedScene" path="res://scenes/ui/sin_display.tscn" id="6_sin"]
+[ext_resource type="PackedScene" path="res://scenes/ui/soul_display.tscn" id="7_soul"]
+[ext_resource type="Texture2D" uid="uid://bylpwg0q74nm7" path="res://health.png" id="8_health"]
+[ext_resource type="Texture2D" uid="uid://dnyyi7eatfy37" path="res://mp.png" id="9_mp"]
 
-[sub_resource type="StyleBoxFlat" id="result_style"]
-bg_color = Color(0.06, 0.05, 0.10, 0.95)
+[sub_resource type="StyleBoxFlat" id="end_turn_normal"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12, 0.3, 0.12, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.50, 0.40, 0.25, 1.0)
+border_color = Color(0.3, 0.75, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="end_turn_hover"]
+content_margin_left = 18.0
+content_margin_top = 8.0
+content_margin_right = 18.0
+content_margin_bottom = 8.0
+bg_color = Color(0.18, 0.45, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.95, 0.4, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="result_style"]
+bg_color = Color(0.06, 0.05, 0.1, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.4, 0.25, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="hud_panel_style"]
-bg_color = Color(0.05, 0.04, 0.06, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.40, 0.32, 0.20, 0.70)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="pill_style"]
+bg_color = Color(0.06, 0.05, 0.12, 0.85)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="end_turn_normal"]
-bg_color = Color(0.12, 0.30, 0.12, 1.0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.30, 0.75, 0.30, 1.0)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-content_margin_left = 18.0
-content_margin_top = 8.0
-content_margin_right = 18.0
-content_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="end_turn_hover"]
-bg_color = Color(0.18, 0.45, 0.18, 1.0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.40, 0.95, 0.40, 1.0)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-content_margin_left = 18.0
-content_margin_top = 8.0
-content_margin_right = 18.0
-content_margin_bottom = 8.0
-
-[node name="CombatScene" type="Control"]
+[node name="CombatScene" type="Control" unique_id=673985758]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_theme")
 script = ExtResource("1")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=125953967]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.05, 0.035, 0.09, 1)
 
-[node name="BgGradientTop" type="ColorRect" parent="."]
+[node name="BgGradientTop" type="ColorRect" parent="." unique_id=261931059]
 layout_mode = 1
-anchors_preset = 0
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 120.0
-color = Color(0.08, 0.04, 0.16, 0.6)
+grow_horizontal = 2
 mouse_filter = 2
+color = Color(0.08, 0.04, 0.16, 0.6)
 
-[node name="ShakeContainer" type="Control" parent="."]
+[node name="ShakeContainer" type="Control" parent="." unique_id=1505933085]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="EnemyArea" type="HBoxContainer" parent="ShakeContainer"]
+[node name="EnemyArea" type="HBoxContainer" parent="ShakeContainer" unique_id=2051708948]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -99,11 +107,12 @@ offset_left = -150.0
 offset_top = 30.0
 offset_right = 150.0
 offset_bottom = 360.0
+grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="PlayerBoards" type="HBoxContainer" parent="ShakeContainer"]
+[node name="PlayerBoards" type="HBoxContainer" parent="ShakeContainer" unique_id=1957660085]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -114,15 +123,21 @@ offset_left = -480.0
 offset_top = -340.0
 offset_right = 480.0
 offset_bottom = -210.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="HandDisplay" parent="." instance=ExtResource("2")]
+[node name="HandDisplay" parent="." unique_id=1721436318 instance=ExtResource("2")]
+layout_mode = 1
+grow_horizontal = 1
+grow_vertical = 1
+pivot_offset = Vector2(4935, -335)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1083598558]
 
-[node name="TurnLabel" type="Label" parent="HUD"]
+[node name="TurnLabel" type="Label" parent="HUD" unique_id=2135213205]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -130,12 +145,12 @@ offset_left = -80.0
 offset_top = 8.0
 offset_right = 80.0
 offset_bottom = 30.0
-horizontal_alignment = 1
-text = "Turn 1"
-theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.92, 0.82, 0.55, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "Turn 1"
+horizontal_alignment = 1
 
-[node name="EndTurnButton" type="Button" parent="HUD"]
+[node name="EndTurnButton" type="Button" parent="HUD" unique_id=501625333]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -145,60 +160,14 @@ offset_left = -160.0
 offset_top = -32.0
 offset_right = -16.0
 offset_bottom = 32.0
-text = "END TURN"
+theme_override_colors/font_color = Color(0.85, 1, 0.85, 1)
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("end_turn_normal")
 theme_override_styles/hover = SubResource("end_turn_hover")
-theme_override_colors/font_color = Color(0.85, 1.0, 0.85, 1)
+text = "END TURN"
 
-[node name="DeckPanel" type="Panel" parent="HUD"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = -52.0
-offset_right = 120.0
-offset_bottom = -10.0
-theme_override_styles/panel = SubResource("hud_panel_style")
-
-[node name="DeckCount" type="Label" parent="HUD/DeckPanel"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 4.0
-offset_right = 100.0
-offset_bottom = 38.0
-horizontal_alignment = 1
-vertical_alignment = 1
-text = "Deck: 10"
-theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.85, 0.78, 0.55, 1)
-
-[node name="DiscardPanel" type="Panel" parent="HUD"]
-anchors_preset = 14
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -52.0
-offset_right = -14.0
-offset_bottom = -10.0
-theme_override_styles/panel = SubResource("hud_panel_style")
-
-[node name="DiscardCount" type="Label" parent="HUD/DiscardPanel"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 4.0
-offset_right = 100.0
-offset_bottom = 38.0
-horizontal_alignment = 1
-vertical_alignment = 1
-text = "Discard: 0"
-theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.90, 0.72, 0.50, 1)
-
-[node name="ResultPanel" type="Panel" parent="HUD"]
+[node name="ResultPanel" type="Panel" parent="HUD" unique_id=725488092]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -208,26 +177,163 @@ offset_left = -170.0
 offset_top = -70.0
 offset_right = 170.0
 offset_bottom = 70.0
-visible = false
 theme_override_styles/panel = SubResource("result_style")
 
-[node name="ResultLabel" type="Label" parent="HUD/ResultPanel"]
+[node name="ResultLabel" type="Label" parent="HUD/ResultPanel" unique_id=1418850789]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 330.0
 offset_bottom = 55.0
+theme_override_colors/font_color = Color(0.2, 1, 0.4, 1)
+theme_override_font_sizes/font_size = 32
+text = "VICTORY!"
 horizontal_alignment = 1
 vertical_alignment = 1
-text = "VICTORY!"
-theme_override_font_sizes/font_size = 32
-theme_override_colors/font_color = Color(0.2, 1.0, 0.4, 1)
 
-[node name="ContinueButton" type="Button" parent="HUD/ResultPanel"]
+[node name="ContinueButton" type="Button" parent="HUD/ResultPanel" unique_id=701758733]
 layout_mode = 0
 offset_left = 95.0
 offset_top = 80.0
 offset_right = 245.0
 offset_bottom = 118.0
-text = "Continue"
 theme_override_font_sizes/font_size = 16
+text = "Continue"
+
+[node name="CorruptionMeter" parent="." unique_id=1414277685 instance=ExtResource("5_corrupt")]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 4.0
+scale = Vector2(0.7, 0.7)
+
+[node name="SinDisplay" parent="." unique_id=178630843 instance=ExtResource("6_sin")]
+visible = false
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 34.0
+offset_right = 8.0
+offset_bottom = 34.0
+scale = Vector2(0.65, 0.65)
+
+[node name="SoulDisplay" parent="." unique_id=1229206304 instance=ExtResource("7_soul")]
+visible = false
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 76.0
+offset_right = 8.0
+offset_bottom = 76.0
+scale = Vector2(0.65, 0.65)
+
+[node name="HPOrb" parent="." unique_id=2021223445 instance=ExtResource("4_orb")]
+anchors_preset = 0
+offset_top = 760.0
+offset_right = 280.0
+offset_bottom = 1080.0
+orb_color = Color(0.75, 0.08, 0.08, 1)
+frame_texture = ExtResource("8_health")
+
+[node name="ManaOrb" parent="." unique_id=998405806 instance=ExtResource("4_orb")]
+anchors_preset = 0
+offset_left = 180.0
+offset_top = 920.0
+offset_right = 460.0
+offset_bottom = 1240.0
+scale = Vector2(0.5, 0.5)
+orb_color = Color(0.35, 0.1, 0.85, 1)
+label_text = "MP"
+frame_texture = ExtResource("9_mp")
+
+[node name="HPNumber" type="Label" parent="." unique_id=1022889443]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1072.0
+offset_right = 225.0
+offset_bottom = 1102.0
+theme_override_colors/font_color = Color(0.9, 0.75, 0.75, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
+text = "80/80"
+horizontal_alignment = 1
+
+[node name="MPNumber" type="Label" parent="." unique_id=2066120206]
+visible = false
+layout_mode = 0
+offset_left = 1700.0
+offset_top = 1072.0
+offset_right = 1920.0
+offset_bottom = 1102.0
+theme_override_colors/font_color = Color(0.75, 0.75, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
+text = "10/10"
+horizontal_alignment = 1
+
+[node name="BlockDisplay" type="Label" parent="." unique_id=815687687]
+visible = false
+layout_mode = 0
+offset_left = 220.0
+offset_top = 900.0
+offset_right = 320.0
+offset_bottom = 928.0
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+text = "BLOCK 0"
+
+[node name="LocalDmgAnchor" type="Control" parent="." unique_id=577699875]
+anchors_preset = 0
+offset_left = 110.0
+offset_top = 840.0
+offset_right = 230.0
+offset_bottom = 900.0
+
+[node name="DeckPill" type="Panel" parent="." unique_id=890904070]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 935.0
+offset_right = 460.0
+offset_bottom = 967.0
+theme_override_styles/panel = SubResource("pill_style")
+
+[node name="Label" type="Label" parent="DeckPill" unique_id=1189659325]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0.4, 0.6, 0.85, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "Deck: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DiscardPill" type="Panel" parent="." unique_id=118345143]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 995.0
+offset_right = 460.0
+offset_bottom = 1027.0
+theme_override_styles/panel = SubResource("pill_style")
+
+[node name="Label" type="Label" parent="DiscardPill" unique_id=177056824]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(0.7, 0.4, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "Discard: 0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -95,7 +95,7 @@ func show_summary(is_victory: bool, run: RunState, current_hp: int) -> void:
 func _setup_appearance() -> void:
 	var accent: Color = COLOR_VICTORY if _is_victory else COLOR_DEFEAT
 
-	_title_label.text = "DIGITAL GENESIS COMPLETE" if _is_victory else "RUN FAILED"
+	_title_label.text = "deus.exe COMPLETE" if _is_victory else "RUN FAILED"
 	_title_label.add_theme_color_override("font_color", accent)
 	_accent_bar.color = accent
 

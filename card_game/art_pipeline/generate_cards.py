@@ -1,5 +1,5 @@
 """
-Digital Genesis Card Art Batch Generator
+deus.exe Card Art Batch Generator
 CLI tool for generating all card art via ComfyUI API.
 
 Usage:
@@ -78,7 +78,7 @@ def list_cards(prompts_data: dict):
         by_type[ctype].append((cid, data))
 
     print(f"\n{'='*60}")
-    print(f"  Digital Genesis Card Art — {len(cards)} Cards")
+    print(f"  deus.exe Card Art — {len(cards)} Cards")
     print(f"{'='*60}\n")
 
     for ctype in ["ATTACK", "SKILL", "POWER", "CURSE"]:
@@ -150,7 +150,7 @@ def generate_card(client, card_id: str, corruption_tier: int, seed: int,
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Digital Genesis Card Art Batch Generator",
+        description="deus.exe Card Art Batch Generator",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -360,7 +360,7 @@ def main():
     total = base_count + corrupt_count
 
     print(f"\n{'='*60}")
-    print(f"  Digital Genesis Card Art Generator")
+    print(f"  deus.exe Card Art Generator")
     print(f"{'='*60}")
     print(f"  Cards:      {base_count} base images")
     if corruption_tiers:

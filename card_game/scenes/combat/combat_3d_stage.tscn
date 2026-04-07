@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dcmbt3dstg001"]
+
+[ext_resource type="Script" uid="uid://5qenug4ln8h4" path="res://scripts/scenes/combat_3d_stage.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://du8swuxhni70x" path="res://scenes/combat/dungeons/act1/server_crypt.tscn" id="2_placeholder"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.03, 0.02, 0.06, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.3, 0.35, 1)
+ambient_light_energy = 0.5
+fog_enabled = true
+fog_light_color = Color(0.05, 0.04, 0.08, 1)
+fog_density = 0.015
+fog_aerial_perspective = 0.5
+
+[node name="Combat3DStage" type="SubViewportContainer" unique_id=998508078]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 35.0
+offset_right = 6.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+script = ExtResource("1_script")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=396599865]
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 2
+gui_disable_input = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport" unique_id=314374825]
+environment = SubResource("Environment_1")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=431664242]
+transform = Transform3D(1, 0, 0, 0, 0.9802715, 0.1976574, 0, -0.1976574, 0.9802715, 0, 2.5, 8.95)
+fov = 50.6
+
+[node name="KeyLight" type="DirectionalLight3D" parent="SubViewport" unique_id=771517957]
+transform = Transform3D(0.866025, 0.353553, -0.353553, 0, 0.707107, 0.707107, 0.5, -0.612372, 0.612372, 0, 0, 0)
+light_color = Color(1, 0.97, 0.92, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="SubViewport" unique_id=685328798]
+transform = Transform3D(-0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, 0.433013, -0.75, 0, 0, 0)
+light_color = Color(0.7, 0.8, 1, 1)
+light_energy = 0.4
+
+[node name="PlayerSpawn" type="Node3D" parent="SubViewport" unique_id=1496035777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, -0.5, 0.5)
+
+[node name="EnemySpawn" type="Node3D" parent="SubViewport" unique_id=1006259927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, -0.5, 0.5)
+
+[node name="DungeonRoot" type="Node3D" parent="SubViewport" unique_id=1257297215]
+
+[node name="EditorPreviewDungeon" parent="SubViewport/DungeonRoot" unique_id=630820065 instance=ExtResource("2_placeholder")]

@@ -1,5 +1,5 @@
 """
-ComfyUI Workflow builders for Digital Genesis art pipeline.
+ComfyUI Workflow builders for deus.exe art pipeline.
 Each function returns a workflow dict ready to queue via the API.
 """
 

@@ -155,7 +155,7 @@
       "mode": 0,
       "properties": {"text": ""},
       "widgets_values": [
-        "=== DIGITAL GENESIS CARD ART TEMPLATE ===\n\nHOW TO USE:\n1. Edit the Positive Prompt node with your card's prompt\n2. Rename the Save Image filename prefix\n3. Change the seed or set to 'randomize'\n4. Queue the prompt\n\nFor batch generation, use the Python CLI:\n  python generate_cards.py --all\n  python generate_cards.py --card strike\n  python generate_cards.py --card strike --corrupt\n\nSee CARD_ART_README.md for full docs."
+        "=== deus.exe CARD ART TEMPLATE ===\n\nHOW TO USE:\n1. Edit the Positive Prompt node with your card's prompt\n2. Rename the Save Image filename prefix\n3. Change the seed or set to 'randomize'\n4. Queue the prompt\n\nFor batch generation, use the Python CLI:\n  python generate_cards.py --all\n  python generate_cards.py --card strike\n  python generate_cards.py --card strike --corrupt\n\nSee CARD_ART_README.md for full docs."
       ],
       "title": "INSTRUCTIONS"
     },
@@ -262,8 +262,8 @@
       "offset": [0, 0]
     },
     "info": {
-      "name": "Digital Genesis Card Art Template",
-      "author": "Digital Genesis Art Pipeline",
+      "name": "deus.exe Card Art Template",
+      "author": "deus.exe Art Pipeline",
       "description": "SDXL card art generation workflow for cyberpunk deck-builder. See CARD_ART_README.md for full documentation.",
       "version": "1.0",
       "category": "card_art"

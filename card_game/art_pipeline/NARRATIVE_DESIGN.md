@@ -1,4 +1,4 @@
-# Digital Genesis — Narrative Evolution: Tech Pirates & AI Demon-Gods
+# deus.exe — Narrative Evolution: Tech Pirates & AI Demon-Gods
 
 ## The Shift
 

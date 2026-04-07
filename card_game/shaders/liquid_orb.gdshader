@@ -21,6 +21,11 @@ uniform float inner_circle_radius_offset : hint_range(0.0,  0.2,  0.005) = 0.0;
 // The script drives this uniform via fill_ratio property.
 uniform float fill_value : hint_range(-1.0, 1.0, 0.005) = 0.0;
 
+// When 1.0, the empty region of the orb is fully transparent (no fresnel,
+// no dark background, no specular on empty). Use this when the orb is
+// rendered behind an ornate frame whose own glass should show through.
+uniform float transparent_empty : hint_range(0.0, 1.0, 1.0) = 0.0;
+
 // ─────────────────────────────────────────────────────────────────────────────
 // SDF helpers
 // ─────────────────────────────────────────────────────────────────────────────
@@ -133,20 +138,27 @@ void fragment() {
 	float specular = (spec1 + spec2) * SPECULAR_STRENGTH;
 
 	// ── Composite ─────────────────────────────────────────────────────────────
-	vec3 front_fill_colour = mix(front_fill_inner_colour, front_fill_outer_colour, ff_fresnel);
+	// In frame mode, flatten the front fill so it doesn't darken at the edges
+	// (the ornate frame already provides edge depth).
+	float ff_blend = ff_fresnel * (1.0 - transparent_empty);
+	vec3 front_fill_colour = mix(front_fill_inner_colour, front_fill_outer_colour, ff_blend);
 
 	const vec3 SPECULAR_COLOUR      = vec3(1.0, 1.0, 0.9);
 	const vec3 OUTER_RING_GLOW_COL  = vec3(1.0, 0.8, 0.1);
 
+	// Suppress the inner ring glow halo in frame mode — the ornate frame
+	// replaces the glow function, so the colored halo just looks like a fake ring.
+	float inner_ring_glow_factor = 1.0 - transparent_empty;
+
 	vec3 rgb =
 		ring            * ring_colour           +
-		inner_ring_glow * inner_ring_glow_colour +
+		inner_ring_glow * inner_ring_glow_colour * inner_ring_glow_factor +
 		front_fill      * front_fill_colour      +
 		back_fill       * back_fill_colour       +
 		fresnel         * fresnel_colour         +
 		specular        * SPECULAR_COLOUR;
 
-	// Dark background behind the liquid
+	// Dark background behind the liquid (suppressed when transparent_empty == 1).
 	const float BG_POWER    = 0.6;
 	const float BG_STRENGTH = 0.65;
 	vec2 nc_uv = (uv - 0.5) * 2.0;
@@ -154,10 +166,16 @@ void fragment() {
 	vec3 bg = mix(vec3(0.10, 0.0, 0.25), vec3(0.0), bg_grad)
 	          * clamp(1.0 - (front_fill + back_fill + ring), 0.0, 1.0)
 	          * BG_STRENGTH;
-	rgb += bg;
+	rgb += bg * (1.0 - transparent_empty);
 
-	float mask = ring + front_fill + back_fill + fresnel + clamp(specular, 0.0, 1.0);
-	mask = clamp(mask + inner_ring_glow, 0.0, 1.0);
+	// In normal mode, the empty glass region is visible (ring + fresnel + specular).
+	// In frame mode, only the actual liquid contributes to alpha so the ornate
+	// frame's own glass shows through unobstructed.
+	float fluid_mask  = clamp(front_fill + back_fill, 0.0, 1.0);
+	float full_mask   = clamp(ring + front_fill + back_fill + fresnel
+	                          + clamp(specular, 0.0, 1.0) + inner_ring_glow,
+	                          0.0, 1.0);
+	float mask = mix(full_mask, fluid_mask, transparent_empty);
 
 	COLOR = vec4(rgb, mask);
 }

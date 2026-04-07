@@ -1,0 +1,75 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   deus.exe // codex — terminal scanlines
+   Used ONLY on terminal-mode surfaces: code blocks, the wordmark strip, the
+   sidebar filesystem header. Body prose is manuscript and stays grain-only.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Base scanline layer — horizontal lines every 3px */
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+.scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.35) 2px,
+    rgba(0, 0, 0, 0.35) 3px
+  );
+  mix-blend-mode: multiply;
+  z-index: 2;
+}
+
+/* Subtle variant — used on wider panels where heavy scanlines would be ugly */
+.scanlines-soft::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0.22) 4px
+  );
+}
+
+/* CRT flicker — super-subtle brightness pulse */
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.97; }
+}
+.crt {
+  animation: crt-flicker 140ms infinite var(--ease-step);
+}
+
+/* Vertical phosphor glow — used on the sidebar header strip */
+.phosphor-glow {
+  box-shadow:
+    inset 0 0 40px rgba(135, 196, 100, 0.04),
+    inset 0 0 2px rgba(135, 196, 100, 0.08);
+}
+
+/* Hard-edge terminal frame */
+.terminal-frame {
+  background: var(--void-deeper);
+  border: 1px solid var(--burnt-brass);
+  box-shadow:
+    inset 0 1px 0 rgba(217, 176, 95, 0.06),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 0 0 1px var(--burnt-brass-dim);
+}
+
+/* Command-line prompt style */
+.prompt::before {
+  content: "$";
+  color: var(--oxidized-gold);
+  margin-right: 0.6em;
+  font-weight: 500;
+}
+.prompt-root::before {
+  content: "#";
+  color: var(--blood-bright);
+}

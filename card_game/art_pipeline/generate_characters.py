@@ -1,5 +1,5 @@
 """
-Digital Genesis Character Art Generator
+deus.exe Character Art Generator
 Generates character puppet parts via ComfyUI for the puppet rig system.
 
 Usage:
@@ -460,7 +460,7 @@ def main():
 
     mode_label = expansion_mode or "portrait+parts"
     print(f"\n{'='*60}")
-    print(f"  Digital Genesis Character Art Generator")
+    print(f"  deus.exe Character Art Generator")
     print(f"{'='*60}")
     print(f"  Mode:       {mode_label}")
     print(f"  Characters: {len(targets)}")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcdecaywrn001"]
+
+[ext_resource type="PackedScene" uid="uid://b224inwh0wbp0" path="res://assets/models/dungeon/barrel_large.gltf" id="1_barrel"]
+[ext_resource type="PackedScene" uid="uid://7d1s82ivgfdb" path="res://assets/models/dungeon/candle_triple.gltf" id="2_candle"]
+[ext_resource type="PackedScene" uid="uid://dljh7pxlssqoh" path="res://assets/models/dungeon/banner_red.gltf" id="3_banner"]
+
+[node name="DecayWorn" type="Node3D"]
+
+[node name="ScatteredBarrel1" parent="." groups=["proc_jitter", "proc_optional"] instance=ExtResource("1_barrel")]
+transform = Transform3D(0.866, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866, -3.8, -0.5, -3.2)
+
+[node name="ScatteredBarrel2" parent="." groups=["proc_jitter", "proc_optional"] instance=ExtResource("1_barrel")]
+transform = Transform3D(0.766, 0, -0.643, 0, 1, 0, 0.643, 0, 0.766, 3.6, -0.5, -3.2)
+
+[node name="TippedBarrel" parent="." groups=["proc_optional"] instance=ExtResource("1_barrel")]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -4.8, -0.3, 1.8)
+
+[node name="FallenCandle1" parent="." groups=["proc_jitter", "proc_optional"] instance=ExtResource("2_candle")]
+transform = Transform3D(1, 0, 0, 0, 0.258, -0.966, 0, 0.966, 0.258, -2.5, -0.4, 2.5)
+
+[node name="FallenCandle2" parent="." groups=["proc_jitter", "proc_optional"] instance=ExtResource("2_candle")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866, 0, -0.866, 0.5, 2.5, -0.4, 2.5)
+
+[node name="TornBanner" parent="." groups=["proc_optional"] instance=ExtResource("3_banner")]
+transform = Transform3D(0.906, -0.423, 0, 0.423, 0.906, 0, 0, 0, 1, -1, 0.3, -4.85)

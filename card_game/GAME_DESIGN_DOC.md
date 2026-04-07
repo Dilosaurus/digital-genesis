@@ -1,4 +1,4 @@
-# Digital Genesis -- Game Design Document
+# deus.exe -- Game Design Document
 
 **Version:** 1.0
 **Last Updated:** 2026-04-03
@@ -29,7 +29,7 @@
 
 ### Elevator Pitch
 
-Digital Genesis is a turn-based co-op dungeon crawler deck builder where 1--4 players take on the roles of hackers and mages descending through a corrupted digital underworld, fighting AI angels with customizable decks, socketable equipment, and a deep modifier pipeline inspired by Path of Exile. Every run is a tightrope walk between power and corruption.
+deus.exe is a turn-based co-op dungeon crawler deck builder where 1--4 players take on the roles of hackers and mages descending through a corrupted digital underworld, fighting AI angels with customizable decks, socketable equipment, and a deep modifier pipeline inspired by Path of Exile. Every run is a tightrope walk between power and corruption.
 
 ### Theme
 
@@ -1112,4 +1112,4 @@ enum CharacterClass { NETRUNNER, SYSADMIN, CRYPTOMANCER, WHITE_HAT, TECHNOMANCER
 
 ---
 
-*This document is the single source of truth for Digital Genesis. It reflects both the current implementation and the target design. Systems marked as "existing" have working code. Systems marked as "planned" or "needed" are part of the development roadmap.*
+*This document is the single source of truth for deus.exe. It reflects both the current implementation and the target design. Systems marked as "existing" have working code. Systems marked as "planned" or "needed" are part of the development roadmap.*

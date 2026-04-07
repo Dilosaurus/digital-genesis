@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://hd4r2g05keke"]
+
+[ext_resource type="PackedScene" uid="uid://caq7thouw7vpi" path="res://assets/models/characters/Knight.glb" id="100_player_preview"]
+[ext_resource type="PackedScene" uid="uid://d3e62qmqkhlwm" path="res://assets/models/characters/Skeleton_Warrior.glb" id="101_enemy_preview"]
+
+[node name="DungeonTemplate" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(2, 2, 2)
+cell_center_y = false
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="PlayerSpawnPoint" parent="." groups=["spawn_preview"] instance=ExtResource("100_player_preview")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -1.2, 0, 0.5)
+
+[node name="EnemySpawnPoint" parent="." groups=["spawn_preview"] instance=ExtResource("101_enemy_preview")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.2, 0, 0.5)

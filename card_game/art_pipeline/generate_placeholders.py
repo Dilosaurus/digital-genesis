@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate stylized character placeholder sprites for Digital Genesis.
+"""Generate stylized character placeholder sprites for deus.exe.
 
 Creates full-body silhouette sprites with glow effects, energy auras,
 and character-specific color themes. These serve as temporary placeholders

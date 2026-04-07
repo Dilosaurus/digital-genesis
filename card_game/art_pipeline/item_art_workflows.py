@@ -1,5 +1,5 @@
 """
-Digital Genesis Item Art Workflow Builder
+deus.exe Item Art Workflow Builder
 Generates ComfyUI API-format workflows for item icons:
 - Equipment (HEAD, CHEST, WEAPON, ACCESSORY)
 - Gems (gemstones with inner glow)
