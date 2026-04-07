@@ -137,11 +137,13 @@ export function CharacterDetail() {
           <h1
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3rem, 7vw, 6.5rem)',
+              fontSize: 'clamp(2rem, 9vw, 6.5rem)',
               lineHeight: 0.92,
-              letterSpacing: '0.06em',
+              letterSpacing: '0.04em',
               color: 'var(--bone)',
               fontWeight: 600,
+              wordBreak: 'break-word',
+              overflowWrap: 'anywhere',
             }}
           >
             {c.display_name}

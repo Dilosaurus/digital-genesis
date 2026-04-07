@@ -206,7 +206,7 @@ export function CodexCards() {
         <div
           className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] grid gap-3 md:gap-5"
           style={{
-            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 150px), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 140px), 1fr))',
           }}
         >
           {filtered.map((card, i) => (

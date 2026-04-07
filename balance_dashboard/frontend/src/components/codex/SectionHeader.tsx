@@ -20,7 +20,7 @@ interface Props {
 export function SectionHeader({ chapter, heading, filename, count, subtitle, rightSlot }: Props) {
   return (
     <header
-      className="relative flex items-start justify-between gap-4 md:gap-6 pt-10 md:pt-14 pb-6 md:pb-8"
+      className="relative flex items-start justify-between gap-4 md:gap-6 pt-8 md:pt-14 pb-5 md:pb-8"
       style={{ paddingLeft: 'clamp(1rem, 6vw, 6rem)', paddingRight: 'clamp(1rem, 6vw, 6rem)' }}
     >
       <div className="flex items-start gap-4 md:gap-6 min-w-0 flex-1">
@@ -46,25 +46,26 @@ export function SectionHeader({ chapter, heading, filename, count, subtitle, rig
 
         <div className="min-w-0 flex-1">
           <div
-            className="reveal reveal-0 mb-2 font-mono text-[9px] md:text-[10px] flex items-center gap-2 md:gap-3 flex-wrap"
+            className="reveal reveal-0 mb-2 font-mono text-[9px] md:text-[10px] flex items-center gap-2 md:gap-3"
             style={{ color: 'var(--burnt-brass)', letterSpacing: '0.18em' }}
           >
-            <span style={{ color: 'var(--blood-bright)' }}>█</span>
-            <span>OPEN CATALOG</span>
-            <span>·</span>
-            <span className="truncate">{filename}</span>
+            <span className="shrink-0" style={{ color: 'var(--blood-bright)' }}>█</span>
+            <span className="shrink-0">OPEN CATALOG</span>
+            <span className="shrink-0">·</span>
+            <span className="truncate min-w-0">{filename}</span>
           </div>
 
           <h1
             className="reveal reveal-1"
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.2rem, 7vw, 6rem)',
+              fontSize: 'clamp(1.9rem, 9.5vw, 6rem)',
               lineHeight: 0.95,
-              letterSpacing: '0.05em',
+              letterSpacing: '0.04em',
               color: 'var(--bone)',
               fontWeight: 600,
               wordBreak: 'break-word',
+              overflowWrap: 'anywhere',
             }}
           >
             {heading}
@@ -72,7 +73,7 @@ export function SectionHeader({ chapter, heading, filename, count, subtitle, rig
 
           {(count != null || subtitle) && (
             <div
-              className="reveal reveal-2 mt-3 flex items-baseline gap-4 font-mono text-[11px] md:text-[12px] flex-wrap"
+              className="reveal reveal-2 mt-3 flex items-baseline gap-3 md:gap-4 font-mono text-[10px] md:text-[12px] flex-wrap"
               style={{ color: 'var(--bone-faint)', letterSpacing: '0.02em' }}
             >
               {count != null && (

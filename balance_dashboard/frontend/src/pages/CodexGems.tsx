@@ -147,7 +147,7 @@ export function CodexGems() {
       )}
 
       {/* Grouped by tier */}
-      <div className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] space-y-14">
+      <div className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] space-y-10 md:space-y-14">
         {grouped.map(([tierName, items]) => (
           <TierSection
             key={tierName}
@@ -178,12 +178,13 @@ function TierSection({ tierName, items }: { tierName: string; items: Gem[] }) {
   const color = TIER_COLORS[tierName]
   const glyph = TIER_GLYPH[tierName]
   return (
-    <div>
-      <div className="flex items-baseline gap-4 mb-5">
+    <div className="min-w-0">
+      <div className="flex items-baseline gap-3 md:gap-4 mb-4 md:mb-5 min-w-0">
         <div
+          className="shrink-0"
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 36,
+            fontSize: 'clamp(28px, 8vw, 36px)',
             color,
             letterSpacing: 0,
             lineHeight: 1,
@@ -192,22 +193,24 @@ function TierSection({ tierName, items }: { tierName: string; items: Gem[] }) {
         >
           {glyph}
         </div>
-        <div>
+        <div className="min-w-0 flex-1">
           <div
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 24,
+              fontSize: 'clamp(18px, 5.6vw, 24px)',
               color: 'var(--bone)',
-              letterSpacing: '0.14em',
+              letterSpacing: '0.12em',
               fontWeight: 600,
               textTransform: 'uppercase',
+              lineHeight: 1.1,
+              wordBreak: 'break-word',
             }}
           >
             {tierName}
           </div>
           <div
-            className="font-mono"
-            style={{ fontSize: 10, color: 'var(--burnt-brass)', letterSpacing: '0.12em' }}
+            className="font-mono truncate"
+            style={{ fontSize: 10, color: 'var(--burnt-brass)', letterSpacing: '0.1em' }}
           >
             tier/{tierName} · {items.length}&nbsp;entries
           </div>
@@ -215,8 +218,8 @@ function TierSection({ tierName, items }: { tierName: string; items: Gem[] }) {
       </div>
 
       <div
-        className="grid gap-4"
-        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))' }}
+        className="grid gap-3 md:gap-4"
+        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}
       >
         {items.map(g => (
           <ItemTile

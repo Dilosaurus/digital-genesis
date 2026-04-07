@@ -80,8 +80,8 @@ export function CodexRelics() {
       )}
 
       <div
-        className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] grid gap-4"
-        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))' }}
+        className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] grid gap-3 md:gap-4"
+        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}
       >
         {filtered.map(r => (
           <ItemTile

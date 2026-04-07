@@ -146,7 +146,6 @@ card_game/assets/icons
 card_game/assets/player
 card_game/assets/relics
 card_game/assets/DOWNLOAD_GUIDE.md
-/Dockerfile
 /README.md
 /CHANGELOG.md
 /LICENSE
@@ -178,7 +177,6 @@ echo "==> Submitting to Cloud Build + Cloud Run..."
 
 $GCLOUD run deploy "$SERVICE_NAME" \
   --source . \
-  --dockerfile balance_dashboard/Dockerfile \
   --region "$REGION" \
   --allow-unauthenticated \
   --port 8080 \

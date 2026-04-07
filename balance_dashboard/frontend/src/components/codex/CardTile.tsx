@@ -131,22 +131,28 @@ export function CardTile({ card, index }: Props) {
 
       {/* ── name + meta ─────────────────────────────────────────────── */}
       <div
-        className="absolute left-0 right-0 px-3 pt-2 pb-2"
+        className="absolute left-0 right-0 px-3 pt-2 pb-2 min-w-0"
         style={{
           top: '65%',
           bottom: 0,
         }}
       >
         <div
-          className="mb-[2px] truncate"
+          className="mb-[2px]"
           style={{
             fontFamily: 'var(--font-display)',
             fontSize: 13,
-            letterSpacing: '0.06em',
+            letterSpacing: '0.05em',
             color: 'var(--bone)',
             fontWeight: 600,
             textTransform: 'uppercase',
-            lineHeight: 1.15,
+            lineHeight: 1.1,
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            wordBreak: 'break-word',
+            overflowWrap: 'anywhere',
           }}
         >
           {card.display_name}

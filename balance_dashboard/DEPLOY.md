@@ -145,6 +145,10 @@ Build, restores your ignore files on exit.
 
 ## What the build does
 
+The `Dockerfile` at the repo root is the active build recipe. `gcloud
+run deploy --source .` requires it at the root — there is no
+`--dockerfile` flag to point it elsewhere.
+
 1. **Frontend build stage** (Node 22): `npm ci && npm run build` →
    `balance_dashboard/frontend/dist/`.
 2. **Runtime stage** (Python 3.12): installs FastAPI + uvicorn + pydantic

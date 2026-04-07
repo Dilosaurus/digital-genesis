@@ -160,9 +160,6 @@ jobs:
           card_game/assets/relics
           card_game/assets/DOWNLOAD_GUIDE.md
 
-          # Old root Dockerfile (Flask-era)
-          /Dockerfile
-
           # Top-level docs
           /README.md
           /CHANGELOG.md
@@ -193,12 +190,13 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       # ─── Deploy ───────────────────────────────────────────────────
+      # Note: `gcloud run deploy` always reads the Dockerfile from the
+      # root of the source (./Dockerfile). There is no --dockerfile flag.
       - name: Deploy to Cloud Run
         id: deploy
         run: |
           gcloud run deploy "$SERVICE_NAME" \
             --source . \
-            --dockerfile balance_dashboard/Dockerfile \
             --region "$REGION" \
             --allow-unauthenticated \
             --port 8080 \

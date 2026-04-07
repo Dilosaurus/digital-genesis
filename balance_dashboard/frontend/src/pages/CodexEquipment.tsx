@@ -105,14 +105,15 @@ export function CodexEquipment() {
         </div>
       )}
 
-      <div className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] space-y-14">
+      <div className="reveal reveal-4 mx-[clamp(1rem,6vw,6rem)] space-y-10 md:space-y-14">
         {grouped.map(([slotName, gear]) => (
-          <div key={slotName}>
-            <div className="flex items-baseline gap-4 mb-5">
+          <div key={slotName} className="min-w-0">
+            <div className="flex items-baseline gap-3 md:gap-4 mb-4 md:mb-5 min-w-0">
               <div
+                className="shrink-0"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: 36,
+                  fontSize: 'clamp(28px, 8vw, 36px)',
                   color: SLOT_COLORS[slotName],
                   lineHeight: 1,
                   filter: `drop-shadow(0 0 8px ${SLOT_COLORS[slotName]}44)`,
@@ -120,28 +121,30 @@ export function CodexEquipment() {
               >
                 {SLOT_GLYPH[slotName]}
               </div>
-              <div>
+              <div className="min-w-0 flex-1">
                 <div
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 24,
+                    fontSize: 'clamp(18px, 5.6vw, 24px)',
                     color: 'var(--bone)',
-                    letterSpacing: '0.14em',
+                    letterSpacing: '0.12em',
                     fontWeight: 600,
                     textTransform: 'uppercase',
+                    lineHeight: 1.1,
+                    wordBreak: 'break-word',
                   }}
                 >
                   {slotName}
                 </div>
-                <div className="font-mono" style={{ fontSize: 10, color: 'var(--burnt-brass)', letterSpacing: '0.12em' }}>
+                <div className="font-mono truncate" style={{ fontSize: 10, color: 'var(--burnt-brass)', letterSpacing: '0.1em' }}>
                   slot/{slotName.toLowerCase()} · {gear.length}&nbsp;entries
                 </div>
               </div>
             </div>
 
             <div
-              className="grid gap-4"
-              style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 320px), 1fr))' }}
+              className="grid gap-3 md:gap-4"
+              style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))' }}
             >
               {gear.map(e => (
                 <ItemTile

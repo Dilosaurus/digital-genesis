@@ -13,18 +13,18 @@ interface FilterBarProps {
 export function FilterBar({ children, counter }: FilterBarProps) {
   return (
     <div
-      className="relative mb-6 md:mb-8 terminal-frame scanlines-soft"
+      className="relative mb-5 md:mb-8 terminal-frame scanlines-soft min-w-0"
       style={{
         marginLeft: 'clamp(1rem, 6vw, 6rem)',
         marginRight: 'clamp(1rem, 6vw, 6rem)',
-        padding: '12px 14px',
+        padding: '10px 12px',
       }}
     >
-      <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-3 md:gap-x-6 md:gap-y-3 font-mono">
+      <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-3 md:gap-x-6 md:gap-y-3 font-mono min-w-0">
         {children}
         {counter && (
           <div
-            className="md:ml-auto text-[11px] pt-2 md:pt-0"
+            className="md:ml-auto text-[10px] md:text-[11px] pt-2 md:pt-0 min-w-0"
             style={{
               color: 'var(--bone-faint)',
               letterSpacing: '0.02em',
@@ -111,9 +111,9 @@ interface SearchInputProps {
 
 export function SearchInput({ value, onChange, placeholder = 'search...' }: SearchInputProps) {
   return (
-    <div className="flex items-center gap-2 min-w-[220px]">
+    <div className="flex items-center gap-2 w-full md:w-auto md:min-w-[220px] min-w-0">
       <span
-        className="font-mono text-[11px]"
+        className="font-mono text-[11px] shrink-0"
         style={{ color: 'var(--oxidized-gold)', letterSpacing: '0.02em' }}
       >
         $&nbsp;grep
@@ -123,7 +123,7 @@ export function SearchInput({ value, onChange, placeholder = 'search...' }: Sear
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="flex-1 font-mono bg-transparent outline-none border-0 border-b border-dotted"
+        className="flex-1 min-w-0 font-mono bg-transparent outline-none border-0 border-b border-dotted"
         style={{
           color: 'var(--bone)',
           borderBottomColor: 'var(--burnt-brass)',
