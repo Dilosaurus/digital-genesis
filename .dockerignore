@@ -7,7 +7,17 @@
 **/frontend/dist
 **/*.import
 *.md
-card_game/art_pipeline/
+# Cherry-pick the animation preview sheets out of art_pipeline/ for
+# the dashboard's /anim/ mount. We exclude one path level at a time so
+# only animations/sheets/{*.gif,*.json} survives — no prompts/, no
+# characters/, no master PNGs (~10MB each, used only in-engine).
+card_game/art_pipeline/*
+!card_game/art_pipeline/animations
+card_game/art_pipeline/animations/*
+!card_game/art_pipeline/animations/sheets
+card_game/art_pipeline/animations/sheets/*
+!card_game/art_pipeline/animations/sheets/*.gif
+!card_game/art_pipeline/animations/sheets/*.json
 card_game/data/
 card_game/scenes/
 card_game/scripts/
