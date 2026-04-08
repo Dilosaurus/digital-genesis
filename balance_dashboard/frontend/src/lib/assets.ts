@@ -156,14 +156,24 @@ export const CLASS_TO_IDX: Record<CharacterClassName, number> = {
 // Maps a character callsign (Character.display_name.toLowerCase()) to the
 // list of poses available under /anim/<callsign>_<pose>_loop.gif. The first
 // entry is the default pose shown when the character is first viewed. Add
-// new poses here as the Grok Imagine pipeline produces them.
+// new poses here as the Veo 3.1 pipeline produces them.
 
 export const ANIMATION_POSES: Record<string, string[]> = {
   abyss:    ['idle', 'attack_cast', 'attack_cast_heavy', 'attack_quick', 'attack_ultimate'],
   paladin:  ['idle'],
   corsayre: ['idle'],
   flux:     ['idle'],
-  ghost:    ['idle'],
+  ghost:    [
+    'idle',
+    'attack_cast',
+    'attack_cast_heavy',
+    'skill_block',
+    'skill_draw',
+    'skill_buff',
+    'skill_stealth',
+    'hurt',
+    'defeated',
+  ],
   aegis:    ['idle'],
 }
 
@@ -174,6 +184,12 @@ export const POSE_LABELS: Record<string, string> = {
   attack_cast_heavy:  'CAST·HEAVY',
   attack_quick:       'QUICK',
   attack_ultimate:    'ULTIMATE',
+  skill_block:        'BLOCK',
+  skill_draw:         'DRAW',
+  skill_buff:         'BUFF',
+  skill_stealth:      'STEALTH',
+  hurt:               'HURT',
+  defeated:           'DEFEATED',
 }
 
 export function characterCallsign(displayName: string): string {

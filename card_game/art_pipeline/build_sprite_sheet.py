@@ -1,5 +1,5 @@
 """
-Convert a Grok Imagine MP4 clip into a chroma-keyed sprite sheet for Godot.
+Convert a Veo 3.1 MP4 clip into a chroma-keyed sprite sheet for Godot.
 
 Usage:
     python build_sprite_sheet.py <callsign> <pose>
@@ -39,18 +39,35 @@ POSE_SETTINGS = {
     # native speed we'd bump target_frames to 96 and keep fps at 12.
     "idle":         {"target_frames": 48, "loop": True,  "fps": 12},
     "attack_melee": {"target_frames": 48, "loop": False, "fps": 12},
-    # 48 frames @ 12 fps = 4-second cast, matching the idle pacing so the
-    # cast and idle feel like the same animation language.
-    "attack_cast":       {"target_frames": 48, "loop": False, "fps": 12},
-    # Heavier version of attack_cast — bigger gestures, arms overhead.
-    # Same pacing as the basic cast.
-    "attack_cast_heavy": {"target_frames": 48, "loop": False, "fps": 12},
+    # 192 frames @ 24 fps = 8-second cast played at 1:1 source speed.
+    # Veo 3.1 source clips are 8 seconds at 24 fps natively, so this
+    # keeps every frame with zero resampling — smoother motion at the
+    # original ritualistic pacing. ~13MB GIF vs. 3.3MB at 48 @ 12fps.
+    "attack_cast":       {"target_frames": 192, "loop": False, "fps": 24},
+    # Heavier version of attack_cast — bigger gestures, both hands. Same
+    # native 8s pacing as the basic cast.
+    "attack_cast_heavy": {"target_frames": 192, "loop": False, "fps": 24},
     # Quick snappy attack — 24 fps for the snappier feel that fits a fast
     # melee-style lunge or quick spell. Half the duration of the cast.
     "attack_quick":      {"target_frames": 48, "loop": False, "fps": 24},
     # Ultimate / finisher attack — mouth open, dramatic peak. Slow ritual
     # pacing like the cast so the player can feel the weight of it.
     "attack_ultimate":   {"target_frames": 48, "loop": False, "fps": 12},
+    # Warding / defensive gesture — both hands rise to a ward-off position and
+    # hold. Seamless 2-second loop so it reads as a sustained guard when Defend
+    # and BLOCK skills resolve.
+    "skill_block":       {"target_frames": 24, "loop": True,  "fps": 12},
+    # Receiving / offering gesture — cupped hands rise palm-up to chest, hold,
+    # lower. One-shot 4-second play for DRAW and ADVANCE utility cards.
+    "skill_draw":        {"target_frames": 48, "loop": False, "fps": 12},
+    # Claim / transform gesture — arms raised in invocation (cruciform,
+    # cross-arm seal, hand-on-heart). One-shot 4-second play for POWER cards
+    # and self-buffs.
+    "skill_buff":        {"target_frames": 48, "loop": False, "fps": 12},
+    # Silence / stealth / setup gesture — finger to lips, head tilt, hand
+    # drawn back to chest. One-shot 4-second play for stealth/silence skills
+    # (ghost-affine, but any character with a setup-oriented skill can use it).
+    "skill_stealth":     {"target_frames": 48, "loop": False, "fps": 12},
     "hurt":         {"target_frames": 24, "loop": False, "fps": 12},
     "block":        {"target_frames": 24, "loop": True,  "fps": 12},
     "defeated":     {"target_frames": 48, "loop": False, "fps": 12},
@@ -205,7 +222,7 @@ def main() -> int:
     mp4 = RAW / f"{callsign}_{pose}.mp4"
     if not mp4.exists():
         print(f"missing source clip: {mp4}")
-        print("Drop the Grok Imagine download in animations/raw_video/ first.")
+        print("Drop the Veo 3.1 download in animations/raw_video/ first.")
         return 1
 
     print(f"reading {mp4}")

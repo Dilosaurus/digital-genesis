@@ -1,0 +1,11 @@
+{
+  "callsign": "ghost",
+  "pose": "skill_block",
+  "frame_count": 24,
+  "fps": 12,
+  "loop": true,
+  "frame_w": 720,
+  "frame_h": 720,
+  "sheet_w": 17280,
+  "sheet_h": 720
+}
