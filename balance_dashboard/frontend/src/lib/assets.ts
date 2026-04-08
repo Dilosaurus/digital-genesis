@@ -148,7 +148,7 @@ export const CLASS_TO_IDX: Record<CharacterClassName, number> = {
   SYSADMIN:     1,
   CRYPTOMANCER: 2,
   WHITE_HAT:    3,
-  TECHNOMANCER: 4,
+  HERETIC:      4,
   SCOURGE:      5,
 }
 
