@@ -32,6 +32,9 @@ on:
       - 'card_game/resources/**'
       - 'card_game/assets/cards/**'
       - 'card_game/assets/items/**'
+      - 'card_game/art_pipeline/animations/sheets/**'
+      - 'Dockerfile'
+      - '.dockerignore'
       - '.github/workflows/deploy-codex.yml'
   workflow_dispatch:  # allow manual runs from the GitHub Actions tab
 
@@ -132,7 +135,17 @@ jobs:
           balance_dashboard/backups
 
           # card_game — include only what the parser reads
-          card_game/art_pipeline
+          # Cherry-pick the animation preview sheets (*.gif + *.json) so the
+          # FastAPI /anim/ mount has something to serve. Single-segment globs
+          # exclude one path level at a time so prompts/, characters/,
+          # raw_video/, frames/, and master sprite-sheet PNGs all stay out.
+          card_game/art_pipeline/*
+          !card_game/art_pipeline/animations
+          card_game/art_pipeline/animations/*
+          !card_game/art_pipeline/animations/sheets
+          card_game/art_pipeline/animations/sheets/*
+          !card_game/art_pipeline/animations/sheets/*.gif
+          !card_game/art_pipeline/animations/sheets/*.json
           card_game/scenes
           card_game/shaders
           card_game/tests
