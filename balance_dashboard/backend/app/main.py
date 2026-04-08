@@ -22,7 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.config import ASSETS_DIR, CARD_GAME_DIR, verify_paths
+from app.config import ANIMATION_DIR, ASSETS_DIR, CARD_GAME_DIR, verify_paths
 from app.parsers.enums import all_enums
 from app.routers import codex, content, meta
 
@@ -81,6 +81,12 @@ def health() -> dict:
 if ASSETS_DIR.exists():
     app.mount("/media", StaticFiles(directory=str(ASSETS_DIR)), name="media")
 
+# Animation preview mount — Grok Imagine sprite-sheet GIFs for the operator
+# dossier page. Lives outside /media because the art pipeline isn't part of
+# the in-game res:// asset tree.
+if ANIMATION_DIR.exists():
+    app.mount("/anim", StaticFiles(directory=str(ANIMATION_DIR)), name="anim")
+
 
 # ─── Frontend serving ─────────────────────────────────────────────────────
 # In production (inside the Docker image), frontend_dist/ contains the
@@ -109,6 +115,7 @@ if FRONTEND_DIST.exists() and (FRONTEND_DIST / "index.html").exists():
             or full_path.startswith("docs")
             or full_path.startswith("openapi")
             or full_path.startswith("media/")
+            or full_path.startswith("anim/")
             or full_path.startswith("assets/")
         ):
             return JSONResponse({"detail": "Not Found"}, status_code=404)

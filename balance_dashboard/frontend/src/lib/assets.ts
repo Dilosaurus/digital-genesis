@@ -151,3 +151,37 @@ export const CLASS_TO_IDX: Record<CharacterClassName, number> = {
   TECHNOMANCER: 4,
   SCOURGE:      5,
 }
+
+// ─── Character animation registry ────────────────────────────────────────
+// Maps a character callsign (Character.display_name.toLowerCase()) to the
+// list of poses available under /anim/<callsign>_<pose>_loop.gif. The first
+// entry is the default pose shown when the character is first viewed. Add
+// new poses here as the Grok Imagine pipeline produces them.
+
+export const ANIMATION_POSES: Record<string, string[]> = {
+  abyss:      ['idle', 'attack_cast', 'attack_cast_heavy', 'attack_quick', 'attack_ultimate'],
+  paladin:    ['idle'],
+  blackbeard: ['idle'],
+  bulwark:    ['idle'],
+}
+
+// Human-readable pose labels for the dossier tab strip.
+export const POSE_LABELS: Record<string, string> = {
+  idle:               'IDLE',
+  attack_cast:        'CAST',
+  attack_cast_heavy:  'CAST·HEAVY',
+  attack_quick:       'QUICK',
+  attack_ultimate:    'ULTIMATE',
+}
+
+export function characterCallsign(displayName: string): string {
+  return displayName.toLowerCase()
+}
+
+export function animationUrl(callsign: string, pose: string): string {
+  return `/anim/${callsign}_${pose}_loop.gif`
+}
+
+export function hasAnimation(displayName: string): boolean {
+  return (ANIMATION_POSES[characterCallsign(displayName)]?.length ?? 0) > 0
+}

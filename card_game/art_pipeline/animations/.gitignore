@@ -1,0 +1,12 @@
+# Source clips from Grok Imagine — huge MP4s, regenerate as needed.
+raw_video/
+
+# Per-frame intermediates from build_sprite_sheet.py — regenerable from raw_video.
+frames/
+
+# Sprite-sheet PNGs — 9-13MB each, regenerable from raw_video. The in-game
+# importer reads these, but we don't want them in git history. Keep the GIFs
+# (preview + dashboard playback) and the JSON metadata (frame_count/fps/loop)
+# in-tree so the dashboard works on a fresh clone without re-running the pipeline.
+sheets/*.png
+sheets/*.png.import

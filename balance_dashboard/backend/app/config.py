@@ -25,6 +25,12 @@ SCRIPTS_DIR = CARD_GAME_DIR / "scripts"
 ASSETS_DIR = CARD_GAME_DIR / "assets"
 THEMES_DIR = CARD_GAME_DIR / "themes"
 
+# Generated sprite-sheet GIFs from the Grok Imagine pipeline. Mounted at
+# /anim/ in the backend so the React dashboard can preview character idles
+# and attack animations on the operator dossier page. Empty in fresh checkouts
+# until the per-character build_sprite_sheet.py runs are complete.
+ANIMATION_DIR = CARD_GAME_DIR / "art_pipeline" / "animations" / "sheets"
+
 # Schema source-of-truth — GDScript class definitions and enums
 ENUMS_GD = SCRIPTS_DIR / "data" / "enums.gd"
 SKILL_TREE_GD = SCRIPTS_DIR / "systems" / "skill_tree_system.gd"

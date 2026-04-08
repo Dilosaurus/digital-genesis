@@ -1,0 +1,11 @@
+{
+  "callsign": "paladin",
+  "pose": "idle",
+  "frame_count": 48,
+  "fps": 12,
+  "loop": true,
+  "frame_w": 720,
+  "frame_h": 720,
+  "sheet_w": 34560,
+  "sheet_h": 720
+}

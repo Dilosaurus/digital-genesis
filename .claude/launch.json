@@ -6,6 +6,18 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--prefix", "balance_dashboard/frontend"],
       "port": 3001
+    },
+    {
+      "name": "balance-backend",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "uvicorn", "app.main:app", "--port", "8000", "--app-dir", "balance_dashboard/backend"],
+      "port": 8000
+    },
+    {
+      "name": "animation-preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "card_game/art_pipeline/animations"],
+      "port": 8765
     }
   ]
 }

@@ -1,7 +1,14 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useCharacter, useCards } from '../hooks/useCodex'
 import { CardTile } from '../components/codex/CardTile'
 import { pad } from '../lib/format'
+import {
+  ANIMATION_POSES,
+  POSE_LABELS,
+  animationUrl,
+  characterCallsign,
+} from '../lib/assets'
 
 /**
  * /characters/:id — operator dossier.
@@ -75,47 +82,7 @@ export function CharacterDetail() {
       >
         {/* icon block — capped width on mobile to keep the icon proportional */}
         <div className="reveal reveal-1 flex flex-col items-start w-full max-w-[280px] mx-auto md:max-w-none md:mx-0">
-          <div
-            className="relative mb-4"
-            style={{
-              width: '100%',
-              aspectRatio: '1 / 1',
-              background: 'var(--void-deeper)',
-              border: `1px solid ${c.color_primary}`,
-              boxShadow: `inset 0 1px 0 rgba(235, 224, 200, 0.04), 0 0 40px -10px ${c.color_primary}66`,
-            }}
-          >
-            <div
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(6rem, 14vw, 12rem)',
-                color: c.color_primary,
-                fontWeight: 700,
-                letterSpacing: '0.06em',
-                lineHeight: 1,
-                filter: `drop-shadow(0 0 28px ${c.color_primary}55)`,
-              }}
-            >
-              {c.icon_text}
-            </div>
-            {/* corner hatches */}
-            {['tl', 'tr', 'bl', 'br'].map(pos => (
-              <span
-                key={pos}
-                className="absolute"
-                style={{
-                  width: 14,
-                  height: 14,
-                  borderColor: c.color_primary,
-                  ...(pos === 'tl' && { top: 4, left: 4, borderTop: `1.5px solid`, borderLeft: `1.5px solid` }),
-                  ...(pos === 'tr' && { top: 4, right: 4, borderTop: `1.5px solid`, borderRight: `1.5px solid` }),
-                  ...(pos === 'bl' && { bottom: 4, left: 4, borderBottom: `1.5px solid`, borderLeft: `1.5px solid` }),
-                  ...(pos === 'br' && { bottom: 4, right: 4, borderBottom: `1.5px solid`, borderRight: `1.5px solid` }),
-                }}
-              />
-            ))}
-          </div>
+          <CharacterPortrait c={c} />
 
           {/* stats */}
           <div className="w-full grid grid-cols-2 gap-3">
@@ -269,6 +236,113 @@ export function CharacterDetail() {
         </section>
       )}
     </article>
+  )
+}
+
+/**
+ * The square portrait box at the top of the dossier. When the operator has
+ * sprite-sheet GIFs available (under /anim/<callsign>_<pose>_loop.gif), this
+ * shows the live animation with a pose tab strip below it. Otherwise it
+ * falls back to the giant text-icon glyph.
+ */
+function CharacterPortrait({ c }: { c: import('../types/game').Character }) {
+  const callsign = characterCallsign(c.display_name)
+  const poses = ANIMATION_POSES[callsign] ?? []
+  const hasAnimation = poses.length > 0
+  const [pose, setPose] = useState(poses[0] ?? 'idle')
+  // Re-mount the GIF on pose change so the loop restarts cleanly. The
+  // browser otherwise reuses the cached decode and the animation looks like
+  // it picks up mid-stride.
+  const gifKey = `${callsign}-${pose}`
+
+  return (
+    <>
+      <div
+        className="relative mb-3"
+        style={{
+          width: '100%',
+          aspectRatio: '1 / 1',
+          background: 'var(--void-deeper)',
+          border: `1px solid ${c.color_primary}`,
+          boxShadow: `inset 0 1px 0 rgba(235, 224, 200, 0.04), 0 0 40px -10px ${c.color_primary}66`,
+        }}
+      >
+        {hasAnimation ? (
+          <img
+            key={gifKey}
+            src={animationUrl(callsign, pose)}
+            alt={`${c.display_name} ${pose}`}
+            className="absolute inset-0 w-full h-full"
+            style={{
+              objectFit: 'contain',
+              imageRendering: 'auto',
+              filter: `drop-shadow(0 0 24px ${c.color_primary}44)`,
+            }}
+          />
+        ) : (
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(6rem, 14vw, 12rem)',
+              color: c.color_primary,
+              fontWeight: 700,
+              letterSpacing: '0.06em',
+              lineHeight: 1,
+              filter: `drop-shadow(0 0 28px ${c.color_primary}55)`,
+            }}
+          >
+            {c.icon_text}
+          </div>
+        )}
+
+        {/* corner hatches */}
+        {['tl', 'tr', 'bl', 'br'].map(p => (
+          <span
+            key={p}
+            className="absolute pointer-events-none"
+            style={{
+              width: 14,
+              height: 14,
+              borderColor: c.color_primary,
+              ...(p === 'tl' && { top: 4, left: 4, borderTop: `1.5px solid`, borderLeft: `1.5px solid` }),
+              ...(p === 'tr' && { top: 4, right: 4, borderTop: `1.5px solid`, borderRight: `1.5px solid` }),
+              ...(p === 'bl' && { bottom: 4, left: 4, borderBottom: `1.5px solid`, borderLeft: `1.5px solid` }),
+              ...(p === 'br' && { bottom: 4, right: 4, borderBottom: `1.5px solid`, borderRight: `1.5px solid` }),
+            }}
+          />
+        ))}
+      </div>
+
+      {/* pose tabs — only render if there's more than one pose to switch between */}
+      {hasAnimation && poses.length > 1 && (
+        <div className="w-full mb-4 flex flex-wrap gap-1">
+          {poses.map(p => {
+            const active = p === pose
+            return (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPose(p)}
+                className="font-mono uppercase transition-colors"
+                style={{
+                  fontSize: 9,
+                  letterSpacing: '0.12em',
+                  padding: '6px 9px',
+                  background: active ? `${c.color_primary}22` : 'var(--server-rack)',
+                  border: `1px solid ${active ? c.color_primary : 'var(--burnt-brass-dim)'}`,
+                  color: active ? c.color_primary : 'var(--bone-dim)',
+                  cursor: 'pointer',
+                }}
+              >
+                {POSE_LABELS[p] ?? p.toUpperCase()}
+              </button>
+            )
+          })}
+        </div>
+      )}
+      {hasAnimation && poses.length === 1 && <div className="mb-1" />}
+    </>
   )
 }
 
