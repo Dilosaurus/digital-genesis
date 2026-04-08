@@ -163,6 +163,7 @@ export const ANIMATION_POSES: Record<string, string[]> = {
   paladin:    ['idle'],
   blackbeard: ['idle'],
   bulwark:    ['idle'],
+  flux:       ['idle'],
 }
 
 // Human-readable pose labels for the dossier tab strip.
