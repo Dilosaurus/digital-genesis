@@ -30,7 +30,7 @@ export function Vision() {
       </div>
 
       {/* ─── header block ───────────────────────────────────────── */}
-      <header className="pt-10 md:pt-16 pb-8 md:pb-12 px-4 md:pl-[18vw] md:pr-[6vw] relative">
+      <header className="pt-10 md:pt-16 pb-8 md:pb-12 px-4 md:pl-[12vw] lg:pl-[18vw] md:pr-[6vw] relative">
         <div
           className="mb-4 reveal reveal-0 font-mono text-[10px] md:text-[11px]"
           style={{ color: 'var(--bone-faint)', letterSpacing: '0.18em' }}
@@ -43,12 +43,14 @@ export function Vision() {
           className="reveal reveal-1"
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(2.6rem, 9vw, 8.5rem)',
+            fontSize: 'clamp(2rem, 8.5vw, 8.5rem)',
             lineHeight: 0.92,
-            letterSpacing: '0.04em',
+            letterSpacing: '0.03em',
             fontWeight: 600,
             color: 'var(--bone)',
             marginLeft: '-0.03em',
+            wordBreak: 'break-word',
+            overflowWrap: 'anywhere',
           }}
         >
           THE SACRED

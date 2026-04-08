@@ -1,0 +1,42 @@
+A painted horror diorama backdrop in the style of Guillermo del Toro's practical cathedral sets (Crimson Peak, Pan's Labyrinth), Zdzisław Beksiński's monumental cathedral architecture, the Capuchin Crypt bone chambers, Coraline stop-motion interior miniatures, Disco Elysium painted environments, and Wayne Barlowe's Inferno architecture. Painterly oil brushwork, painterly dissolving edges — NOT smooth CG, NOT photoreal, NOT Unreal Engine, NOT airbrushed. This is an EMPTY environmental BACKDROP — a painted stage set — onto which individual prop assets (altar, pews, candles, reliquaries, etc.) will be composited later in the game engine.
+
+SUBJECT: the interior of a desecrated gothic cathedral nave, viewed from a low dramatic 3/4 camera angle, standing roughly at floor level inside the nave looking down its length toward the far end. The scene is ARCHITECTURALLY COMPLETE but PROP-EMPTY — it shows walls, floor, ceiling, arches, columns, and a distant stained-glass window, but it does NOT show any furniture, altars, pews, candles, reliquaries, server racks, cables at floor level, thuribles, codex pages, crucifixes at floor level, books, or any portable set dressing. Every removable object will be added as a separate prop sprite in Godot. This backdrop is the empty shell of the room.
+
+ARCHITECTURE TO INCLUDE:
+- Tall gothic cathedral nave with pointed arches and ribbed stone vaulting receding into depth
+- Crumbling plaster walls, visible rebar where the stone has broken through, stained with old water and ash
+- Cracked slate floor tiles extending away from the camera toward the far end, the tiles broken in places
+- Gothic columns lining the nave on both sides, some fractured, some intact, some with dark stains running down them
+- Heavy wooden ceiling beams high above, with cabling draped like dead vines across the vaulting (the high cabling is baked into the architecture as atmosphere — NOT prop cable at floor level)
+- A single tall gothic stained-glass window at the far end of the nave, framed by a tarnished-gold leaded frame. The "saint" figure in the stained glass is replaced by a frozen blue-screen-of-death pattern — cold desaturated slate-blue light pours through it and illuminates the nave
+- Distant architectural atmosphere: a bent crucifix hanging from a high arch, a partial rose window shape above, broken ceiling plaster, dust and haze in the volumetric light
+
+STRICTLY DO NOT INCLUDE (these are separate prop assets, not backdrop):
+- NO altar, NO pews, NO server racks, NO chairs, NO lecterns, NO pulpits, NO confessionals
+- NO candles, NO reliquary boxes, NO thuribles, NO iron chains at floor level, NO crucifixes at floor level
+- NO burnt pages on the floor, NO smashed terminals, NO books, NO scattered debris, NO bone fragments at floor level
+- NO characters, NO people, NO figures, NO humanoids, NO hands, NO faces, NO silhouettes
+- NO distinct floating particles with individual shapes (atmospheric haze is allowed as general lighting, but no individual dust-motes-as-objects)
+
+LIGHTING: single dominant cold desaturated blue-slate light source pouring from the distant stained-glass window at the far end of the nave, a strong volumetric beam cutting down the length of the nave toward the camera. Deep chiaroscuro shadows in the side arches and along the walls. Heavy ambient occlusion in corners, between columns, and under the ceiling beams. Atmospheric haze thickening into the far depths. The canonical "sun direction" for this world is from the window, so architectural forms catch a cold rim-light on their window-facing edges and fall into deep shadow on the opposite side.
+
+DEPTH COMPOSITION: wide ultrawide aspect (21:9). The camera is framed so that there is a clear, flat, empty area of floor in the midground and foreground directly in front of the camera — roughly the middle half of the image width at floor level — where characters and props will later be composited in. The nave recedes into depth toward the distant window. The floor at the camera's feet is mostly empty, structurally intact, ready for prop placement.
+
+PALETTE RULE (HARD): 80% of the image is charcoal, ink-black, cold slate, bone off-white, rusted iron, and crumbling plaster grey. 10% sacred accent: tarnished gold leaf on the distant window frame and the very top of the vaulting stonework. 10% corruption accent: a faint bile-green seepage along one far side wall. The stained-glass light is COLD and DESATURATED — NOT neon, NOT bright. Treat it as "cathedral glass through fog." No more than 2 saturated colors total in the whole image.
+
+STYLE INSPIRATIONS to mix: Zdzisław Beksiński monumental cathedral architecture, Guillermo del Toro practical cabinet cathedral sets, Capuchin Crypt bone chambers, Wayne Barlowe Inferno architecture, Disco Elysium painted interior environments, Coraline stop-motion interior density, wunderkammer cabinets of curiosity.
+
+HARD CONSTRAINTS (do not include any of these):
+- NO PEOPLE, no characters, no figures, no humanoids, no hands, no faces, no silhouettes
+- NO SET DRESSING: no altar, no pews, no server racks, no candles, no reliquaries, no thuribles, no books, no chains at floor level, no furniture, no crucifixes at floor level, no burnt pages, no smashed terminals
+- no text, no words, no letters, no numbers, no readable signs
+- no borders, no frames, no UI, no HUD, no watermark, no signature
+- no Tron neon, no glowing blue grid floors, no circuits-on-everything wallpaper
+- no cyberpunk cliches: no kanji signage, no rainy neon streets, no holograms
+- no wet-PBR Unreal slickness, no photoreal CG, no modern sterile interiors
+- no anime, no cute
+- no AI-slop tells: dead-center symmetry, too-smooth surfaces, unexplained floating debris
+
+COMPOSITION: wide ultrawide aspect (21:9), an empty architectural backdrop with clear floor space in the foreground and midground where props and characters will later be composited. The camera is at approximately standing eye level, looking slightly forward into the depth of the nave so the distant window is the vanishing point.
+
+TONE GROUND TRUTH: reverent, corrupted, precise. This is the empty shell of a holy place that has been compiled and crashed. It is waiting for its horrors to be placed inside.

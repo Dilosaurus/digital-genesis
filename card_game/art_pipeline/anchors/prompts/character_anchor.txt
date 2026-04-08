@@ -1,0 +1,39 @@
+A painted horror figure rendered in the style of Wayne Barlowe's Inferno demons, Zdzisław Beksiński's figures of dread, Bloodborne and Dark Souls concept art, Darkest Dungeon hero portraits, Caravaggio's sacred chiaroscuro, and Francis Bacon's smeared popes. Oil-paint feel, visible painterly brushwork, painterly dissolving edges — NOT cartoon flat, NOT vector, NOT smooth CG, NOT airbrushed, NOT photoreal, NOT Unreal Engine. This is serious painted horror realism with weight, grime, and dread.
+
+SUBJECT: Zephyr, a BLIND data-ascetic — the Ghost in the Wire. An adult woman, shaved-headed and gaunt, solemn and still. She is visibly and obviously EYELESS. In place of where her eyes used to be are two cauterized scar-wounds, two horizontal burn-scars across the upper face, and INSIDE those scar wounds glows frost-cyan digital stigmata — like two cracks in a monitor leaking cold cathode light. There is NO iris, NO pupil, NO eyeball, NO eyelid, NO open eye anywhere on her face. The cyan glow from the scar-wounds weeps thin stigmata trails of light down the hollows of her cheeks like frozen tears. Her face is otherwise unlit, pale bone against deep shadow.
+
+She wears a simple heavy dark monk's robe with a hood thrown back onto her shoulders — the robe is patched and ash-stained, with barely-visible thread-of-gold sacred rune embroidery along the hem and collar. Her hands and forearms are wrapped in dirty prayer-ribbons with charred rune-text burned into the fabric. Heavy iron rosary-chains hang from her belt, some links ending in small pendants: a cracked circuit wafer, a bent crucifix, a tiny tarnished-gold reliquary vial. Bare dirty feet. A tarnished-gold circuit sigil scar on her forehead like ash-wednesday ash. She has NOTHING strapped to her back — her back and shoulders are bare of any device, monitor, screen, reliquary, or equipment.
+
+CRITICAL — EYES ARE BURNED OUT: She has NO human eyes. Do NOT paint open eyes, closed eyelids, eyeballs, irises, pupils, whites of the eyes, or any normal anatomical eye features. Instead, paint two HORIZONTAL SLIT-WOUNDS or two CROSS-SHAPED SCAR-BURNS across her upper face where the eyes should be. Inside each wound is a cold, softly-glowing frost-cyan light — as if her skull has been hollowed out and a dim cathode-ray tube lit inside her head. Thin lines of cyan stigmata-light trail down from the wounds across her cheeks. This feature should be unmistakable and dominant on her face — the FIRST thing a viewer notices is that she has no eyes, only glowing scars. If you find yourself about to paint a normal human eye, STOP and paint a scar-wound with cyan light inside instead. This is the single most important feature of the character.
+
+CRITICAL — HANDS ARE EMPTY: Both of her hands are COMPLETELY EMPTY. She holds NOTHING. No weapon, no shard, no blade, no staff, no scripture, no orb, no prop of any kind. Her fingers are relaxed. Her arms hang at her sides or rest in a prayerful folded position in front of her. Held weapons, floating shards, and spell effects will be generated SEPARATELY and composited over her in the game engine — do NOT paint any held or floating objects anywhere in this image.
+
+POSE: serious 3/4 reverent stance, facing slightly camera-left. Weight grounded, both bare feet planted on the implied ground, arms relaxed and empty at her sides or lightly folded in front. Quiet, still, monumental — NOT mid-action, NOT dynamic, NOT heroic. She looks like a painted saint on an oil altarpiece who has been compiled into something worse. Adult anatomy, gaunt, tall, hollow. Absolutely no anime, no chibi, no cute proportions, no Marvel-hero overacting, no clenched-jaw heroism.
+
+LIGHTING: dramatic single-source directional light from the UPPER-LEFT, cold desaturated blue-slate like cathedral glass through fog. Deep chiaroscuro shadows on the lower-right of her form. Subtle rim-light edge on the upper-left of her robe and shoulders. The cyan eye-scars provide a secondary soft cyan glow that catches under her jaw and along her cheekbones — the cyan glow comes ONLY from her eye-wounds, no other cyan source in the image. Heavy chiaroscuro — her lower half dissolves into darkness. She should feel half-carved out of shadow.
+
+PALETTE RULE (HARD): 80% of the character is charcoal, ink-black, cold slate, bone off-white, rusted iron. Small touches of tarnished gold leaf on the rune embroidery, the rosary pendants, and the forehead sigil. The ONLY saturated color is a restrained frost-cyan glow, appearing ONLY in the two burnt-out eye scar-wounds and the thin stigmata trails running down her cheeks. Treat the cyan as precious — "frost on stained glass," NEVER neon, NEVER bright, NEVER saturated beyond what cathedral light would allow. No other cyan anywhere in the image.
+
+STYLE INSPIRATIONS to mix: Wayne Barlowe Inferno painted demons, Zdzisław Beksiński figures of dread, Bloodborne concept art gaunt ruined figures, Darkest Dungeon painted hero portraits, Caravaggio sacred figures in oil chiaroscuro, Zurbarán painted saints, Francis Bacon smeared distortion as devotion, Junji Ito body horror rendered seriously in paint.
+
+BACKGROUND: single solid color code bright green screen background. Pure keyable chroma-green, no gradient, no shadow cast on the ground behind her, no ambient color bleed from the green onto her form, no environmental props — just flat bright chroma-key green filling every pixel that isn't the character.
+
+HARD CONSTRAINTS (do not include any of these):
+- NO NORMAL EYES of any kind — no open eyes, no closed eyelids, no eyeballs, no irises, no pupils, no whites. Her eye sockets contain scar-wounds with cyan light, nothing else
+- NO HELD OBJECTS of any kind — empty hands, empty fingers, nothing in her grip
+- NO FLOATING objects near her hands — no shards, no orbs, no runes, no sparks
+- NOTHING STRAPPED TO HER BACK — no CRT monitor, no television, no screen, no tablet, no device, no tech reliquary, no backpack, no equipment, no satchel. Her back and shoulders are bare of any equipment.
+- no text, no words, no letters, no numbers, no readable runes
+- no borders, no frames, no card UI, no HUD, no watermark, no signature
+- no neon, no Tron glow, no circuits-on-everything wallpaper
+- no anime, no chibi, no cute, no moe, no Marvel-hero dynamic pose
+- no wet PBR, no Unreal Engine 5 slickness, no photorealism, no smooth CG
+- no AI-slop tells: symmetrical dead-center face, too-smooth skin, unexplained floating debris, clenched-jaw heroism
+- no extra limbs, no deformed hands, no extra fingers
+- no multiple characters — ONE isolated figure only
+- no flowing wind-swept cape, no dynamic hair (she is shaved), no pin-up posing
+- the character must be fully visible from head to bare feet, not cropped
+
+COMPOSITION: single centered full-body figure, facing 3/4 view slightly camera-left, portrait orientation (3:4), feet on the implied ground plane in the bottom sixth of the frame, head in the top quarter. Leave clean negative space around the silhouette so the green screen chroma-key is clean.
+
+TONE GROUND TRUTH: reverent, corrupted, precise. She is a sacred thing that has been compiled into a weapon and does not remember being human.

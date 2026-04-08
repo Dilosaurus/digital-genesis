@@ -1,0 +1,10 @@
+Nano Banana 2 prototype report
+Model: gemini-3.1-flash-image-preview
+Aspect: 2:3 | Size: 2K
+References: bash_base.png, cleave_base.png
+
+strike: OK  19.4s  1696x2528  ->  strike_nb2.png
+body_slam: OK  26.5s  1696x2528  ->  body_slam_nb2.png
+bandage: OK  32.2s  1696x2528  ->  bandage_nb2.png
+
+Total: 3/3 OK in 78.2s

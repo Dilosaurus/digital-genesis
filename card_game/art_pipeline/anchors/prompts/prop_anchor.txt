@@ -1,0 +1,28 @@
+A single painted horror prop rendered in the style of Guillermo del Toro's practical cabinet props (Crimson Peak, Pan's Labyrinth), the Capuchin Crypt reliquary tableaus, Coraline stop-motion miniatures, Zdzisław Beksiński's monumental stone sculpture, Caravaggio's and Zurbarán's sacred still-life chiaroscuro, and Wayne Barlowe's Inferno object-design. Oil-paint feel, visible painterly brushwork, painterly dissolving edges — NOT smooth CG, NOT photoreal, NOT Unreal Engine. This is a painted hero prop — one piece from a reliquary shadow-box diorama, painted in isolation on green screen so it can be composited with other props onto a painted backdrop in the game engine to build scenes. This image is the STYLE ANCHOR for the entire prop library — every future prop in the game will inherit its lighting direction, palette, and painterly brushwork from this piece.
+
+SUBJECT: a broken altar. A monolithic slab of dark basalt stone on a low stepped plinth, split clean down the middle by some terrible impact, the two halves slightly offset and cracked. On top of the altar stands a single guttering black-wax candle in a rusted iron candlestick, the wax running down the stone in frozen rivulets. Beside the candle rests a small tarnished-gold reliquary box, ornate but dented, with a broken clasp — the lid is half-open to reveal a crushed circuit-board inside where a saint's finger-bone should be. A heavy iron rosary-chain drapes across one corner of the split, dangling down into shadow. A few burnt codex pages lie curled at the base of the altar. Beneath the altar, the stone is worn, chipped, and stained with old candle-wax and a faint bile-green seepage creeping from under the base.
+
+POSE / ANGLE: the altar is viewed from a low dramatic 3/4 angle, looking slightly up at it — the way a worshipper would see an altar from a kneeling position. Not straight-on, not pure side-on. The split in the stone runs roughly vertical and the reliquary sits on the right half of the slab.
+
+LIGHTING (CRITICAL — this is the canonical sun direction for the entire game): dramatic single-source directional light from the UPPER-LEFT, cold desaturated blue-slate like cathedral glass through fog. Every subsequent prop in this library will be lit from upper-left to match. Deep chiaroscuro shadows on the lower-right of every form, subtle rim-light on the upper-left edges of the stone, reliquary, and candle. The candle flame provides a SMALL secondary warm glow — sodium-lamp amber, barely pushing back the dark, only reaching the immediate area around the wick and catching on the nearest edge of the reliquary. Heavy ambient occlusion in the split of the stone, under the base, inside the half-open reliquary, and behind the candle.
+
+PALETTE RULE (HARD): 80% of the image is charcoal, ink-black, cold slate basalt, bone off-white wax, and rusted iron chain. 10% sacred accents: tarnished gold leaf on the reliquary box and sodium-lamp amber on the candle flame. 10% corruption accents: faint bile-green seepage under the base of the altar, and a thin arterial-red stain on one of the burnt page corners. No more than 2 saturated colors total in the whole image. The cyan blue-slate light from upper-left is DESATURATED — it is NOT neon, NOT bright.
+
+STYLE INSPIRATIONS to mix: Wayne Barlowe painted prop detail, Caravaggio and Zurbarán still-life chiaroscuro, Zdzisław Beksiński monumental stone architecture, Guillermo del Toro practical cabinet props, Capuchin Crypt reliquary tableau, Coraline stop-motion miniature density, wunderkammer cabinet curiosities.
+
+BACKGROUND: single solid color code bright green screen background. Pure keyable chroma-green filling every pixel that is not the altar prop. No gradient, no cast shadow on the ground behind, no ambient green color bleed onto the stone, no environmental architecture around the prop, no horizon line, no sky, no walls, no floor extending outward — just flat bright chroma-key green around the isolated altar. The base of the altar plinth should sit on a small implied patch of cracked slate tile (about one altar's width across) so the prop has a grounded footprint, but EVERYTHING beyond that footprint is pure chroma-key green.
+
+HARD CONSTRAINTS (do not include any of these):
+- NO CHARACTERS, no people, no hands, no faces, no silhouettes, no worshippers, no priests
+- NO SCENE ARCHITECTURE: no walls, no arches, no ceiling, no window, no columns, no floor extending to the horizon — this is ONE ISOLATED PROP on green, not a scene
+- no text, no words, no letters, no numbers, no readable runes
+- no borders, no frames, no UI, no HUD, no watermark, no signature
+- no neon, no Tron glow, no circuits-on-everything wallpaper
+- no wet PBR Unreal slickness, no photoreal CG, no smooth modern CG rendering
+- no anime, no cute props
+- no AI-slop tells: dead-center symmetry, too-smooth surfaces, floating unexplained debris
+- do NOT paint a cathedral around the altar — the altar MUST be isolated on green screen
+
+COMPOSITION: the altar is centered in the frame, occupying roughly the middle two thirds of the image. Clean negative green-screen space around the silhouette. Frame is roughly square (1:1). The altar is a hero prop — treat it like a museum object photographed on a clean backdrop, except painted.
+
+TONE GROUND TRUTH: reverent, corrupted, precise. This is a holy object that has been compiled and then crashed. It is the prop style anchor — every future painted prop in this game inherits its lighting, palette, and painterly brushwork from this image.

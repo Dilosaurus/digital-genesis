@@ -1,0 +1,6 @@
+Phase 1 anchor generation report
+Model: gemini-3.1-flash-image-preview
+
+character_anchor: OK  40.2s  1792x2400  aspect=3:4  size=2K
+
+Total: 40.2s

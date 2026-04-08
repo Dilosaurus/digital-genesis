@@ -11,6 +11,16 @@ var crystals: int = 0
 var corruption_essence: int = 0
 var current_node: int = 0
 var act: int = 1
+# --- Persistent-pivot fields (added Phase 10a) ---
+# act_id is the new string identifier for which Act the player is in.
+# rite_index tracks which Rite within the Act (1, 2, or 3).
+# These coexist with the legacy `act: int` field for backward compatibility
+# during the transition. New code should prefer act_id + rite_index.
+var act_id: String = "outer_nexus"
+var rite_index: int = 1
+# RunPouch holds unidentified packages collected during this run. Drained
+# into MetaState on extraction or death (degraded on death).
+var run_pouch: RunPouch = null
 var completed_nodes: Array[int] = []
 var relics: Array[String] = []
 var remove_count: int = 0  # Tracks how many cards removed at shop (raises price)
@@ -68,6 +78,8 @@ static func new_run(p_character_id: String = "netrunner") -> RunState:
 	# Technomancer passive: start with 4 energy (handled via character data starting_energy)
 	# No special run_state init needed — Daemon Forge is resolved in combat_engine
 	rs.map_data = RunState.generate_map(1)
+	# Phase 10a: initialize the run pouch for the persistent-pivot loot system.
+	rs.run_pouch = RunPouch.new()
 	return rs
 
 # ---------------------------------------------------------------------------
@@ -297,6 +309,12 @@ func save_to_file() -> void:
 			srow.append(snode)
 		serialized_map.append(srow)
 
+	# Phase 10a: serialize the run pouch alongside the rest of the run state.
+	# Pouches are an Array of Dictionaries; JSON handles them natively.
+	var pouch_packages: Array = []
+	if run_pouch != null:
+		pouch_packages = run_pouch.packages.duplicate()
+
 	var data = {
 		"character_id": character_id,
 		"deck": deck,
@@ -308,6 +326,9 @@ func save_to_file() -> void:
 		"corruption_essence": corruption_essence,
 		"current_node": current_node,
 		"act": act,
+		"act_id": act_id,
+		"rite_index": rite_index,
+		"pouch_packages": pouch_packages,
 		"completed_nodes": completed_nodes,
 		"relics": relics,
 		"map_data": serialized_map,
@@ -358,6 +379,13 @@ static func load_from_file() -> RunState:
 	rs.corruption_essence = data.get("corruption_essence", 0)
 	rs.current_node = data.get("current_node", 0)
 	rs.act = data.get("act", 1)
+	# Phase 10a: deserialize the new persistent-pivot fields with safe defaults.
+	rs.act_id = data.get("act_id", "outer_nexus")
+	rs.rite_index = int(data.get("rite_index", 1))
+	rs.run_pouch = RunPouch.new()
+	for raw_pkg in data.get("pouch_packages", []):
+		if raw_pkg is Dictionary:
+			rs.run_pouch.packages.append(raw_pkg)
 	for n in data.get("completed_nodes", []):
 		rs.completed_nodes.append(int(n))
 	for r in data.get("relics", []):

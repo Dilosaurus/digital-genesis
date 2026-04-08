@@ -1,10 +1,13 @@
 ---
 title: Mana pool system
-status: planned
+status: parked
 order: 7
 phase: 5
 tag: combat
 ---
+
+> **Note (2026-04-07):** Parked by the persistent-progression pivot (see roadmap item 13 and ADR-0003). In a game with persistent stash, crafting, and map-tier progression, the combat economy is shifted by the rolled-affix system rather than by a mana pool. May be revisited once the pivot systems ship and we see whether 3-energy still feels constraining.
+
 
 ## mana pool
 
