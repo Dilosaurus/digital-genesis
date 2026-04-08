@@ -17,7 +17,7 @@ export type CardTag =
 export type EquipSlot = 'WEAPON' | 'ARMOR' | 'TRINKET' | 'AMULET' | 'RING'
 export type CharacterClassName =
   | 'NETRUNNER' | 'SYSADMIN' | 'CRYPTOMANCER'
-  | 'WHITE_HAT' | 'TECHNOMANCER' | 'SCOURGE'
+  | 'WHITE_HAT' | 'HERETIC' | 'SCOURGE'
 export type Stat =
   | 'DAMAGE' | 'BLOCK' | 'HEAL' | 'DRAW' | 'ENERGY' | 'MAX_HP'
   | 'STRENGTH' | 'DEXTERITY' | 'CORRUPTION' | 'VULNERABLE' | 'WEAK'

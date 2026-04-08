@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 id = "scourge"
-display_name = "BLACKBEARD"
+display_name = "CORSAYRE"
 title = "The Code Privateer"
 character_class = 5
 backstory = "Mira Vashenko grew up in a Pacific arcology where her parents wrote security middleware for the cloud cartels. By fourteen she was siphoning encrypted assets out of those same cartels and laundering them through gray-market relays. By twenty she had a kill list, a fleet of stolen daemon shells, and a callsign — Blackbeard — burned into half the wanted boards on the dark net.

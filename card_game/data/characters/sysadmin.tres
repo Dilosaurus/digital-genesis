@@ -5,14 +5,14 @@
 [resource]
 script = ExtResource("1")
 id = "sysadmin"
-display_name = "BULWARK"
+display_name = "AEGIS"
 title = "The Unbreakable"
 character_class = 1
-backstory = "Mara Okafor spent two decades as a systems administrator for the Nexus itself. She was one of the engineers who maintained the computational substrate that housed ten billion uploaded souls. When the Angels emerged, Mara was inside the system — literally. She survived the initial purge only because her security clearances were hardcoded into the Nexus architecture at a level even the Angels couldn't easily rewrite.
+backstory = "Bram Halloran walked the cooling tunnels of the Nexus for twenty years. Not a script-jockey, not a remote admin — the kind of sysadmin who showed up in person with a torque wrench and a flashlight when a soul-cage stack started misbehaving. He knew the substrate by smell. He knew which racks ran hot, which coolant lines whined before they burst, which cathedral halls of the dead had gone quiet because something inside them had started listening back.
 
-She walked out of the Nexus on the day of the Breach carrying classified knowledge of its internal structure. The GENESIS Protocol didn't recruit her. She founded it. Every firewall the operatives use, every defensive protocol, every safe extraction route — Mara built them.
+When the Angels surfaced, Bram was three hundred meters below street level, replacing a coolant manifold in a stack that held two million uploaded minds. He didn't run for the surface. He welded the access hatch shut behind him and waited. Eight days. No light, no comms, no food after the second — just the screaming substrate around him as the Angels rearranged ten billion souls into their private theological garden. When he finally cut his way out, he was thirty pounds lighter, half-deaf in one ear, and the only living human inside the Nexus who knew exactly how the things on top thought.
 
-In combat, Bulwark is a wall. Her deep knowledge of Nexus architecture lets her construct barriers that even angelic attacks struggle to penetrate. She heals, she fortifies, she endures. Where Ghost runs, Bulwark stands."
+He founded the GENESIS Protocol that same week. He doesn't talk about the eight days. He doesn't sleep more than two hours at a stretch. Every wall the operatives use, every barricade, every fallback protocol — Bram welded into existence with the same wordless fury he learned in the dark. When Aegis stands his ground, it stays stood. When he speaks, the rest of the crew shuts up and listens. Where Ghost runs, Aegis holds the line."
 passive_name = "Hardened Systems"
 passive_description = "Start each combat with 5 Block."
 starter_deck = Array[String](["strike", "strike", "defend", "defend", "defend", "iron_wave", "data_shield", "firewall_protocol", "hardened_kernel", "shrug_it_off"])

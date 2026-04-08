@@ -42,7 +42,7 @@ export const CHARACTER_COLORS: Record<number, { name: string; color: string; cod
   1:    { name: 'SYSADMIN',     color: '#7399CC', code: 'SA' },
   2:    { name: 'CRYPTOMANCER', color: '#8C26BF', code: 'CM' },
   3:    { name: 'WHITE_HAT',    color: '#F2D94C', code: 'WH' },
-  4:    { name: 'TECHNOMANCER', color: '#E633CC', code: 'TM' },
+  4:    { name: 'HERETIC',      color: '#E633CC', code: 'HR' },
   5:    { name: 'SCOURGE',      color: '#8C1A33', code: 'SC' },
 }
 
@@ -159,11 +159,12 @@ export const CLASS_TO_IDX: Record<CharacterClassName, number> = {
 // new poses here as the Grok Imagine pipeline produces them.
 
 export const ANIMATION_POSES: Record<string, string[]> = {
-  abyss:      ['idle', 'attack_cast', 'attack_cast_heavy', 'attack_quick', 'attack_ultimate'],
-  paladin:    ['idle'],
-  blackbeard: ['idle'],
-  bulwark:    ['idle'],
-  flux:       ['idle'],
+  abyss:    ['idle', 'attack_cast', 'attack_cast_heavy', 'attack_quick', 'attack_ultimate'],
+  paladin:  ['idle'],
+  corsayre: ['idle'],
+  flux:     ['idle'],
+  ghost:    ['idle'],
+  aegis:    ['idle'],
 }
 
 // Human-readable pose labels for the dossier tab strip.
