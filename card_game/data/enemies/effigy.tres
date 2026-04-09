@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "effigy"
+display_name = "THE EFFIGY — Compiled in Prayer"
+description = "A novitiate caught mid-rite by the breach, still reciting a prayer that has been compiled into a weapon."
+lore = "When the breach swept through the Cloister of the Silent Compile, most of the novitiates were at their evening devotions. They did not finish.
+
+The Effigy is what one of them became. Caught mid-prayer — hands pressed together, head bowed, rite half-spoken — the moment of the breach froze the gesture while the flesh beneath was rewritten. The serene porcelain mask still faces you with its painted calm. The face under the mask is not a face anymore. It is a process, running the prayer in a loop it cannot exit, spitting the unrecited syllables back out as binary rosary beads that fall from its hands and land on the uploaded like a curse.
+
+GENESIS crews have tried to match the mask-patterns of recovered Effigies to the names of novitiates lost in the breach. None of them correspond. Whatever these things are, they were never the people they look like — the masks, the dossier suggests, are older than the Cloister, older than the Nexus, older than the names they wear."
+max_hp = 38
+intent_pool = [{"type": 3, "value": 2}, {"type": 0, "value": 6}, {"type": 3, "value": 2}, {"type": 1, "value": 6}, {"type": 0, "value": 7}]
+xp_reward = 14

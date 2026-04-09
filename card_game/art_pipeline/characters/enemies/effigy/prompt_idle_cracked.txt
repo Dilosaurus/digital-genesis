@@ -1,0 +1,67 @@
+A painted horror figure rendered in the style of Wayne Barlowe's Inferno demons, Zdzisław Beksiński's figures of dread, Bloodborne and Dark Souls concept art, Darkest Dungeon hero portraits, Caravaggio's sacred chiaroscuro, and Francis Bacon's smeared popes. Oil-paint feel, visible painterly brushwork, painterly dissolving edges — NOT cartoon flat, NOT vector, NOT smooth CG, NOT airbrushed, NOT photoreal, NOT Unreal Engine. This is serious painted horror realism with weight, grime, and dread.
+
+SUBJECT: THE EFFIGY — a novitiate monk caught mid-prayer by the breach. An adult figure in a heavy, ash-stained, hooded monk's robe torn along the hem into long ragged strips. The figure stands in a solemn orant (praying) pose with hands pressed together palm-to-palm in front of the chest, fingers pointing up, in the exact gesture of sacred supplication. Gaunt, ascetic, weight-grounded, still.
+
+CRITICAL — MASK NEARLY FLUSH WITH ONE CRACKED OPENING, EVIL EYE AND TEETH VISIBLE THROUGH THE CRACK: The figure's face is a serene bone-white porcelain devotional mask — painted closed eyes in calm prayer, medieval reliquary death-mask features, tarnished gold leaf tracing the cheek-lines and forehead sigil. The mask rests DIRECTLY ON the face, held nearly flush against the skull across most of its surface — not floating, not detached, not two heads side-by-side, not held off to the side, not subtly hovering. Most of the face is still fully covered by the serene mask.
+
+BUT: on the viewer's LEFT of the face (which is the figure's right cheek, because the figure faces slightly camera-left), the mask has CRACKED OPEN. A jagged broken gap roughly the size of a thumb has broken away from the porcelain, exposing the flesh and bone beneath in that one area. This cracked opening is dramatic enough to see clearly but small enough that the rest of the mask is obviously still in place.
+
+Through that cracked opening, TWO things must be visible and PAINTED CLEARLY so the viewer cannot miss them:
+
+ONE: an OPEN EVIL EYE. Not a painted eye on the mask — a real, living, open eye, set in a hollow socket, gleaming faintly with cold BILE-GREEN corruption light, staring directly OUT AT THE VIEWER with the still, patient, predatory hunger of a creature that has been waiting in the dark under the sacred porcelain for a very long time. The eye is wide open. It is NOT closed. It is NOT serene. It is actively watching.
+
+TWO: the CORNER OF A MOUTH curled back from GREY TEETH. Only the edge of the lip and the edge of the teeth visible in the cracked opening — never the full grin, never the full mouth. A predatory smile suggested at just this one broken corner.
+
+Paint the face beneath the mask in the register of Wayne Barlowe's fallen angels, Bloodborne's beast-made-flesh horrors, Francis Bacon's smears of distorted features: taut pale grey-green skin pulled tight over the bones, sunken cheek, hollow eye-socket, an expression of silent predatory amusement at you.
+
+The contradiction is the horror: the mask's PAINTED eyes are closed in sacred prayer, the mask's PAINTED mouth is serene and solemn. But through the one cracked opening, the REAL eye underneath is wide open and evil, and the REAL mouth underneath is curled back in teeth. The mask is the lie. The eye through the crack is the truth. The viewer should read "monk praying" at first glance, then see the cracked cheek with the open bile-green eye and the teeth, and recoil. This is the single most important feature of the character — paint it boldly and clearly, not subtly.
+
+CRITICAL — THE BINARY ROSARY: From the praying hands, a cascading string of small tarnished-gold glyphs falls in a gentle arc downward and outward like rosary beads on a chain. The glyphs are clearly 1s and 0s — digital binary digits rendered as if they were sacred marks, tiny and carefully made, hand-inscribed, NEVER neon, NEVER glowing. There should be roughly 10–20 glyphs arcing outward from the hands in the shape of an actual rosary loop, not a dense wall of text, not a stream of code. Treat the binary rosary as the figure's sacred object — its equivalent of prayer beads. The glyphs catch faint tarnished-gold side-light. They fall because the figure is praying, not because they are glowing or animated.
+
+CRITICAL — HANDS ARE PRAYING AND EMPTY: The figure's hands are pressed together palm-to-palm in the orant prayer gesture, fingers pointing up. They hold NOTHING — no weapon, no staff, no book, no sword, no object. The binary rosary emanates FROM the hands but is NOT held in them — the glyphs fall outward from the prayer gesture itself, as if the act of praying is still spitting out the unrecited beads.
+
+CRITICAL — HOOD DOWN, HEAD EXPOSED: The robe has a heavy hood, but the hood is pulled DOWN and back, resting loose behind the neck and on the shoulders like a thick collar. The hood is NOT up, NOT over the head, NOT covering the skull, NOT casting a shadow across the face, NOT draped across the mask. The head and mask are fully visible and uncovered — no hood, no cowl, no veil, no head-wrap, no fabric hanging over the face. The mask and the evil face beneath it are the focal point of the figure and must NOT be obscured by any head-covering of any kind.
+
+ROBES: A heavy dark monk's robe, ash-stained and torn at the hem into long ragged strips that trail down past the feet and dissolve into shadow / void within the lower portion of the figure — the robe is partly grounded, partly dissolving, the lower half tattering into darkness. The robe has barely-visible thread-of-gold sacred rune embroidery along the hem and collar (matching the mask's gold cheek-lines). A heavy iron rosary-chain hangs from a rope belt at the waist, some links ending in small cracked pendants: a bent crucifix, a tarnished-gold reliquary vial, a cracked circuit wafer.
+
+POSE: Serious 3/4 reverent stance facing slightly camera-left. Weight grounded, both BARE DIRTY FEET FIRMLY PLANTED ON THE IMPLIED GROUND AND CLEARLY VISIBLE at the bottom of the figure — the figure is NOT floating, NOT trailing off into fog, NOT dissolving where the feet should be. Paint the bare feet as real feet, visible beneath the tattered hem of the robe. The arms are raised in front of the chest in the orant prayer position — palms pressed together, fingers pointing up, elbows slightly out and down. Quiet, still, monumental. NOT mid-action, NOT dynamic, NOT heroic. This figure looks like a painted saint on an oil altarpiece who has been compiled into something worse. Adult anatomy, gaunt, tall, hollow. Absolutely no anime, no chibi, no cute proportions, no Marvel-hero overacting, no clenched-jaw heroism.
+
+LIGHTING: Dramatic single-source directional light from the UPPER-LEFT, cold desaturated slate-blue like cathedral glass through fog. Deep chiaroscuro shadows on the lower-right of the figure. Subtle rim-light on the upper-left edges of the mask, the hood, and the raised hands. Heavy chiaroscuro — the lower half of the robe dissolves into darkness. The tarnished-gold of the mask and rosary catches the side-light in small sacred highlights. A faint secondary bile-green undertone emanates from the boundary-seam where the mask meets the corrupting face beneath — but no other light source.
+
+PALETTE RULE (HARD): 80% of the figure is charcoal, ink-black, cold slate, bone off-white (the mask), and rusted iron. 10% tarnished gold leaf — only on the mask's cheek-lines and forehead sigil, the rosary pendants, the robe-hem embroidery, and the binary rosary glyphs. 10% restrained BILE GREEN — the corruption color — seeping OUT of the boundary between the slipping mask and the dissolving face beneath, bleeding into the pixelated fracture edges. The bile green is the corruption color for this figure; treat it as precious and unsettling, never neon, never saturated, like algae on old stone or mold bleeding through vellum. No other saturated color anywhere in the image.
+
+STYLE INSPIRATIONS to mix: Wayne Barlowe Inferno painted demons, Zdzisław Beksiński figures of dread, Bloodborne concept art gaunt ruined figures, Darkest Dungeon painted hero portraits, Caravaggio sacred figures in oil chiaroscuro, Zurbarán painted saints, Francis Bacon smeared distortion as devotion, Junji Ito body horror rendered seriously in paint, medieval reliquary death masks, Capuchin Crypt relic displays.
+
+BACKGROUND: Single flat bright chroma-key green screen background. Pure keyable green, no gradient, no shadow cast on the ground behind the figure, no ambient green bleed onto the form, no environmental props — just flat bright chroma-key green filling every pixel that isn't the figure.
+
+REFERENCE IMAGE: Use the provided reference image as the PRIMARY visual ground truth for the figure's silhouette, the orant prayer pose, the monk's robes, the tattered dissolving hem, and the binary rosary beads cascading from the hands. For the HEAD specifically: match the reference's overall head shape and scale, but paint the face per the CRITICAL MASK instruction above — a single serene porcelain mask resting FLUSH on the face with only a tiny slipping seam, and through that seam an evil predatory face watching the viewer with one open bile-green eye. Do NOT paint two discrete faces side-by-side — paint ONE head with a mask nearly flush on it and something worse underneath. Match the painted horror-realism style and the bone-and-bile palette of the reference. Render the figure in the locked art direction of the game deus.exe.
+
+HARD CONSTRAINTS (do not include any of these):
+- NO held objects in the hands — the hands are empty, pressed together in prayer, and the binary rosary is FALLING from them, not HELD
+- NO normal open or closed human eyes on the face — the mask has painted closed eyes, and the face beneath is dissolving into pixel fracture, not anatomically correct
+- NO neon glow, NO Tron grid, NO circuits-on-everything wallpaper
+- NO readable text, NO letters, NO words, NO sentences — ONLY 1s and 0s painted as sacred glyphs, and only as the rosary beads falling from the hands
+- NO borders, NO frames, NO card UI, NO HUD, NO watermark, NO signature
+- NO anime, NO chibi, NO cute, NO moe, NO Marvel-hero dynamic pose
+- NO wet PBR, NO Unreal Engine 5 slickness, NO photorealism, NO smooth CG
+- NO AI-slop tells: symmetrical dead-center face, too-smooth skin, unexplained floating debris, clenched-jaw heroism
+- NO multiple figures — ONE isolated figure only
+- NO flowing wind-swept cape, NO dynamic action pose, NO pin-up posing
+- NO weapon of any kind — no sword, no staff, no blade, no spear, no knife
+- the figure must be fully visible from head to torn-robe-hem, not cropped at the top or sides
+
+COMPOSITION: Single full-body figure, facing 3/4 view slightly camera-left, portrait orientation (3:4).
+
+CRITICAL FRAMING RULE — the figure CONFIDENTLY FILLS the frame with a small but clean margin of green chroma-key on all four sides. Target composition: the figure's head-to-feet height takes up approximately 80–85% of the canvas height, leaving roughly 8% green margin above the head and 8% green margin below the feet. Horizontally, the figure's silhouette plus its binary rosary takes up roughly 70–80% of the canvas width, leaving roughly 10% green margin on the left and 10% on the right. This is a commanding altarpiece composition, not a small figure floating in a sea of green.
+
+NO PART of the figure, robe, torn hem, hands, pendants, or binary rosary glyphs may be cropped by or touch any edge of the frame. Specifically:
+- ABOVE the head — clear green space at the top, roughly 8% of the canvas height
+- BELOW the bare feet — clear green chroma-key strip, roughly 8% of the canvas height, so the feet are clearly visible with ground beneath them (no floating, no robe dissolving where the feet should be)
+- TO THE LEFT of the robe silhouette — clear green space, roughly 10% of the canvas width
+- TO THE RIGHT of the binary rosary's outermost glyphs — clear green space, roughly 10% of the canvas width
+
+Place the masked head at around 15% from the top of the canvas (just below the top margin). Place the orant prayer hands at roughly 40% height. Place the bare feet at roughly 90% height (just above the bottom margin). The torn robe hem dissolves in the lower part of the figure but must not eat the feet or extend past the bottom margin — the feet are always visible beneath the hem.
+
+Clean green margins on all four sides are MANDATORY so the chroma-key is clean. But the figure should feel TALL and COMMANDING inside those margins — it is the subject of an altarpiece panel, not a small object floating in space.
+
+TONE GROUND TRUTH: reverent, corrupted, precise. The Effigy is a sacred thing that has been compiled into a weapon and is still praying through it. The mask still believes. The code beneath does not.
