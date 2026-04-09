@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcaj4orptcej3"]
+
+[ext_resource type="Texture2D" path="res://assets/backdrops/server_crypt.png" id="1_bkdrp"]
+[ext_resource type="Script" path="res://scripts/ui/sprite_sheet_animator.gd" id="2_anim"]
+[ext_resource type="Texture2D" path="res://assets/characters/netrunner/sheets/idle.png" id="3_ghost"]
+[ext_resource type="Texture2D" path="res://assets/characters/effigy/fullbody.png" id="4_effigy"]
+
+[sub_resource type="Gradient" id="light_gradient"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.4, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="light_tex"]
+gradient = SubResource("light_gradient")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="PaintedArena" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PaintedBackdrop" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_bkdrp")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.72, 0.72, 0.82, 1)
+
+[node name="WindowLight" type="PointLight2D" parent="."]
+position = Vector2(1350, 280)
+color = Color(0.55, 0.72, 1, 1)
+energy = 1.35
+texture = SubResource("light_tex")
+texture_scale = 3.5
+
+[node name="PaintedPlayer" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 173.0
+offset_top = 328.0
+offset_right = 873.0
+offset_bottom = 1028.0
+mouse_filter = 2
+texture = ExtResource("3_ghost")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_anim")
+sheet_path = "res://assets/characters/netrunner/sheets/idle.png"
+meta_path = "res://assets/characters/netrunner/sheets/idle.json"
+
+[node name="PaintedEnemySprite_0" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1148.0
+offset_top = 406.0
+offset_right = 1627.0
+offset_bottom = 1044.667
+mouse_filter = 2
+texture = ExtResource("4_effigy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PaintedEnemySprite_1" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 865.0
+offset_top = 200.0
+offset_right = 1390.0
+offset_bottom = 900.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PaintedEnemySprite_2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 485.0
+offset_top = 200.0
+offset_right = 1010.0
+offset_bottom = 900.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

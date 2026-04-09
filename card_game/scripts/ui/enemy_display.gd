@@ -153,24 +153,37 @@ func update_enemy(state_dict: Dictionary) -> void:
 		if _idle_tween:
 			_idle_tween.kill()
 			_idle_tween = null
-	elif _puppet == null:
-		var fullbody_path := "res://assets/characters/%s/fullbody.png" % enemy_id
-		if ResourceLoader.exists(fullbody_path):
-			# Use fullbody sprite instead of colored rect
-			var sprite := TextureRect.new()
-			sprite.texture = load(fullbody_path)
-			sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			sprite.custom_minimum_size = enemy_rect.size
-			sprite.size = enemy_rect.size
-			sprite.position = enemy_rect.position
-			sprite.name = "EnemySprite"
-			add_child(sprite)
+	elif _puppet == null and not has_node("EnemySprite"):
+		# Painted 2D enemies render via painted_arena.tscn's PaintedEnemySprite_*
+		# nodes at editor-placed fixed positions (see combat_scene.gd's
+		# _configure_painted_enemy_slot). The EnemyDisplay Control only hosts
+		# the HP / intent / status UI overlaid above that sprite — we do NOT
+		# create a fullbody TextureRect here.
+		if enemy_id in Combat3DStage.PAINTED_2D_ENEMIES:
 			enemy_rect.visible = false
 		else:
-			var cols = ENEMY_COLORS.get(enemy_id, [Color(0.5, 0.15, 0.15), Color(0.65, 0.22, 0.22)])
-			enemy_rect.color = cols[0]
-			if enemy_rect.has_node("EnemyLabel"):
-				enemy_rect.get_node("EnemyLabel").add_theme_color_override("font_color", cols[1].lightened(0.4))
+			var fullbody_path := "res://assets/characters/%s/fullbody.png" % enemy_id
+			if ResourceLoader.exists(fullbody_path):
+				var sprite := TextureRect.new()
+				sprite.texture = load(fullbody_path)
+				sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				# Fix: expand_mode defaults to EXPAND_KEEP_SIZE which forces the
+				# control's minimum size to match the source texture's native
+				# dimensions. IGNORE_SIZE lets us size it freely.
+				sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				sprite.custom_minimum_size = enemy_rect.size
+				sprite.size = enemy_rect.size
+				sprite.position = enemy_rect.position
+				sprite.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				sprite.name = "EnemySprite"
+				add_child(sprite)
+				move_child(sprite, 0)
+				enemy_rect.visible = false
+			else:
+				var cols = ENEMY_COLORS.get(enemy_id, [Color(0.5, 0.15, 0.15), Color(0.65, 0.22, 0.22)])
+				enemy_rect.color = cols[0]
+				if enemy_rect.has_node("EnemyLabel"):
+					enemy_rect.get_node("EnemyLabel").add_theme_color_override("font_color", cols[1].lightened(0.4))
 
 	hp_bar.set_values(state_dict["current_hp"], state_dict["max_hp"])
 

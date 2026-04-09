@@ -139,14 +139,41 @@ func spawn_player(character_id: String) -> PuppetBase3D:
 	return puppet
 
 
-## Spawn an enemy in the 3D scene
-func spawn_enemy(enemy_id: String, slot_index: int = 0, total_enemies: int = 1) -> PuppetBase3D:
-	var puppet := PlayerPuppet3D.new()
-	_enemy_spawn.add_child(puppet)
+## Enemies rendered as painted 2D sprites instead of 3D KayKit puppets.
+## For these we create an invisible Node3D at the enemy spawn position as a
+## positional anchor — the 2D EnemyDisplay Control still projects its screen
+## position from this anchor via _update_enemy_display_positions(), but no
+## KayKit model is instantiated. The painted character render lives entirely
+## in the 2D layer via enemy_display.gd's fullbody.png path.
+const PAINTED_2D_ENEMIES: Array[String] = ["effigy"]
 
-	# Position enemies spread out
+
+## Spawn an enemy in the 3D scene. Returns Node3D so callers must type-check
+## before accessing PuppetBase3D-specific methods — painted enemies return a
+## plain Node3D anchor with no character setup or animation.
+##
+## When the Combat3DStage is hidden (painted-2D combat mode), the anchor is
+## still needed so the existing 3D→2D projection in combat_scene.gd's
+## _update_enemy_display_positions() can place the EnemyDisplay Control's
+## intent / HP / status UI at the right screen position. The actual character
+## render happens in the 2D layer via enemy_display.gd's oversize fullbody
+## TextureRect path.
+func spawn_enemy(enemy_id: String, slot_index: int = 0, total_enemies: int = 1) -> Node3D:
 	var spread := 1.8
 	var offset := (slot_index - (total_enemies - 1) / 2.0) * spread
+
+	# Painted 2D enemies: no KayKit puppet, just an invisible positional anchor
+	# used by the EnemyDisplay tracking code. The painted character render is
+	# in the 2D layer (enemy_display.gd), not here.
+	if enemy_id in PAINTED_2D_ENEMIES:
+		var anchor := Node3D.new()
+		anchor.name = "PaintedEnemy_%s" % enemy_id
+		_enemy_spawn.add_child(anchor)
+		anchor.position = Vector3(offset, 0.0, 0.0)
+		return anchor
+
+	var puppet := PlayerPuppet3D.new()
+	_enemy_spawn.add_child(puppet)
 	puppet.position = Vector3(offset, 0.0, 0.0)
 
 	# Face left (toward player)

@@ -67,7 +67,7 @@ var _end_turn_pulse_tween: Tween = null
 # 3D character display
 var _combat_3d_stage: Combat3DStage = null
 var _player_puppet_3d: PuppetBase3D = null
-var _enemy_puppets_3d: Dictionary = {}  # enemy_index -> PuppetBase3D
+var _enemy_puppets_3d: Dictionary = {}  # enemy_index -> Node3D (PuppetBase3D for KayKit enemies, plain Node3D anchor for painted 2D enemies)
 
 # Targeting state for multi-enemy single-target card selection
 var _targeting_active: bool = false
@@ -89,6 +89,9 @@ func _update_enemy_display_positions() -> void:
 	var camera: Camera3D = _combat_3d_stage.get_camera()
 	if not camera:
 		return
+	if Engine.get_process_frames() % 120 == 0:
+		print("[EnemyTrack] _update called. _enemy_puppets_3d.size=%d enemy_display_nodes.size=%d _painted_arena=%s"
+			% [_enemy_puppets_3d.size(), enemy_display_nodes.size(), str(_painted_arena)])
 	for i in _enemy_puppets_3d:
 		if not enemy_display_nodes.has(i):
 			continue
@@ -96,7 +99,40 @@ func _update_enemy_display_positions() -> void:
 		var ed: Control = enemy_display_nodes[i]
 		if not is_instance_valid(puppet) or not is_instance_valid(ed):
 			continue
-		# Get the world position above the enemy's head
+
+		# Painted enemies have their character render in painted_arena.tscn
+		# at an editor-placed fixed position. Put the HP / intent UI above
+		# that sprite instead of projecting from the (hidden) 3D anchor.
+		var enemy_id: String = ""
+		if engine and engine.state and i < engine.state.enemies.size():
+			enemy_id = engine.state.enemies[i].enemy_data_id
+		if enemy_id in Combat3DStage.PAINTED_2D_ENEMIES:
+			var slot: Control = _get_painted_enemy_slot(i)
+			if slot != null:
+				ed.visible = true
+				# CRITICAL: ed is a child of EnemyArea (HBoxContainer), which
+				# auto-lays-out its children every frame — any position we set
+				# gets clobbered. top_level = true detaches ed from its parent
+				# layout and makes its position global / screen-space. Idempotent
+				# so it's safe to set every frame.
+				if not ed.top_level:
+					ed.top_level = true
+					print("[EnemyTrack-%d] set top_level=true on ed (parent=%s)"
+						% [i, ed.get_parent().name if ed.get_parent() else "null"])
+				var slot_global_center_x: float = slot.global_position.x + slot.size.x / 2.0
+				var slot_global_top_y: float = slot.global_position.y
+				var target_pos := Vector2(
+					slot_global_center_x - ed.size.x / 2.0,
+					max(slot_global_top_y - 20.0, 10.0)
+				)
+				ed.global_position = target_pos
+				if Engine.get_process_frames() % 60 == 0:
+					print("[EnemyTrack-%d] slot.global_pos=%s slot.size=%s  →  ed.global_pos=%s ed.size=%s ed.top_level=%s"
+						% [i, slot.global_position, slot.size, ed.global_position, ed.size, ed.top_level])
+			continue
+
+		# Get the world position above the enemy's head. KayKit puppets stand
+		# at puppet.position.y = 0 (feet on ground) with head at +1.8m.
 		var world_pos: Vector3 = puppet.global_position + Vector3(0, 1.8, 0)
 		if camera.is_position_behind(world_pos):
 			ed.visible = false
@@ -199,7 +235,21 @@ func _play_encounter_intro(node_type: String) -> void:
 ## Sandbox enemy picker. Set DEBUG_SANDBOX_ENEMY to a specific enemy id
 ## (e.g. "michael", "gabriel") to force every F6 of combat_scene.tscn to
 ## fight that enemy. Empty string = random from the pool.
-const DEBUG_SANDBOX_ENEMY: String = ""
+const DEBUG_SANDBOX_ENEMY: String = "effigy"
+
+## Sandbox player picker. Set DEBUG_SANDBOX_PLAYER to a specific character id
+## (e.g. "netrunner" for Ghost, "white_hat" for Paladin) to force every F6 of
+## combat_scene.tscn to use that painted character instead of the default
+## KayKit chibi knight. Empty string = fall back to current_run.character_id
+## or "knight".
+const DEBUG_SANDBOX_PLAYER: String = "netrunner"
+
+## Playable characters that render as painted 2D sprites (animated sprite
+## sheets from the Veo 3.1 pipeline) instead of KayKit 3D puppets. When the
+## current player's character_id is in this set, combat_scene.gd hides the
+## entire Combat3DStage SubViewport and renders a painted backdrop + a
+## SpriteSheetAnimator for the player in the 2D layer.
+const PAINTED_2D_PLAYERS: Array[String] = ["netrunner"]
 
 func _pick_random_enemy() -> String:
 	if DEBUG_SANDBOX_ENEMY != "":
@@ -377,8 +427,9 @@ func _client_card_played_fx(peer_id: int, card_id: String, target_index: int, da
 		_spawn_damage_number(enemy_display_nodes[target_index], damage, "damage")
 		_do_screen_shake(clampf(float(damage) * 0.8, 3.0, 15.0))
 		SFXManager.play_hit()
-		# 3D enemy hit reaction
-		if _enemy_puppets_3d.has(target_index):
+		# 3D enemy hit reaction — only for KayKit puppets; painted enemies
+		# return a plain Node3D anchor from spawn_enemy() with no animation.
+		if _enemy_puppets_3d.has(target_index) and _enemy_puppets_3d[target_index] is PuppetBase3D:
 			_enemy_puppets_3d[target_index].play_hit()
 
 	# Block number on player
@@ -417,8 +468,8 @@ func _client_enemy_acted_fx(enemy_index: int, intent_type: int, value: int, targ
 			if _combat_3d_stage:
 				_combat_3d_stage.do_camera_shake(0.08, 0.25)
 			_do_screen_shake(clampf(float(damage_dealt) * 1.0, 5.0, 20.0), 0.3)
-		# Enemy attack animation
-		if _combat_3d_stage and _enemy_puppets_3d.has(enemy_index):
+		# Enemy attack animation — only for KayKit puppets
+		if _combat_3d_stage and _enemy_puppets_3d.has(enemy_index) and _enemy_puppets_3d[enemy_index] is PuppetBase3D:
 			_enemy_puppets_3d[enemy_index].play_attack()
 
 	# Hack challenge — only triggers for the targeted local player
@@ -1280,8 +1331,9 @@ func _play_enemy_actions() -> void:
 		var tpid: int = action["target_peer_id"]
 		var dd: int = action["damage_dealt"]
 
-		# Play the enemy's attack/defend/buff animation on the 3D model
-		if _enemy_puppets_3d.has(ei):
+		# Play the enemy's attack/defend/buff animation on the 3D model —
+		# only for KayKit puppets; painted enemies have no animation rig.
+		if _enemy_puppets_3d.has(ei) and _enemy_puppets_3d[ei] is PuppetBase3D:
 			match it:
 				Enums.EnemyIntent.ATTACK: _enemy_puppets_3d[ei].play_attack()
 				Enums.EnemyIntent.DEFEND: _enemy_puppets_3d[ei].play_block()
@@ -1689,12 +1741,21 @@ func _get_first_living_enemy_index() -> int:
 				return i
 	return -1
 
-# === 3D Character Puppet ===
+# === Character Rendering (3D Puppet or Painted 2D Sprite) ===
+
+## Resolve which character the player is this combat.
+## Priority: active run → DEBUG_SANDBOX_PLAYER override (F6 sandbox) → "knight".
+func _resolve_player_character_id() -> String:
+	if GameManager.is_run_active() and GameManager.current_run:
+		return GameManager.current_run.character_id
+	if DEBUG_SANDBOX_PLAYER != "":
+		return DEBUG_SANDBOX_PLAYER
+	return "knight"
+
 
 func _spawn_player_puppet_3d() -> void:
-	var character_id := "knight"
-	if GameManager.is_run_active() and GameManager.current_run:
-		character_id = GameManager.current_run.character_id
+	var character_id := _resolve_player_character_id()
+	var painted_mode := character_id in PAINTED_2D_PLAYERS
 
 	_combat_3d_stage = Combat3DStageScene.instantiate() as Combat3DStage
 	_combat_3d_stage.name = "Combat3DStage"
@@ -1703,33 +1764,187 @@ func _spawn_player_puppet_3d() -> void:
 	shake_container.add_child(_combat_3d_stage)
 	shake_container.move_child(_combat_3d_stage, 0)
 
-	# Load a dungeon variant for this combat. Phase 1: pick by whether the
-	# first enemy is a boss, else use the Act 1 server crypt variants.
-	var variant := _pick_dungeon_variant()
-	if variant:
-		var seed_val: int = 1
-		if GameManager.is_run_active() and GameManager.current_run:
-			# Hash (act, floors_cleared) so each room in a run varies
-			# deterministically without needing a dedicated run seed field.
-			var r = GameManager.current_run
-			seed_val = (int(r.act) * 10007) ^ (int(r.floors_cleared) * 31)
-			if seed_val == 0:
-				seed_val = 1
-		_combat_3d_stage.load_dungeon(variant, seed_val)
+	# Painted 2D mode: hide the entire 3D stage (stone dungeon + KayKit puppets)
+	# and render a painted backdrop + painted player in the 2D layer instead.
+	# The 3D stage is kept in the tree (not freed) so the invisible Node3D
+	# enemy anchors still exist inside _enemy_spawn and the existing
+	# _update_enemy_display_positions() can still project their screen coords
+	# via the Camera3D. The camera's unproject_position() is pure math and
+	# works even when the SubViewport isn't rendering.
+	if painted_mode:
+		_combat_3d_stage.visible = false
+		_spawn_painted_backdrop_and_player(character_id)
+	else:
+		# Load a dungeon variant for this combat. Phase 1: pick by whether the
+		# first enemy is a boss, else use the Act 1 server crypt variants.
+		var variant := _pick_dungeon_variant()
+		if variant:
+			var seed_val: int = 1
+			if GameManager.is_run_active() and GameManager.current_run:
+				# Hash (act, floors_cleared) so each room in a run varies
+				# deterministically without needing a dedicated run seed field.
+				var r = GameManager.current_run
+				seed_val = (int(r.act) * 10007) ^ (int(r.floors_cleared) * 31)
+				if seed_val == 0:
+					seed_val = 1
+			_combat_3d_stage.load_dungeon(variant, seed_val)
 
-	# Spawn player
+	# Spawn player puppet via the 3D stage. In painted mode this is still
+	# called so _player_puppet_3d is populated for any legacy code paths, but
+	# the puppet is inside the hidden Combat3DStage so it doesn't render. The
+	# painted SpriteSheetAnimator added in _spawn_painted_backdrop_and_player
+	# is what the player actually sees.
 	_player_puppet_3d = _combat_3d_stage.spawn_player(character_id)
+	if painted_mode and _player_puppet_3d:
+		# Extra safety: hide the KayKit puppet even within the hidden stage,
+		# in case anything tries to bring the stage back visible later.
+		_player_puppet_3d.visible = false
 
-	# Spawn enemies as 3D models and hide 2D artwork
+	# Spawn enemies as 3D anchors (invisible) / 2D painted sprites and hide
+	# the legacy 2D fullbody artwork in EnemyDisplay for painted enemies.
 	if engine:
-		var enemy_count = engine.state.enemies.size()
+		var enemy_count: int = engine.state.enemies.size()
+		print("[EnemySpawnLoop] enemy_count=%d painted_arena=%s PAINTED_2D_ENEMIES=%s"
+			% [enemy_count, str(_painted_arena), str(Combat3DStage.PAINTED_2D_ENEMIES)])
 		for i in enemy_count:
-			var enemy_id = engine.state.enemies[i].enemy_data_id
-			var enemy_puppet = _combat_3d_stage.spawn_enemy(enemy_id, i, enemy_count)
+			var enemy_id: String = engine.state.enemies[i].enemy_data_id
+			print("[EnemySpawnLoop] i=%d enemy_id=%s in_painted_list=%s"
+				% [i, enemy_id, enemy_id in Combat3DStage.PAINTED_2D_ENEMIES])
+			var enemy_puppet: Node3D = _combat_3d_stage.spawn_enemy(enemy_id, i, enemy_count)
 			_enemy_puppets_3d[i] = enemy_puppet
+			# Painted enemies: set up the corresponding slot in painted_arena.tscn
+			# so its TextureRect shows this enemy's fullbody sprite at the
+			# editor-placed position. See _configure_painted_enemy_slot.
+			if enemy_id in Combat3DStage.PAINTED_2D_ENEMIES:
+				_configure_painted_enemy_slot(enemy_id, i)
 			# Hide 2D enemy artwork after a frame so it catches dynamically loaded sprites
 			if enemy_display_nodes.has(i):
 				_hide_enemy_2d_art.call_deferred(i)
+
+		# Hide any unused painted enemy slots (if painted_arena.tscn has more
+		# slots than the current encounter needs).
+		if _painted_arena != null:
+			var slot_idx: int = enemy_count
+			while true:
+				var slot = _painted_arena.get_node_or_null("PaintedEnemySprite_%d" % slot_idx)
+				if slot == null:
+					break
+				slot.visible = false
+				slot_idx += 1
+
+
+## Packed painted arena scene — edit scenes/combat/painted_arena.tscn in the
+## Godot editor to drag the backdrop / player / enemy sprites around visually.
+## Runtime code below just instantiates the scene and swaps textures as needed.
+const PaintedArenaScene = preload("res://scenes/combat/painted_arena.tscn")
+const SpriteSheetAnimatorScript = preload("res://scripts/ui/sprite_sheet_animator.gd")
+
+## The instantiated PaintedArena root, cached so later code can find its
+## PaintedPlayer / PaintedEnemySprite_* children for texture swapping and
+## for EnemyDisplay UI positioning.
+var _painted_arena: Control = null
+
+
+## Instantiate painted_arena.tscn as a child of shake_container. The scene
+## file has default textures (Ghost idle for PaintedPlayer, Effigy v4 for
+## PaintedEnemySprite_0) and fixed positions that can be tweaked in the
+## editor. Here we just override textures / sheets based on the actual
+## character_id + enemy list for this combat.
+func _spawn_painted_backdrop_and_player(character_id: String) -> void:
+	_painted_arena = PaintedArenaScene.instantiate() as Control
+	shake_container.add_child(_painted_arena)
+	shake_container.move_child(_painted_arena, 0)  # behind everything else
+
+	# Verify the backdrop texture actually loaded. Godot's import system has
+	# been flaky about some PNGs in this project (it marks the .import file
+	# valid=false and never generates the .ctex, leaving scene-file ExtResource
+	# references resolving to null). When that happens, bypass the import
+	# pipeline entirely: read the raw PNG bytes with FileAccess, decode them
+	# in memory with Image.load_png_from_buffer, and build an ImageTexture.
+	# Slightly less efficient (no GPU compression) but guaranteed to work.
+	var backdrop := _painted_arena.get_node_or_null("PaintedBackdrop") as TextureRect
+	if backdrop:
+		if backdrop.texture == null:
+			print("[PaintedBackdrop] texture is NULL — bypassing import via FileAccess")
+			# Try multiple candidate paths in order — first the art_pipeline
+			# anchor (the original), then the assets copy.
+			var candidates := [
+				"res://art_pipeline/anchors/background_anchor.png",
+				"res://assets/backdrops/server_crypt.png",
+			]
+			var loaded := false
+			for p in candidates:
+				if not FileAccess.file_exists(p):
+					print("[PaintedBackdrop] candidate missing: %s" % p)
+					continue
+				var bytes := FileAccess.get_file_as_bytes(p)
+				print("[PaintedBackdrop] read %d bytes from %s" % [bytes.size(), p])
+				if bytes.size() == 0:
+					continue
+				var img := Image.new()
+				var err := img.load_png_from_buffer(bytes)
+				if err != OK:
+					print("[PaintedBackdrop] load_png_from_buffer FAILED err=%d for %s" % [err, p])
+					continue
+				var tex := ImageTexture.create_from_image(img)
+				backdrop.texture = tex
+				print("[PaintedBackdrop] loaded via FileAccess: %s  size=%s" % [p, img.get_size()])
+				loaded = true
+				break
+			if not loaded:
+				push_warning("PaintedBackdrop: ALL candidate paths failed to load")
+		print("[PaintedBackdrop] final texture=%s size=%s visible=%s"
+			% [str(backdrop.texture), backdrop.size, backdrop.visible])
+	else:
+		push_warning("PaintedArena: PaintedBackdrop node missing")
+
+	# --- Override the player sprite sheet based on the actual character_id ---
+	# The scene file defaults to Ghost's idle. For other painted characters,
+	# swap to their sheet here.
+	var painted_player := _painted_arena.get_node_or_null("PaintedPlayer")
+	if painted_player:
+		var sheet_path := "res://assets/characters/%s/sheets/idle.png" % character_id
+		var meta_path := "res://assets/characters/%s/sheets/idle.json" % character_id
+		if ResourceLoader.exists(sheet_path) and painted_player.has_method("load_pose"):
+			painted_player.load_pose(sheet_path, meta_path)
+		print("[PaintedPlayer] character=%s position=%s size=%s"
+			% [character_id, painted_player.position, painted_player.size])
+	else:
+		push_warning("PaintedArena: PaintedPlayer node not found in instantiated scene")
+
+	print("[PaintedArena] instantiated at position=%s size=%s"
+		% [_painted_arena.position, _painted_arena.size])
+
+
+## Configure the PaintedEnemySprite_<slot_index> node in the instantiated
+## painted arena: set its texture from the enemy's fullbody.png and make it
+## visible. Slots beyond total_slots are hidden. Called from the main enemy
+## spawn loop in _spawn_player_puppet_3d for each painted enemy.
+func _configure_painted_enemy_slot(enemy_id: String, slot_index: int) -> void:
+	if _painted_arena == null:
+		return
+	var slot_name := "PaintedEnemySprite_%d" % slot_index
+	var slot: TextureRect = _painted_arena.get_node_or_null(slot_name) as TextureRect
+	if slot == null:
+		push_warning("PaintedArena: %s not found — add more slots to painted_arena.tscn if needed" % slot_name)
+		return
+
+	var fullbody_path := "res://assets/characters/%s/fullbody.png" % enemy_id
+	if ResourceLoader.exists(fullbody_path):
+		slot.texture = load(fullbody_path)
+	slot.visible = true
+	print("[PaintedArena] %s configured for %s" % [slot_name, enemy_id])
+
+
+## Return the PaintedEnemySprite_<slot_index> Control from the instantiated
+## painted arena, or null if it doesn't exist. Used by
+## _update_enemy_display_positions to place the HP / intent UI above the
+## painted enemy sprite instead of projecting from the (hidden) 3D anchor.
+func _get_painted_enemy_slot(slot_index: int) -> Control:
+	if _painted_arena == null:
+		return null
+	return _painted_arena.get_node_or_null("PaintedEnemySprite_%d" % slot_index) as Control
+
 
 ## Pick a DungeonVariant for the current combat.
 ## Phase 1: if the first enemy is "michael" return the Michael boss arena; if
@@ -1786,8 +2001,20 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _hide_enemy_2d_art(enemy_index: int) -> void:
 	if not enemy_display_nodes.has(enemy_index):
 		return
+
+	# In painted 2D combat mode, the character render IS the EnemySprite
+	# TextureRect inside EnemyDisplay (loaded by enemy_display.gd from
+	# assets/characters/<id>/fullbody.png). Don't hide it — the whole point
+	# of painted mode is that the 2D sprite IS what the player sees.
+	if engine and engine.state and enemy_index < engine.state.enemies.size():
+		var enemy_id: String = engine.state.enemies[enemy_index].enemy_data_id
+		if enemy_id in Combat3DStage.PAINTED_2D_ENEMIES:
+			return
+
 	var ed = enemy_display_nodes[enemy_index]
 	# Hide all visual children but keep UI elements (HP bar, intent, name, etc.)
+	# This is the legacy chibi-mode path — only used when a KayKit 3D puppet
+	# is actually rendering behind the EnemyDisplay.
 	for child in ed.get_children():
 		if child is ColorRect or child is TextureRect or child.name == "EnemySprite" or child.name == "ShadowRect":
 			child.visible = false
