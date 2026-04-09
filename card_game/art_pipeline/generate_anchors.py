@@ -25,6 +25,7 @@ Run:
 """
 
 import argparse
+import io
 import os
 import sys
 import time
@@ -34,6 +35,40 @@ from pathlib import Path
 from google import genai
 from google.genai import types
 from PIL import Image
+
+
+def save_genai_image_as_png(genai_image, out_path: Path) -> tuple[int, int]:
+    """Save a google.genai image as a PROPER PNG.
+
+    Nano Banana 2 (gemini-3.1-flash-image-preview) returns JPEG bytes. Calling
+    ``genai_image.save(path)`` just writes those raw bytes with whatever
+    extension the path has, producing JPEG-with-a-.png-extension files that
+    Godot's PNG decoder can't parse (err=43 ERR_FILE_CORRUPT). Re-encoding
+    via PIL guarantees a real PNG.
+
+    Returns (width, height) of the saved image.
+    """
+    # Try to get raw bytes directly from the genai object. Fall back to a
+    # temp file if the SDK version doesn't expose image_bytes.
+    raw_bytes = None
+    for attr in ("image_bytes", "_image_bytes", "data"):
+        if hasattr(genai_image, attr):
+            raw_bytes = getattr(genai_image, attr)
+            if callable(raw_bytes):
+                raw_bytes = raw_bytes()
+            if raw_bytes:
+                break
+    if raw_bytes is None:
+        tmp_path = out_path.with_suffix(".genai-tmp")
+        genai_image.save(str(tmp_path))
+        raw_bytes = tmp_path.read_bytes()
+        tmp_path.unlink()
+
+    pil_img = Image.open(io.BytesIO(raw_bytes))
+    if pil_img.mode != "RGBA":
+        pil_img = pil_img.convert("RGBA")
+    pil_img.save(str(out_path), format="PNG", optimize=False, compress_level=6)
+    return pil_img.size
 
 # ── Config ────────────────────────────────────────────────────────────────
 
@@ -59,7 +94,7 @@ ANCHORS = [
         prompt_file="character_anchor.txt",
         aspect_ratio="3:4",        # portrait — one standing figure
         image_size="2K",
-        description="Zephyr painted horror figure on green screen",
+        description="GHOST painted horror figure on green screen",
     ),
     AnchorSpec(
         name="background_anchor",
@@ -119,7 +154,10 @@ def generate_anchor(client: genai.Client, spec: AnchorSpec):
         return False, elapsed, text, "model returned text only, no image"
 
     out_path = ANCHORS_DIR / f"{spec.name}.png"
-    image.save(str(out_path))
+    # Re-encode via PIL to guarantee a real PNG (Nano Banana returns JPEG
+    # bytes; writing them with a .png extension produces files Godot can't
+    # parse). See save_genai_image_as_png docstring above.
+    save_genai_image_as_png(image, out_path)
     return True, elapsed, text, None
 
 

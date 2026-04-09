@@ -1,15 +1,23 @@
 A painted horror diorama backdrop in the style of Guillermo del Toro's practical cathedral sets (Crimson Peak, Pan's Labyrinth), Zdzisław Beksiński's monumental cathedral architecture, the Capuchin Crypt bone chambers, Coraline stop-motion interior miniatures, Disco Elysium painted environments, and Wayne Barlowe's Inferno architecture. Painterly oil brushwork, painterly dissolving edges — NOT smooth CG, NOT photoreal, NOT Unreal Engine, NOT airbrushed. This is an EMPTY environmental BACKDROP — a painted stage set — onto which individual prop assets (altar, pews, candles, reliquaries, etc.) will be composited later in the game engine.
 
-SUBJECT: the interior of a desecrated gothic cathedral nave, viewed from a low dramatic 3/4 camera angle, standing roughly at floor level inside the nave looking down its length toward the far end. The scene is ARCHITECTURALLY COMPLETE but PROP-EMPTY — it shows walls, floor, ceiling, arches, columns, and a distant stained-glass window, but it does NOT show any furniture, altars, pews, candles, reliquaries, server racks, cables at floor level, thuribles, codex pages, crucifixes at floor level, books, or any portable set dressing. Every removable object will be added as a separate prop sprite in Godot. This backdrop is the empty shell of the room.
+SUBJECT: the interior of a desecrated gothic cathedral nave, rendered as an empty painted stage for a 2D side-scrolling combat scene. This is a painted STAGE SET viewed from the SIDE, like a theater set photographed from the audience — we are looking ACROSS the nave sideways, NOT down its length.
 
-ARCHITECTURE TO INCLUDE:
-- Tall gothic cathedral nave with pointed arches and ribbed stone vaulting receding into depth
-- Crumbling plaster walls, visible rebar where the stone has broken through, stained with old water and ash
-- Cracked slate floor tiles extending away from the camera toward the far end, the tiles broken in places
-- Gothic columns lining the nave on both sides, some fractured, some intact, some with dark stains running down them
-- Heavy wooden ceiling beams high above, with cabling draped like dead vines across the vaulting (the high cabling is baked into the architecture as atmosphere — NOT prop cable at floor level)
-- A single tall gothic stained-glass window at the far end of the nave, framed by a tarnished-gold leaded frame. The "saint" figure in the stained glass is replaced by a frozen blue-screen-of-death pattern — cold desaturated slate-blue light pours through it and illuminates the nave
-- Distant architectural atmosphere: a bent crucifix hanging from a high arch, a partial rose window shape above, broken ceiling plaster, dust and haze in the volumetric light
+CRITICAL CAMERA ANGLE — SIDE-ON WITH OFF-CENTER VANISHING POINT:
+- The camera is positioned at the SIDE of the nave, roughly standing eye-level, looking ACROSS the nave (perpendicular to the nave's long axis). You can see one wall as the dominant background surface, with the nave extending diagonally away from the camera INTO THE DEPTH of one side of the frame.
+- The vanishing point is PUSHED OFF TO ONE SIDE of the frame — either hard left or hard right, NOT dead center. The nave recedes diagonally TOWARD THAT OFF-CENTER VANISHING POINT.
+- This creates oblique 3/4 perspective: foreground elements on the near side appear larger and at the FRONT of the frame, while the deep end of the nave with the distant window recedes TOWARD ONE SIDE of the image, not straight back.
+- ABSOLUTELY NO symmetrical axial view looking straight down the length of the nave. NO dead-center vanishing points. NO mirror-image left/right symmetry. The composition must be ASYMMETRICAL and OBLIQUE.
+- Think of it like a side-view stage set for a 2D game where characters walk left-to-right in front of the backdrop — the backdrop shows a WALL at an angle, with architectural depth visible to one side of the frame.
+
+ARCHITECTURE TO INCLUDE (rendered from the side-on oblique angle above):
+- A long stretch of gothic cathedral wall with pointed arches receding into depth along one side of the frame
+- Ribbed stone vaulting visible overhead, retreating into the distance
+- Crumbling plaster walls with visible rebar where the stone has broken through, stained with old water and ash
+- Cracked slate flagstone floor extending across the ENTIRE bottom third of the frame, running horizontally left-to-right (this is the walking surface where characters will stand) — broken in places, photographed/rendered flat so it reads as a 2D walking plane from the side
+- Gothic columns lining the nave at intervals along the far wall, some fractured, some intact, some with dark stains running down them, each column smaller as they recede toward the vanishing point
+- Heavy wooden ceiling beams high above, with cabling draped like dead vines across the vaulting (high cabling only — NOT prop cable at floor level)
+- One tall gothic stained-glass window set into the far wall, positioned OFF-CENTER in the frame (around 1/3 or 2/3 horizontally, NOT dead center), framed by a tarnished-gold leaded frame. The "saint" figure in the stained glass is replaced by a frozen blue-screen-of-death pattern — cold desaturated slate-blue light pours through it.
+- Distant architectural atmosphere: a bent crucifix hanging from a high arch (not at floor level), dust and volumetric haze in the light beams
 
 STRICTLY DO NOT INCLUDE (these are separate prop assets, not backdrop):
 - NO altar, NO pews, NO server racks, NO chairs, NO lecterns, NO pulpits, NO confessionals
@@ -18,17 +26,21 @@ STRICTLY DO NOT INCLUDE (these are separate prop assets, not backdrop):
 - NO characters, NO people, NO figures, NO humanoids, NO hands, NO faces, NO silhouettes
 - NO distinct floating particles with individual shapes (atmospheric haze is allowed as general lighting, but no individual dust-motes-as-objects)
 
-LIGHTING: single dominant cold desaturated blue-slate light source pouring from the distant stained-glass window at the far end of the nave, a strong volumetric beam cutting down the length of the nave toward the camera. Deep chiaroscuro shadows in the side arches and along the walls. Heavy ambient occlusion in corners, between columns, and under the ceiling beams. Atmospheric haze thickening into the far depths. The canonical "sun direction" for this world is from the window, so architectural forms catch a cold rim-light on their window-facing edges and fall into deep shadow on the opposite side.
+LIGHTING: single dominant cold desaturated blue-slate light source pouring from the off-center stained-glass window, a strong volumetric beam cutting diagonally across the scene toward the camera. Deep chiaroscuro shadows in the side arches and along the walls. Heavy ambient occlusion in corners, between columns, and under the ceiling beams. Atmospheric haze thickening into the far depths. The canonical "sun direction" for this world is from the window — architectural forms catch a cold rim-light on their window-facing edges and fall into deep shadow on the opposite side. Since characters will be composited onto this backdrop, the lighting should read as "single strong directional source from off-camera-right (or off-camera-left) at the window's position" — consistent enough that a character sprite with upper-left baked lighting can be placed in front of this backdrop and not clash.
 
-DEPTH COMPOSITION: wide ultrawide aspect (21:9). The camera is framed so that there is a clear, flat, empty area of floor in the midground and foreground directly in front of the camera — roughly the middle half of the image width at floor level — where characters and props will later be composited in. The nave recedes into depth toward the distant window. The floor at the camera's feet is mostly empty, structurally intact, ready for prop placement.
+DEPTH COMPOSITION: wide ultrawide aspect (21:9). The composition is asymmetrical and oblique. The bottom third of the frame is a clear, flat, cracked-flagstone floor running horizontally across the whole width — this is the foreground walking plane where characters will stand. The middle third is the mid-depth wall and columns at oblique perspective. The top third is the ribbed vaulting and high architecture. The distant window and vanishing point sit off-center in the middle-to-upper region, NOT dead center.
+
+CRITICAL FLOOR PLANE RULE: the cracked-flagstone floor MUST occupy the bottom third (approximately 30-35%) of the frame, running horizontally and flat, so that 2D character sprites placed in the lower third of the final composited scene will read as "standing on the floor." Do NOT show the floor receding toward the camera in a top-down tile pattern — show it flat, like a stage floor photographed from the side.
 
 PALETTE RULE (HARD): 80% of the image is charcoal, ink-black, cold slate, bone off-white, rusted iron, and crumbling plaster grey. 10% sacred accent: tarnished gold leaf on the distant window frame and the very top of the vaulting stonework. 10% corruption accent: a faint bile-green seepage along one far side wall. The stained-glass light is COLD and DESATURATED — NOT neon, NOT bright. Treat it as "cathedral glass through fog." No more than 2 saturated colors total in the whole image.
 
-STYLE INSPIRATIONS to mix: Zdzisław Beksiński monumental cathedral architecture, Guillermo del Toro practical cabinet cathedral sets, Capuchin Crypt bone chambers, Wayne Barlowe Inferno architecture, Disco Elysium painted interior environments, Coraline stop-motion interior density, wunderkammer cabinets of curiosity.
+STYLE INSPIRATIONS to mix: Zdzisław Beksiński monumental cathedral architecture, Guillermo del Toro practical cabinet cathedral sets, Capuchin Crypt bone chambers, Wayne Barlowe Inferno architecture, Disco Elysium painted interior environments, Coraline stop-motion interior density, wunderkammer cabinets of curiosity, classic 2D side-scroller painted backdrops (think Dragon's Crown, Odin Sphere).
 
 HARD CONSTRAINTS (do not include any of these):
 - NO PEOPLE, no characters, no figures, no humanoids, no hands, no faces, no silhouettes
 - NO SET DRESSING: no altar, no pews, no server racks, no candles, no reliquaries, no thuribles, no books, no chains at floor level, no furniture, no crucifixes at floor level, no burnt pages, no smashed terminals
+- NO axial / symmetrical / dead-center perspective — the vanishing point MUST be off-center
+- NO mirror-image left/right composition
 - no text, no words, no letters, no numbers, no readable signs
 - no borders, no frames, no UI, no HUD, no watermark, no signature
 - no Tron neon, no glowing blue grid floors, no circuits-on-everything wallpaper
@@ -37,6 +49,6 @@ HARD CONSTRAINTS (do not include any of these):
 - no anime, no cute
 - no AI-slop tells: dead-center symmetry, too-smooth surfaces, unexplained floating debris
 
-COMPOSITION: wide ultrawide aspect (21:9), an empty architectural backdrop with clear floor space in the foreground and midground where props and characters will later be composited. The camera is at approximately standing eye level, looking slightly forward into the depth of the nave so the distant window is the vanishing point.
+COMPOSITION: ultrawide 21:9, side-on oblique view of a cathedral nave with the vanishing point pushed hard to one side of the frame. Bottom third is flat horizontal cracked-flagstone floor. The distant stained-glass window is visible but off-center. Characters will be composited in front of this backdrop at the floor level.
 
-TONE GROUND TRUTH: reverent, corrupted, precise. This is the empty shell of a holy place that has been compiled and crashed. It is waiting for its horrors to be placed inside.
+TONE GROUND TRUTH: reverent, corrupted, precise. This is the empty shell of a holy place that has been compiled and crashed, shown from the side like a theater set waiting for its actors. It is waiting for its horrors to be placed inside.
