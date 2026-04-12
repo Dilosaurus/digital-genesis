@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/half_uploaded/half_uploaded_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "half_uploaded"
+display_name = "Half-Uploaded"
+description = "Create 1 Daemon Fragment. Gain 4 Block. +3 Corruption."
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 4
+create_daemon_fragment = 1
+corruption_gain = 3
+rarity = 1
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 1

@@ -15,7 +15,7 @@ When the Angels seized the Nexus and turned the uploaded dead into a private the
 She fights like a privateer should: rip the defenses off the mark, hand the spoils to the crew, and let corruption pool in her registers like rum in a hold. Every PIRACY card she plays bleeds shielding straight off the target. The grid calls it corruption. She calls it freedom from anyone who'd ever try to own her code."
 passive_name = "Digital Privateer"
 passive_description = "Whenever you play a PIRACY card, steal 2 Block from the target."
-starter_deck = Array[String](["strike", "strike", "defend", "defend", "cutlass_exe", "boarding_hook", "ransack", "smoke_screen", "dead_mans_code", "plunder"])
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "cutlass_exe", "boarding_hook", "ransack", "plunder", "shakedown", "smoke_and_mirrors"])
 starting_hp = 68
 starting_energy = 3
 color_primary = Color(0.55, 0.1, 0.2, 1)

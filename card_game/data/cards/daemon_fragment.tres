@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/daemon_fragment/daemon_fragment_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "daemon_fragment"
+display_name = "Daemon Fragment"
+description = "A compiled code fragment. Consumed by Flux effects."
+energy_cost = 0
+card_type = 3
+target_type = 1
+exhaust = true
+tags = Array[int]([6])

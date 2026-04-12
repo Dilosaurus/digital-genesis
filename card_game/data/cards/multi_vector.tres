@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/multi_vector/multi_vector_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "multi_vector"
+display_name = "Multi-Vector Attack"
+description = "Deal 4 damage 3 times. Draw 1. +4 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 4
+hits = 3
+draw = 1
+corruption_gain = 4
+rarity = 1
+character_class = 0
+tags = Array[int]([6, 1])
+gem_sockets = 1

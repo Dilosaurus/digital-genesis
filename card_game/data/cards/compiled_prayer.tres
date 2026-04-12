@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/compiled_prayer/compiled_prayer_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "compiled_prayer"
+display_name = "Compiled Prayer"
+description = "All players heal 3. Create 1 Daemon Fragment. Remove 2 Corruption from all players."
+energy_cost = 2
+card_type = 1
+target_type = 3
+party_heal = 3
+create_daemon_fragment = 1
+party_corruption_remove = 2
+rarity = 1
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 1

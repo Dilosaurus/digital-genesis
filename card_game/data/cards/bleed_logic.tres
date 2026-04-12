@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/bleed_logic/bleed_logic_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "bleed_logic"
+display_name = "Bleed Logic"
+description = "Deal 5 damage. Apply 1 Vulnerable. +3 Corruption."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 5
+apply_vulnerable = 1
+corruption_gain = 3
+rarity = 0
+character_class = 2
+tags = Array[int]([5, 7])

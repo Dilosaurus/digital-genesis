@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/prayer_of_protection/prayer_of_protection_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "prayer_of_protection"
+display_name = "Prayer of Protection"
+description = "All allies heal 2 HP. Gain 4 Block."
+energy_cost = 1
+card_type = 1
+target_type = 3
+block = 4
+party_heal = 2
+rarity = 0
+character_class = 3
+tags = Array[int]([4])

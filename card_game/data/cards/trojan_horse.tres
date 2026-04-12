@@ -8,6 +8,7 @@ script = ExtResource("1")
 artwork = ExtResource("2")
 id = "trojan_horse"
 display_name = "Trojan Horse"
+rarity = 1
 description = "Deal 9 damage. Gain 9 Block."
 energy_cost = 2
 card_type = 0

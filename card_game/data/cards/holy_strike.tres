@@ -1,22 +1,19 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/holy_strike/holy_strike_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "holy_strike"
 display_name = "Holy Strike"
-description = "Deal 7 damage. -3 Corruption."
+description = "Deal 8 damage. Remove 2 Corruption."
 energy_cost = 1
 card_type = 0
 target_type = 0
-damage = 7
-block = 0
-heal = 0
-draw = 0
-hits = 1
-apply_vulnerable = 0
-apply_weak = 0
-corruption_gain = -3
+damage = 8
+corruption_remove = 2
+rarity = 0
+character_class = 3
 tags = Array[int]([4, 0])
-gem_sockets = 1

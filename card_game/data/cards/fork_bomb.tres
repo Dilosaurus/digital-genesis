@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/fork_bomb/fork_bomb_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "fork_bomb"
 display_name = "Fork Bomb"
 description = "Create Daemon Fragments equal to the number of Daemon Fragments you've played this combat (max 5). +5 Corruption. (Combat engine: scaling fragment generation.)"

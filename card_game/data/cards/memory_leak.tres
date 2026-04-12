@@ -7,6 +7,7 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "memory_leak"
+rarity = 1
 display_name = "Memory Leak"
 description = "Apply 3 Vulnerable. Apply 2 Weak."
 energy_cost = 1

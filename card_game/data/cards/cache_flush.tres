@@ -7,6 +7,7 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "cache_flush"
+rarity = 1
 display_name = "Cache Flush"
 description = "Draw 3. Exhaust."
 energy_cost = 1

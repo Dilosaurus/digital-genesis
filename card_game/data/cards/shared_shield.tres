@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/shared_shield/shared_shield_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "shared_shield"
 display_name = "Shared Shield"
 description = "Gain 12 Block. Split your block evenly among all players."

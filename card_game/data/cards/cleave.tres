@@ -19,5 +19,5 @@ draw = 0
 hits = 1
 apply_vulnerable = 0
 apply_weak = 0
-tags = Array[int]([0])
+tags = Array[int]([6])
 gem_sockets = 1

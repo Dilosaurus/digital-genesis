@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/merge_request/merge_request_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "merge_request"
+display_name = "Merge Request"
+description = "Destroy all Daemon Fragments. Deal 5 damage per Fragment destroyed. +2 Corruption per Fragment."
+energy_cost = 2
+card_type = 0
+target_type = 0
+destroy_daemons_for_damage = 5
+rarity = 1
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 1

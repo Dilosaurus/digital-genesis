@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/corsairs_gambit/corsairs_gambit_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "corsairs_gambit"
+display_name = "Corsair's Gambit"
+description = "Deal 8 damage to ALL enemies. Steal 4 Block from each. Create 2 Contraband. +5 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 2
+damage = 8
+corruption_gain = 5
+rarity = 2
+character_class = 5
+tags = Array[int]([9, 7])
+gem_sockets = 2
+aoe_steal_block = 4
+create_contraband = 2

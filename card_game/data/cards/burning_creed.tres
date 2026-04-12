@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/burning_creed/burning_creed_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "burning_creed"
+display_name = "Burning Creed"
+description = "Deal 12 damage to ALL enemies. Apply 2 Vulnerable to ALL enemies. Remove 8 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 2
+damage = 12
+apply_vulnerable = 2
+corruption_remove = 8
+rarity = 2
+character_class = 3
+tags = Array[int]([4, 0])
+gem_sockets = 2

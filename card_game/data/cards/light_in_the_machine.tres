@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/light_in_the_machine/light_in_the_machine_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "light_in_the_machine"
+display_name = "Light in the Machine"
+description = "Whenever you remove Corruption, deal 1 damage per Corruption removed to ALL enemies. Remove 3 Corruption per turn. (Combat engine: corruption-removal trigger.)"
+energy_cost = 3
+card_type = 2
+target_type = 1
+corruption_remove = 3
+rarity = 3
+character_class = 3
+tags = Array[int]([4])
+gem_sockets = 2

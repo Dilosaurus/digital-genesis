@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/hymn_of_clarity/hymn_of_clarity_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "hymn_of_clarity"
+display_name = "Hymn of Clarity"
+description = "Draw 2. Remove 4 Corruption."
+energy_cost = 1
+card_type = 1
+target_type = 1
+draw = 2
+corruption_remove = 4
+rarity = 0
+character_class = 3
+tags = Array[int]([4])

@@ -7,6 +7,7 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "pommel_strike_plus"
+character_class = 0
 display_name = "Data Mine+"
 description = "Deal 9 damage. Draw 2."
 energy_cost = 1

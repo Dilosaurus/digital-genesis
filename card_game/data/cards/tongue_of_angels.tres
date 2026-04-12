@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/tongue_of_angels/tongue_of_angels_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "tongue_of_angels"
+display_name = "Tongue of Angels"
+description = "Whenever you gain Corruption, apply 1 Weak to a random enemy. +3 Corruption per turn. (Combat engine: corruption-gain trigger + per-turn tick.)"
+energy_cost = 3
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = 2
+tags = Array[int]([5, 7])
+gem_sockets = 2

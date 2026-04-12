@@ -1,23 +1,19 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/fusion_core/fusion_core_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "fusion_core"
 display_name = "Fusion Core"
-description = "Deal 25 damage. Cooldown: 3 turns. Exhaust."
-energy_cost = 5
+description = "Destroy all Daemon Fragments. Deal 8 damage per Fragment destroyed. +2 Corruption per Fragment."
+energy_cost = 3
 card_type = 0
 target_type = 0
-damage = 25
-block = 0
-heal = 0
-draw = 0
-hits = 1
-apply_vulnerable = 0
-apply_weak = 0
-exhaust = true
-cooldown_max = 3
-tags = Array[int]([6, 7])
+destroy_daemons_for_damage = 8
+rarity = 2
+character_class = 4
+tags = Array[int]([6, 5])
 gem_sockets = 2

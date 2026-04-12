@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/dark_sacrament/dark_sacrament_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "dark_sacrament"
+display_name = "Dark Sacrament"
+description = "Heal 4 HP to ALL allies. Remove 5 Corruption from all allies. +5 Corruption to self."
+energy_cost = 2
+card_type = 1
+target_type = 3
+party_heal = 4
+party_corruption_remove = 5
+corruption_gain = 5
+rarity = 1
+character_class = 2
+tags = Array[int]([5])
+gem_sockets = 1

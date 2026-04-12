@@ -7,8 +7,9 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "berserker_virus"
+rarity = 2
 display_name = "Berserker Virus"
-description = "Gain 3 Strength. Take 3 HP. Exhaust."
+description = "Gain 3 Strength. Take 3 HP. +3 Corruption. Exhaust."
 energy_cost = 1
 card_type = 2
 target_type = 1

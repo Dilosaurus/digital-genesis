@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/shadow_clone/shadow_clone_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "shadow_clone"
+display_name = "Shadow Clone"
+description = "Draw 3. +4 Corruption."
+energy_cost = 1
+card_type = 1
+target_type = 1
+draw = 3
+corruption_gain = 4
+rarity = 1
+character_class = 0
+tags = Array[int]([6, 7])
+gem_sockets = 1

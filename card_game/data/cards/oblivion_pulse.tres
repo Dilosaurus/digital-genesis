@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/oblivion_pulse/oblivion_pulse_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "oblivion_pulse"
 display_name = "Oblivion Pulse"
 description = "Deal 12 damage to ALL enemies. +10 Corruption. Gain Strength equal to enemies killed. (Combat engine: on-kill strength.)"
@@ -12,7 +14,7 @@ card_type = 0
 target_type = 2
 damage = 12
 corruption_gain = 10
-rarity = 2
+rarity = 1
 character_class = 2
 tags = Array[int]([5])
 gem_sockets = 1

@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/flying_dutchman/flying_dutchman_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "flying_dutchman"
 display_name = "Flying Dutchman"
 description = "Power. Start of turn: steal 5 Block from all enemies and create 2 Contraband. Corruption burn is halved. [combat engine: start-of-turn aoe_steal_block=5 + create_contraband=2 + corruption_burn x0.5]"

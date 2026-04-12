@@ -1,22 +1,20 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/consecrate/consecrate_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "consecrate"
 display_name = "Consecrate"
-description = "Heal 6 HP. -5 Corruption."
-energy_cost = 1
-card_type = 1
-target_type = 1
-damage = 0
-block = 0
-heal = 6
-draw = 0
-hits = 1
-apply_vulnerable = 0
-apply_weak = 0
-corruption_gain = -5
+description = "Deal 10 damage to ALL enemies. Remove 3 Corruption from all allies."
+energy_cost = 2
+card_type = 0
+target_type = 2
+damage = 10
+party_corruption_remove = 3
+rarity = 1
+character_class = 3
 tags = Array[int]([4])
 gem_sockets = 1

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/singularity_theorem/singularity_theorem_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "singularity_theorem"
+display_name = "Singularity Theorem"
+description = "Deal 10 damage to ALL enemies. Apply 2 Vulnerable to ALL. +8 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 2
+damage = 10
+apply_vulnerable = 2
+corruption_gain = 8
+rarity = 2
+character_class = 2
+tags = Array[int]([5, 7])
+gem_sockets = 2

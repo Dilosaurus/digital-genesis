@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/recursive_breach/recursive_breach_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "recursive_breach"
+display_name = "Recursive Breach"
+description = "Deal 5 damage 4 times. +6 Corruption."
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 5
+hits = 4
+corruption_gain = 6
+rarity = 2
+character_class = 0
+tags = Array[int]([6, 7])
+gem_sockets = 2

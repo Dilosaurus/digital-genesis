@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/lay_on_hands/lay_on_hands_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "lay_on_hands"
 display_name = "Lay on Hands"
 description = "Heal 12 HP to target ally. Remove 8 Corruption from target. (Combat engine: ally targeting for heal + corruption.)"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/bulkhead_seal/bulkhead_seal_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "bulkhead_seal"
+display_name = "Bulkhead Seal"
+description = "Gain 8 Block. Remove 2 Corruption."
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 8
+corruption_remove = 2
+rarity = 0
+character_class = 1
+tags = Array[int]([6])

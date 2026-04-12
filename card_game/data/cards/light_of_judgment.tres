@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/light_of_judgment/light_of_judgment_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "light_of_judgment"
+display_name = "Light of Judgment"
+description = "Deal 10 damage + 1 per Corruption removed this combat (max +20). (Combat engine: corruption-removed scaling.)"
+energy_cost = 2
+card_type = 0
+target_type = 0
+damage = 10
+rarity = 2
+character_class = 3
+tags = Array[int]([4])
+gem_sockets = 2

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/entropy_weave/entropy_weave_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "entropy_weave"
+display_name = "Entropy Weave"
+description = "Remove 8 Corruption. Gain 6 Block. Draw 1."
+energy_cost = 1
+card_type = 1
+target_type = 1
+block = 6
+draw = 1
+corruption_remove = 8
+rarity = 1
+character_class = 2
+tags = Array[int]([5])
+gem_sockets = 1

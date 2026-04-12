@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/iron_bastion/iron_bastion_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "iron_bastion"
 display_name = "Iron Bastion"
-description = "At end of turn, retain 5 Block (does not reset fully). (Combat engine: end-of-turn block retention.)"
+description = "Power. At end of turn, retain 5 Block (does not reset fully)."
 energy_cost = 2
 card_type = 2
 target_type = 1
-rarity = 2
+rarity = 1
 character_class = 1
 tags = Array[int]([6, 0])
 gem_sockets = 1

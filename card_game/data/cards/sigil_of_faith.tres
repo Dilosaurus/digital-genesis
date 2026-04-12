@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/sigil_of_faith/sigil_of_faith_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "sigil_of_faith"
+display_name = "Sigil of Faith"
+description = "Gain 3 Block. Remove 3 Corruption. Exhaust."
+energy_cost = 0
+card_type = 1
+target_type = 1
+block = 3
+corruption_remove = 3
+exhaust = true
+rarity = 0
+character_class = 3
+tags = Array[int]([4])

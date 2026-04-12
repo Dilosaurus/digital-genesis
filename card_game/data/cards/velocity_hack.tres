@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/velocity_hack/velocity_hack_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "velocity_hack"
+display_name = "Velocity Hack"
+description = "Deal 3 damage per card played this turn. +3 Corruption."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage_per_card_played = 3
+corruption_gain = 3
+rarity = 1
+character_class = 0
+tags = Array[int]([6, 7])
+gem_sockets = 1

@@ -7,8 +7,9 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "uppercut"
-display_name = "Buffer Overflow"
-description = "Deal 13 damage. Apply 1 Weak."
+display_name = "Core Dump"
+description = "Deal 13 damage. Apply 1 Weak. +2 Corruption."
+rarity = 1
 energy_cost = 2
 card_type = 0
 target_type = 0

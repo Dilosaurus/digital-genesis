@@ -15,7 +15,7 @@ When the Angels seized the Nexus, Ghost saw it as the ultimate challenge: an enc
 Fast, reckless, and brilliant, Ghost fights with rapid-fire exploits and multi-vector attacks. The corruption that seeps in during deep dives doesn't worry them. After all, code is code — and Ghost has always been comfortable rewriting themselves."
 passive_name = "Neural Overclock"
 passive_description = "Draw 1 extra card each turn."
-starter_deck = Array[String](["strike", "strike", "strike", "defend", "defend", "twin_strike", "pommel_strike", "net_spike", "packet_storm", "backdoor"])
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "twin_strike", "pommel_strike", "net_spike", "data_skim", "sprint_protocol", "firewall_bypass"])
 starting_hp = 75
 starting_energy = 3
 color_primary = Color(0.2, 0.85, 0.95, 1)

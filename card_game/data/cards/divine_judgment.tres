@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/divine_judgment/divine_judgment_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "divine_judgment"
 display_name = "Divine Judgment"
 description = "Deal 15 damage. If you are at Pure tier, deal 15 again. Remove 5 Corruption. (Combat engine: tier conditional.)"

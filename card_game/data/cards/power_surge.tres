@@ -7,8 +7,9 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "power_surge"
+rarity = 2
 display_name = "Power Surge"
-description = "Gain 1 max energy."
+description = "Gain 1 max energy this combat. +5 Corruption. Exhaust."
 energy_cost = 2
 card_type = 2
 target_type = 1

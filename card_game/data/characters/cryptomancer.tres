@@ -15,7 +15,7 @@ Sera learned that the corruption seeping into operatives during Nexus dives isn'
 Abyss fights with a style that horrifies other operatives. She channels corruption as a weapon, turning the Angels' own code against them. The darkness that others resist, she embraces. Every dive takes her closer to something — or something closer to her."
 passive_name = "Corrupted Resonance"
 passive_description = "Start at 15 corruption. Deal +25% damage when corruption >= 50."
-starter_deck = Array[String](["strike", "strike", "strike", "defend", "defend", "dark_compile", "void_channel", "malware_inject", "null_pointer"])
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "dark_compile", "void_channel", "dark_pulse", "shadow_weave", "bleed_logic", "whispered_axiom"])
 starting_hp = 70
 starting_energy = 3
 color_primary = Color(0.55, 0.15, 0.75, 1)

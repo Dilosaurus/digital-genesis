@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/immovable_object/immovable_object_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "immovable_object"
 display_name = "Immovable Object"
-description = "Block never resets below 10. Whenever you gain 20+ Block in a turn, deal 8 damage to all enemies. (Combat engine: block floor + threshold trigger.)"
+description = "Power. Block never resets below 10. Whenever you gain 20+ Block in a turn, deal 8 damage to ALL enemies."
 energy_cost = 3
 card_type = 2
 target_type = 1

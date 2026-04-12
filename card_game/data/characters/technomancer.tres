@@ -15,7 +15,7 @@ While other operatives hack angelic code or purify it, Zephyr compiles it into n
 GENESIS tolerates Flux because they deliver results. Every dive, they return with impossible artifacts: daemon fragments that shouldn't function outside the Nexus but do, compiled angelic subroutines that rewrite local physics, reality patches that seal corruption tears. The other operatives keep their distance. Flux doesn't mind. They're too busy talking to things that don't exist yet."
 passive_name = "Daemon Forge"
 passive_description = "Playing a 2+ cost card creates a 0-cost Daemon Fragment (3 dmg, 3 block, or draw 1)."
-starter_deck = Array[String](["strike", "strike", "defend", "defend", "daemon_compile", "flux_shift", "code_summon", "reality_patch"])
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "daemon_compile", "flux_shift", "daemon_pulse", "reality_patch", "code_summon", "patch_daemon"])
 starting_hp = 65
 starting_energy = 4
 color_primary = Color(0.9, 0.2, 0.8, 1)

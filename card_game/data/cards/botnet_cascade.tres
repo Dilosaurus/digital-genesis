@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/botnet_cascade/botnet_cascade_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
+artwork = ExtResource("2")
 id = "botnet_cascade"
 display_name = "Botnet Cascade"
 description = "Deal 6 damage to ALL enemies. Draw 1 for each enemy hit. +4 Corruption. (Combat engine: per-enemy draw.)"

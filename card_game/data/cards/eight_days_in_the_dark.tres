@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/eight_days_in_the_dark/eight_days_in_the_dark_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "eight_days_in_the_dark"
+display_name = "Eight Days in the Dark"
+description = "Power. At the start of each turn, gain 3 Block and 1 Strength. Whenever you take unblocked damage, gain 2 Strength."
+energy_cost = 3
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = 1
+tags = Array[int]([6, 0])
+gem_sockets = 2

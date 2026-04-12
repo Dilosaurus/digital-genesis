@@ -7,6 +7,7 @@
 script = ExtResource("1")
 artwork = ExtResource("2")
 id = "iron_wave_plus"
+character_class = 1
 display_name = "Ping+"
 description = "Deal 7 damage. Gain 7 Block."
 energy_cost = 1

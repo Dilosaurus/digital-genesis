@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/burst_transmission/burst_transmission_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "burst_transmission"
+display_name = "Burst Transmission"
+description = "Deal 5 damage. Draw 1. +1 Corruption."
+energy_cost = 1
+card_type = 0
+target_type = 0
+damage = 5
+draw = 1
+corruption_gain = 1
+rarity = 0
+character_class = 0
+tags = Array[int]([6, 1])

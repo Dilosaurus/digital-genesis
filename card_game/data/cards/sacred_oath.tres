@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/sacred_oath/sacred_oath_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "sacred_oath"
+display_name = "Sacred Oath"
+description = "Gain 1 Strength. Remove 5 Corruption."
+energy_cost = 1
+card_type = 1
+target_type = 1
+gain_strength = 1
+corruption_remove = 5
+rarity = 1
+character_class = 3
+tags = Array[int]([4])
+gem_sockets = 1

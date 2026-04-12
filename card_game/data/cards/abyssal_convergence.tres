@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/abyssal_convergence/abyssal_convergence_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "abyssal_convergence"
+display_name = "Abyssal Convergence"
+description = "Remove 20 Corruption. Gain 3 Strength. Gain 2 Dexterity."
+energy_cost = 2
+card_type = 1
+target_type = 1
+gain_strength = 3
+gain_dexterity = 2
+corruption_remove = 20
+rarity = 2
+character_class = 2
+tags = Array[int]([5, 7])
+gem_sockets = 2

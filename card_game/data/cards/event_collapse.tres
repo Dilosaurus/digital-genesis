@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/event_collapse/event_collapse_base.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+artwork = ExtResource("2")
+id = "event_collapse"
+display_name = "Event Collapse"
+description = "Whenever Daemon Fragments are destroyed, deal 3 damage per Fragment to ALL enemies. Create 1 Daemon Fragment at end of turn."
+energy_cost = 3
+card_type = 2
+target_type = 1
+rarity = 3
+character_class = 4
+tags = Array[int]([6, 5])
+gem_sockets = 2
