@@ -1,4 +1,4 @@
-import { resolveAsset, RARITY_COLORS } from '../../lib/assets'
+import { resolveThumb, RARITY_COLORS } from '../../lib/assets'
 import type { Rarity } from '../../types/game'
 import type { ReactNode } from 'react'
 
@@ -38,7 +38,7 @@ export function ItemTile({
   topRightColor,
   footer,
 }: Props) {
-  const iconUrl = resolveAsset(icon)
+  const iconUrl = resolveThumb(icon)
   const r = RARITY_COLORS[rarity]
 
   return (

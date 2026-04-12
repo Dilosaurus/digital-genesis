@@ -29,10 +29,11 @@ function stripRes(resPath: string): string {
   return resPath
 }
 
+/** Full-resolution art URL — use for detail/modal views only. */
 export function resolveAsset(resPath: string | undefined | null): string | null {
   if (!resPath) return null
   const rel = stripRes(resPath)
-  // Card & item illustrations → GCS CDN
+  // Card & item illustrations → GCS CDN (full res)
   if (rel.startsWith('cards/illustrations/')) {
     return `${GCS_ART_BASE}/cards/${rel.slice('cards/illustrations/'.length)}`
   }
@@ -46,14 +47,22 @@ export function resolveAsset(resPath: string | undefined | null): string | null 
   return null
 }
 
-/** Return a thumbnail URL. GCS art uses the same CDN URL (browser caches it).
- *  Non-illustration assets still go through the backend /media/thumb/ endpoint. */
+/**
+ * GCS thumbnail URL — 512px WebP (~25-50KB vs ~5MB full-res PNG).
+ * Use this for card grids, lists, and anywhere the art is displayed small.
+ */
 export function resolveThumb(resPath: string | undefined | null): string | null {
   if (!resPath) return null
   const rel = stripRes(resPath)
-  // Illustrations → just use the GCS URL (no server-side thumb needed)
-  if (rel.startsWith('cards/illustrations/') || rel.startsWith('items/illustrations/')) {
-    return resolveAsset(resPath)
+  // Card illustrations → 512px WebP thumb
+  if (rel.startsWith('cards/illustrations/')) {
+    const file = rel.slice('cards/illustrations/'.length).replace(/\.png$/, '.webp')
+    return `${GCS_ART_BASE}/cards/thumb/${file}`
+  }
+  // Item illustrations → 512px WebP thumb
+  if (rel.startsWith('items/illustrations/')) {
+    const file = rel.slice('items/illustrations/'.length).replace(/\.png$/, '.webp')
+    return `${GCS_ART_BASE}/items/thumb/${file}`
   }
   if (resPath.startsWith('res://assets/')) {
     return '/media/thumb/' + resPath.slice('res://assets/'.length)
@@ -65,6 +74,21 @@ export function resolveThumb(resPath: string | undefined | null): string | null 
     return '/media/thumb/' + resPath.slice('/media/'.length)
   }
   return null
+}
+
+/** 256px micro thumbnail for tiny contexts (tooltips, inline refs). */
+export function resolveMicro(resPath: string | undefined | null): string | null {
+  if (!resPath) return null
+  const rel = stripRes(resPath)
+  if (rel.startsWith('cards/illustrations/')) {
+    const file = rel.slice('cards/illustrations/'.length).replace(/\.png$/, '.webp')
+    return `${GCS_ART_BASE}/cards/micro/${file}`
+  }
+  if (rel.startsWith('items/illustrations/')) {
+    const file = rel.slice('items/illustrations/'.length).replace(/\.png$/, '.webp')
+    return `${GCS_ART_BASE}/items/micro/${file}`
+  }
+  return resolveThumb(resPath)
 }
 
 // ─── Character class palette ─────────────────────────────────────────────

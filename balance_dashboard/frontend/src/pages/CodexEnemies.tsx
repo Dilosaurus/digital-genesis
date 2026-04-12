@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useEnemies } from '../hooks/useCodex'
 import { SectionHeader } from '../components/codex/SectionHeader'
 import { FilterBar, SearchInput, FilterGroup, FilterChip } from '../components/codex/FilterBar'
-import { resolveAsset } from '../lib/assets'
+import { resolveThumb } from '../lib/assets'
 import type { Enemy, EnemyIntentType } from '../types/game'
 
 /**
@@ -180,7 +180,7 @@ export function CodexEnemies() {
 }
 
 function EnemyCard({ enemy, color }: { enemy: Enemy; color: string }) {
-  const art = resolveAsset(enemy.artwork)
+  const art = resolveThumb(enemy.artwork)
   const boss = isBoss(enemy)
   // Unique intents in pool, with max value
   const intentSummary = new Map<EnemyIntentType, number>()
