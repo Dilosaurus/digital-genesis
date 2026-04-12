@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/items/illustrations/anchor/anchor.png" id="icon_tex"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/firewall_remnant/firewall_remnant.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
-id = "anchor"
-display_name = "Anchor"
+id = "firewall_remnant"
+display_name = "Firewall Remnant"
 description = "Start combat with 10 Block."
 rarity = 1
 icon = ExtResource("icon_tex")

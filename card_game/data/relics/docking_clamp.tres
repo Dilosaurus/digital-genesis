@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/docking_clamp/docking_clamp.png" id="icon_tex"]
+
+[resource]
+script = ExtResource("1")
+id = "docking_clamp"
+display_name = "Docking Clamp"
+description = "Start combat with 14 Block."
+rarity = 1
+icon = ExtResource("icon_tex")
+start_combat_block = 14

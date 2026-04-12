@@ -15,7 +15,7 @@ Marcus joined the GENESIS Protocol not as a hacker but as a chaplain. He was sup
 Paladin fights clean. His attacks carry a resonance that disrupts angelic defenses without absorbing their taint. Where Abyss embraces the dark, Paladin burns it away. Other operatives wonder if his resistance to corruption is faith, stubbornness, or something else entirely. Marcus doesn't explain. He just prays — and the code listens."
 passive_name = "Divine Compiler"
 passive_description = "Holy-tagged cards cost 1 less energy."
-starter_deck = Array[String](["strike", "strike", "defend", "defend", "purge_routine", "sanctify", "divine_ward", "holy_strike", "benediction", "prayer_of_protection"])
+starter_deck = Array[String](["strike", "strike", "defend", "defend", "purge_routine", "consecrated_pulse", "divine_ward", "holy_strike", "benediction", "prayer_of_protection"])
 starting_hp = 80
 starting_energy = 3
 color_primary = Color(0.95, 0.85, 0.3, 1)

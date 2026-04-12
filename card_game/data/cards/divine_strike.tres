@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/card_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/cards/illustrations/smite/smite_base.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/cards/illustrations/divine_strike/divine_strike_base.png" id="2"]
 
 [resource]
 script = ExtResource("1")
 artwork = ExtResource("2")
-id = "smite"
-display_name = "Smite"
+id = "divine_strike"
+display_name = "Divine Strike"
 description = "Deal 14 damage. Apply 1 Vulnerable. Remove 5 Corruption."
 energy_cost = 2
 card_type = 0

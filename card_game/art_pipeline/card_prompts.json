@@ -538,8 +538,8 @@
       "prompt": "cleansing white-gold light cutting through darkness and corruption, holy energy strike purifying, divine code execution, purification beam",
       "character": "White Hat"
     },
-    "sanctify": {
-      "display_name": "Sanctify",
+    "consecrated_pulse": {
+      "display_name": "Consecrated Pulse",
       "card_type": "SKILL",
       "tags": ["HOLY"],
       "prompt": "holy barrier of pure light expanding outward purging all corruption, sanctification ritual, golden protective dome with cleansing energy, corruption dissolving",

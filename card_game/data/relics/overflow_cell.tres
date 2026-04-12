@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/items/illustrations/lantern/lantern.png" id="icon_tex"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/overflow_cell/overflow_cell.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
-id = "lantern"
-display_name = "Lantern"
+id = "overflow_cell"
+display_name = "Overflow Cell"
 description = "+1 max Energy."
 rarity = 2
 icon = ExtResource("icon_tex")

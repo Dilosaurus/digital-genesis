@@ -152,29 +152,29 @@
       "rarity": "Uncommon",
       "prompt": "A moonstone split cleanly down its center — one half the pale blue-white of cold light, the other half suffused with warm amber like flesh seen through candlelight. The division is razor-sharp, a perfect type-cast from destruction to restoration rendered in mineral. Where the two halves meet, a thin line of tarnished gold holds them together. It sits on a scrap of altar cloth, a function that takes harm as input and returns healing."
     },
-    "anchor": {
-      "display_name": "Anchor",
+    "firewall_remnant": {
+      "display_name": "Firewall Remnant",
       "category": "relic",
       "description": "Start combat with 10 Block.",
       "rarity": "Uncommon",
       "prompt": "A ship's anchor the size of a fist, forged from blackened iron so old it has fused with the rust. The flukes are worn smooth by ages of ocean and prayer, and the crown is wrapped in a few turns of fraying rope stiff with salt and age. It sits heavily on dark stone, casting a shadow that looks heavier than the object itself. A grounding routine made physical — it holds you in place so the current cannot move you."
     },
-    "bag_of_prep": {
-      "display_name": "Bag of Preparation",
+    "boot_sequence": {
+      "display_name": "Boot Sequence",
       "category": "relic",
       "description": "Draw 1 additional card at start.",
       "rarity": "Common",
       "prompt": "A small drawstring pouch of cracked leather, mouth slightly open to reveal a glimpse of folded parchment pages inside — prayers pre-written, ready to be read. The leather is dark as charcoal, stitched with coarse thread that has partly unraveled. A faint amber glow leaks from the opening, the light of pre-loaded instructions. It sits on rough wood, a bootstrap loader in leather, stuffed with cached scripture."
     },
-    "blood_vial": {
-      "display_name": "Blood Vial",
+    "cache_fragment": {
+      "display_name": "Cache Fragment",
       "category": "relic",
       "description": "Heal 2 HP after each combat.",
       "rarity": "Common",
       "prompt": "A tiny glass vial no larger than a finger bone, filled with dark liquid that is unmistakably blood — arterial red near the top fading to black sediment at the bottom. The glass is old, hand-blown, with tiny bubbles trapped in its walls. A cork stopper sealed with black wax bears the faint impression of a cross. It leans against a chip of bone on dark cloth, a micro-dose of healing, a recovery function measured in precious drops."
     },
-    "burning_blood": {
-      "display_name": "Burning Blood",
+    "daemons_tithe": {
+      "display_name": "Daemon's Tithe",
       "category": "relic",
       "description": "Heal 6 HP after each combat.",
       "rarity": "Common",
@@ -194,8 +194,8 @@
       "rarity": "Rare",
       "prompt": "A small iron lantern with pierced cathedral-window panels, its glass long since shattered and replaced with something that glows without fuel — a steady sodium-amber light that never flickers, never dims. The iron frame is pitted with age, the handle wrapped in wire that has cut grooves into the metal over centuries. It sits on dark stone, the light falling through its pierced panels in sacred geometric patterns. An additional power supply, a prayer that generates its own energy to speak itself."
     },
-    "oddly_smooth_stone": {
-      "display_name": "Oddly Smooth Stone",
+    "polished_servo": {
+      "display_name": "Polished Servo",
       "category": "relic",
       "description": "Start with 1 Dexterity.",
       "rarity": "Common",
@@ -208,8 +208,8 @@
       "rarity": "Rare",
       "prompt": "A human skull carved from a single piece of red jasper, the arterial color of the stone making it look freshly flayed. The eye sockets are deep and black, but catch faint tarnished gold reflections from somewhere unseen. Fine cracks web across the cranium like a corruption map held in check by the mineral's density. It sits on black iron, facing the viewer with the quiet authority of a saint who chose violence. A root-access daemon wearing the face of its former host."
     },
-    "vajra": {
-      "display_name": "Vajra",
+    "etched_circuit": {
+      "display_name": "Etched Circuit",
       "category": "relic",
       "description": "Start each combat with 1 Strength.",
       "rarity": "Common",

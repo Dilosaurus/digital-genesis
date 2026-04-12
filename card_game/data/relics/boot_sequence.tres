@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/items/illustrations/bag_of_prep/bag_of_prep.png" id="icon_tex"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/boot_sequence/boot_sequence.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
-id = "bag_of_prep"
-display_name = "Bag of Preparation"
+id = "boot_sequence"
+display_name = "Boot Sequence"
 description = "Draw 1 additional card at start."
 rarity = 0
 icon = ExtResource("icon_tex")

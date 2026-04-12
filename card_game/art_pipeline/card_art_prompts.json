@@ -338,8 +338,8 @@
       ],
       "prompt": "A congregation of prayer-ribbons feed themselves into a stone compiler-reliquary, emerging from the other side as a single healed and purified stream of magenta light that branches outward to touch multiple wounds. The compilation strips the corruption from each prayer, leaving clean code and a single daemon fragment crystallizing in the exhaust — healing as heresy, heresy as healing."
     },
-    "consecrate": {
-      "display_name": "Consecrate",
+    "hallowed_ground": {
+      "display_name": "Hallowed Ground",
       "card_type": "ATTACK",
       "character": "paladin",
       "tags": [
@@ -1755,8 +1755,8 @@
       ],
       "prompt": "Wreckage of a destroyed server-chapel drifts in darkness, and from the debris a single piece of salvageable contraband is pulled free by a hooked chain. The salvage glows faintly with residual tarnished silver light, its value evident despite the damage — a scavenger's prize retrieved from ruin, already being wrapped in protective leather against the corrupting dark."
     },
-    "sanctify": {
-      "display_name": "Sanctify",
+    "consecrated_pulse": {
+      "display_name": "Consecrated Pulse",
       "card_type": "SKILL",
       "character": "paladin",
       "tags": [
@@ -1887,8 +1887,8 @@
       ],
       "prompt": "A single point of infinite density hangs in a cathedral nave, bending the visible world around it -- stone columns curve toward it, iron chains arc inward, dust spirals in accelerating orbits. The point itself is invisible, marked only by the distortion of everything surrounding it and a thin accretion disk of shredded parchment and purple-black vapor that orbits at tremendous speed. The theorem that summoned it is carved into the floor in a perfect circle, its equations already being pulled upward from their grooves."
     },
-    "smite": {
-      "display_name": "Smite",
+    "divine_strike": {
+      "display_name": "Divine Strike",
       "card_type": "ATTACK",
       "character": "paladin",
       "tags": [

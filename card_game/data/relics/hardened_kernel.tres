@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="RelicData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/relic_data.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/items/illustrations/horn_cleat/horn_cleat.png" id="icon_tex"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/hardened_kernel/hardened_kernel.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
-id = "horn_cleat"
-display_name = "Horn Cleat"
-description = "Start combat with 14 Block."
+id = "hardened_kernel"
+display_name = "Hardened Kernel"
+description = "+10 max HP."
 rarity = 1
 icon = ExtResource("icon_tex")
-start_combat_block = 14
+bonus_max_hp = 10

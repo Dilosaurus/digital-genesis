@@ -180,34 +180,34 @@
       "prompt": "flawless clear diamond with prismatic rainbow light refraction, perfect geometric cut, white-blue energy core, balanced dual-purpose radiance, precision crafted"
     },
 
-    "vajra": {
+    "etched_circuit": {
       "type": "relic",
       "rarity": 0,
-      "display_name": "Vajra",
+      "display_name": "Etched Circuit",
       "prompt": "ancient vajra thunderbolt scepter with cybernetic enhancements, symmetrical prong design, crackling with contained lightning energy, bronze and steel construction"
     },
-    "oddly_smooth_stone": {
+    "polished_servo": {
       "type": "relic",
       "rarity": 0,
-      "display_name": "Oddly Smooth Stone",
+      "display_name": "Polished Servo",
       "prompt": "perfectly smooth oval stone with an inexplicable inner shimmer, simple yet uncanny, faint cyan data patterns flowing beneath surface, mysteriously polished"
     },
-    "blood_vial": {
+    "cache_fragment": {
       "type": "relic",
       "rarity": 0,
-      "display_name": "Blood Vial",
+      "display_name": "Cache Fragment",
       "prompt": "small glass vial containing luminous red liquid data, cork sealed with circuitry, gentle healing glow, medical tech aesthetic, crimson fluid swirling"
     },
-    "burning_blood": {
+    "daemons_tithe": {
       "type": "relic",
       "rarity": 0,
-      "display_name": "Burning Blood",
+      "display_name": "Daemon's Tithe",
       "prompt": "ornate vial of blazing red-orange liquid that burns with inner fire, heat distortion around glass, molten data fluid, intense regenerative energy"
     },
-    "bag_of_prep": {
+    "boot_sequence": {
       "type": "relic",
       "rarity": 0,
-      "display_name": "Bag of Preparation",
+      "display_name": "Boot Sequence",
       "prompt": "tactical utility satchel with holographic inventory display, organized compartments glowing with ready equipment, preparedness tech bag, data readout on flap"
     },
     "war_paint": {
@@ -216,10 +216,10 @@
       "display_name": "War Paint",
       "prompt": "small container of glowing tribal war paint, neon circuit patterns on container surface, crimson luminous pigment, warrior ritual aesthetic"
     },
-    "anchor": {
+    "firewall_remnant": {
       "type": "relic",
       "rarity": 1,
-      "display_name": "Anchor",
+      "display_name": "Firewall Remnant",
       "prompt": "miniature cybernetic anchor artifact with stabilization field, grounding energy waves emanating outward, teal protective aura, anti-corruption ward device"
     },
     "horn_cleat": {
