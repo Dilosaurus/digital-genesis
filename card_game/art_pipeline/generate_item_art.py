@@ -245,7 +245,7 @@ def main() -> int:
     # Filter items
     items = {}
     for item_id, entry in all_items.items():
-        if args.only and item_id != args.only:
+        if args.only and item_id not in args.only.split(','):
             continue
         if args.category and entry.get("category", "") != args.category:
             continue

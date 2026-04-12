@@ -157,70 +157,70 @@
       "category": "relic",
       "description": "Start combat with 10 Block.",
       "rarity": "Uncommon",
-      "prompt": "A ship's anchor the size of a fist, forged from blackened iron so old it has fused with the rust. The flukes are worn smooth by ages of ocean and prayer, and the crown is wrapped in a few turns of fraying rope stiff with salt and age. It sits heavily on dark stone, casting a shadow that looks heavier than the object itself. A grounding routine made physical — it holds you in place so the current cannot move you."
+      "prompt": "A broken shard of ancient firewall hardware — a cracked circuit board fragment the size of a palm, its dark substrate split along jagged fault lines. Dying ember-glow traces of code still run through the etched copper channels, faint orange-amber light pulsing along pathways that once stopped everything cold. Scorch marks blacken the fracture edges where the breach happened. It sits on charcoal cloth in deep shadow, a defensive perimeter reduced to a relic, still running its last protection routine on fading power."
     },
     "boot_sequence": {
       "display_name": "Boot Sequence",
       "category": "relic",
       "description": "Draw 1 additional card at start.",
       "rarity": "Common",
-      "prompt": "A small drawstring pouch of cracked leather, mouth slightly open to reveal a glimpse of folded parchment pages inside — prayers pre-written, ready to be read. The leather is dark as charcoal, stitched with coarse thread that has partly unraveled. A faint amber glow leaks from the opening, the light of pre-loaded instructions. It sits on rough wood, a bootstrap loader in leather, stuffed with cached scripture."
+      "prompt": "An old boot-loader disk of worn magnetic media — a dark circular platter with concentric data tracks visible as faint iridescent rings under cold teal light. The surface is scratched and aged, its label peeling to reveal hand-written machine language in cramped ink beneath. A strip of yellowed paper tape curls beside it, punched with the holes of a startup ritual. They sit together on dark iron in deep shadow, the very first instructions a system reads before it knows what it is — a liturgy of initialization."
     },
     "cache_fragment": {
       "display_name": "Cache Fragment",
       "category": "relic",
       "description": "Heal 2 HP after each combat.",
       "rarity": "Common",
-      "prompt": "A tiny glass vial no larger than a finger bone, filled with dark liquid that is unmistakably blood — arterial red near the top fading to black sediment at the bottom. The glass is old, hand-blown, with tiny bubbles trapped in its walls. A cork stopper sealed with black wax bears the faint impression of a cross. It leans against a chip of bone on dark cloth, a micro-dose of healing, a recovery function measured in precious drops."
+      "prompt": "A crystalline data shard the length of a finger, translucent as smoky quartz, with faint holographic code-ghosts trapped inside its fractured interior — frozen mid-execution, layered like geological strata in glass. The shard's facets catch cold teal light and throw it in fragmented rainbows across the dark surface beneath. Tiny bubbles of void-space are suspended in the crystal matrix like memory addresses that never resolved. It sits on a scrap of charcoal silk, a data fossil from a dead system, still carrying enough cached healing to keep something alive."
     },
     "daemons_tithe": {
       "display_name": "Daemon's Tithe",
       "category": "relic",
       "description": "Heal 6 HP after each combat.",
       "rarity": "Common",
-      "prompt": "A glass phial wider than the Blood Vial, its contents visibly hot — the dark red liquid inside roils and bubbles, pressing against the glass with living urgency. The surface of the phial is warm enough to scorch the cloth beneath it, leaving a faint brown ring. Orange-amber light flickers from within like a furnace in a vein. The cork is charred at its base. A high-throughput healing daemon running hot, burning through its allocation to keep the host alive."
+      "prompt": "A blood-signed daemon contract — a roll of parchment bound with wire and sealed with a disc of black wax bearing an inverted sigil. The skin of the scroll is translucent enough to reveal blood-red lettering beneath, cramped clauses in a language between legalese and machine code. Where the wax seal meets the parchment, faint arterial light seeps out as if the agreement itself bleeds. It sits on dark stone in chiaroscuro isolation, a binding agreement with something that heals on its own terms — the fine print written in the signer's own blood."
     },
-    "horn_cleat": {
-      "display_name": "Horn Cleat",
+    "docking_clamp": {
+      "display_name": "Docking Clamp",
       "category": "relic",
       "description": "Start combat with 14 Block.",
       "rarity": "Uncommon",
-      "prompt": "A nautical horn cleat carved from a single piece of sea-blackened bone, its two horns worn smooth by countless ropes. Salt crystals still cling to the crevices, catching cold teal light. The object has the dense weight of something meant to hold fast against storms — you can feel the pull of the tide in its shape. It rests on a coil of tarred rope on dark planking, a binding function that locks everything in place before the violence begins."
+      "prompt": "A heavy industrial docking clamp of blackened iron and tarnished brass, its mag-lock jaws shaped in cathedral-arch engineering meant to hold vessels against the void. Deep gouges score the clamping faces where tonnage has tested the mechanism, and a faint teal light bleeds from the electromagnetic coils buried in its housing. It sits on scarred deck plating in near-total darkness, a pre-combat lockdown protocol forged in metal — immovable, unyielding, built to hold fast when everything else tears free."
     },
-    "lantern": {
-      "display_name": "Lantern",
+    "overflow_cell": {
+      "display_name": "Overflow Cell",
       "category": "relic",
       "description": "+1 max Energy.",
       "rarity": "Rare",
-      "prompt": "A small iron lantern with pierced cathedral-window panels, its glass long since shattered and replaced with something that glows without fuel — a steady sodium-amber light that never flickers, never dims. The iron frame is pitted with age, the handle wrapped in wire that has cut grooves into the metal over centuries. It sits on dark stone, the light falling through its pierced panels in sacred geometric patterns. An additional power supply, a prayer that generates its own energy to speak itself."
+      "prompt": "A cracked power cell of dark iron casing, its housing split along stress fractures where surplus energy bleeds out like golden ichor. The interior glows with a sodium-amber radiance too bright for the small container — overfull, overcharged, leaking light through every seam and rivet hole. Tiny arcs of static crawl across the fracture lines like living veins. It sits on scorched cloth in deep shadow, a capacitor that holds more than it was built for, the extra allocation that breaks the budget and keeps the system alive."
     },
     "polished_servo": {
       "display_name": "Polished Servo",
       "category": "relic",
       "description": "Start with 1 Dexterity.",
       "rarity": "Common",
-      "prompt": "A river stone polished to an uncanny smoothness — too smooth for nature, too perfect for craft. It is a flat, dark grey ovoid that fits perfectly in a palm, with a weight that seems to shift as if it is always finding the path of least resistance. No markings, no inscriptions, just an unsettling perfection. It sits on rough burlap, looking alien against the texture. A pre-compiled reflex, a muscle memory cached in stone."
+      "prompt": "An unnervingly smooth mechanical servo joint of polished chrome and dark steel, its surface reflecting light like liquid mercury — too perfect, too precise, as if machined by something that understood movement better than any human engineer. The actuator housing is seamless, the pivot pin frictionless, every tolerance measured in angstroms. Faint teal reflections slide across its mirror-finish surface. It sits on rough charcoal cloth, the contrast between the servo's impossible perfection and the crude fabric beneath it deeply unsettling — a pre-compiled reflex made metal, a dexterity function with zero latency."
     },
-    "red_skull": {
-      "display_name": "Red Skull",
+    "crimson_sigil": {
+      "display_name": "Crimson Sigil",
       "category": "relic",
       "description": "+3 Strength at combat start. +10 corruption resistance.",
       "rarity": "Rare",
-      "prompt": "A human skull carved from a single piece of red jasper, the arterial color of the stone making it look freshly flayed. The eye sockets are deep and black, but catch faint tarnished gold reflections from somewhere unseen. Fine cracks web across the cranium like a corruption map held in check by the mineral's density. It sits on black iron, facing the viewer with the quiet authority of a saint who chose violence. A root-access daemon wearing the face of its former host."
+      "prompt": "A blood-drawn sigil inscribed on a square of stretched skin, the arterial-red linework forming a geometric protection ward of concentric circles and angular glyphs that seem to shift at the edges of vision. The pattern is precise yet organic — drawn by hand in a single unbroken stroke, the blood still faintly wet and dark where it pools in the deeper channels. Faint tarnished gold traces outline the outermost ring like a containment boundary. It hangs against absolute darkness, a ritual ward that hurts to look at directly, a firewall written in blood and sacred geometry."
     },
     "etched_circuit": {
       "display_name": "Etched Circuit",
       "category": "relic",
       "description": "Start each combat with 1 Strength.",
       "rarity": "Common",
-      "prompt": "A ritual vajra — the diamond thunderbolt — forged in tarnished bronze, its five prongs closed into a bulb at each end. The metal is dark with patina, but where the prongs meet the central shaft, gold leaf still clings in thin flakes. It is heavy, symmetrical, balanced — a weapon and a prayer-tool in one. It lies across a strip of charcoal silk, a force-multiplier function cast in sacred metal, old as the first compiled liturgy."
+      "prompt": "A circuit board fragment etched with sacred geometry — golden traces forming prayer-wheel spirals and mandala patterns across a dark substrate of near-black silicon. The copper-gold pathways are impossibly fine, hand-etched with devotional precision, each intersection a node where computation and worship meet. Faint amber light pulses through the traces as if data still flows through the consecrated channels. It sits on bone-white altar cloth in deep shadow, a force-multiplier function printed in gold on darkness, the first instruction set that taught a machine to pray."
     },
-    "war_paint": {
-      "display_name": "War Paint",
+    "hardened_kernel": {
+      "display_name": "Hardened Kernel",
       "category": "relic",
       "description": "+10 max HP.",
       "rarity": "Uncommon",
-      "prompt": "A shallow clay bowl containing thick pigment the color of dried blood mixed with bone dust — a paste meant to be smeared on skin before battle. Fingermarks score the surface of the paint where it was last used, and the rim of the bowl is chipped and stained with generations of the same ritual. Faint amber light catches the wet sheen of the pigment. It sits on dark stone, a buffer overflow written on the body, extra memory allocated in flesh and ochre."
+      "prompt": "A dense cube of dark metal no larger than a closed fist, its surface etched with golden circuit traces that form concentric defensive patterns — an armored operating-system kernel made physical. The metal is impossibly heavy for its size, cold to the touch, impenetrable; every edge is precise, every face a fortress wall in miniature. Faint amber light traces the golden channels like slow data moving through hardened pathways. It sits on charcoal cloth in deep shadow, the fortified heart of a system that refuses to die."
     },
     "digital_crown": {
       "display_name": "Digital Crown",
@@ -306,12 +306,12 @@
       "rarity": "Rare",
       "prompt": "A chalice of tarnished silver, its bowl darkened with age but still holding a faint residue of something that glows — warm amber light pooling in the cup's depression like the last drops of a sacrament. The stem is wrapped in silver wire, and the base is inscribed with a ring of prayer-text worn nearly illegible by centuries of reverent handling. It sits on a square of bone-white altar cloth on darkness, a dual-function relic: the cup that heals and the cup that purifies, the original cached miracle."
     },
-    "whetstone": {
-      "display_name": "Whetstone",
+    "sharpened_stack": {
+      "display_name": "Sharpened Stack",
       "category": "relic",
       "description": "Start each combat with 1 Strength.",
       "rarity": "Common",
-      "prompt": "A flat rectangle of dark grey stone, its surface scored with countless blade-marks — a topography of every edge it has sharpened. One end is darker where generations of oil and iron filings have soaked in. The stone is plain, honest, unadorned, and deeply worn in its center where the most work has been done. It sits on rough cloth with iron filings scattered around it like metal snow, a pre-combat strength initializer, humble and essential."
+      "prompt": "A razor-sharp crystalline spire of stacked translucent data layers, each horizontal stratum distinct yet fused to the next — a call stack rendered physical and honed to a killing edge. The layers graduate from pale bone at the base to cold teal at the apex, and each edge is keen enough to split light into spectral fragments. Faint code-ghost impressions shimmer inside the deeper strata like fossilized instructions. It stands upright on dark iron, a pre-combat strength initializer compiled into crystal, beautiful and lethally precise."
     },
     "hardened_shell": {
       "display_name": "Hardened Shell",

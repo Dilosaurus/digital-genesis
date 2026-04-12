@@ -1,14 +1,15 @@
 {
   "meta": {
     "version": "1.0",
-    "description": "deus.exe item art prompt database for ComfyUI batch generation — equipment, gems, and relics",
-    "resolution": {"width": 512, "height": 512},
+    "description": "deus.exe item art prompt database for ComfyUI batch generation \u00e2\u20ac\u201d equipment, gems, and relics",
+    "resolution": {
+      "width": 512,
+      "height": 512
+    },
     "total_items": 28
   },
-
   "style_prefix": "cyberpunk digital item icon, dark background, centered object, detailed illustration, neon glow, holographic sheen, Tron Legacy aesthetic, game icon art, single isolated object, studio lighting",
   "style_negative": "text, words, letters, numbers, watermark, signature, blurry, low quality, person, character, hand, fingers, face, body, multiple objects, cluttered, background scene, landscape, 3d render, photo, photorealistic, out of frame, cropped",
-
   "item_types": {
     "equipment": {
       "keywords": "cybernetic gear, futuristic equipment, sci-fi armor piece",
@@ -33,14 +34,18 @@
     },
     "gem": {
       "keywords": "gemstone, crystal, faceted jewel, translucent, glowing inner core, floating gem, prismatic light refraction",
-      "lora_tags": ["HOLY"]
+      "lora_tags": [
+        "HOLY"
+      ]
     },
     "relic": {
       "keywords": "ancient artifact, mystical relic, arcane object, mysterious power source, legendary item",
-      "lora_tags": ["SHADOW", "HOLY"]
+      "lora_tags": [
+        "SHADOW",
+        "HOLY"
+      ]
     }
   },
-
   "rarity_styles": {
     "0": {
       "label": "Common",
@@ -58,7 +63,6 @@
       "glow": "intense golden glow, particle effects, energy corona, blazing aura"
     }
   },
-
   "items": {
     "iron_helm": {
       "type": "equipment",
@@ -130,7 +134,6 @@
       "display_name": "Corrupt Amulet",
       "prompt": "dark pendant with swirling void energy trapped in central crystal, corruption tendrils seeping from edges, purple-black energy aura, ominous dark power source"
     },
-
     "ruby_of_fury": {
       "type": "gem",
       "rarity": 0,
@@ -179,7 +182,6 @@
       "display_name": "Diamond of Efficiency",
       "prompt": "flawless clear diamond with prismatic rainbow light refraction, perfect geometric cut, white-blue energy core, balanced dual-purpose radiance, precision crafted"
     },
-
     "etched_circuit": {
       "type": "relic",
       "rarity": 0,
@@ -210,35 +212,42 @@
       "display_name": "Boot Sequence",
       "prompt": "tactical utility satchel with holographic inventory display, organized compartments glowing with ready equipment, preparedness tech bag, data readout on flap"
     },
-    "war_paint": {
-      "type": "relic",
-      "rarity": 0,
-      "display_name": "War Paint",
-      "prompt": "small container of glowing tribal war paint, neon circuit patterns on container surface, crimson luminous pigment, warrior ritual aesthetic"
-    },
     "firewall_remnant": {
       "type": "relic",
       "rarity": 1,
       "display_name": "Firewall Remnant",
       "prompt": "miniature cybernetic anchor artifact with stabilization field, grounding energy waves emanating outward, teal protective aura, anti-corruption ward device"
     },
-    "horn_cleat": {
+    "docking_clamp": {
       "type": "relic",
       "rarity": 1,
-      "display_name": "Horn Cleat",
+      "display_name": "Docking Clamp",
       "prompt": "curved horn-shaped metal cleat with defensive energy field projector, blue shield energy crackling between prongs, nautical-tech hybrid design, sturdy construction"
     },
-    "lantern": {
+    "overflow_cell": {
       "type": "relic",
       "rarity": 2,
-      "display_name": "Lantern",
+      "display_name": "Overflow Cell",
       "prompt": "ornate cyberpunk lantern radiating intense golden energy light, intricate metalwork housing, blazing power core visible through glass panels, legendary luminosity, energy overflow"
     },
-    "red_skull": {
+    "crimson_sigil": {
       "type": "relic",
       "rarity": 2,
-      "display_name": "Red Skull",
+      "display_name": "Crimson Sigil",
       "prompt": "menacing crimson crystallized skull artifact pulsing with dark power, red energy veins across bone surface, glowing eye sockets, ominous strength aura, corruption ward runes etched into forehead"
+    },
+    "hardened_kernel": {
+      "type": "relic",
+      "rarity": 0,
+      "display_name": "Hardened Kernel",
+      "prompt": "small container of glowing tribal war paint, neon circuit patterns on container surface, crimson luminous pigment, warrior ritual aesthetic"
+    },
+    "sharpened_stack": {
+      "type": "relic",
+      "slot": null,
+      "rarity": "COMMON",
+      "display_name": "Sharpened Stack",
+      "prompt": "A call stack rendered physical \u2014 a razor-edged spire of translucent crystalline layers stacked vertically, each thin slab containing faint traces of compiled code. The edges are impossibly sharp, gleaming like surgical steel where the light catches them."
     }
   }
 }
