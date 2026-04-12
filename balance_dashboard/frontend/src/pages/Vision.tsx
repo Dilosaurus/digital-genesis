@@ -30,7 +30,7 @@ export function Vision() {
       </div>
 
       {/* ─── header block ───────────────────────────────────────── */}
-      <header className="pt-10 md:pt-16 pb-8 md:pb-12 px-4 md:pl-[12vw] lg:pl-[18vw] md:pr-[6vw] relative">
+      <header className="pt-10 md:pt-16 pb-8 md:pb-12 px-4 md:pl-[8vw] lg:pl-[14vw] md:pr-[6vw] relative">
         <div
           className="mb-4 reveal reveal-0 font-mono text-[10px] md:text-[11px]"
           style={{ color: 'var(--bone-faint)', letterSpacing: '0.18em' }}
@@ -90,27 +90,22 @@ export function Vision() {
         </div>
       </header>
 
-      <hr
-        className="hr-double reveal reveal-3"
-        style={{
-          marginLeft: 'clamp(1rem, 18vw, 18vw)',
-          marginRight: 'clamp(1rem, 6vw, 6vw)',
-        }}
-      />
+      <hr className="hr-double reveal reveal-3 mx-4 md:ml-[8vw] lg:ml-[14vw] md:mr-[6vw]" />
 
       {/* ─── body: prose + marginalia ─────────────────────────────
-         Desktop: side-by-side (58ch prose + 22ch marginalia)
-         Mobile:  prose full-width, marginalia stacked below as a
-                  terminal-framed scribe's notes block.
+         Desktop (lg+): flex with justify-between — prose hugs left,
+                        marginalia hugs right margin like a true scribal
+                        annotation. Variable gap absorbs wide screens.
+         Tablet (md):   stacked, narrower side gutters.
+         Mobile:        prose full-width, marginalia stacked below
+                        as a terminal-framed scribe's notes block.
       */}
-      <section className="relative pb-16 md:pb-24 px-4 md:pl-[18vw] md:pr-[6vw]">
+      <section className="relative pb-16 md:pb-24 px-4 md:pl-[8vw] lg:pl-[14vw] md:pr-[6vw] lg:pr-[8vw]">
         <div
-          className="grid gap-10 md:gap-[clamp(2rem,5vw,5rem)]"
-          style={{ gridTemplateColumns: 'minmax(0, 1fr)' }}
+          className="lg:flex lg:items-start lg:justify-between lg:gap-[clamp(3rem,5vw,8rem)]"
         >
-          <div className="md:grid md:gap-[clamp(2rem,5vw,5rem)] md:items-start" style={{ gridTemplateColumns: 'minmax(0, 58ch) minmax(0, 22ch)' }}>
             {/* prose column */}
-            <div className="reveal reveal-4">
+            <div className="reveal reveal-4 min-w-0 lg:flex-1 lg:max-w-[62ch]">
               <p
                 className="dropcap"
                 style={{
@@ -180,55 +175,67 @@ export function Vision() {
               </p>
             </div>
 
-            {/* marginalia — desktop: side, mobile: below prose as terminal box */}
+            {/* marginalia — lg+: side rule pinned to right margin,
+                sm/md: stacked terminal box.
+                Note: terminal-frame's border/bg is in scanlines.css which loads
+                AFTER tailwind in main.tsx, so we need `lg:!*` important utilities
+                to override it on desktop. Padding is via class (not inline) so
+                lg:!p-0 can win. */}
             <aside
-              className="reveal reveal-5 font-mono mt-8 md:mt-0 terminal-frame md:border-0 md:p-0 md:bg-transparent md:shadow-none"
+              className="reveal reveal-5 font-mono mt-10 lg:mt-0 min-w-0
+                         lg:w-[34ch] lg:shrink-0
+                         terminal-frame p-[clamp(1rem,3vw,1.5rem)]
+                         lg:!border-0 lg:!bg-transparent lg:!shadow-none lg:!p-0"
               style={{
-                fontSize: 11,
+                fontSize: 12,
                 color: 'var(--bone-faint)',
                 letterSpacing: '0.02em',
-                lineHeight: 1.7,
-                padding: 'clamp(1rem, 3vw, 1.5rem)',
+                lineHeight: 1.75,
               }}
             >
               <div
-                className="md:border-l md:pl-6 md:py-0 md:pr-0"
+                className="lg:border-l lg:pl-7"
                 style={{ borderColor: 'var(--burnt-brass-dim)' }}
               >
                 <div
-                  className="mb-1"
-                  style={{ color: 'var(--oxidized-gold)', letterSpacing: '0.18em' }}
+                  className="mb-1 text-[10px] lg:text-[11px]"
+                  style={{ color: 'var(--oxidized-gold)', letterSpacing: '0.22em' }}
                 >
                   MARGINALIA
                 </div>
-                <div className="mb-4" style={{ color: 'var(--burnt-brass)' }}>
+                <div
+                  className="mb-5 text-[10px]"
+                  style={{ color: 'var(--burnt-brass)', letterSpacing: '0.04em' }}
+                >
                   /notes by the scribe
                 </div>
 
                 <p className="mb-4">
-                  <span style={{ color: 'var(--bone-dim)' }}>[01]</span> deus.exe was
-                  renamed from "digital genesis" on 2026-04-07. the old name was a
-                  placeholder; this one is the whole pitch in 8 characters.
+                  <span style={{ color: 'var(--oxidized-gold)' }}>[01]</span>&nbsp;
+                  deus.exe was renamed from "digital genesis" on 2026-04-07. the
+                  old name was a placeholder; this one is the whole pitch in 8
+                  characters.
                 </p>
 
                 <p className="mb-4">
-                  <span style={{ color: 'var(--bone-dim)' }}>[02]</span> we have 175
-                  cards, 20 gems, 25 relics, 6 playable operators. combat is live.
-                  multiplayer is live. the game is real. the bible is catching up.
+                  <span style={{ color: 'var(--oxidized-gold)' }}>[02]</span>&nbsp;
+                  we have 175 cards, 20 gems, 25 relics, 6 playable operators.
+                  combat is live. multiplayer is live. the game is real. the
+                  bible is catching up.
                 </p>
 
                 <p className="mb-4">
-                  <span style={{ color: 'var(--bone-dim)' }}>[03]</span> read the
-                  depths.log if you want to understand what descent means here.
-                  start with the outer nexus. do not read the void core first.
+                  <span style={{ color: 'var(--oxidized-gold)' }}>[03]</span>&nbsp;
+                  read the depths.log if you want to understand what descent
+                  means here. start with the outer nexus. do not read the void
+                  core first.
                 </p>
 
                 <p style={{ color: 'var(--blood-bright)' }}>
-                  [04] do not trust the angels.
+                  [04]&nbsp;do not trust the angels.
                 </p>
               </div>
             </aside>
-          </div>
         </div>
       </section>
 

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="GemData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="GemData" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/data/modifier_data.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/black_pearl_of_plunder/black_pearl_of_plunder.png" id="icon_tex"]
 
 [sub_resource type="Resource" id="mod1"]
 script = ExtResource("2")
@@ -19,6 +20,7 @@ id = "black_pearl_of_plunder"
 display_name = "Black Pearl of Plunder"
 description = "When this card is played, also create 1 Contraband. PIRACY cards deal +20% damage."
 rarity = 2
+icon = ExtResource("icon_tex")
 on_play_modifiers = [SubResource("mod1")]
 trigger_event = ""
 trigger_effect = ""

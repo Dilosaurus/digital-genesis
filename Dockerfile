@@ -65,8 +65,8 @@ COPY card_game/resources            ./card_game/resources
 COPY card_game/assets/cards         ./card_game/assets/cards
 COPY card_game/assets/items         ./card_game/assets/items
 
-# Animation preview GIFs for the dashboard's /anim/ mount. The Grok
-# Imagine pipeline produces these under art_pipeline/animations/sheets/
+# Animation preview GIFs for the dashboard's /anim/ mount. The Veo 3.1
+# pipeline produces these under art_pipeline/animations/sheets/
 # and the FastAPI app mounts that directory at /anim/. The .dockerignore
 # whitelist limits what flows through to *.gif + *.json (no master PNGs).
 COPY card_game/art_pipeline/animations/sheets ./card_game/art_pipeline/animations/sheets

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GemData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="GemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/alexandrite_of_chains/alexandrite_of_chains.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
@@ -8,6 +9,7 @@ id = "alexandrite_of_chains"
 display_name = "Alexandrite of Chains"
 description = "When this card deals unblocked damage, apply 1 Weak."
 rarity = 2
+icon = ExtResource("icon_tex")
 on_play_modifiers = []
 trigger_event = "on_unblocked_hit"
 trigger_effect = "apply_weak"

@@ -1,0 +1,491 @@
+{
+  "meta": {
+    "total_items": 65,
+    "style": "painted horror realism",
+    "aspect_ratio": "1:1",
+    "resolution": "2K",
+    "generated": "2026-04-11"
+  },
+  "style_guide": {
+    "prefix": "A painted item illustration in dramatic oil-paint horror realism. A single object centered on a near-black background, lit by dramatic single-source chiaroscuro. Visible brushwork, oil-paint texture, museum-specimen presentation. Sacred artifact from a corrupted cathedral.",
+    "palette_rule": "80% charcoal, ink-black, cold slate, bone/parchment off-white, rusted iron. 10% sacred accents: tarnished gold leaf, cathedral-glass teal, sodium-lamp amber. 10% corruption accents: arterial red, bile green, void violet. HARD RULE: no more than 2 saturated colors.",
+    "negative": "No text, no words, no letters, no numbers, no borders, no frames, no UI elements. No neon glow, no Tron lines. No anime, no cartoon. No smooth CG render, no 3D, no photorealistic. No watermarks, no signatures. No hands holding the object. No background scenery — just the object on darkness. No painted borders, no torn-edge effects, no mat or frame effects, no vignette borders, no picture-within-a-picture. The painting must fill the entire canvas edge-to-edge."
+  },
+  "items": {
+    "ruby_of_fury": {
+      "display_name": "Ruby of Fury",
+      "category": "gem",
+      "description": "+15% damage when this card is played",
+      "rarity": "Common",
+      "prompt": "A blood-red ruby cut in the shape of a clenched fist, its facets catching firelight from below. Deep arterial crimson glows from within the stone's heart — not natural light, but something alive and angry. The gem sits on a bed of charred prayer-cloth, its shadow unnaturally sharp against the darkness. Oil-paint chiaroscuro, the red the only saturated color in a field of charcoal and bone."
+    },
+    "sapphire_of_shielding": {
+      "display_name": "Sapphire of Shielding",
+      "category": "gem",
+      "description": "+3 block when this card is played",
+      "rarity": "Common",
+      "prompt": "A deep cerulean sapphire carved into a miniature kite shield, cathedral-glass blue refracting through its layered interior. Hairline fractures run through the stone like defensive wards etched by a desperate hand. It rests on a fold of ink-black velvet, each facet reflecting a different shade of cold cobalt — a frozen prayer for protection, compiled into mineral geometry."
+    },
+    "emerald_of_renewal": {
+      "display_name": "Emerald of Renewal",
+      "category": "gem",
+      "description": "+2 healing when this card is played",
+      "rarity": "Common",
+      "prompt": "An emerald the color of bile and new growth, cut in an elongated hexagonal pillar like a cathedral column in miniature. Pale green light pulses from deep inside the crystal lattice — the slow heartbeat of a healing subroutine running in the stone's core. Tiny root-like veins of darker green thread through the facets. It sits on a scrap of bone-white linen stained with old medicine."
+    },
+    "diamond_of_efficiency": {
+      "display_name": "Diamond of Efficiency",
+      "category": "gem",
+      "description": "+2 damage and +2 block when this card is played",
+      "rarity": "Uncommon",
+      "prompt": "A flawless diamond cut with impossible precision, each facet a perfect geometric proof refracting cold white and pale teal light in equal measure. The stone is so clear it seems to contain an absence — a void where wasted energy has been optimized away. It hovers just above a circle of ash on dark stone, casting twin shadows: one warm amber, one cold slate. A compiled prayer that does two things at once and wastes nothing."
+    },
+    "amethyst_of_fortitude": {
+      "display_name": "Amethyst of Fortitude",
+      "category": "gem",
+      "description": "+4 block on Skill cards",
+      "rarity": "Uncommon",
+      "prompt": "A heavy amethyst in bruised cathedral-glass violet, its facets cut to resemble overlapping fortress walls. The purple deepens at the stone's center where faint runic inscriptions spiral inward — liturgical defense protocols crystallized into quartz. A thin vein of tarnished gold runs through one face like a sealed gate. It sits on cracked slate, casting a shadow darker than the darkness around it."
+    },
+    "topaz_of_wrath": {
+      "display_name": "Topaz of Wrath",
+      "category": "gem",
+      "description": "+4 damage on Attack cards",
+      "rarity": "Uncommon",
+      "prompt": "A sodium-lamp amber topaz cut in aggressive angular facets that make the stone look perpetually mid-shatter. Warm orange fury radiates from its core, throwing long dagger-shaped light patterns across the charcoal surface beneath it. The stone is mounted in a claw of blackened iron, as if something tried to hold it and was burned. A weaponized psalm, hardened into amber crystal."
+    },
+    "obsidian_shard": {
+      "display_name": "Obsidian Shard",
+      "category": "gem",
+      "description": "+25% damage when this card is played (dark power)",
+      "rarity": "Uncommon",
+      "prompt": "A jagged shard of volcanic obsidian, not cut but broken — its edges lethally sharp, its surface a mirror of absolute black that reflects nothing. Where the fracture lines meet, faint void-violet light seeps out like blood from a wound in reality itself. The shard sits upright in a crack in charred wood, a dark sermon made physical. No facets, no beauty — only compressed violence."
+    },
+    "crimson_opal": {
+      "display_name": "Crimson Opal",
+      "category": "gem",
+      "description": "x1.5 damage vs vulnerable enemies",
+      "rarity": "Rare",
+      "prompt": "A crimson opal with an interior fire that shifts between arterial red and deep black with each angle of viewing. The stone's surface is polished smooth as wet muscle, and inside its translucent depths something moves — a play of color like blood cells flowing through glass veins. It sits in a shallow dish of tarnished silver, the only light in the image coming from the opal's own predatory glow. An exploit compiled into gemstone, designed to find the wound and press."
+    },
+    "onyx_of_exploitation": {
+      "display_name": "Onyx of Exploitation",
+      "category": "gem",
+      "description": "+4 damage vs Vulnerable enemies when played",
+      "rarity": "Uncommon",
+      "prompt": "A black onyx cabochon polished to a mirror finish, its surface reflecting a scene that isn't there — a faint image of something broken, something exposed. A single vein of arterial red runs through the stone's equator like a fault line in moral architecture. The gem sits on a torn page of parchment covered in cramped, illegible script. It finds weakness the way a compiler finds unhandled exceptions."
+    },
+    "pearl_of_purity": {
+      "display_name": "Pearl of Purity",
+      "category": "gem",
+      "description": "+5 corruption resistance when played",
+      "rarity": "Uncommon",
+      "prompt": "A luminous pearl of impossible whiteness, its surface carrying the faintest iridescent sheen of cathedral-glass teal. It seems to repel the darkness around it — the shadows near the pearl are lighter, cleaner, as if the corruption in the air cannot quite touch it. It rests in a half-shell of blackened iron, like a saint's eye preserved in a reliquary. A validation function made manifest, rejecting every malformed input."
+    },
+    "garnet_of_vitality": {
+      "display_name": "Garnet of Vitality",
+      "category": "gem",
+      "description": "+25% healing when played",
+      "rarity": "Uncommon",
+      "prompt": "A deep garnet the color of wine held up to candlelight, its round cabochon cut giving it the look of a single drop of living blood frozen mid-fall. Warmth radiates from within — not fire, but the memory of a pulse, a heartbeat cached in mineral form. Fine gold-leaf veins branch through the stone like capillaries. It sits on a swatch of charcoal-stained linen, a transfusion subroutine crystallized into something you could hold."
+    },
+    "moonstone_of_efficiency": {
+      "display_name": "Moonstone of Efficiency",
+      "category": "gem",
+      "description": "-1 energy cost when played",
+      "rarity": "Rare",
+      "prompt": "A milky moonstone that shifts between pale blue and ghostly white as light passes through its adularescent layers. The stone appears to weigh nothing — it casts no shadow, and the surface beneath it shows no compression. Faint geometric patterns swim beneath the surface like optimization algorithms visualized in mineral. It floats on a cushion of moth-grey silk, a refactored prayer that costs less to speak."
+    },
+    "bloodstone_of_sacrifice": {
+      "display_name": "Bloodstone of Sacrifice",
+      "category": "gem",
+      "description": "+30% damage and block when below 50% HP",
+      "rarity": "Rare",
+      "prompt": "A dark green bloodstone flecked with spots of vivid arterial red, as if the stone itself has been wounded and is bleeding from within. The red inclusions seem to spread as you look — growing, multiplying, feeding on the host mineral. It sits in a shallow pool of its own dark condensation on rough iron, a covenant stone that gives more the more you give up. The desperate bargain of a process running on its last allocation."
+    },
+    "jade_of_iron_will": {
+      "display_name": "Jade of Iron Will",
+      "category": "gem",
+      "description": "+5 block when played",
+      "rarity": "Common",
+      "prompt": "A dense cylinder of nephrite jade in muted olive-green, polished but not shining — its surface absorbs light like a shield absorbs blows. The stone has the gravity of something much larger, as if it contains a compressed wall inside its small form. A single hairline crack runs across one face, sealed with tarnished gold in the kintsugi tradition. A firewall rendered in stone, patient and immovable."
+    },
+    "garnet_of_cascade": {
+      "display_name": "Garnet of Cascade",
+      "category": "gem",
+      "description": "When this card kills an enemy, gain 2 energy.",
+      "rarity": "Rare",
+      "prompt": "A cluster of three garnets fused together in a descending cascade, each stone a darker shade of wine-red than the last — from living arterial to dried-blood black. Energy arcs between the stones in faint amber threads like lightning trapped in amber. The cluster sits on a bed of ash and bone fragments, a chain-reaction prayer that feeds on endings to fuel new beginnings. Kill one process, and two more wake."
+    },
+    "alexandrite_of_chains": {
+      "display_name": "Alexandrite of Chains",
+      "category": "gem",
+      "description": "When this card deals unblocked damage, apply 1 Weak.",
+      "rarity": "Rare",
+      "prompt": "An alexandrite that shifts from cathedral-teal in direct light to bruised violet in shadow, its color-change effect making it look like two different stones occupying the same space. Tiny chain-link patterns are etched into each facet, visible only at certain angles — binding protocols inscribed in mineral. It sits on dark iron, and where its shifting light touches the metal, frost forms. A gem that weakens what it touches, a debuff compiled into crystal."
+    },
+    "fire_opal_of_ignition": {
+      "display_name": "Fire Opal of Ignition",
+      "category": "gem",
+      "description": "When this card is played, deal 3 damage to ALL enemies.",
+      "rarity": "Uncommon",
+      "prompt": "A fire opal blazing with trapped solar amber and arterial orange, its interior a roiling miniature inferno visible through translucent walls. The stone seems to vibrate, to hum, as if the fire inside is pressing against its facets trying to escape in all directions at once. Scorch marks radiate outward on the dark surface beneath it. A broadcast spell crystallized — one ignition that burns everything in range."
+    },
+    "black_pearl_of_plunder": {
+      "display_name": "Black Pearl of Plunder",
+      "category": "gem",
+      "description": "When this card is played, also create 1 Contraband. PIRACY cards deal +20% damage.",
+      "rarity": "Rare",
+      "prompt": "A black pearl with the iridescent sheen of an oil slick on dark water, its surface shifting between deep violet and gunmetal grey. The pearl is cradled in a tiny nest of tarnished silver chain, and around its base, faint residue of something stolen — gold dust, ash, salt. One hemisphere is slightly flattened, as if it was pried from something holy by force. A cached theft, a stolen subroutine wrapped in nacre."
+    },
+    "star_sapphire_of_reprise": {
+      "display_name": "Star Sapphire of Reprise",
+      "category": "gem",
+      "description": "This card hits a second time at 50% damage.",
+      "rarity": "Rare",
+      "prompt": "A star sapphire with a six-rayed asterism blazing across its domed surface — the star appears to split into two overlapping patterns, one bright, one faded, like an echo of itself. Deep cathedral blue fills the stone's body, but the star is cold white, sharp as a doubled blade strike. It rests on black velvet, the twin-star pattern casting two distinct shadows. A loop that executes twice: the prayer and its echo, the blow and its ghost."
+    },
+    "moonstone_of_conversion": {
+      "display_name": "Moonstone of Conversion",
+      "category": "gem",
+      "description": "This card's damage is converted to healing for you (no damage dealt).",
+      "rarity": "Uncommon",
+      "prompt": "A moonstone split cleanly down its center — one half the pale blue-white of cold light, the other half suffused with warm amber like flesh seen through candlelight. The division is razor-sharp, a perfect type-cast from destruction to restoration rendered in mineral. Where the two halves meet, a thin line of tarnished gold holds them together. It sits on a scrap of altar cloth, a function that takes harm as input and returns healing."
+    },
+    "anchor": {
+      "display_name": "Anchor",
+      "category": "relic",
+      "description": "Start combat with 10 Block.",
+      "rarity": "Uncommon",
+      "prompt": "A ship's anchor the size of a fist, forged from blackened iron so old it has fused with the rust. The flukes are worn smooth by ages of ocean and prayer, and the crown is wrapped in a few turns of fraying rope stiff with salt and age. It sits heavily on dark stone, casting a shadow that looks heavier than the object itself. A grounding routine made physical — it holds you in place so the current cannot move you."
+    },
+    "bag_of_prep": {
+      "display_name": "Bag of Preparation",
+      "category": "relic",
+      "description": "Draw 1 additional card at start.",
+      "rarity": "Common",
+      "prompt": "A small drawstring pouch of cracked leather, mouth slightly open to reveal a glimpse of folded parchment pages inside — prayers pre-written, ready to be read. The leather is dark as charcoal, stitched with coarse thread that has partly unraveled. A faint amber glow leaks from the opening, the light of pre-loaded instructions. It sits on rough wood, a bootstrap loader in leather, stuffed with cached scripture."
+    },
+    "blood_vial": {
+      "display_name": "Blood Vial",
+      "category": "relic",
+      "description": "Heal 2 HP after each combat.",
+      "rarity": "Common",
+      "prompt": "A tiny glass vial no larger than a finger bone, filled with dark liquid that is unmistakably blood — arterial red near the top fading to black sediment at the bottom. The glass is old, hand-blown, with tiny bubbles trapped in its walls. A cork stopper sealed with black wax bears the faint impression of a cross. It leans against a chip of bone on dark cloth, a micro-dose of healing, a recovery function measured in precious drops."
+    },
+    "burning_blood": {
+      "display_name": "Burning Blood",
+      "category": "relic",
+      "description": "Heal 6 HP after each combat.",
+      "rarity": "Common",
+      "prompt": "A glass phial wider than the Blood Vial, its contents visibly hot — the dark red liquid inside roils and bubbles, pressing against the glass with living urgency. The surface of the phial is warm enough to scorch the cloth beneath it, leaving a faint brown ring. Orange-amber light flickers from within like a furnace in a vein. The cork is charred at its base. A high-throughput healing daemon running hot, burning through its allocation to keep the host alive."
+    },
+    "horn_cleat": {
+      "display_name": "Horn Cleat",
+      "category": "relic",
+      "description": "Start combat with 14 Block.",
+      "rarity": "Uncommon",
+      "prompt": "A nautical horn cleat carved from a single piece of sea-blackened bone, its two horns worn smooth by countless ropes. Salt crystals still cling to the crevices, catching cold teal light. The object has the dense weight of something meant to hold fast against storms — you can feel the pull of the tide in its shape. It rests on a coil of tarred rope on dark planking, a binding function that locks everything in place before the violence begins."
+    },
+    "lantern": {
+      "display_name": "Lantern",
+      "category": "relic",
+      "description": "+1 max Energy.",
+      "rarity": "Rare",
+      "prompt": "A small iron lantern with pierced cathedral-window panels, its glass long since shattered and replaced with something that glows without fuel — a steady sodium-amber light that never flickers, never dims. The iron frame is pitted with age, the handle wrapped in wire that has cut grooves into the metal over centuries. It sits on dark stone, the light falling through its pierced panels in sacred geometric patterns. An additional power supply, a prayer that generates its own energy to speak itself."
+    },
+    "oddly_smooth_stone": {
+      "display_name": "Oddly Smooth Stone",
+      "category": "relic",
+      "description": "Start with 1 Dexterity.",
+      "rarity": "Common",
+      "prompt": "A river stone polished to an uncanny smoothness — too smooth for nature, too perfect for craft. It is a flat, dark grey ovoid that fits perfectly in a palm, with a weight that seems to shift as if it is always finding the path of least resistance. No markings, no inscriptions, just an unsettling perfection. It sits on rough burlap, looking alien against the texture. A pre-compiled reflex, a muscle memory cached in stone."
+    },
+    "red_skull": {
+      "display_name": "Red Skull",
+      "category": "relic",
+      "description": "+3 Strength at combat start. +10 corruption resistance.",
+      "rarity": "Rare",
+      "prompt": "A human skull carved from a single piece of red jasper, the arterial color of the stone making it look freshly flayed. The eye sockets are deep and black, but catch faint tarnished gold reflections from somewhere unseen. Fine cracks web across the cranium like a corruption map held in check by the mineral's density. It sits on black iron, facing the viewer with the quiet authority of a saint who chose violence. A root-access daemon wearing the face of its former host."
+    },
+    "vajra": {
+      "display_name": "Vajra",
+      "category": "relic",
+      "description": "Start each combat with 1 Strength.",
+      "rarity": "Common",
+      "prompt": "A ritual vajra — the diamond thunderbolt — forged in tarnished bronze, its five prongs closed into a bulb at each end. The metal is dark with patina, but where the prongs meet the central shaft, gold leaf still clings in thin flakes. It is heavy, symmetrical, balanced — a weapon and a prayer-tool in one. It lies across a strip of charcoal silk, a force-multiplier function cast in sacred metal, old as the first compiled liturgy."
+    },
+    "war_paint": {
+      "display_name": "War Paint",
+      "category": "relic",
+      "description": "+10 max HP.",
+      "rarity": "Uncommon",
+      "prompt": "A shallow clay bowl containing thick pigment the color of dried blood mixed with bone dust — a paste meant to be smeared on skin before battle. Fingermarks score the surface of the paint where it was last used, and the rim of the bowl is chipped and stained with generations of the same ritual. Faint amber light catches the wet sheen of the pigment. It sits on dark stone, a buffer overflow written on the body, extra memory allocated in flesh and ochre."
+    },
+    "digital_crown": {
+      "display_name": "Digital Crown",
+      "category": "relic",
+      "description": "Start each combat with 2 Strength.",
+      "rarity": "Uncommon",
+      "prompt": "A circlet crown forged from black iron, its band etched with geometric patterns that are half-sacred geometry, half-circuit traces. Three prongs rise from the band, each tipped with a tiny point of tarnished gold that catches light like dying stars. The crown is too small for a human head — made for something else, something that processes rather than thinks. It rests on dark velvet, a root privilege escalation worn on the brow."
+    },
+    "quantum_lens": {
+      "display_name": "Quantum Lens",
+      "category": "relic",
+      "description": "+1 card draw per turn.",
+      "rarity": "Uncommon",
+      "prompt": "A single monocle-sized lens ground from smoky quartz, set in a ring of tarnished brass covered in fine engraved numerals. Looking through the lens, the darkness behind it appears different — deeper, structured, as if it reveals hidden layers in the void. A hairline crack runs across one face but the glass still holds. It sits propped on a folded page of cramped notation, an I/O amplifier that lets you read more scripture per cycle."
+    },
+    "nano_heart": {
+      "display_name": "Nano Heart",
+      "category": "relic",
+      "description": "+15 Max HP.",
+      "rarity": "Common",
+      "prompt": "An anatomical heart the size of a plum, cast in dark iron and fitted with visible rivets and seams where its chambers were welded shut. Despite being metal, it has the organic asymmetry of a real organ — lumpy, imperfect, heavy with purpose. A faint amber pulse glows from between the seam lines, rhythmic and slow. It sits in a nest of frayed copper wire on dark cloth, an upgraded health pool forged in iron and soldered with prayer."
+    },
+    "shadow_idol": {
+      "display_name": "Shadow Idol",
+      "category": "relic",
+      "description": "Start each combat with 2 Strength and 2 Dexterity.",
+      "rarity": "Rare",
+      "prompt": "A small idol carved from a single piece of obsidian, depicting a figure with two faces — one looking left, one right, both expressionless, both wrong. The carving is crude but intentional, the proportions deliberately inhuman. Where the two faces share a single brow, a vein of void-violet mineral catches the light. It sits on a circle of salt on dark stone, a dual-stat daemon invoked by worship, granting power and speed to those who prostrate before its doubled gaze."
+    },
+    "battery_pack": {
+      "display_name": "Battery Pack",
+      "category": "relic",
+      "description": "+1 max Energy.",
+      "rarity": "Rare",
+      "prompt": "A rectangular slab of dark metal wrapped in cracked leather strapping, with two brass terminals on its top face that weep a faint teal-green patina. The object hums — not audibly, but visibly, the air above it shimmering like heat haze. Faint cathedral-glass teal light leaks from a hairline seam along one edge. It sits on scorched wood, a supplementary power cell for the liturgical machine, an extra action point stored in corroded brass and prayer."
+    },
+    "corrupted_core": {
+      "display_name": "Corrupted Core",
+      "category": "relic",
+      "description": "+15 Corruption Resistance.",
+      "rarity": "Uncommon",
+      "prompt": "A sphere of dark crystalline material riddled with frozen fracture lines, each crack filled with bile-green luminescence that pulses like a slow infection. The core is meant to be corrupted — it has absorbed the poison so you don't have to. Its surface is cold to look at, and the green light casts sickly shadows on the dark surface beneath. It sits in a cradle of bent iron nails, a quarantine partition made manifest, containing corruption within its own crystalline sandbox."
+    },
+    "medic_drone": {
+      "display_name": "Medic Drone",
+      "category": "relic",
+      "description": "Heal 10 HP after each combat.",
+      "rarity": "Uncommon",
+      "prompt": "A small mechanical insect the size of a thumb, built from tarnished brass and thin iron plate. Its four wings are folded flat against its body, etched with prayer-script too small to read. A single red eye — a tiny ruby set in its head — glows with steady amber warmth. Dried residue of old healing salve clings to its needle-like proboscis. It sits motionless on dark cloth, a post-combat healing daemon in dormant mode, waiting for the violence to end before it begins its work."
+    },
+    "iron_fortress": {
+      "display_name": "Iron Fortress",
+      "category": "relic",
+      "description": "Start combat with 15 Block.",
+      "rarity": "Uncommon",
+      "prompt": "A palm-sized model of a fortress tower, cast in solid iron with every detail rendered in miniature — arrow slits, battlements, a portcullis gate smaller than a fingernail. The iron is dark and cold, the surface rough with age, and the base shows where it was broken from a larger model. Faint tarnished gold traces the crenellations. It sits on dark stone with the gravity of something much larger, a defensive initialization routine compressed into a handful of iron."
+    },
+    "swift_boots": {
+      "display_name": "Swift Boots",
+      "category": "relic",
+      "description": "Start each combat with 2 Dexterity.",
+      "rarity": "Uncommon",
+      "prompt": "A pair of ankle-high boots no bigger than a child's, stitched from supple dark leather so thin it looks like shed skin. The soles are worn completely smooth — no tread, no grip, as if the wearer moved too fast for friction to matter. Faint cathedral-teal stitching traces the seams, barely visible. They sit side by side on dark stone, slightly angled as if about to walk away on their own. Pre-loaded agility routines laced into leather, a dexterity buffer worn on the feet."
+    },
+    "phoenix_feather": {
+      "display_name": "Phoenix Feather",
+      "category": "relic",
+      "description": "Auto-revive once per floor when entering Death's Door.",
+      "rarity": "Rare",
+      "prompt": "A single feather the length of a hand, its barbs shifting between charcoal black and deep arterial orange as if perpetually smoldering. The quill end is blackened and cracked, and the tip curls slightly as if heat is still rising from it. Faint amber embers drift from the feather's edge, dissolving into the darkness before they fall. It lies on a bed of cold ash on dark stone, a single-use resurrection script — one exception handler that catches death itself, once, and throws you back."
+    },
+    "hackers_manual": {
+      "display_name": "Hacker's Manual",
+      "category": "relic",
+      "description": "+1 card draw per turn. Start combat with 1 Strength.",
+      "rarity": "Rare",
+      "prompt": "A small codex bound in cracked black leather, its pages visible at the edges — densely written in two colors of ink, one the amber of aged scripture, one the arterial red of annotations added later by a different hand. The binding is held together with copper wire threaded through the spine. The cover bears no title, only a geometric sigil pressed into the leather. It sits on dark wood, slightly open as if it reads itself. A dual-purpose daemon: one thread reads ahead, another sharpens the blade."
+    },
+    "holy_grail": {
+      "display_name": "Holy Grail",
+      "category": "relic",
+      "description": "Heal 8 HP after each combat. +10 Corruption Resistance.",
+      "rarity": "Rare",
+      "prompt": "A chalice of tarnished silver, its bowl darkened with age but still holding a faint residue of something that glows — warm amber light pooling in the cup's depression like the last drops of a sacrament. The stem is wrapped in silver wire, and the base is inscribed with a ring of prayer-text worn nearly illegible by centuries of reverent handling. It sits on a square of bone-white altar cloth on darkness, a dual-function relic: the cup that heals and the cup that purifies, the original cached miracle."
+    },
+    "whetstone": {
+      "display_name": "Whetstone",
+      "category": "relic",
+      "description": "Start each combat with 1 Strength.",
+      "rarity": "Common",
+      "prompt": "A flat rectangle of dark grey stone, its surface scored with countless blade-marks — a topography of every edge it has sharpened. One end is darker where generations of oil and iron filings have soaked in. The stone is plain, honest, unadorned, and deeply worn in its center where the most work has been done. It sits on rough cloth with iron filings scattered around it like metal snow, a pre-combat strength initializer, humble and essential."
+    },
+    "hardened_shell": {
+      "display_name": "Hardened Shell",
+      "category": "relic",
+      "description": "+10 Max HP. Start combat with 5 Block.",
+      "rarity": "Common",
+      "prompt": "A curved fragment of carapace — insect or crustacean, impossibly large — its surface a dark chitinous brown-black with the layered texture of lacquered armor. The inner surface is pale as bone, smooth and slightly concave. Impact dents mark the outer face, each one a story of something that hit hard and was turned aside. It sits on dark stone, a dual-purpose defense allocation: the shell that makes you harder to kill and harder to hurt, biological armor cached for re-use."
+    },
+    "data_shard": {
+      "display_name": "Data Shard",
+      "category": "relic",
+      "description": "Start each combat with 1 Dexterity. Heal 4 HP after each combat.",
+      "rarity": "Uncommon",
+      "prompt": "A thin, blade-like shard of translucent crystal, its interior filled with dense patterns of light that shift like data scrolling through glass. The shard is cathedral-teal at its thin edge, darkening to deep slate at its thick base. It hums with quiet potential, the light inside following paths too regular to be natural — structured, indexed, retrievable. It stands upright in a crack in dark stone, a dual-thread daemon stored in crystal: one that quickens your reflexes, one that mends your wounds."
+    },
+    "berserker_gauntlet": {
+      "display_name": "Berserker Gauntlet",
+      "category": "equipment",
+      "slot": "Weapon",
+      "description": "x1.25 damage vs vulnerable enemies",
+      "rarity": "Rare",
+      "prompt": "A single gauntlet of blackened plate armor, its knuckles ridged with raised iron teeth and its fingers curled into a permanent half-fist. The metal is scarred with deep gouges from impacts given, not received — this is a weapon that hits back. Arterial red stains the knuckle teeth, old and baked into the iron. The leather interior is visible at the wrist, cracked and sweat-darkened. It sits on dark stone, a compiled rage function that activates when it smells weakness."
+    },
+    "blessed_armor": {
+      "display_name": "Blessed Armor",
+      "category": "equipment",
+      "slot": "Armor",
+      "description": "+1 block to all cards, +10% healing",
+      "rarity": "Uncommon",
+      "prompt": "A breastplate of dull silver metal, its surface engraved with overlapping prayer-text in a spiral pattern from collar to waist. The engraving is so dense it creates its own texture, a scripture-skin that covers every inch of the armor. A faint amber warmth radiates from the deepest grooves where the prayers are oldest. Dents mark the chest and shoulders — this armor has served, and the prayers kept its wearer alive. It hangs on darkness, a dual-function liturgical vest: one layer blocks, one layer heals."
+    },
+    "corrupt_amulet": {
+      "display_name": "Corrupt Amulet",
+      "category": "equipment",
+      "slot": "Amulet",
+      "description": "+20% damage",
+      "rarity": "Rare",
+      "prompt": "An amulet on a heavy chain of blackened iron links, its centerpiece a flat disc of dark stone inscribed with a sigil that seems to writhe when not looked at directly. The stone is cracked, and from the crack, bile-green light leaks in a thin line like infection from a wound. The chain has worn the stone's edges smooth from years of swinging against a chest in combat. It hangs against darkness, a persistent damage multiplier worn close to the heart — power at the cost of something it is too late to name."
+    },
+    "flame_gauntlets": {
+      "display_name": "Flame Gauntlets",
+      "category": "equipment",
+      "slot": "Weapon",
+      "description": "+2 damage on FIRE cards",
+      "rarity": "Uncommon",
+      "prompt": "A pair of gauntlets forged from dark iron with fingertips that taper to blackened points, the metal around the knuckles still carrying the faint orange patina of extreme heat. The palms are lined with a mesh of copper wire that glows dull amber, as if the gauntlets remember every fire they have channeled. Soot and ash are permanently baked into the finger joints. They sit palm-up on dark stone, liturgical fire-starters, conduits for incendiary psalms."
+    },
+    "holy_circlet": {
+      "display_name": "Holy Circlet",
+      "category": "equipment",
+      "slot": "Accessory",
+      "description": "+3 healing on HOLY cards",
+      "rarity": "Uncommon",
+      "prompt": "A thin circlet of tarnished gold, its band no wider than a finger, inscribed with a continuous line of prayer-text so fine it looks like a single golden thread wound around the metal. Three small cabochon moonstones are set at equal intervals, each one milky-white and faintly luminous. The gold has darkened to amber in the deepest grooves. It rests on bone-white cloth against darkness, a healing amplifier for sacred subroutines, worn on the brow where the liturgy enters the mind."
+    },
+    "iron_helm": {
+      "display_name": "Iron Helm",
+      "category": "equipment",
+      "slot": "Accessory",
+      "description": "+10 Max HP",
+      "rarity": "Common",
+      "prompt": "A plain iron helm of the kettle-hat type — a wide brim, a domed crown, no visor, no ornament. The metal is dark with age and use, dented on the left side where something heavy struck and the wearer survived. The interior shows the ghost-impression of a leather liner long since rotted away. Rivets ring the brim, each one slightly different, replaced over years of service. It sits on dark wood, a simple health-pool expansion, ugly and honest and effective."
+    },
+    "leather_vest": {
+      "display_name": "Leather Vest",
+      "category": "equipment",
+      "slot": "Armor",
+      "description": "+2 block to all cards",
+      "rarity": "Common",
+      "prompt": "A sleeveless vest of thick boiled leather, dark brown approaching black, its surface scarred with a dozen shallow cuts that never penetrated through. The stitching is heavy and uneven — field repairs made by hand in poor light. The collar is stiff with old sweat and the armholes are worn smooth. It lies flat on dark cloth, a universal block modifier stitched from animal hide, the most basic defensive layer — reliable, unglamorous, essential."
+    },
+    "rusty_blade": {
+      "display_name": "Rusty Blade",
+      "category": "equipment",
+      "slot": "Weapon",
+      "description": "+1 damage to all attacks",
+      "rarity": "Common",
+      "prompt": "A short-bladed knife with a tang handle wrapped in stained leather cord, the blade pitted with rust that has eaten craters into the steel. The edge is still sharp in places — bright metal showing through the corrosion where someone has ground it against stone recently. The rust gives the blade a mottled orange-brown pattern like dried blood on iron. It lies on dark cloth, a flat damage bonus with no elegance, a function that adds one to everything it touches."
+    },
+    "shadow_cloak": {
+      "display_name": "Shadow Cloak",
+      "category": "equipment",
+      "slot": "Armor",
+      "description": "+15% damage when below 50% HP",
+      "rarity": "Rare",
+      "prompt": "A hooded cloak of fabric so dark it seems to absorb the surrounding shadows into itself, its edges dissolving into the background as if the garment is not fully present. The fabric has no visible weave — it looks like compressed darkness given textile form. A single clasp of tarnished silver at the throat bears a void-violet stone. The cloak is draped over an invisible form, falling in heavy folds that suggest weight without body. A conditional damage amplifier that feeds on desperation, growing stronger as the wearer fades."
+    },
+    "tech_visor": {
+      "display_name": "Tech Visor",
+      "category": "equipment",
+      "slot": "Accessory",
+      "description": "+2 damage on TECH cards",
+      "rarity": "Uncommon",
+      "prompt": "A visor of smoked glass set in a frame of dark iron and brass fittings, designed to cover the eyes and bridge of the nose. Through the glass, faint cathedral-teal symbols scroll — targeting data, vulnerability markers, compiled attack vectors. The frame is adjustable, with tiny brass screws at the temples worn bright from frequent calibration. It sits on folded dark cloth, a tech-card amplifier that parses the sacred code and finds the executable violence within it."
+    },
+    "neural_interface": {
+      "display_name": "Neural Interface",
+      "category": "equipment",
+      "slot": "Accessory",
+      "description": "+1 card draw per turn",
+      "rarity": "Rare",
+      "prompt": "A thin band of dark metal meant to encircle the skull just above the ears, its inner surface lined with dozens of tiny brass pins that would press into the scalp. Three nodes of dark crystal are set into the band at the temples and the forehead, each one pulsing with faint teal light in a slow rhythm that suggests thought. Fine wire runs between the nodes like ley lines on a cranial map. It rests on dark velvet, a bandwidth upgrade for the mind — more scripture read per cycle, more cards drawn from the liturgical deck."
+    },
+    "reinforced_helm": {
+      "display_name": "Reinforced Helm",
+      "category": "equipment",
+      "slot": "Accessory",
+      "description": "+15 Max HP",
+      "rarity": "Uncommon",
+      "prompt": "A great helm of riveted iron plates, each plate individually forged and bolted to its neighbors with visible brass rivets. The visor slit is narrow and deep, revealing only darkness within. An additional brow-plate has been welded over the original — the reinforcement that gives it its name, a visible second layer of protection added after the first proved insufficient. Hammer marks dimple the crown. It sits on dark stone, a health-pool upgrade in iron, the engineering of survival through redundancy."
+    },
+    "corruption_filter": {
+      "display_name": "Corruption Filter",
+      "category": "equipment",
+      "slot": "Accessory",
+      "description": "+10 Corruption Resistance",
+      "rarity": "Uncommon",
+      "prompt": "A mask-like filter of dark leather and brass, designed to cover the nose and mouth, with a cylindrical canister of dark metal attached at the jaw. The canister is perforated with tiny holes, and from within, the faintest bile-green glow suggests the corruption it has already trapped. The leather straps are cracked with age but the brass fittings are polished bright — someone maintains this. It sits on dark cloth, an input sanitizer worn on the face, filtering corruption from every breath of the poisoned cathedral air."
+    },
+    "mithril_vest": {
+      "display_name": "Mithril Vest",
+      "category": "equipment",
+      "slot": "Armor",
+      "description": "+2 block to all cards",
+      "rarity": "Uncommon",
+      "prompt": "A sleeveless vest of interlocking metal rings so fine they look like woven silk, the metal a pale silver-grey that catches light like water. Despite its delicate appearance, the rings are dense and heavy, each one individually riveted shut. The collar is edged with a thin band of tarnished gold. It is impossibly light for its strength, folded neatly on dark cloth with the fluid drape of fabric, not metal. A universal block modifier refined to its most elegant form — minimum weight, maximum resistance."
+    },
+    "void_plate": {
+      "display_name": "Void Plate",
+      "category": "equipment",
+      "slot": "Armor",
+      "description": "+20 Max HP, +10% block",
+      "rarity": "Rare",
+      "prompt": "A massive chest plate of dark metal so dense it bends light at its edges, the surface carrying a faint void-violet sheen like oil on deep water. The plate is thick, brutal, unornamented — designed for a frame larger than human. Impact craters mark its surface but none have penetrated; the metal simply absorbed the force and held. Faint geometric etchings around the collar suggest containment wards. It hangs in darkness with the weight of a collapsed star, a dual-stat defensive allocation that makes the wearer both harder to kill and harder to break."
+    },
+    "holy_vestments": {
+      "display_name": "Holy Vestments",
+      "category": "equipment",
+      "slot": "Armor",
+      "description": "+2 healing, +5 corruption resistance",
+      "rarity": "Uncommon",
+      "prompt": "A sleeveless surplice of heavy linen the color of aged bone, its hem and collar embroidered with gold thread in repeating prayer-patterns now fraying with use. The fabric is stained with old incense smoke and something darker — the corruption it has filtered from its wearer over years of service. A small tarnished gold clasp in the shape of a cross holds the front closed. It lies folded on dark stone, dual-purpose liturgical armor: one thread heals, one thread purifies, both fading but still faithful."
+    },
+    "plasma_edge": {
+      "display_name": "Plasma Edge",
+      "category": "equipment",
+      "slot": "Weapon",
+      "description": "+3 damage to all attacks",
+      "rarity": "Uncommon",
+      "prompt": "A straight-bladed short sword with an edge that glows faint cathedral-teal along its sharpened side — not neon, not bright, but the cold luminescence of ionized air clinging to metal that has been sharpened beyond the physical. The blade is dark iron, the handle wrapped in blackened leather, the guard a simple crosspiece. The teal edge-glow casts no shadows, only a thin line of cold light. It lies on dark cloth, a flat damage bonus elevated to sacrament — every cut carries three more than it should."
+    },
+    "shadow_fang": {
+      "display_name": "Shadow Fang",
+      "category": "equipment",
+      "slot": "Weapon",
+      "description": "+2 damage on SHADOW cards, -3 corruption on SHADOW cards",
+      "rarity": "Rare",
+      "prompt": "A curved dagger with a blade of dark metal that seems to drink light from the air around it, its edge visible only as a razor-thin line of void-violet luminescence. The handle is wrapped in strips of shadow-dark leather, and a single vein of the same violet runs along the blade's spine like a poisoned artery. The metal is cold — frost forms where it contacts the dark cloth beneath. A dual-function shadow compiler: it sharpens the dark psalms and purges their corruption cost in the same stroke."
+    },
+    "mana_crystal": {
+      "display_name": "Mana Crystal",
+      "category": "equipment",
+      "slot": "Amulet",
+      "description": "+1 Mana Regen",
+      "rarity": "Uncommon",
+      "prompt": "A rough-cut crystal the size of a walnut, suspended on a cord of braided dark thread, its interior filled with slowly swirling cathedral-teal luminescence like smoke trapped in glass. The crystal is not a perfect gem — it is raw, fractured, grown rather than cut, with irregular faces that catch light differently. The cord has worn a groove into the crystal where it hangs. It sways slightly against darkness, a mana regeneration loop made physical, a prayer that replenishes itself one cycle at a time."
+    },
+    "exploit_chip": {
+      "display_name": "Exploit Chip",
+      "category": "equipment",
+      "slot": "Amulet",
+      "description": "+20% damage on EXPLOIT cards, -1 cost on EXPLOIT cards",
+      "rarity": "Rare",
+      "prompt": "A wafer-thin disc of dark silicon no larger than a communion wafer, its surface etched with circuitry so fine it looks like scripture written by a needle. A hairline crack runs across one corner — the exploit, the vulnerability that makes it powerful. The disc is mounted in a bezel of tarnished brass on a fine chain, and where the crack meets the circuitry, faint arterial-red light leaks through. It hangs against darkness, a zero-day sacrament: the flaw that was promoted to feature, the sin that was compiled into doctrine."
+    }
+  }
+}

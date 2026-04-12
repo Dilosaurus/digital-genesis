@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GemData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="GemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/garnet_of_cascade/garnet_of_cascade.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
@@ -8,6 +9,7 @@ id = "garnet_of_cascade"
 display_name = "Garnet of Cascade"
 description = "When this card kills an enemy, gain 2 energy."
 rarity = 2
+icon = ExtResource("icon_tex")
 on_play_modifiers = []
 trigger_event = "on_kill"
 trigger_effect = "gain_energy"

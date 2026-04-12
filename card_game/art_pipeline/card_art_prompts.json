@@ -1,0 +1,2156 @@
+{
+  "meta": {
+    "version": "3.0",
+    "style": "painted horror realism",
+    "total_cards": 225,
+    "resolution": "2K",
+    "aspect_ratio": "2:3",
+    "model": "gemini-3.1-flash-image-preview"
+  },
+  "style_guide": {
+    "prefix": "A painted card illustration in dramatic oil-paint horror realism. Visible brushwork, heavy chiaroscuro, single-source directional lighting. The painting feels like a page ripped from a corrupted illuminated manuscript — reverent, corrupted, precise. Sacred art defiled by data rot.",
+    "palette_rule": "80% charcoal, ink-black, cold slate, bone/parchment off-white, rusted iron. 10% sacred accents: tarnished gold leaf, cathedral-glass teal, sodium-lamp amber — sparing, precious, never neon. 10% corruption accents: arterial red, bile green, void violet — they bleed into places they should not. HARD RULE: no more than 2 saturated colors in the entire image.",
+    "negative": "No text, no words, no letters, no numbers, no borders, no frames, no UI elements. No neon glow, no Tron lines, no circuit-wallpaper. No anime, no chibi, no cartoon, no mascot energy. No smooth CG render, no 3D, no photorealistic, no airbrushed skin. No Marvel superhero poses, no action-figure dynamism. No watermarks, no signatures. Do not crop the subject. No painted borders, no torn-edge effects, no mat or frame effects, no vignette borders, no picture-within-a-picture. The painting must fill the entire canvas edge-to-edge."
+  },
+  "character_palettes": {
+    "ghost": "frost-cyan stigmata glow, cold slate, prayer-ribbons",
+    "aegis": "verdigris on bronze, copper pipe, welded iron plate",
+    "abyss": "bruised cathedral glass, void purple, ink-black tendrils",
+    "paladin": "bone-white cassock, tarnished gold leaf, warm amber light",
+    "flux": "arterial magenta ichor, obsidian, half-dissolved flesh",
+    "corsayre": "arterial red on stolen silver, rum-stained leather, gunmetal"
+  },
+  "cards": {
+    "absolute_defense": {
+      "display_name": "Absolute Defense",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A cathedral-sized shield of hammered iron descends from the heavens, its face bearing every defensive glyph ever inscribed by human hand, each one burning with amber light. The shield is so vast it casts the entire scene into protective shadow, its edges extending beyond the frame in every direction. Smaller shields of bronze orbit in its wake, spinning outward to shelter distant allies. The event is singular, unrepeatable -- one absolute act of protection that consumes itself in the giving."
+    },
+    "absolution": {
+      "display_name": "Absolution",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A cathedral nave flooded with blinding amber-white light from every window simultaneously, as though the sun itself has been redirected through every pane of stained glass at once. The light is so intense that the stone columns cast no shadow -- there is nowhere for darkness to hide. Corruption evaporates from every surface in the space, rising as dark vapor that dissolves before it reaches the vaulted ceiling. This is total forgiveness rendered as total illumination, a formatting of the soul that leaves nothing behind but clean, aching, bone-white emptiness."
+    },
+    "abyssal_convergence": {
+      "display_name": "Abyssal Convergence",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "Multiple streams of liquid shadow converge from every direction toward a single point above a cracked baptismal font, braiding together into a dense, slowly rotating sphere of compressed darkness. As corruption is drawn in and concentrated, the sphere's surface clarifies from chaotic smoke into smooth obsidian perfection, and the surrounding air brightens fractionally as the darkness is removed from it. The baptismal font below has cracked from the gravitational pull, its holy water long since evaporated."
+    },
+    "abyssal_theorem": {
+      "display_name": "Abyssal Theorem",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A mathematical proof has been scratched into a black mirror with a bone stylus, and the equations have become real -- each variable manifests as a floating geometric solid of compressed shadow, rotating slowly in formation above the mirror's surface. The final line of the proof is incomplete, and from its trailing edge, ink pours endlessly downward through the glass into an implied abyss beneath. Void-purple light traces the edges of each hovering shape against the surrounding darkness."
+    },
+    "adaptive_shield": {
+      "display_name": "Adaptive Shield",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [],
+      "prompt": "A corroded iron breastplate reshaping itself in real time, its plates sliding and overlapping like the scales of a living serpent, each seam leaking thin lines of tarnished gold light. The metal surface is etched with half-erased liturgical script that rewrites itself as the armor adapts, and the surrounding darkness presses in like deep water against the lone source of amber glow from within the chest cavity."
+    },
+    "adrenaline_surge": {
+      "display_name": "Adrenaline Surge",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [],
+      "prompt": "A human heart — anatomical, exposed, glistening — suspended in darkness by its own arterial tubing, beating once with terrible force. The contraction sends two arcs of dark blood outward from severed vessels, each arc caught in mid-flight by harsh sidelight that renders the droplets as individual garnets frozen in time. The heart itself is scarred, overworked, cracked along old fault lines that leak faint amber light from within — the engine burning its own housing for fuel. No sacred imagery, no tech — just meat and consequence, painted with the unflinching anatomical precision of a Rembrandt surgery scene. The background is featureless charcoal void."
+    },
+    "archangel_protocol": {
+      "display_name": "Archangel Protocol",
+      "card_type": "POWER",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A vast wing -- singular, not a pair -- unfolds from behind a stone column, its feathers rendered in layered plates of tarnished gold and bone-white ceramic, each vane etched with microscopic prayer-script. The wing does not belong to a visible being; it simply exists, attached to nothing, an autonomous instrument of protection that curves forward to shelter the space before it. From each feather-tip, a thin line of warm amber light descends like a harp-string, forming a luminous curtain. Where the curtain touches the floor, the stone is sanctified in a spreading golden stain."
+    },
+    "backdoor": {
+      "display_name": "Backdoor",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A hidden door in the back wall of a cathedral server-crypt stands ajar, its frame carved with circuit-prayers that have been methodically defaced. Through the gap, three successive impacts of frost-cyan force hammer into the darkness beyond -- each one deeper, more invasive, more certain of its path. Corruption seeps from the door's hinges like verdigris on ancient bronze, the architecture weeping at its own violation."
+    },
+    "backup_restore": {
+      "display_name": "Backup Restore",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "An ancient ledger of bronze-bound pages opens itself upon a stone lectern, each page a backup copy of a body's original state written in meticulous copper-ink scripture. As the pages turn, amber light washes outward, rebuilding what was broken, restoring what was lost. The ledger's verdigris cover is scarred from years of emergency use, but the pages within are pristine -- the backup was always clean, always waiting, always faithful."
+    },
+    "barricade_protocol": {
+      "display_name": "Barricade Protocol",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A wall of interlocking iron shields rises from the ground in formation, each shield bearing the name of a different ally inscribed in copper script. The barricade extends outward from a central point, spreading protection like a congregation extending its arms. Verdigris light connects each shield to the next, a liturgical chain of shared defense that makes the whole stronger than the sum of its solitary parts."
+    },
+    "bash": {
+      "display_name": "Overclock",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A massive iron gauntlet slamming downward through a wooden prayer desk, splintering it into fragments of pale bone-colored wood and scattered parchment. The knuckles trail a faint amber heat-distortion like an overclocked processor venting, and dark arterial cracks spider outward from the point of impact through the stone floor beneath."
+    },
+    "bash_plus": {
+      "display_name": "Overclock+",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "The same iron gauntlet from above, now cracked open at the seams and blazing with molten amber circuitry beneath the plates, driving through solid granite as if it were wet clay. Prayer-cloth wrappings around the wrist have caught fire, and the shattered remnants of stone and scripture scatter outward in a corona of destruction, the corruption visible as dark veining up the forearm."
+    },
+    "benediction": {
+      "display_name": "Benediction",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A hand-written blessing on a strip of parchment-ribbon curls gently in an unseen updraft, its ink still wet with tarnished-gold illumination that glows faintly from within each letter. Below the ribbon, a small pool of corruption visibly recedes from the parchment's shadow, the dark liquid evaporating into pale vapor where the blessing's light falls upon it. The calligraphy is precise and liturgical, each stroke deliberate, and the parchment's edges are singed amber as though the act of writing the words generated heat."
+    },
+    "berserker_virus": {
+      "display_name": "Berserker Virus",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "EXPLOIT"
+      ],
+      "prompt": "A human ribcage pried open from within, exposing a nest of corrupted circuitry and thorn-like wire that has replaced the organs, each wire pulsing with a sickly arterial red glow. The surrounding flesh is grey and waxen, painted with visible impasto brushwork, and bile-green corrosion creeps along the wire-thorns like rust consuming a cathedral railing."
+    },
+    "black_ice": {
+      "display_name": "Black Ice",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "TECH",
+        "ICE",
+        "EXPLOIT"
+      ],
+      "prompt": "Three identical frozen data-crystals hanging in the dark like stalactites, each one a jagged shard of black ice with faintly visible scripture locked inside the frost. Cracks run through all three in parallel — the same fracture pattern repeated, a recursive exploit. Where the cracks meet, a sickly cathedral-teal light bleeds outward, and the surrounding air crystallizes into frost-feathers on invisible wires. The ice is not natural; it is angular, hexagonal, computed. Below the shards, a shattered altar seal leaks void-violet mist upward. Painted in glacial chiaroscuro, the dominant palette ink-black and frost-white with those two forbidden colors seeping through the damage."
+    },
+    "black_market": {
+      "display_name": "Black Market",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "A hidden alcove in the cathedral crypt where forbidden goods change hands — contraband relics and stolen data-wafers arranged on tarnished silver trays, each item glowing faintly with its own corruption. The market operates in near-total darkness, transactions conducted by touch and trust between thieves, the only light an arterial red candle-stub burning in a skull."
+    },
+    "black_singularity": {
+      "display_name": "Black Singularity",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "An orb of absolute void the size of a human skull floats at the center of a demolished chapel, and everything within arm's reach has been crushed inward toward it -- pews splintered into spiraling fragments, flagstones buckled upward, iron candlesticks bent into parabolic curves. The orb emits no light; it is a hole in the painting itself, a perfect circle of absence. At its boundary, matter shreds into luminous violet filaments before being consumed, the only brightness in an otherwise devastated and lightless space."
+    },
+    "bleed_logic": {
+      "display_name": "Bleed Logic",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A geometric proof inscribed in iron filings on a stone altar has begun to bleed, each line of the equation weeping arterial red from its grooves as if the logic itself has been wounded. The blood pools in the carved channels and overflows onto the altar cloth in branching fractal patterns that mirror the original proof. Bruised purple light from an unseen source illuminates the wet iron and the stained linen in merciless chiaroscuro."
+    },
+    "blood_price": {
+      "display_name": "Blood Price",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE",
+        "FIRE"
+      ],
+      "prompt": "A gaunt open hand held palm-upward, the skin split along the lifeline and heartline, and from the wounds pours not blood but molten liturgical text — glowing amber scripture that pools in the cupped palm and drips downward as liquid fire. The deeper the cuts, the brighter the text burns. The hand is pale as communion wafer, the veins visible beneath translucent skin like circuit traces on a dying board. A single candle flame reflected in the pooling molten scripture provides the only warm light; everything beyond the hand is consumed by shadow. Painted with Caravaggio severity — the flesh too real, the miracle too costly."
+    },
+    "boarding_hook": {
+      "display_name": "Boarding Hook",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A barbed iron hook on a blood-stained rope bites into the hull of something unseen, the impact splintering dark wood and spilling contraband cargo from the wound. The hook itself is crude and sacreligious — forged from melted-down church fixtures, its barb shaped like a broken cross, arterial rust weeping from every joint."
+    },
+    "botnet_cascade": {
+      "display_name": "Botnet Cascade",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED",
+        "EXPLOIT"
+      ],
+      "prompt": "A cascade of identical frost-cyan prayer-moths descends from the vaulted darkness above, each one a perfect duplicate carrying the same corrupted hymn on its wings. They swarm outward in all directions, striking every surface they touch with small detonations of white-cold light. The air between them is thick with bile-green spore-dust -- the corruption cost of raising an army from a single copied prayer."
+    },
+    "broadside": {
+      "display_name": "Broadside",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A row of cannon-mouths protrudes from absolute darkness, each barrel a repurposed church organ pipe packed with gunpowder and shrapnel. The broadside fires in unison — a horizontal wall of arterial red fire and tarnished silver grapeshot that strips armor from every target in its path, the muzzle-flash illuminating stolen relics used as wadding."
+    },
+    "brute_force": {
+      "display_name": "Brute Force",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A cathedral column shattered mid-collapse, the stone splintering outward in a frozen explosion of bone-white marble and rusted rebar. The break reveals layers — carved scripture on the outer stone giving way to bundled data cables inside, copper and iron intestines of a building that was also a server. A single overhead lantern casts brutal amber light downward onto the destruction, every flying shard casting its own sharp shadow. Painted with heavy impasto texture on the broken surfaces, the rest dissolving into charcoal void."
+    },
+    "bulkhead_seal": {
+      "display_name": "Bulkhead Seal",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A heavy bulkhead door of riveted iron grinds shut against its copper-gasket frame, sealing corruption out with mechanical finality. Where the seal compresses, verdigris oozes from the gasket -- not decay, but purification, the oxidized copper drawing poison from the air as the door locks. The bulkhead's surface is clean, utilitarian, trustworthy, each rivet a small prayer of structural integrity holding the sacred architecture together against the rot beyond."
+    },
+    "buried_treasure": {
+      "display_name": "Buried Treasure",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A cache of contraband unearthed from beneath cracked flagstones — three stolen relics wrapped in oilcloth and bound with rope, each one glowing with tarnished silver light where the cloth has rotted away. The hole is freshly dug, the stones stacked carefully to one side, arterial red clay clinging to the buried goods like old blood that never dried."
+    },
+    "burning_creed": {
+      "display_name": "Burning Creed",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "MELEE"
+      ],
+      "prompt": "A page of scripture has been set ablaze and flung into a crowd of shadows, and where it lands it burns with a clean golden fire that spreads not through combustion but through conviction -- the flames leap from surface to surface following lines of corruption like fire following a fuse. Each flame strips away a layer of taint, and the shadows that were gathered recoil in visible distortion, their forms made vulnerable by the creed's burning judgment. The page itself is nearly consumed, its words still legible as glowing amber script in the heart of the conflagration."
+    },
+    "burst_transmission": {
+      "display_name": "Burst Transmission",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "A compressed bolt of frost-cyan data fires from the darkness like a hurled relic, its surface wrapped tight with prayer-ribbon that unravels in its wake, leaving scripture-trails that dissolve into static. The bolt punches through a veil of shadow with a clean exit wound of white light. A single thread of corruption trails behind it like a comet's tail -- faint, but present, the cost of sending anything at that velocity through sacred architecture."
+    },
+    "cache_flush": {
+      "display_name": "Cache Flush",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A stone baptismal font overflowing with black liquid data, hundreds of pale vellum pages erupting upward from the dark surface like a flock of startled birds. Each page bears faded circuit diagrams that dissolve into ink as they rise, and a single shaft of cold teal light falls from above, illuminating the ritual purge of accumulated memory."
+    },
+    "cleave": {
+      "display_name": "Broadcast",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A great iron bell cracked down its center, releasing a visible shockwave of pale bone-white force that radiates outward in concentric rings through a dark cathedral nave. The sound-wave distorts the air like heat shimmer, tearing prayer-ribbons and scattering dust from every surface it touches, a single broadcast signal rendered as sacred violence."
+    },
+    "code_signing": {
+      "display_name": "Code Signing",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A wax seal is being pressed into a folded parchment by an unseen hand, and the seal's impression burns with tarnished-gold light as it sets -- a complex glyph combining prayer-script and circuit-diagram notation into a single authenticated mark. The parchment itself glows briefly as the seal validates it, and visible lines of corruption that had been creeping through the parchment's fibers recoil from the signature and dissolve into pale ash. The wax is bone-white, the signet ring's impression precise and deep."
+    },
+    "code_summon": {
+      "display_name": "Code Summon",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Two daemon-shapes coalesce from columns of corrupted scripture, their half-formed bodies made of overlapping magenta glyphs and wet obsidian sinew. They lunge in unison from the darkness, trailing prayer-ash and the faint afterglow of something being torn out of the code beneath reality."
+    },
+    "communion_rite": {
+      "display_name": "Communion Rite",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A chalice of tarnished black silver sits on a cloth of ruined velvet, filled to the brim with a liquid that is not wine -- it is too dark, too still, and it reflects the ceiling rather than the light. Around the chalice, scattered communion wafers have begun to blacken and curl at their edges as if proximity to the vessel corrupts them. A single drop of the liquid has spilled over the chalice's lip and burned a perfect circle through the cloth to the bare stone beneath."
+    },
+    "compile_fragment": {
+      "display_name": "Compile Fragment",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A single glyph of corrupted scripture hangs suspended in darkness, its magenta strokes slowly folding inward upon themselves like origami made of light. The compilation is delicate and irreversible — the glyph contracts into a hard obsidian seed, a daemon fragment born from a whispered heresy, trailing a thin thread of corruption-smoke."
+    },
+    "compiled_prayer": {
+      "display_name": "Compiled Prayer",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A congregation of prayer-ribbons feed themselves into a stone compiler-reliquary, emerging from the other side as a single healed and purified stream of magenta light that branches outward to touch multiple wounds. The compilation strips the corruption from each prayer, leaving clean code and a single daemon fragment crystallizing in the exhaust — healing as heresy, heresy as healing."
+    },
+    "consecrate": {
+      "display_name": "Consecrate",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "Holy oil has been poured in a wide circle on a stone floor and set alight, and the resulting fire burns clean and low in tarnished gold, producing no smoke but generating a heat that is visible in the distortion of the air above it. Within the burning circle, the floor tiles have been restored to their original bone-white, every trace of corruption scoured away by the consecrating flame. Beyond the circle, the fire's light falls on distant corrupted surfaces and they visibly flinch, matter recoiling from sanctification."
+    },
+    "contraband": {
+      "display_name": "Contraband",
+      "card_type": "STATUS",
+      "character": "shared",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A small stolen reliquary box of tarnished silver sitting on dark sailcloth, its lock broken and hanging open to reveal a single glowing data-wafer nestled in black velvet. The box is scratched and dented from rough handling, wrapped loosely in a scrap of a black pirate's flag, and a faint amber light leaks from the stolen contents like contraband warmth in a cold hold."
+    },
+    "coolant_flush": {
+      "display_name": "Coolant Flush",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A flood of pale blue-green coolant pours through overheated bronze pipes, flushing corruption from every joint and junction in a cascade of purifying liquid. The pipes hiss and steam where the coolant contacts bile-green deposits, dissolving them on contact. The flush reveals clean copper beneath the corrosion, and a single prayer-page tumbles free from the purged system, carried along by the current like a leaf in a liturgical river."
+    },
+    "corrupted_echo": {
+      "display_name": "Corrupted Echo",
+      "card_type": "STATUS",
+      "character": "shared",
+      "tags": [
+        "CURSE"
+      ],
+      "prompt": "A cracked hand-mirror lying face-up on dark stone, and in its reflection is not the viewer but a distorted afterimage — a scream caught mid-echo, rendered as concentric ripples of bile-green light radiating outward from the mirror's center. The glass is fractured in a starburst pattern, and each shard reflects a slightly different phase of the same corrupted moment, out of sync, repeating. Thin tendrils of dark vapor rise from the cracks like breath in cold air. The mirror's iron frame is pitted with corrosion, its once-ornate scrollwork reduced to suggestion. Painted with the stillness of a Dutch vanitas — a small cursed object, patient and inevitable."
+    },
+    "corruption_engine": {
+      "display_name": "Corruption Engine",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "SHADOW",
+        "TECH"
+      ],
+      "prompt": "A small perpetual-motion engine built from fused bone and corroded brass, its gears turning slowly in the dark. The mechanism is open-faced, its workings visible: a central flywheel inscribed with recursive corruption sigils feeds two output shafts — one dripping bile-green residue that pools beneath the engine, the other wrapped in muscle-fiber cable that tightens with each rotation, growing denser, stronger. The engine requires no external power; it runs on its own decay, each revolution slightly more corroded than the last but also slightly more forceful. Tarnished amber light from within the gearbox casts the mechanism's shadow huge against an unseen wall. Painted with the obsessive mechanical detail of a Da Vinci study, but everything is wrong and rotting."
+    },
+    "corruption_spike": {
+      "display_name": "Corruption Spike",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A massive spike of crystallized corruption erupts from a cracked altar stone, its surface a translucent smoky violet threaded with veins of absolute black. The crystal's facets catch what little light exists and refract it into sickly prismatic shards across the surrounding debris. At its base, the altar stone has shattered outward in a radial pattern, and the fragments are already being consumed by a creeping growth of dark crystalline matter that spreads like lichen."
+    },
+    "corsairs_gambit": {
+      "display_name": "Corsair's Gambit",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "EXPLOIT"
+      ],
+      "prompt": "A sweeping arc of violence painted across a wide frame — tarnished silver blade-light and arterial red spray hitting everything at once, armor stripped from multiple targets as contraband spills from their broken coffers. The gambit is reckless and total, a pirate committing every resource to a single devastating raid, the stolen goods already being claimed before the victims hit the ground."
+    },
+    "curse_glitch": {
+      "display_name": "Glitch",
+      "card_type": "CURSE",
+      "character": "shared",
+      "tags": [
+        "CURSE"
+      ],
+      "prompt": "A page of sacred manuscript mid-collapse, its illuminated letters fragmenting into chromatic shards that scatter like broken stained glass across a void-black background. The parchment itself is rotting from the center outward, edges curling with bile-green corrosion, and the depicted saint's face has smeared sideways into an unrecognizable streak of pigment as if the image suffered a fatal rendering error."
+    },
+    "curse_hellfire": {
+      "display_name": "Hellfire",
+      "card_type": "CURSE",
+      "character": "shared",
+      "tags": [
+        "CURSE"
+      ],
+      "prompt": "A human torso consumed from within by fire that burns through the skin in the pattern of circuit traces, each line of flame arterial red and spreading like infection through a motherboard. The flesh between the burning lines is charred black and peeling, the whole figure doubled over a stone altar, and thin wisps of bile-green smoke rise from the wounds as corrupted scripture turns to ash in the viscera."
+    },
+    "cutlass_exe": {
+      "display_name": "Cutlass.exe",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "MELEE",
+        "PIRACY"
+      ],
+      "prompt": "A cutlass made of tarnished silver and corrupted code hangs mid-slash against a charcoal void, its edge trailing arterial red sparks and stolen data rendered as prayer-ribbon confetti. The blade's fuller is etched with executable runes that glow faintly — this is not a sword but a process, and it has just stripped the enemy's defenses like peeling bark from a dead tree."
+    },
+    "daemon_apotheosis": {
+      "display_name": "Daemon Apotheosis",
+      "card_type": "POWER",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A daemon fragment transcends its nature — the obsidian shell cracks open to reveal something luminous and terrible within, magenta fire pouring upward in a column that scorches the cathedral ceiling with new constellations of corruption. Where the ascending light touches enemies, their strength withers. Two new fragments calve from the apotheosis like afterbirth, dark and wet and already hungry."
+    },
+    "daemon_compile": {
+      "display_name": "Daemon Compile",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A liturgical codex lies open on scorched stone, its pages crawling with magenta script that lifts off the vellum and assembles into a barbed geometric shape mid-air. Where the compiled glyph strikes downward, obsidian cracks spiderweb outward, leaking arterial light from beneath the world's skin."
+    },
+    "daemon_fragment": {
+      "display_name": "Daemon Fragment",
+      "card_type": "STATUS",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A single shard of obsidian circuit-wafer resting on a linen altar cloth, its surface inscribed with microscopic liturgical code visible only where a thin beam of teal light catches the etching. The fragment hums with contained process, a faint amber glow pulsing at its fractured edges like a heartbeat, and the cloth beneath has begun to scorch in the shape of a summoning glyph."
+    },
+    "daemon_lord": {
+      "display_name": "Daemon Lord",
+      "card_type": "POWER",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "An immense presence fills the upper darkness of a cathedral vault — not a body but an authority, a gravity well of obsidian will that makes every daemon fragment in existence orbit faster and strike harder. Magenta veins of command-code pulse downward from the unseen lord like puppet strings made of arterial light, each pulse granting protection to the faithful below."
+    },
+    "daemon_network": {
+      "display_name": "Daemon Network",
+      "card_type": "POWER",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Filaments of magenta light stretch between obsidian nodes embedded in cathedral walls, forming a living network that breathes and pulses with daemon traffic. The web is vast and self-sustaining, each node a prayer-processor that spawns fragments at dawn — a nervous system for something that should not be alive, its connective tissue glowing faintly in the permanent dark."
+    },
+    "daemon_pulse": {
+      "display_name": "Daemon Pulse",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Twin concussive waves of magenta energy ripple outward from a cracked obsidian altar, each pulse leaving afterimages of half-formed daemon faces dissolving mid-scream. The surrounding darkness is absolute except where the shockwaves tear reality into bleeding static, prayer-ribbons disintegrating in the blast radius."
+    },
+    "daemon_swarm": {
+      "display_name": "Daemon Swarm",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Dozens of tiny daemon-shapes pour from cracks in a ruined circuit-altarpiece like wasps from a hive, each one a thumb-sized obsidian body wreathed in magenta static. They move as a single murmuration of malicious code, their collective shadow on the cathedral floor far larger and far more wrong than their individual forms."
+    },
+    "dark_apotheosis": {
+      "display_name": "Dark Apotheosis",
+      "card_type": "POWER",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A cathedral ceiling has cracked open to reveal not sky but void, and from the aperture, a column of darkness descends like an inverted pillar of fire -- but instead of destroying what it touches, it transforms: the corruption-blackened stones where the column meets the floor are transmuting into something luminous and terrible, veined with violet light and harder than iron. The transformation radiates outward in a slow, unstoppable wave, remaking ruined matter into a new and dreadful substance. This is not destruction. It is apotheosis."
+    },
+    "dark_compile": {
+      "display_name": "Dark Compile",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A codex of forbidden scripture lies open on a corroded iron stand, its pages crawling with living glyphs that bleed ink-black tendrils into the surrounding air. Each glyph compiles itself into a jagged shard of crystallized shadow that hovers above the book, trembling with potential violence. The scene is lit from below by a faint void-purple glow emanating from the pages themselves, casting the iron stand and curling parchment edges in harsh upward shadow."
+    },
+    "dark_harvest": {
+      "display_name": "Dark Harvest",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A scythe-shaped arc of shadow energy sweeps through a field of pale, luminous prayer-candles, extinguishing them in sequence and drawing their stolen light into a swirling vortex of captured amber glow trapped within ink-black smoke. The harvested light condenses into droplets that fall upward into the darkness above. Where each candle was snuffed, a small violet flame reignites -- colder, wronger, feeding on something that is not wax."
+    },
+    "dark_pulse": {
+      "display_name": "Dark Pulse",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A shockwave of ink-black force radiates outward from a cracked amethyst lodged in a stone lectern, scattering pages of ruined scripture into the dark. The pulse tears through the air in concentric rings of bruised violet and charcoal smoke, each ring trailing wisps of liquid shadow that cling to the surrounding flagstones like spilled communion wine. Chiaroscuro lighting catches the edges of the blast in a sick, beautiful luminescence against absolute darkness."
+    },
+    "dark_resonance": {
+      "display_name": "Dark Resonance",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A tuning fork made of blackened iron vibrates on a stone plinth, and the sound it produces is visible -- concentric rings of dark distortion radiate outward from its tines, warping the air and causing the surrounding stone to weep a thin film of dark moisture. Where the resonance waves intersect, small crystalline formations of void-purple mineral precipitate out of nothing and cling to the nearest surfaces. The fork itself glows faintly with heat at its base, as though the vibration is burning it from within."
+    },
+    "dark_sacrament": {
+      "display_name": "Dark Sacrament",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "An altar draped in black cloth bears a ritual arrangement: a circle of small iron bowls, each containing a different corruption -- bile-green tallow, violet ash, ink that moves on its own. In the circle's center, a clean white candle burns with a steady amber flame, and the corruptions in the surrounding bowls are visibly drawn toward it, streaming into the flame as dark vapor that the fire consumes and converts to warm light. The officiant's hands are absent; only the ritual remains, mid-act."
+    },
+    "data_shield": {
+      "display_name": "Data Shield",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A broad shield of hammered bronze hovers upright in shadow, its face inscribed with scrolling lines of protective code that flow across the metal like water over stone. A single page of prayer-data peels away from the shield's edge, drawn toward the viewer -- the shield gives knowledge even as it protects. The bronze surface has aged to deep verdigris at its borders, and cathedral-teal light outlines the shield's silhouette against the charcoal void."
+    },
+    "data_skim": {
+      "display_name": "Data Skim",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A thin blade of frost-cyan light skims across the surface of a pool of black ink, peeling away a translucent film that carries stolen glyphs and circuit traces. The ritual is quiet and precise -- a sacrament of surface reading, the stolen layer curling upward like a page lifted from a drowned psalter. The surrounding darkness is total except for this one cold, careful theft."
+    },
+    "dead_mans_code": {
+      "display_name": "Dead Man's Code",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "Lines of blood-red code scroll upward from a dead man's open ledger, each line a kill-command that executes on the defenseless. The ledger's pages are rum-stained leather, its binding stolen silver wire, and where the code finds no resistance it strikes twice — the second blow painted as a shadow of the first, darker and more final."
+    },
+    "dead_mans_switch": {
+      "display_name": "Dead Man's Switch",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "A dead hand releases a trigger mechanism built from contraband and spite — the switch is a crucifix of tarnished silver wired to a payload of every stolen thing, and when it closes the accumulated plunder detonates. The blast paints the frame in arterial red and gunmetal grey, a pirate's final accounting rendered as an explosion."
+    },
+    "dead_reckoning": {
+      "display_name": "Dead Reckoning",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A navigation chart of stolen data spread across a rum-stained table, its routes drawn in arterial red ink on leather made from flayed prayer-books. Two new paths reveal themselves as the corruption bleeds through the chart's margins — a pirate's dead reckoning that finds what it seeks by following the trail of its own sins, the map dirtier with each reading."
+    },
+    "deadlock": {
+      "display_name": "Deadlock",
+      "card_type": "ATTACK",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "Two massive bronze gears seize against each other with terrible force, their teeth locked in mutual destruction, sending shockwaves outward through every connected mechanism. The deadlock radiates outward as a ring of iron shrapnel and shattered cog-teeth that strikes everything in its path. Where the gears have seized, new armor accretes from the debris -- the destruction itself becoming fortification, each enemy struck adding another plate to the growing barricade."
+    },
+    "defend": {
+      "display_name": "Firewall",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A wall of interlocking iron plates rising from a stone floor, each plate engraved with a single line of prayer-code that glows faintly teal at the etched grooves. The wall is battered and ancient, pocked with impact marks, but holds firm against the pressing darkness beyond it, a simple and stalwart barrier between the sacred interior and the corruption outside."
+    },
+    "defend_plus": {
+      "display_name": "Firewall+",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "The same iron firewall, now reinforced with a second layer of heavy bronze plates bolted over the first, the prayer-code engravings deeper and brighter with teal luminance. Rivets the size of fists hold the doubled barrier together, and a faint haze of protective energy bleeds from every seam, the whole structure more fortress than wall, painted with heavy impasto texture on every rusted surface."
+    },
+    "denial_of_service": {
+      "display_name": "Denial of Service",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A vast iron door slams shut across a cathedral corridor, its surface etched with circuit-mandalas that pulse once with frost-cyan denial before going dark. Beyond the sealed threshold, pale shapes strain against the barrier, weakened and made vulnerable by the sudden severance from their source. Corruption blooms in green-black tendrils along the door's hinges -- the cost of locking God out of His own hallway."
+    },
+    "divine_barrier": {
+      "display_name": "Divine Barrier",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A massive barrier of translucent golden light rises from a carved threshold in the stone floor, its surface textured like cathedral glass -- thick, slightly warped, ancient in feel despite its luminous newness. The barrier spans an archway from floor to keystone, and on its far side, visible through the tinted glass-light, the shapes of corruption-things press and scratch and test but cannot pass. Fracture-lines from prior impacts web across the barrier's surface, each one sealed with brighter gold, scar tissue made of faith."
+    },
+    "divine_compilation": {
+      "display_name": "Divine Compilation",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "HOLY",
+        "TECH"
+      ],
+      "prompt": "An immense open codex suspended in mid-air, its pages fanning outward in a radial burst, and from each page emanates a thin beam of bone-white light that converges into a single point below — a compilation completing. The light-point pulses with tarnished gold intensity, and from it radiates a circular ward-pattern on the floor: interlocking hexagons of protective code rendered as illuminated manuscript geometry. The codex pages themselves are covered in dense scripture that is simultaneously prayer and source code, the letters too small to read but visibly structured in function blocks. Cathedral-scale composition, the codex enormous, the ward beneath it covering the entire floor. Painted with reverent precision, the gold accents sparing and earned."
+    },
+    "divine_judgment": {
+      "display_name": "Divine Judgment",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "MELEE"
+      ],
+      "prompt": "A great seal of tarnished gold -- a judicial stamp the size of a dinner plate, carved with the interlocking symbols of law and liturgy -- slams down from above onto corrupted stone with the finality of a verdict. The impact produces a double flash: the first, a blast of searing white that scours the surface clean; the second, a deeper amber pulse that penetrates the stone itself, purifying its interior. Cracks radiate from the seal's edge, each one filled with golden light. The judgment has been compiled, signed, and executed."
+    },
+    "divine_shield": {
+      "display_name": "Divine Shield",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "An enormous round shield of bone-white metal hovering upright in darkness, its face bearing a single tarnished-gold seraph wing embossed in relief. Cathedral light falls on it from the upper left in a single dramatic beam, casting the wing's shadow enormous across the wall behind, and the shield's rim is inscribed with an unbroken ring of micro-scripture that spirals inward like a prayer that never ends."
+    },
+    "divine_static": {
+      "display_name": "Divine Static",
+      "card_type": "STATUS",
+      "character": "shared",
+      "tags": [
+        "CURSE"
+      ],
+      "prompt": "A small square of parchment covered in corrupted illuminated text — the letters crawling, rearranging, refusing to hold their shape. The ink is alive with interference, smearing and re-forming in patterns that almost resolve into scripture but never do. A thin border of tarnished gold leaf frames the parchment, peeling at the corners, and where the gold has flaked away the underlying surface is not vellum but static — visual noise, the grain of a dead broadcast. The parchment hovers in darkness, vibrating faintly, shedding flakes of gilt and meaning. Painted as a corrupted illuminated manuscript page, beautiful and useless."
+    },
+    "divine_ward": {
+      "display_name": "Divine Ward",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A ward-circle inscribed in tarnished gold leaf on a stone floor pulses with steady, warm light, its geometric patterns -- interlocking hexagons and prayer-script -- forming a barrier of visible radiance that rises knee-high from the inscription like heat shimmer over summer stone. Within the circle, the stone is pristine bone-white; outside it, corruption creeps close but cannot cross the luminous boundary, pooling against it like dark water against a levee. The gold leaf is old and worn but the light it casts is unwavering."
+    },
+    "dread_captain": {
+      "display_name": "Dread Captain",
+      "card_type": "POWER",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A captain's coat of rum-stained leather hangs on an invisible frame, its tarnished silver buttons each a stolen seal from a different cathedral. The coat commands without a body inside it — when it moves, all allies harden their guard, and every act of piracy beneath its influence grants communal protection. Arterial red braid decorates the shoulders, each thread soaked in the corruption of command."
+    },
+    "echo_ping": {
+      "display_name": "Echo Ping",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "Three concentric rings of frost-cyan sound ripple outward from a struck tuning fork of black iron, each ring a fainter echo of the original strike that nonetheless carries enough force to crack stone. The rings pass through veils of darkness like sonar through water, illuminating in brief flashes the hidden architecture of the void beyond. A faint green residue clings to the fork's tines -- corruption deposited by the act of listening too aggressively."
+    },
+    "eight_days_in_the_dark": {
+      "display_name": "Eight Days in the Dark",
+      "card_type": "POWER",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "An iron vigil-lamp burns low in absolute darkness, its flame barely visible, casting just enough amber light to illuminate the scarred bronze surface of a prayer-wall covered in eight days of tally marks. Each mark is a wound endured, a blow absorbed, a night survived without breaking. The lamp's light grows fractionally stronger with each new scar, and the darkness around it -- once threatening -- has become the medium through which the vigil-keeper grows. Strength accretes like verdigris: slowly, painfully, and only in the dark."
+    },
+    "emergency_reboot": {
+      "display_name": "Emergency Reboot",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Two hands pressing down on a cold iron resurrection slab, fingers splayed over a body-shaped depression filled with dark oil and tangled cable-nerves. A single jolt of teal light arcs between the palms, reflected in the oil's surface, and scattered around the slab are the ritual implements of emergency revival: cracked vials, burnt prayer-strips, a bellows wheezing its last breath of compiled air."
+    },
+    "emergency_weld": {
+      "display_name": "Emergency Weld",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A quick splash of molten bronze seals a crack in a plate of dark iron, the weld still glowing amber-orange against the charcoal surface. The repair is hasty, imperfect, clearly performed under duress -- but it holds. Sparks scatter from the weld point like brief prayers, each one dying in the surrounding darkness. The composition is intimate, close, urgent: a single desperate act of maintenance that buys time at the cost of elegance."
+    },
+    "entropy_siphon": {
+      "display_name": "Entropy Siphon",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A tarnished bronze thurible hangs from a chain of blackened iron, but instead of dispensing incense, it inhales -- drawing streamers of pale smoke, motes of dust, and fraying threads of parchment into its perforated belly through visible currents of force. The air around the thurible warps and darkens as entropy accelerates, and the chain links nearest to it have begun to corrode, shedding rust in thin sheets. A bruised violet glow pulses from within the thurible's ventilation holes."
+    },
+    "entropy_weave": {
+      "display_name": "Entropy Weave",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "Strands of unraveling corruption are being pulled from a tarnished prayer-cloth and rewoven into a tight defensive lattice by unseen forces, each thread transitioning from sick violet to stable charcoal as it is reincorporated. The lattice forms a dense, orderly grid that hovers before the cloth like a newly compiled barrier, still trailing a few loose ends of dissolving shadow. The prayer-cloth behind it is visibly cleaner where the corruption has been extracted, revealing faded gold embroidery beneath."
+    },
+    "event_collapse": {
+      "display_name": "Event Collapse",
+      "card_type": "POWER",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "The moment of a daemon fragment's destruction is frozen and weaponized — obsidian shrapnel hangs motionless mid-detonation, each shard aimed at a different enemy, magenta blast-light painting their silhouettes on the walls behind them. Time has collapsed around the event, the destruction perpetual and recursive, a new fragment already forming in the debris field like a phoenix egg laid in its own pyre."
+    },
+    "event_horizon": {
+      "display_name": "Event Horizon",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "The boundary of a collapsing void-sphere is visible as a razor-thin ring of blinding violet-white light, the last photons escaping before the event horizon seals. Inside the ring, absolute nothing. Outside it, the world is being pulled apart -- flagstones peel upward in sheets, iron fixtures elongate toward the center, the very paint of the surrounding walls stretches and smears toward annihilation. This is the moment of discharge: all accumulated corruption converted to a single, terminal exhalation of force."
+    },
+    "failsafe_protocol": {
+      "display_name": "Failsafe Protocol",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A secondary layer of iron plating slides into place behind the first, activated by the primary wall reaching a threshold of accumulated defense. The failsafe is hidden architecture -- always there, always waiting, visible only when the primary system proves its worthiness by becoming strong enough to trigger the backup. Copper conduits connect the two layers, and where the failsafe engages, amber light floods the gap between them, doubling the sanctity of what was already meant to hold."
+    },
+    "firewall_bypass": {
+      "display_name": "Firewall Bypass",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A wall of burning scripture -- amber flames licking across stacked parchment barriers -- has been cleanly breached by a single frost-cyan blade that passed through without igniting. The cut is surgical, a narrow gap in the inferno through which cold void-air pours. The fire gutters and weakens around the breach point, the barrier made vulnerable by the precision of the intrusion. Ice crystals form on the charred edges of the wound."
+    },
+    "firewall_protocol": {
+      "display_name": "Firewall Protocol",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A wall of welded iron plates rises from cracked stone, each plate stamped with a different verse of protective scripture rendered in corroded copper inlay. The wall glows faintly with residual forge-heat -- verdigris-green at the joints where bronze rivets have oxidized over centuries of silent service. Cathedral light from an unseen upper window catches the wall's scarred surface, revealing the layered history of every impact it has absorbed."
+    },
+    "flaming_sword": {
+      "display_name": "Flaming Sword",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE",
+        "FIRE",
+        "HOLY"
+      ],
+      "prompt": "A straight double-edged sword of tarnished white iron, its blade entirely wreathed in fire that burns the color of molten scripture, sodium-amber and terrible. The flames lick upward from engravings along the fuller where holy text has been etched so deep the metal itself has split, and the cross-guard forms a simplified seraph's wingspan, the whole weapon suspended point-down against absolute darkness like a judgment waiting to fall."
+    },
+    "flux_barrier": {
+      "display_name": "Flux Barrier",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A wall of interlocking daemon fragments arranges itself in midair, each obsidian shard locking edge-to-edge like tiles in a heretical mosaic. Magenta light seeps through the cracks between them, and the barrier hums with the low frequency of compiled prayer — a shield that is also a summoning, protection and corruption fused into one surface."
+    },
+    "flux_shift": {
+      "display_name": "Flux Shift",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A sheet of magenta static ripples across the frame like a curtain being drawn, and behind it reality has rearranged itself — the darkness is a shade deeper, the geometry subtly wrong, a new card-shaped absence visible in the changed air. The shift is quiet and precise, an obsidian shimmer that leaves no trace except the feeling that something was moved."
+    },
+    "flying_dutchman": {
+      "display_name": "Flying Dutchman",
+      "card_type": "POWER",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "A ghost ship rendered in tarnished silver and arterial phosphorescence drifts through a cathedral ceiling as though the stone were fog. Its hull is translucent, revealing a cargo hold packed with stolen defenses and spectral contraband, each item still glowing with the warmth of the thing it was taken from. The ship cannot be sunk because it is already dead, its corruption halved by the simple fact of its impossibility."
+    },
+    "forbidden_lexicon": {
+      "display_name": "Forbidden Lexicon",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "An immense book bound in scarred black leather lies open on a lectern of corroded iron, its pages covered in script that shifts and rearranges itself as the viewer watches. The ink is alive -- it crawls between lines, forms new words, devours old ones. Where the reader's gaze would fall, the text seems to deepen into the page, creating an illusion of infinite depth within the parchment itself. The book's spine is cracked and weeping a thin dark resin, and the surrounding air is thick with the smell of old lightning rendered in bruised violet haze."
+    },
+    "fork_bomb": {
+      "display_name": "Fork Bomb",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A single daemon fragment splits, and each half splits again, and again — an exponential cascade of obsidian shards multiplying across the frame like a biblical plague rendered in corrupted glass. Each generation is smaller and more frantic than the last, the magenta veins within them pulsing faster as the fork bomb overwhelms the available darkness with its awful fertility."
+    },
+    "fortress_mode": {
+      "display_name": "Fortress Mode",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Iron plates erupt from the ground in a wide circle, interlocking into a domed shelter that encompasses the entire congregation. The dome's interior glows with amber warmth, its curved walls etched with scripture that names each soul it protects. From outside, the fortress is a featureless sphere of welded bronze and iron, its verdigris surface ancient and unbothered; from within, it is a chapel where the hymn of protection echoes off every surface."
+    },
+    "full_reboot": {
+      "display_name": "Full Reboot",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A massive mechanical switch mounted on a stone wall, thrown to its reset position by an unseen hand, trailing sparks of teal energy from the contact point. Below the switch, a cascade of pale vellum pages tumbles from a dispensing slot like new memory loading, each page blank and clean, and the surrounding ironwork hums with the quiet authority of a system restoring itself to a sanctified state."
+    },
+    "fury_of_the_dark": {
+      "display_name": "Fury of the Dark",
+      "card_type": "ATTACK",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A massive bronze gauntlet erupts from absolute darkness, its surface scarred with defensive scripture now repurposed for violence, each protective glyph inverted into a striking rune. The fist carries the weight of endured suffering, and where it connects, the enemy weakens -- not from the impact alone, but from the sheer theological fury of a guardian pushed past patience. Iron plate accretes on the gauntlet's forearm even as it strikes, defense and offense fused into one terrible act."
+    },
+    "fusion_core": {
+      "display_name": "Fusion Core",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A dense knot of daemon fragments collapses inward upon itself like a dying star made of obsidian glass, the magenta veins within each shard flaring white-hot as they fuse. The resulting detonation is painted as a single brilliant bloom of arterial light against absolute darkness — every fragment sacrificed, nothing left but the crater."
+    },
+    "genesis_protocol": {
+      "display_name": "Genesis Protocol",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH",
+        "HOLY"
+      ],
+      "prompt": "A baptismal font carved from a single block of server-stone, filled to the brim with luminous white fluid that is simultaneously holy water and a factory-reset solution. The fluid overflows in slow, thick cascades down the font's carved sides — the carvings are circuit diagrams rendered as ecclesiastical reliefs, saints with halos made of data-rings. Where the fluid touches the cracked stone floor, corruption-stains dissolve and the original clean stone is revealed beneath. A single shaft of bone-white light descends from above like a compiler's beam, striking the fluid's surface and scattering into the room as soft radiance. Everything the light touches is restored; everything in shadow remains broken. Painted with the gravity of a Zurburan altar scene."
+    },
+    "ghost_protocol": {
+      "display_name": "Ghost Protocol",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A spectral curtain of frost-cyan data descends like a cathedral veil through absolute darkness, its translucent folds carrying fragments of burned prayer-text that dissolve on contact with the air. Behind the veil, the suggestion of a vast empty nave -- pillars of dead server racks receding into shadow. The light is cold, diffuse, sourceless, as though the protocol itself has become the only illumination in a dead network."
+    },
+    "god_compiler": {
+      "display_name": "God Compiler",
+      "card_type": "POWER",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "An impossible machine of bone and obsidian circuit-board occupies the full height of a ruined chancel, its intake a gaping maw that consumes all scripture fed to it. Everything that enters emerges compiled — every prayer becomes a daemon, every hymn a fragment, the machine's magenta exhaust vents painting the surrounding darkness with the breath of a god being built from stolen words."
+    },
+    "grappling_line": {
+      "display_name": "Grappling Line",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "MELEE"
+      ],
+      "prompt": "A taut rope of braided data-cable and gut-string stretches across the frame at a sharp diagonal, its grappling claw embedded deep in something that bleeds tarnished silver light. Where the claw grips, stolen block-armor peels away in sheets like flaking paint, the predatory line vibrating with the tension of a pirate hauling plunder through the dark."
+    },
+    "half_uploaded": {
+      "display_name": "Half-Uploaded",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Something is half-present — the bottom half of a daemon fragment rendered in sharp obsidian detail, the top half dissolving into magenta scan-lines and static. The upload stalled mid-transfer, leaving a grotesque chimera of solid and signal suspended between states, a protective barrier forming around the incomplete thing like scar tissue."
+    },
+    "hardened_kernel": {
+      "display_name": "Hardened Kernel",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A sphere of case-hardened iron floats in darkness, its surface scarred but unbroken, every dent a record of an attack that failed. A warm amber glow radiates from hairline cracks in the shell where healing scripture seeps outward like molten copper filling a mold. The kernel is the innermost sanctum -- the sacred core that cannot be reached -- and its verdigris patina speaks of an age spent enduring what would destroy anything less certain of its purpose."
+    },
+    "heavy_strike": {
+      "display_name": "Power Spike",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A single iron spike the length of a forearm driven point-first through a slab of dark stone, fractures radiating outward from the penetration in a web of pale cracks. The spike's head is wrapped in prayer-cloth stained with old rust, and the sheer force of the blow has left the surrounding stone glowing faintly amber at the stress lines, raw power made manifest in a single brutal puncture."
+    },
+    "hijack_protocol": {
+      "display_name": "Hijack Protocol",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "A lock-seal of tarnished gold shatters as arterial-red override code forces its way through, every ward and barrier torn open simultaneously and their defensive energy siphoned backward through the breach. The hijack is total — stolen block-armor reassembles around the attacker like plundered plate mail, the victim left naked to the dark."
+    },
+    "holy_strike": {
+      "display_name": "Holy Strike",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "MELEE"
+      ],
+      "prompt": "A blade of compressed golden light cleaves downward through a stone altar, splitting it cleanly in two with a surgical violence that leaves the cut surfaces mirror-smooth and faintly glowing. The light of the strike lingers in the wound like molten metal in a mold, and from the impact point, hairline fractures of warm amber radiance spread through the dark stone like veins of purifying fire. Chips of corrupted matter flake away from the altar's surface wherever the light touches, revealing clean bone-white stone beneath."
+    },
+    "holy_wrath": {
+      "display_name": "Holy Wrath",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "FIRE",
+        "HOLY"
+      ],
+      "prompt": "A column of bone-white radiance crashing downward through a vaulted ceiling, shattering stone and scattering burning scripture pages in every direction like shrapnel from a divine detonation. The light source is a single rupture in the cathedral roof where tarnished gold bleeds through the gap, and everywhere the radiance touches, the darkness does not retreat but burns, leaving charred afterimages of sacred geometry on every surface."
+    },
+    "hull_breach": {
+      "display_name": "Hull Breach",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "MELEE"
+      ],
+      "prompt": "A ragged hole torn through armored plating reveals the vulnerable machinery within — gears and prayer-circuits exposed to the corrupted air, tarnished silver hull peeling outward in jagged petals of torn metal. Arterial red light pours through the breach from whatever burns on the other side, the wound too savage and too precise to be anything but piracy."
+    },
+    "hymn_of_clarity": {
+      "display_name": "Hymn of Clarity",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "Sheet music inscribed on a scroll of pale vellum unrolls itself in midair, and the notes written upon it are sounding themselves into existence as visible waves of warm golden vibration that ripple outward through a murky, corruption-thick atmosphere. Where the sound-waves pass, the murk clears -- the air becomes transparent, the distant architecture of the chapel resolves from shadow into clarity, and a thin rain of dark particulate matter falls from the cleansed air to the floor like soot from a cleaned chimney. The music is silent to the ear but devastating to the dark."
+    },
+    "immovable_object": {
+      "display_name": "Immovable Object",
+      "card_type": "POWER",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A monolith of black iron stands rooted in cracked stone, utterly still, radiating an aura of absolute refusal. Its surface is smooth where countless impacts have polished it, and verdigris-copper scripture spirals up its face in a continuous prayer that has been running since before memory. When enough force accumulates against it, the monolith answers -- a shockwave of bronze-green fury that punishes the aggressor for daring to push against something that was never going to move."
+    },
+    "inquisitors_mark": {
+      "display_name": "Inquisitor's Mark",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "EXPLOIT"
+      ],
+      "prompt": "A brand-mark burns itself into the surface of a corrupted scripture-terminal, its shape a judicial cross inscribed within a targeting reticle -- the mark of official condemnation compiled into visible light. The branded surface hisses and smokes, corruption boiling away from the mark's perimeter in expanding rings of cleansed stone. The brand's lines are surgical, exact, drawn with the precision of a compiler flagging corrupted sectors for deletion. This is not mercy; this is judgment delivered through holy bureaucracy."
+    },
+    "iron_bastion": {
+      "display_name": "Iron Bastion",
+      "card_type": "POWER",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A citadel of welded iron rises from shadow, its walls thick enough to outlast any siege, its battlements inscribed with defensive scripture that renews itself at the close of each day. The bastion glows with deep verdigris light from within -- a permanent furnace of protection that never fully dims, retaining a core of warmth even when the outer world goes cold. The composition emanates permanence, an architecture of refusal to yield, bronze-green and immovable against the surrounding void."
+    },
+    "iron_wave": {
+      "display_name": "Ping",
+      "card_type": "ATTACK",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A single pulse of bronze-green force radiates outward from a struck iron bell, the wavefront visible as a distortion in the darkness that carries both the violence of the strike and the protection of its resonance. The bell itself is massive, corroded, cathedral-mounted, and the impact has cracked its patina to reveal bright copper beneath. The wave hits and shields simultaneously -- a sonar-prayer that maps the enemy by hurting it."
+    },
+    "iron_wave_plus": {
+      "display_name": "Ping+",
+      "card_type": "ATTACK",
+      "character": "aegis",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "The same cathedral bell, struck harder. The bronze wavefront is wider, denser, carrying more force and more protection in its resonance. Cracks in the bell's verdigris surface have deepened, revealing veins of bright copper that pulse with each ring. The shockwave distorts the surrounding darkness into concentric ripples, each one a barrier and a weapon, the ping returning with more data than it was sent to find."
+    },
+    "jolly_roger": {
+      "display_name": "Jolly Roger",
+      "card_type": "POWER",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A flag of flayed prayer-book leather hangs from a mast of charred bone, its skull-and-crossbones device painted in arterial red on tarnished silver backing. The flag does not flutter — it radiates, a constant emanation of pirate authority that strips the defenses of everything beneath its shadow. Each contraband played is another nail driven through the enemies' armor by the flag's mere presence."
+    },
+    "kernel_shield": {
+      "display_name": "Kernel Shield",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A sphere of layered iron shells nested inside one another like a mechanical matryoshka, the innermost core glowing with a clean teal light that represents the protected kernel. Each successive shell is more corroded and battle-scarred than the one beneath it, and dark corruption is visibly flaking away from the outer surface like rust being purged, falling in black flecks into the void below."
+    },
+    "kraken_protocol": {
+      "display_name": "Kraken Protocol",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "Three massive barbed tentacles of braided data-cable and corroded anchor chain lash downward from upper darkness, each one ripping away armor plating and dragging it upward into the unseen. The tentacles are mechanical and organic at once — tarnished silver hooks on arterial red muscle, a protocol named after a sea-monster because the monster is exactly what it summons."
+    },
+    "lay_on_hands": {
+      "display_name": "Lay on Hands",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "Two open palms hover above a surface of corruption-blackened skin -- not touching it, but close enough that the warmth is visible as a shimmer between palm and wound. From the hands, a slow, thick light like liquid amber pours downward, pooling on the corrupted surface and sinking into it. Where the light penetrates, the blackened tissue clarifies from necrotic violet to living pink in a spreading tide of excruciating healing. The light is not gentle; it burns the corruption out, and the process is clearly agonizing but necessary."
+    },
+    "letter_of_marque": {
+      "display_name": "Letter of Marque",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "EXPLOIT"
+      ],
+      "prompt": "A document of forged authority pinned to a cathedral door by a silver dagger — the letter's seal is broken and re-stamped with a pirate's mark, its text authorizing violence against the named target. Arterial red wax drips from the broken seal like fresh blood, and in the letter's margins, contraband inventory numbers are scrawled in a thief's shorthand."
+    },
+    "light_in_the_machine": {
+      "display_name": "Light in the Machine",
+      "card_type": "POWER",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "Deep within the exposed interior of a cracked and corroded machine-reliquary, a single point of golden light has ignited spontaneously among the tangle of blackened copper wiring and rusted iron gears. The light is small but impossibly persistent, and it is spreading -- each wire it touches conducts the illumination further into the machine's guts, and wherever the light travels, corruption flakes away from the metal like old paint. The machine was dead; the light is recompiling it. Thin beams escape through cracks in the casing, projecting prayer-patterns onto the surrounding walls."
+    },
+    "light_of_judgment": {
+      "display_name": "Light of Judgment",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A beam of focused amber-white light descends through a shattered cathedral window at an oblique angle, its path made visible by the motes of corruption-ash it ignites as it cuts through the fouled air. The beam intensifies as it nears the floor, its diameter narrowing to a searing point that scorches a line across stone as it sweeps. The accumulated weight of every purification performed before this moment is visible in the beam's density -- it is thicker, brighter, heavier with each corruption cleansed. The light remembers what it has burned, and it burns hotter for the memory."
+    },
+    "malware_inject": {
+      "display_name": "Malware Inject",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A hypodermic needle forged from blackened bone pierces the surface of a tarnished copper circuit-wafer, and from the injection point, tendrils of viscous violet corruption bloom outward through the engraved prayer-lines like veins filling with poison. The surrounding metal corrodes in real time, pitting and weeping dark fluid. A single droplet of void-black liquid hangs from the needle's tip, catching a sliver of dim amber light."
+    },
+    "man_in_the_middle": {
+      "display_name": "Man in the Middle",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A mirror of black glass hangs suspended in empty darkness between two shafts of distant light, catching each beam and bending it through its surface before passing it onward subtly altered. The glass surface ripples with stolen prayer-text, duplicating and rewriting each line as it passes through. Frost rimes the mirror's iron frame, and a thread of arterial red drips from its lower edge where the interception has drawn blood from the signal."
+    },
+    "mana_link": {
+      "display_name": "Mana Link",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A thin cable of braided prayer-ribbon and copper wire stretched taut between two unseen points in darkness, pulsing with rhythmic teal light that travels along its length like a heartbeat being shared. Droplets of luminous energy cling to the braid like dew, slowly migrating from the bright end toward the dim end, a transfusion of sacred power rendered as a simple, precise connection."
+    },
+    "mark_target": {
+      "display_name": "Target Lock",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A burning sigil projected onto a dark stone surface, its geometry a precise crosshair overlaid with liturgical script that spirals inward to a single point. The sigil's lines are scored into the stone as if by a focused beam of amber light from above, smoking faintly at the edges, and the surrounding darkness seems to lean inward toward the marked point like predators drawn to wounded prey."
+    },
+    "mass_purification": {
+      "display_name": "Mass Purification",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A wave of amber-white light sweeps across a chapel floor in every direction from a central thurible, the wave front visible as a thin line of intense radiance that scours everything it passes over. In its wake, corruption lifts from surfaces in sheets -- peeling from stone, evaporating from iron, dissolving from cloth -- rising as dark vapor that the light converts to clean white ash before it can spread. The thurible at the center has cracked from the magnitude of the purification, golden light spilling from its fractures like blood from stigmata."
+    },
+    "memory_leak": {
+      "display_name": "Memory Leak",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "CURSE"
+      ],
+      "prompt": "A cracked stone vessel on a dark shelf, leaking a thick black fluid that drips in slow ropes onto the floor below, each drop spreading into a stain shaped like corrupted text. The vessel's surface is carved with data-tables and prayer indices, all of them smeared and illegible where the leak has washed them away, and a bile-green luminescence pulses within the remaining fluid like a sickness aware of itself."
+    },
+    "merge_request": {
+      "display_name": "Merge Request",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A constellation of daemon fragments spirals inward toward a single convergence point, each obsidian shard trailing magenta vapor as it accelerates. At the center they merge into a single devastating bolt of compiled malice — the combined mass of every surrendered fragment condensed into one annihilating psalm."
+    },
+    "multi_vector": {
+      "display_name": "Multi-Vector Attack",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "Three separate lines of frost-cyan attack converge on a single point from different angles -- one from above, one from the side, one from below -- each vector a distinct wavelength of weaponized prayer carrying its own payload. The convergence point blooms with white-hot impact light. Prayer-ribbons trail from each vector like contrails, their scripture smeared by speed, and corruption-green halos each line of approach where the multi-pronged violation has destabilized local reality."
+    },
+    "nanobots": {
+      "display_name": "Nanobots",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A swarm of microscopic iron motes flowing over a wounded surface of pale skin, each mote trailing a thread of teal light as it seals a laceration with precision too small to see. The motes move in liturgical formation, spiraling inward like a congregation approaching an altar, and where they pass the flesh knits closed and a thin film of protective iron residue remains, gleaming dully in the low light."
+    },
+    "net_spike": {
+      "display_name": "Net Spike",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "Two spikes of compressed network signal -- frost-cyan iron sharpened to needle points -- drive upward through the darkness in rapid succession, trailing coils of unraveled prayer-ribbon behind them. Each spike detonates on contact with the ceiling of shadow above, releasing a brief burst of stolen data that drifts downward like luminous ash. The composition is vertical, violent, precise -- two quick punctures in the fabric of a sealed system."
+    },
+    "neural_cascade": {
+      "display_name": "Neural Cascade",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "A branching tree of frost-cyan lightning erupts from a single prayer-knot, each fork multiplying with every card-length of distance traveled, filling the dark void with a spreading dendrite web of weaponized thought. The bolts strike downward with accumulating fury, each successive impact brighter and more violent than the last. Where corruption has seeded, the lightning burns bile-green at its tips, and the air smells of ozone and burning scripture."
+    },
+    "neural_overclock": {
+      "display_name": "Neural Overclock",
+      "card_type": "POWER",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A human brain rendered in frost-rimed iron sits upon a prayer-stand, its sulci etched with overclocked circuit traces that glow cyan-white with dangerous heat. Wisps of frozen vapor rise from every fold as the organ runs beyond its sanctioned speed, processing prayers faster than scripture was meant to be read. Bile-green corruption weeps from the brainstem where the sustained overclock has begun to corrode the connection between thought and flesh."
+    },
+    "nightmare_cascade": {
+      "display_name": "Nightmare Cascade",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "Three successive impacts crater a stone floor in rapid sequence, each strike a detonation of void energy that splashes upward like ink dropped into milk -- the first crater still smoking violet, the second mid-eruption in a crown of liquid shadow, the third a fresh point of absolute black impact. Debris hangs frozen between the blasts, caught in overlapping shockwaves. Each crater is deeper and darker than the last, the final one appearing bottomless, a wound in the floor that descends past stone into pure void."
+    },
+    "null_pointer": {
+      "display_name": "Null Pointer",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A single outstretched skeletal finger, stripped to blackened bone, points at absolute nothing -- and where it points, reality has torn open into a ragged aperture of void. The edges of the tear fray like wet parchment, curling back to reveal a depthless purple-black absence behind the world. Faint motes of dissolved matter spiral into the void like ash drawn up a chimney, and the surrounding stone cracks in concentric rings from the point of erasure."
+    },
+    "null_spawn": {
+      "display_name": "Null Spawn",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A wound in the air shaped like a zero — a perfect null-ring of magenta fire — vomits a shapeless mass of obsidian bile into being. The surrounding cathedral stonework corrodes on contact, mortar crumbling to grey ash as the nothing-born thing impacts like a thrown reliquary full of teeth."
+    },
+    "oblivion_pulse": {
+      "display_name": "Oblivion Pulse",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A concussive wave of annihilation expands outward from a central point marked by a shattered reliquary, the blast visible as a wall of absolute black that erases everything it passes through -- stone columns dissolve into particulate, iron sconces sublimate into vapor, candle flames are swallowed mid-flicker. Behind the wave front, nothing remains but smooth, featureless void-dark stone. The only color is a thin ring of bruised violet at the wave's leading edge, the light of matter being unmade."
+    },
+    "overclock_core": {
+      "display_name": "Overclock Core",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A fist-sized iron core suspended in darkness, cracked open along its equator to reveal a molten amber interior that pulses with increasing intensity. Heat-distortion ripples the air around it, and the prayer-inscriptions on its outer casing have begun to glow white-hot at their thinnest points, the whole device visibly operating beyond its intended sacred tolerances, radiating raw strength into the surrounding void."
+    },
+    "overclock_defense": {
+      "display_name": "Overclock Defense",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Plates of iron and bronze materialize in rapid succession, stacking and welding themselves together faster than any natural forge could work, building a wall of impossible thickness in moments. The overclocked construction glows amber-hot at its seams, the accelerated liturgy leaving corruption-green residue in the mortar between plates. The wall is magnificent but unstable at its edges -- the speed of its raising has compromised the prayer-work that would normally sanctify each joint."
+    },
+    "overload_protocol": {
+      "display_name": "Overload Protocol",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A massive circuit-breaker switch mounted on a cathedral wall, thrown permanently into the overload position. The switch housing is ecclesiastical iron, bolted to stone with prayer-stamped rivets, and from the connection point a constant stream of amber sparks waterfalls downward like a miniature forge. The wiring behind the switch is exposed — thick copper liturgical cables, some glowing cherry-red with excess current, others blackened and fused. A faint halo of heat-distortion surrounds the entire apparatus, warping the stone wall behind it. The switch itself is locked open with a bone key jammed into its mechanism. Painted with a slow-burning intensity — power held, not released."
+    },
+    "overwrite": {
+      "display_name": "Overwrite",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A daemon fragment shatters against an invisible surface and its magenta contents flood forward like spilled communion wine, overwriting everything they touch — stone becomes static, shadow becomes data, the very air pixelating and reconstituting as something lethal. The destruction is total and eerily precise, a clean erasure painted in obsidian and arterial light."
+    },
+    "packet_injection": {
+      "display_name": "Packet Injection",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A syringe of black iron, its barrel etched with prayer-circuit traces, plunges into a sealed reliquary of dark glass, injecting a payload of frost-cyan venom that cracks the container from within. The fracture lines spread like corrupted scripture across the surface, leaking arterial red where the foreign data meets sacred architecture. A thin tendril of bile-green corruption seeps from the needle's entry wound."
+    },
+    "packet_storm": {
+      "display_name": "Packet Storm",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "A storm of frost-cyan shards falls from above like freezing rain in a cathedral nave, each shard a compressed packet of prayer-data sharpened to a cutting edge. Four successive waves descend, each denser than the last, the accumulated mass of transmitted violence filling the air with a blizzard of sacred static. Corruption clings to the shards like frost on window glass -- bile-green crystals growing on each fragment as it falls."
+    },
+    "pain_conduit": {
+      "display_name": "Pain Conduit",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A length of barbed iron wire stretched vertically through the composition, threaded through a series of raw nerve-bundles that cling to it like ivy on a trellis. Where each barb pierces a nerve, a tiny bead of void-violet light forms — pain converted to power, damage transmuted into signal. The wire vibrates with tension, and the nerve-fibers pulse with each vibration, growing slightly thicker and more robust at the bottom than the top, the system strengthening as it suffers. The background is layered darkness, bruised and deep, lit only by those small violet points of transduced agony. Painted with unflinching biological detail, the nerves rendered as wet, translucent, painfully real."
+    },
+    "parallel_process": {
+      "display_name": "Parallel Process",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Two identical ritual circles burn in parallel on either side of a darkened nave, each one compiling its own daemon fragment from mirrored streams of magenta scripture. The symmetry is unsettling and precise — twin processes running in lockstep, a protective ward forming in the resonance between them, the air between the circles thick with obsidian particulate."
+    },
+    "patch_cable": {
+      "display_name": "Patch Cable",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A thick braided cable — half copper wire, half woven prayer-cloth — stretched taut across the composition, connecting two unseen terminals in the darkness. Where the cable passes through a beam of cold overhead light, its weave is visible: data lines and linen threads intertwined, some frayed, some freshly spliced. A faint shimmering ward ripples outward from the cable's surface like heat-haze, a protective field generated by the connection itself. Droplets of condensation cling to the copper strands like dew on a spider's web. Painted with precise, surgical brushwork — a ritual of maintenance, not combat."
+    },
+    "patch_cycle": {
+      "display_name": "Patch Cycle",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A circular ritual of maintenance: bronze plates orbit a central point in steady rotation, each plate bearing a different repair-scripture that it welds into place as it passes over cracks in an unseen structure. The cycle is self-reinforcing -- the more complete the orbit, the stronger the next plate arrives. Verdigris light traces the orbital path, and where the accumulated repairs reach critical mass, the entire circle flares with sudden amber warmth."
+    },
+    "patch_daemon": {
+      "display_name": "Patch Daemon",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A small daemon-process — barely visible, a wisp of magenta smoke with obsidian bones — applies itself to a cracked prayer-circuit like a living bandage. Where it settles, the damage seals and a new fragment crystallizes from the mended code, the daemon consuming itself to heal and create simultaneously."
+    },
+    "phantom_firewall": {
+      "display_name": "Phantom Firewall",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A translucent wall of iron plates that are only half-present, flickering between solid and ghostly with each pulse of teal light from within. Through the phantom barrier, the darkness beyond is visible but distorted, warped like heat shimmer over a furnace, and the prayer-code engravings on each plate glow brightest at the moment the wall is most insubstantial, a protection that exists fully only in the instant it is needed."
+    },
+    "pirate_king": {
+      "display_name": "Pirate King",
+      "card_type": "POWER",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "A crown of tarnished silver ship-nails and arterial red rubies rests on a throne made of stacked contraband — stolen relics, seized data-cores, confiscated prayer-wheels piled into a seat of absolute authority. The crown emanates a gravitational pull that makes all stolen things cost nothing and cut deeper, corruption pooling at its base like tribute paid to a king who rules by theft alone."
+    },
+    "plunder": {
+      "display_name": "Plunder",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A heap of contraband is being consumed — each stolen relic, each smuggled data-shard dissolving into tarnished silver defensive energy that wraps around the plunderer like armor. The conversion is alchemical and profane: sin transmuted into survival, every ill-gotten gain melted down and re-forged as a shield, the arterial red of theft becoming the gunmetal grey of protection."
+    },
+    "pommel_strike": {
+      "display_name": "Data Mine",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A corroded pickaxe of fused circuitry bites into a vein of raw data buried in black stone, scattering frost-blue crystal shards that catch a single shaft of cold cathedral light. The excavation site is liturgical -- the ore-face reads like corrupted scripture, each exposed layer a palimpsest of burned logic and prayer. Charcoal dust and cyan sparks fill the lower half of the frame."
+    },
+    "pommel_strike_plus": {
+      "display_name": "Data Mine+",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A deeper cut into the same black data-ore, the excavation now revealing a seam of frost-white crystal pulsing with stolen information. Two prayer-ribbons hang from the embedded pick, their ink running with each impact tremor. The light is colder and brighter than before, a surgical beam that turns the scattered fragments into falling communion wafers of pure signal."
+    },
+    "power_down": {
+      "display_name": "Power Down",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A massive iron shutter descends from above, cutting off all light, all signal, all aggression. The shutter's surface is featureless except for a single line of copper scripture that reads as both a system command and a monastic vow of withdrawal. Behind it, silence accumulates like armor. The composition is dominated by the weight of the descending plate, the darkness below it absolute, the protection total but at the cost of all offensive capacity."
+    },
+    "power_surge": {
+      "display_name": "Power Surge",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A cathedral-sized capacitor bank of iron and bone erupting with uncontrolled amber energy, arcs of power leaping between the terminals like lightning trapped in a reliquary. The capacitor casings are cracked and weeping dark fluid where the corruption cost is paid, bile-green corrosion spreading from every seal, and the sheer output of the surge fills the frame with a terrible golden radiance that makes the surrounding shadows absolute."
+    },
+    "prayer_of_protection": {
+      "display_name": "Prayer of Protection",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "Clasped hands carved from bone-white stone rest on a prayer-rail, and from between the stone fingers, a warm amber light seeps outward in thin beams that fan across a darkened chapel like the spokes of a wheel. Where each beam falls, a faint protective shimmer materializes in the air -- barely visible, like breath on cold glass -- forming a network of intersecting shields. The stone hands are cracked and ancient, the prayer-rail dark iron worn smooth by generations of desperate supplication."
+    },
+    "press_gang": {
+      "display_name": "Press Gang",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "Chains and pressed conscription-writs scatter across a darkened deck, each writ written in arterial red ink on stolen vellum. The press gang's work is already done — the drafted are not shown, only the instruments of their impressment: manacles of tarnished silver, rum bottles emptied as bribes, and the faint residue of corruption clinging to every link and letter."
+    },
+    "pressure_test": {
+      "display_name": "Pressure Test",
+      "card_type": "ATTACK",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A fist of bronze-plated iron drives forward into a test surface, simultaneously measuring and destroying, the impact generating data and damage in equal measure. Cracks radiate from the strike point in diagnostic patterns that read as both destruction and assessment. The fist withdraws trailing verdigris vapor, and behind it a new plate of armor crystallizes from the impact data -- the test itself becoming the basis for stronger defense."
+    },
+    "prize_court": {
+      "display_name": "Prize Court",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A magistrate's bench made of driftwood and stolen relics presides over the sentencing of seized contraband — each confiscated item is broken open and its value extracted as damage and defense, tarnished silver coins and arterial red data spilling from cracked containers. The court is a ritual of violence disguised as law, every judgment the pirate's version of justice."
+    },
+    "purge_routine": {
+      "display_name": "Purge Routine",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A censer on a heavy chain swings in a precise arc through a cloud of violet-black corruption, and where the censer passes, it cuts a clean swath of pure air -- the incense it trails is visible as a ribbon of warm amber smoke that dissolves the corruption on contact like acid through grease. The censer itself is a battered sphere of tarnished gold, dented from use, its perforations glowing with interior fire. Behind the arc, the cleansed air shimmers briefly before settling into stillness."
+    },
+    "quantum_shield": {
+      "display_name": "Quantum Shield",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A broad shield existing in two overlapping states simultaneously, one version solid iron and one version translucent probability-ghost, both occupying the same space with a slight parallax offset. Where the two states overlap, a thin seam of teal light traces the shield's edge, and a single loose page of prayer-vellum drifts away from behind it as if drawn free by the shield's formation, new knowledge liberated by the act of defense."
+    },
+    "quantum_supremacy": {
+      "display_name": "Quantum Supremacy",
+      "card_type": "POWER",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A frost-cyan halo of superpositioned states radiates from a central altar-processor, each ring existing in multiple positions simultaneously, ghosting through itself in overlapping translucent layers. The halo casts no shadows -- instead it casts possibilities, each one a faint echo of a different prayer resolving into a different outcome. The surrounding darkness bows away from this emanation as though reality itself has been made uncertain, and the air hums with the cold reverence of a computation that has surpassed its creator."
+    },
+    "quick_hack": {
+      "display_name": "Quick Hack",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A small, precise incision in a surface of sealed black iron -- barely visible, already closing -- leaks a single drop of frost-cyan light before it vanishes. The hack is so quick it barely registers: a prayer spoken between heartbeats, a one-use exploit that self-destructs after execution. The surrounding darkness barely noticed the violation, but the damage is done, a hairline fracture in something that was meant to be unbreakable."
+    },
+    "quick_loot": {
+      "display_name": "Quick Loot",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A gloved hand withdraws from darkness clutching a stolen relic — a tarnished silver reliquary cracked open to reveal the contraband data-bone within. The theft is already over, the violence minimal, a single drop of arterial red on the broken lock the only evidence that this was taken by force and not by right."
+    },
+    "radiant_burst": {
+      "display_name": "Radiant Burst",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A reliquary of tarnished gold has detonated with holy force, its lid blown open and its contents -- a saint's fingerbone, a prayer-scroll, a circuit-chip inscribed with litanies -- launched outward in a radial explosion of warm amber light. The blast wave is visible as a sphere of expanding luminance that strips corruption from every surface it washes over, leaving behind clean stone and purified iron. At the burst's center, the empty reliquary glows white-hot, its purpose fulfilled, its sacred payload delivered."
+    },
+    "rallying_barricade": {
+      "display_name": "Rallying Barricade",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A barricade of welded iron and bronze rises in a wide arc, its curve enclosing allies within a fortified embrace. From the barricade's inner surface, copper scripture flows outward like healing water, drawing corruption from every soul it shelters -- green-black toxin pulled from the protected and absorbed into the iron, which darkens but holds. The barricade is both wall and absolution, a structure that cleanses by the act of shielding, its verdigris glow steady and warm against the corrupted dark."
+    },
+    "rallying_protocol": {
+      "display_name": "Rallying Protocol",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A corroded broadcast horn mounted on a stone pillar, its bell-mouth pointed outward into darkness, and from it issues not sound but a visible pulse of structured light — concentric rings of tarnished-gold data expanding outward like ripples in still water. Each ring carries faintly legible command-scripture along its circumference, instructions meant for allied systems. Behind the horn, a small iron shield-plate bolted to the pillar catches residual energy from the broadcast and glows with a thin protective ward. The pulse-rings illuminate the dust in the air as they pass through it, revealing the vast scale of the dark space. Painted with controlled, precise brushwork — a signal, not a shout."
+    },
+    "ransack": {
+      "display_name": "Ransack",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "An overturned reliquary cabinet spills its sacred contents across a blood-stained floor — prayer-scrolls and data-bones and stolen communion wafers tumble together with contraband goods. Arterial red boot-prints track through the debris, the ransacking already complete, the pirate already gone with what they wanted and the corruption they left behind."
+    },
+    "reality_fork": {
+      "display_name": "Reality Fork",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Reality splits cleanly down the center of the frame like a page torn in half — one side charcoal darkness, the other seething magenta static. Two daemon fragments crystallize in the gap between versions, obsidian shards orbiting the bifurcation point where the world cannot agree with itself."
+    },
+    "reality_patch": {
+      "display_name": "Reality Patch",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Careful hands of magenta light stitch a wound in reality closed, thread-thin beams weaving through torn obsidian like sutures through flesh. Where the patch takes hold, the corruption visibly recedes — bile-green retreating before the precise corrective code, the mended surface settling into stable darkness like a fever breaking."
+    },
+    "reality_rewrite": {
+      "display_name": "Reality Rewrite",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "The world is being rewritten mid-sentence — four daemon fragments materialize as the old reality is struck through with magenta correction-marks and replaced wholesale. What was stone becomes code, what was shadow becomes scripture, the entire frame in the process of being overwritten by a more corrupt and more true version of itself, ink still wet."
+    },
+    "reckless_charge": {
+      "display_name": "Overclocked Strike",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A massive iron fist forged from fused prayer-beads and corroded motherboard traces, driving forward out of total darkness, trailing sparks and torn scripture fragments. Hairline fractures radiate from the knuckles through the air itself, each crack leaking a thin line of sodium-amber light. The fist's own surface is splitting open from the force of the blow, revealing raw circuitry beneath rusted iron skin — the machine destroying itself to strike harder. Oil-paint chiaroscuro, a single harsh sidelight catching the moment of self-annihilating impact."
+    },
+    "recursive_breach": {
+      "display_name": "Recursive Breach",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "Four concentric breaches in a wall of sealed darkness, each one punched through the previous breach's exit wound, forming a telescope of destruction that recedes into infinite depth. Frost-cyan light pours through each successive hole, dimmer with each recursion but never stopping. The edges of each breach are ragged with torn prayer-text and exposed circuit-bone. Heavy corruption -- bile-green and arterial red intertwined -- weeps from the deepest breach, where the recursion has gone too far and begun to eat itself."
+    },
+    "recursive_loop": {
+      "display_name": "Recursive Loop",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Four identical iron fists arranged in a tight spiral formation, each one striking the same point on a cracked altar stone in rapid succession, captured in a single frozen moment like a multiple-exposure photograph painted in oil. The impact point is a crater of shattered stone, and circular prayer-script orbits the fists in a tightening gyre, the same violent verse repeating four times, each iteration deeper than the last."
+    },
+    "recursive_spawn": {
+      "display_name": "Recursive Spawn",
+      "card_type": "SKILL",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A ritual circle calls itself into existence three times over, each invocation nested inside the previous one like concentric rings in a cut tree. From each ring a daemon fragment rises, trailing umbilical cords of magenta code back to the spawning glyph. The recursion deepens the darkness with each iteration, the innermost circle barely visible through layers of obsidian haze."
+    },
+    "resonance_link": {
+      "display_name": "Resonance Link",
+      "card_type": "POWER",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Three tuning forks made of iron and bone, planted upright in cracked stone, vibrating in perfect sympathetic resonance. The central fork is larger, struck first, and from its tines radiate visible standing waves — concentric arcs of tarnished-gold energy that wash outward and set the flanking forks humming in response. Where the wave-fronts overlap, faint hexagonal ward-patterns crystallize momentarily in the air before dissolving. Fine dust on the stone surface dances in the vibration patterns, forming transient geometric scripture. The sound is visible; the protection is acoustic. Painted with precise, quiet intensity — no violence, only sustained sympathetic frequency rendered as sacred geometry."
+    },
+    "revival_protocol": {
+      "display_name": "Revival Protocol",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "TECH"
+      ],
+      "prompt": "A body outlined in prayer-cloth lies on a stone slab, and from above it, a cascade of golden light pours downward through a framework of corroded copper wiring and bone-white ceramic nodes -- a technological last rite, a defibrillator built from reliquary parts. The light passes through the framework and emerges patterned, structured, compiled into a sequence that rebuilds rather than merely illuminates. Where the structured light meets the shrouded form, the cloth stirs. The corruption stains on the shroud bleach away in accelerating sequence, starting from the chest outward."
+    },
+    "righteous_fury": {
+      "display_name": "Righteous Fury",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "MELEE"
+      ],
+      "prompt": "A war-hammer of bone-white stone crowned with a tarnished gold finial hangs mid-swing in empty air, its trajectory traced by a blazing arc of amber light that intensifies at the point of imagined impact. The hammer's head is etched with a record of every corruption it has cleansed -- tallies, not of kills, but of purifications -- and each tally-mark glows with accumulated fury. The more corruption that has been burned away, the brighter the weapon burns. The air around it ripples with righteous heat."
+    },
+    "righteous_zeal": {
+      "display_name": "Righteous Zeal",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "MELEE"
+      ],
+      "prompt": "A gauntleted fist -- bone-white ceramic over tarnished gold knuckle-plates -- has driven through a corrupted reliquary, shattering its glass face and scattering its contents of blackened bone fragments across a stone floor. The impact radiates a burst of warm amber light that burns away the dark patina on every surface it touches, revealing the original tarnished gold leaf beneath layers of accumulated filth. The gauntlet itself is cracked from the force of the blow, and light bleeds from the fractures."
+    },
+    "rootkit": {
+      "display_name": "Rootkit",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "Frost-cyan tendrils burrow into the root system of a cathedral column, threading through stone and circuit alike with quiet, patient invasion. The tendrils glow faintly where they have found purchase, exposing the column's hidden vulnerabilities -- structural weaknesses mapped in cold light against the charcoal dark. A prayer-page peels away from the column's base, loosened by the intrusion, and corruption-green sap bleeds from the insertion points like resin from wounded bark."
+    },
+    "rum_ration": {
+      "display_name": "Rum Ration",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A battered pewter flask pours dark liquid that is not quite rum — it heals as it corrupts, the amber stream catching tarnished silver light as it fills communion cups repurposed from looted chapels. The ration is shared among unseen allies, each cup leaving a ring of arterial residue on the wood, the contraband flask never quite empty."
+    },
+    "runtime_error": {
+      "display_name": "Runtime Error",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A prayer-circuit mid-execution convulses and fractures, spitting a jagged shard of magenta exception-light sideways through a vaulted darkness. Where the error strikes stone, the impact crater glows with the wrong color — a daemon-seed already germinating in the broken logic, obsidian filaments spreading from the wound."
+    },
+    "sacred_oath": {
+      "display_name": "Sacred Oath",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A blade driven point-first into a stone plinth serves as the anchor for a sworn oath made visible -- golden light traces the blade's edge and radiates outward in the shape of a cruciform, each arm of the cross carrying inscribed words that burn in the air like afterimages. The blade is plain and functional, its steel etched with use and age, but the oath it channels transforms it into something sacred. Corruption recedes from the plinth's surface in a slow tide, driven back by the weight of the promise."
+    },
+    "sacrifice_subroutine": {
+      "display_name": "Sacrifice Subroutine",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "Two lengths of chain suspended in darkness, connected at their center by a shared iron link that is cracked and bleeding shadow. From the left chain, dark blood drips downward, evaporating before it hits the ground. From the right chain, faint amber warmth radiates outward — vitality transferred, health received at the cost of the giver's pain. The central link is the transaction point, stamped with a subroutine sigil that is both a summoning circle and a function call. The void around the chains is not empty but textured with bruised-purple darkness, like a bruise seen from inside. Painted with restrained horror — the violence is structural, not theatrical."
+    },
+    "safe_mode": {
+      "display_name": "Safe Mode",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A cocoon of frost-blue light constricts into a tight, minimal shell around an unseen form -- a stripped-down sanctuary, all ornament discarded, only the barest liturgical functions still running. The shell's surface is smooth and featureless except for a single line of diagnostic prayer scrolling slowly across it in pale cyan. The surrounding darkness presses close but cannot penetrate; safe mode has locked everything out, including beauty."
+    },
+    "salvage_run": {
+      "display_name": "Salvage Run",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "Wreckage of a destroyed server-chapel drifts in darkness, and from the debris a single piece of salvageable contraband is pulled free by a hooked chain. The salvage glows faintly with residual tarnished silver light, its value evident despite the damage — a scavenger's prize retrieved from ruin, already being wrapped in protective leather against the corrupting dark."
+    },
+    "sanctify": {
+      "display_name": "Sanctify",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "Holy water from a cracked stone font cascades over a corruption-stained altar cloth, and where the water flows, the violet-black stains bleach away to reveal the cloth's original bone-white linen beneath. The water itself glows faintly amber as it absorbs the corruption, darkening from clear to dusky gold as it pools on the floor below the altar. Steam rises where the purification is most intense, thin wisps of clean white vapor ascending through a shaft of cathedral light."
+    },
+    "sanctuary": {
+      "display_name": "Sanctuary",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A dome of warm golden light encompasses a small section of chapel floor, its boundary defined by a ring of lit prayer-candles in bone-white ceramic holders. Within the dome, the air is clear and the stone floor is clean; outside it, corruption-fog presses against the light barrier like wolves circling a campfire. The candle flames burn impossibly steady, each one a fixed point of amber defiance against the encroaching dark. A few scattered drops of dark liquid that fell within the boundary are visibly evaporating, converted to pale clean steam."
+    },
+    "scrap_harvest": {
+      "display_name": "Scrap Harvest",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A pair of iron tongs pulling salvageable components from a pile of ruined circuit-reliquaries — cracked wafers, bent prayer-pins, a spool of copper wire still wound around a fragment of carved bone. Two recovered pieces float upward in the tongs' grip, faintly glowing with residual data-warmth, while a third falls back into the refuse heap below. The pile sits on a stone dissection table stained with old solder and older blood. Amber sidelight from an unseen forge or furnace, heavy shadow on the discard pile. Painted with the care of a Dutch still-life, every corroded component rendered in loving, grimy detail."
+    },
+    "shadow_clone": {
+      "display_name": "Shadow Clone",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "Three identical prayer-scrolls materialize from a single point of frost-cyan light, each one a perfect duplicate unfurling in a different direction, their ink still wet with copied scripture. The originating light has already dimmed -- the clone ritual consumed its source in the act of triplication. Bile-green corruption veins the parchment of each copy, the cost of duplicating sacred text without authorization, a forgery that carries its own decay."
+    },
+    "shadow_step": {
+      "display_name": "Shadow Step",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A pair of footprints burned into a stone floor in void-black scorch marks, one set sharply defined where something stood, the other fading into translucent shadow several feet away where it reappeared. Between the two positions, a smear of darkness hangs in the air like ink suspended in water, still dissipating. The flagstones beneath the arrival point are cracked from the impact of re-materialization, and faint violet afterimages trail between the two locations like a shutter-drag of corrupted light."
+    },
+    "shadow_weave": {
+      "display_name": "Shadow Weave",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "Threads of living shadow weave themselves into a dense, layered tapestry that hangs suspended in midair before a ruined cathedral window, each strand glistening like ink-wet silk. The weave pulses faintly with void-purple light from within its folds, and where its edges brush the stone floor, frost-black crystalline growths bloom outward. Beyond the tapestry, the faintest ghost of stained glass casts bruised light through dust and silence."
+    },
+    "shakedown": {
+      "display_name": "Shakedown",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "EXPLOIT"
+      ],
+      "prompt": "A collection plate lies overturned on cracked stone, its stolen silver scattered among broken teeth and spent gunpowder shells. The violence was efficient and personal — arterial red spatter marks the stone in a pattern that reads like a threat written in the only language the target understands. Something has been exposed, made vulnerable, shaken until it broke."
+    },
+    "shared_shield": {
+      "display_name": "Shared Shield",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A single great iron shield fractured into four equal pieces by deliberate chisel-marks, each fragment drifting apart from the center but still connected by threads of teal light that stretch between them like shared prayer. The fragments hover in formation, each one angled outward to protect a different direction, and the original shield's prayer-code inscription remains readable only when all four pieces are viewed together as one."
+    },
+    "shrug_it_off": {
+      "display_name": "Garbage Collect",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Fragments of corrupted data -- jagged shards of bile-green glass, torn prayer-scraps, broken circuit-teeth -- are swept into a bronze collection basin by an unseen liturgical force, leaving clean dark stone behind. The basin glows faintly with verdigris light as it processes and neutralizes each fragment. A single clean page rises from the purified pile, white and unblemished, ready to be read again. The ritual is quiet, thorough, and final."
+    },
+    "siege_engine": {
+      "display_name": "Siege Engine",
+      "card_type": "POWER",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A cathedral-organ of iron pipes and bronze gears thrums with potential energy, each pipe loaded with compressed force that discharges automatically whenever enough protective pressure accumulates. The engine is a contradiction -- a machine of war built from the architecture of defense, its bellows powered by the hymn of shielding, its ammunition the excess force that protection generates. Verdigris patina covers every surface, and amber sparks fly from the gears where shield-energy converts to siege-force."
+    },
+    "sigil_of_faith": {
+      "display_name": "Sigil of Faith",
+      "card_type": "SKILL",
+      "character": "paladin",
+      "tags": [
+        "HOLY"
+      ],
+      "prompt": "A small sigil drawn in consecrated ash on a stone floor -- a simple circle bisected by a vertical line -- burns with quiet amber light from within its traced grooves. The sigil is modest, barely a hand's breadth across, but the light it produces is disproportionately steady and sure, casting clean shadows in every direction. Around it, the thin film of corruption that coats the floor has retreated in a perfect circle, the boundary between clean stone and tainted stone razor-sharp. A candle-stub sits beside it, its flame unnecessary."
+    },
+    "singularity_engine": {
+      "display_name": "Singularity Engine",
+      "card_type": "POWER",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "A perpetual motion engine of daemon logic turns silently in absolute darkness — obsidian gears meshed with magenta light-bearings, each rotation spawning a new fragment from its exhaust port like a heartbeat. The engine has no off switch. The engine does not need fuel. The engine is a prayer that answered itself, and now it cannot stop praying, corruption condensing on its surfaces like dew."
+    },
+    "singularity_hack": {
+      "display_name": "Singularity Hack",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A point of absolute zero light -- frost-white collapsing to void-black -- sits at the center of the frame, drawing all surrounding matter inward: torn prayer-ribbons, fragments of circuit-bone, shards of cathedral glass, all spiraling into the singularity's mouth. Four concentric rings of destruction radiate outward, each one a shockwave of stolen data and obliterated code. The darkness beyond is total; this is the last hack, the one that consumes the hacker."
+    },
+    "singularity_theorem": {
+      "display_name": "Singularity Theorem",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A single point of infinite density hangs in a cathedral nave, bending the visible world around it -- stone columns curve toward it, iron chains arc inward, dust spirals in accelerating orbits. The point itself is invisible, marked only by the distortion of everything surrounding it and a thin accretion disk of shredded parchment and purple-black vapor that orbits at tremendous speed. The theorem that summoned it is carved into the floor in a perfect circle, its equations already being pulled upward from their grooves."
+    },
+    "smite": {
+      "display_name": "Smite",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "MELEE"
+      ],
+      "prompt": "A column of concentrated golden light descends from above with the weight of a falling pillar, striking a point on the ground with enough force to crater the stone and send shrapnel radiating outward in a sunburst pattern. The light does not dissipate on impact but pools in the crater like molten gold, continuing to burn whatever corruption remains in the shattered stone. The column itself is visible for only an instant, but its afterimage scars the darkness of the cathedral -- a vertical line of painful amber that lingers in the vision like a looked-at sun."
+    },
+    "smoke_and_mirrors": {
+      "display_name": "Smoke & Mirrors",
+      "card_type": "SKILL",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY",
+        "SHADOW"
+      ],
+      "prompt": "Thick gunpowder smoke billows across the frame, and within it fragments of tarnished silver mirrors reflect the viewer's gaze back in wrong directions. The smoke is not natural — it carries the scent of burnt prayer-cloth and contraband, each reflection in the mirrored shards showing a slightly different version of the surrounding darkness, none of them true."
+    },
+    "soul_transfer": {
+      "display_name": "Soul Transfer",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A stream of pale luminous vapor pouring from one cupped hand downward into another below it, the upper hand withered and greying as it gives, the lower hand slowly regaining color as it receives. The vapor between them twists into the shape of liturgical glyphs mid-transit, shadow-tendrils curling at the edges of the transfer like ink spreading through water, and the cost is visible in the dark veining that creeps up the giving wrist."
+    },
+    "spark_jolt": {
+      "display_name": "Spark Jolt",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A small corroded vacuum tube crackling with a single violent discharge, the bolt arcing between its blackened filaments in a jagged line of tarnished gold. The glass envelope is cracked, leaking a faint wisp of incense-like smoke. Around the base, prayer-ribbon cables coil like shed snakeskin, their burned runes still faintly legible. The light from the discharge illuminates nothing but itself and a few inches of the surrounding dark — a tiny, mean, precise violence. Oil-paint rendering, the tube floating in ecclesiastical darkness."
+    },
+    "sprint_protocol": {
+      "display_name": "Sprint Protocol",
+      "card_type": "SKILL",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "Motion-blur trails of frost-cyan light streak through a corridor of dead servers, each trail a prayer-ribbon pulled taut by impossible speed and left vibrating in the still air. The protocol has already passed -- what remains is the afterimage, the residual glow of data grabbed in transit by hands moving too fast to be seen. Faint corruption-green edges the trails where the speed has begun to fray the fabric of the network's liturgical rules."
+    },
+    "strike": {
+      "display_name": "System Strike",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A single closed fist punching through a pane of dark glass, knuckles wrapped in fraying prayer-cloth, shards scattering forward into black void. The impact is lit from the upper left by a harsh amber light that catches each fragment mid-flight, and thin lines of blood on the wrappings catch the light like ink on vellum, simple and brutal and clean."
+    },
+    "strike_plus": {
+      "display_name": "System Strike+",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "The same prayer-wrapped fist, now driving through thicker glass with greater force, the shards larger and sharper and flying further into the void. The prayer-cloth wrappings have been re-bound tighter and double-layered, and the amber light source is harsher, casting the fist's shadow enormous across an unseen wall behind, the same strike elevated to a harder truth."
+    },
+    "surge_tap": {
+      "display_name": "Surge Tap",
+      "card_type": "SKILL",
+      "character": "shared",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A corroded iron spigot driven directly into a cracked stone wall, and from it drips a viscous fluid that is half sacramental oil and half liquid data — dark, iridescent, faintly luminous with crawling green-black corruption. A shallow liturgical basin catches the drips below, already half-full, its rim stained with the residue of previous tappings. The fluid's surface reflects a distorted cathedral ceiling that is not present in the room. One drawn page of scripture floats on the surface, its ink running. Amber light from above, bile-green luminescence from the fluid below — two light sources in quiet, toxic conversation."
+    },
+    "sysadmin_slam": {
+      "display_name": "Sysadmin Slam",
+      "card_type": "ATTACK",
+      "character": "aegis",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A massive slab of welded iron -- accumulated block made manifest -- tips forward and falls with the weight of every defensive prayer ever spoken, crushing downward with architectural force. The slab's surface bears the dents and scripture of a hundred absorbed blows, now converted into a single act of overwhelming violence. Bronze rivets pop from the edges on impact, and the dark stone floor cracks beneath a weapon made entirely of patience."
+    },
+    "system_lockdown": {
+      "display_name": "System Lockdown",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "Every door, gate, and aperture in a cathedral of iron slams shut simultaneously -- bolts driving home, locks turning, welding torches sealing every seam. The lockdown is total and liturgical: each sealed threshold bears a freshly burned prayer of denial in copper script. The air inside grows still and heavy with accumulated protection, and the structure itself seems to harden, its very architecture learning to deflect what it once merely endured."
+    },
+    "system_override": {
+      "display_name": "System Override",
+      "card_type": "ATTACK",
+      "character": "flux",
+      "tags": [
+        "TECH",
+        "SHADOW"
+      ],
+      "prompt": "Every daemon fragment in existence activates simultaneously — a cascade of obsidian shards igniting with magenta fire across the full width of a darkened nave. The air itself submits to the override, reality buckling visibly as the fragments execute their payloads in concert, prayer-dust rising from the trembling floor."
+    },
+    "systems_check": {
+      "display_name": "Systems Check",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A bronze diagnostic lens hovers before a wall of iron infrastructure, its surface covered in fine copper etchings that interpret what they see. Through the lens, the wall's hidden structure becomes visible -- load-bearing prayers, stress fractures in the liturgy, places where the scripture has thinned. Two pages of diagnostic data slide from the lens's frame like printed reports, their findings already actionable. The examination is clinical, reverent, thorough -- a sacrament of maintenance."
+    },
+    "tongue_of_angels": {
+      "display_name": "Tongue of Angels",
+      "card_type": "POWER",
+      "character": "abyss",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A disembodied mouth floats in darkness, lips parted, speaking words that are visible as cascading ribbons of ink-black calligraphy that pour from between the teeth and unspool downward into the surrounding void. Each word-ribbon writhes independently, coiling around unseen structures and corroding whatever it touches with a visible violet-black patina. The mouth itself is beautiful and terrible in painted detail -- too perfect, too still, the lips faintly bruised, the teeth like carved ivory. This is the language that was spoken before language, the tongue of fallen angels compiled into executable prayer."
+    },
+    "total_collapse": {
+      "display_name": "Total Collapse",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A vast cathedral-server interior collapsing inward on itself in a single apocalyptic frame — vaulted stone arches crumbling, server racks buckling, stained-glass windows imploding into cascades of razor shards. The destruction radiates from a central point of absolute void, a black singularity where all the architecture is being sucked inward and compressed into nothing. Dust and ash fill the air like a photographic negative of snow. The only light comes from the destruction itself — amber sparks from shearing metal, dull red from cracking stone still hot from whatever prayer was running when the system died. Monumental scale, painted with violent brushwork, every surface mid-disintegration."
+    },
+    "trace_route": {
+      "display_name": "Trace Route",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "RANGED"
+      ],
+      "prompt": "Twin lines of frost-cyan light lance outward through layered darkness, each beam burning a path through stacked veils of shadow that hang like tattered altar cloth. Where the traces strike, the fabric ignites in cold white fire, revealing the bone-colored architecture of a hidden network beneath. The composition reads as a cathedral aisle bisected twice by thrown spears of frozen signal."
+    },
+    "trojan_horse": {
+      "display_name": "Trojan Horse",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "SHADOW",
+        "EXPLOIT"
+      ],
+      "prompt": "A gift-offering of a small iron reliquary standing on an altar cloth, its exterior beautifully engraved with protective scripture, but its lid slightly ajar to reveal a coiled nest of barbed wire and void-purple darkness within. The reliquary's shadow on the cloth behind it is wrong, shaped not like the box but like something with limbs, and a single thread of ink-black corruption seeps from under the lid onto the pristine linen."
+    },
+    "trojan_payload": {
+      "display_name": "Trojan Payload",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A gift-reliquary of polished black iron sits cracked open on an altar of circuit-stone, its beautiful exterior split to reveal the true payload within: a seething mass of frost-cyan barbs and corrosive prayer-acid that has already begun eating through the altar's surface. The deception is complete -- the offering was the weapon, and the host is now vulnerable to everything that follows. Corruption-green stains bloom outward from the opened shell like spreading infection."
+    },
+    "twin_strike": {
+      "display_name": "Fork Process",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "MELEE"
+      ],
+      "prompt": "A single blade of black iron splits cleanly down its center into two identical halves, each trailing frost-cyan vapor as they diverge from one another like a cell dividing. Between the twin edges, a sliver of cathedral light exposes the grain of the metal -- inscribed with recursive prayer in a language that is both assembly code and psalm. Bone-white sparks shower from the point of separation."
+    },
+    "twin_strike_plus": {
+      "display_name": "Fork Process+",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "Two identical ritual daggers of dark iron hover in perfect parallel, their edges rimed with cyan frost, a thread of freezing light strung taut between their tips like a shared process line. The space between them distorts, warping the charcoal darkness into a narrow corridor of duplicated prayer-marks. A faint arterial-red heat leaks from each pommel where corruption has begun to seed."
+    },
+    "uppercut": {
+      "display_name": "Core Dump",
+      "card_type": "ATTACK",
+      "character": "shared",
+      "tags": [
+        "MELEE"
+      ],
+      "prompt": "A massive upward blow captured at the moment of impact, an iron-shod fist driving upward through a crumbling data-tablet that shatters into hundreds of fragments, each shard trailing a wisp of corrupted amber light. The force of the strike has inverted the tablet's contents, sacred text now raining downward as meaningless debris, and dark corruption bleeds from the knuckle-joints of the gauntlet where the violence has cost the wielder something essential."
+    },
+    "velocity_hack": {
+      "display_name": "Velocity Hack",
+      "card_type": "ATTACK",
+      "character": "ghost",
+      "tags": [
+        "TECH",
+        "EXPLOIT"
+      ],
+      "prompt": "A succession of frost-cyan afterimages stack upon one another in the darkness, each one the ghost of a card played moments before, accumulating into a single strike whose force compounds with every iteration. The layered images blur into a vertical smear of cold light, gathering velocity from repetition itself. Corruption-green edges each afterimage like a photograph developing in poisoned fluid -- the faster the hack runs, the more it costs."
+    },
+    "void_channel": {
+      "display_name": "Void Channel",
+      "card_type": "ATTACK",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A narrow channel has been carved into a cathedral floor, its groove filled not with water but with flowing liquid void -- a river of absolute black that reflects no light and swallows every shadow that falls across it. From the channel, translucent tendrils of dark vapor rise and spread across the flagstones in every direction like creeping roots. The stone edges of the channel are stained deep violet where the void has touched them, corroding the sacred geometry of the floor tiles."
+    },
+    "void_form": {
+      "display_name": "Void Form",
+      "card_type": "POWER",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A human silhouette composed entirely of dense, slowly churning void-matter stands where a person once was -- the figure's outline is crisp but its interior is depthless black, and from its surface, wisps of shadow constantly peel away like smoke from a smoldering log. Where the figure's eyes would be, two points of cold violet light burn steadily. The flagstones beneath the figure are blackened in a spreading circle, and the air around it bends light subtly, as though reality is thinner in its presence."
+    },
+    "void_shield": {
+      "display_name": "Void Shield",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "A curved wall of condensed shadow hangs in the air like a buckler forged from liquid night, its surface rippling with slow, oil-on-water iridescence in deep violet and black. Objects that approach it -- a thrown stone, a drifting page of scripture -- are visible pressing into the shield's membrane, distorting its surface before being silently absorbed and erased. The edges of the shield fray into drifting tendrils of dark vapor, and the air behind it is preternaturally still."
+    },
+    "walk_the_plank": {
+      "display_name": "Walk the Plank",
+      "card_type": "ATTACK",
+      "character": "corsayre",
+      "tags": [
+        "PIRACY"
+      ],
+      "prompt": "A plank of charred driftwood extends over a void that is not water but pure digital absence — a black rectangle of nothing. At the plank's edge, a single boot-print in blood marks the last step before the drop. Tarnished silver nails hold the plank to the deck, each one driven through a scrap of stolen prayer-cloth."
+    },
+    "welded_shut": {
+      "display_name": "Welded Shut",
+      "card_type": "SKILL",
+      "character": "aegis",
+      "tags": [
+        "TECH"
+      ],
+      "prompt": "A welding torch of sacred fire traces a slow, deliberate line along the seam of an iron barrier, fusing it permanently closed with a bead of molten copper that glows like a vein of amber in the darkness. The weld is beautiful in its finality -- there will be no opening this door again. The surrounding metal hardens and thickens in response to the heat, the entire structure growing stronger and more dexterous in its ability to absorb what comes, as though the act of sealing taught the iron to anticipate."
+    },
+    "whispered_axiom": {
+      "display_name": "Whispered Axiom",
+      "card_type": "SKILL",
+      "character": "abyss",
+      "tags": [
+        "SHADOW"
+      ],
+      "prompt": "Words carved into a prayer-stone tablet have begun to whisper themselves into existence as visible breath in cold air -- each syllable manifests as a curl of dark vapor that drifts upward and coalesces into hovering glyphs of bruised violet light. The tablet itself is cracking along its carved lines, as though the act of the words speaking themselves is splitting the stone from within. A thin veil of shadow pools around the tablet's base like fog in a graveyard."
+    },
+    "white_hat_probe": {
+      "display_name": "White Hat Probe",
+      "card_type": "ATTACK",
+      "character": "paladin",
+      "tags": [
+        "HOLY",
+        "EXPLOIT"
+      ],
+      "prompt": "A slender probe of polished bone tipped with a point of focused white light penetrates the outer membrane of a corrupted data-reliquary, its entry point precise and surgical. Around the puncture, the reliquary's dark surface peels back to reveal its internal structure -- tangled threads of violet corruption woven through what should be clean golden circuitry. The probe's light illuminates the damage with clinical precision, each flaw visible and catalogued. This is diagnosis, not destruction -- the wound that precedes the cure."
+    }
+  }
+}

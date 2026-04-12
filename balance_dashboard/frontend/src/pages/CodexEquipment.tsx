@@ -8,11 +8,10 @@ import { RARITY_COLORS, RARITY_ORDER, SLOT_ORDER, SLOT_GLYPH } from '../lib/asse
 import type { Rarity, EquipSlot, Equipment } from '../types/game'
 
 const SLOT_COLORS: Record<EquipSlot, string> = {
-  WEAPON:   '#B13340',
-  ARMOR:    '#33D9F2',
-  TRINKET:  '#F5E6A8',
-  AMULET:   '#D9B05F',
-  RING:     '#E633CC',
+  HEAD:      '#33D9F2',
+  CHEST:     '#F5E6A8',
+  WEAPON:    '#B13340',
+  ACCESSORY: '#D9B05F',
 }
 
 /**

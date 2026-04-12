@@ -1,0 +1,9 @@
+Item art generation report
+Model: gemini-3.1-flash-image-preview
+Aspect: 1:1 | Size: 2K
+Items: 1
+
+war_paint: OK  29.4s  2048x2048
+
+Total: 32.0s (0.5m)
+OK: 1, Skipped: 0, Failed: 0

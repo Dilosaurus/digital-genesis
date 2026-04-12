@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GemData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="GemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/moonstone_of_conversion/moonstone_of_conversion.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
@@ -8,6 +9,7 @@ id = "moonstone_of_conversion"
 display_name = "Moonstone of Conversion"
 description = "This card's damage is converted to healing for you (no damage dealt)."
 rarity = 1
+icon = ExtResource("icon_tex")
 on_play_modifiers = []
 trigger_event = ""
 trigger_effect = ""

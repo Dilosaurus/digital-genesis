@@ -14,7 +14,7 @@ export type Rarity = 'COMMON' | 'UNCOMMON' | 'RARE' | 'LEGENDARY'
 export type CardTag =
   | 'MELEE' | 'RANGED' | 'FIRE' | 'ICE' | 'HOLY' | 'SHADOW'
   | 'TECH' | 'EXPLOIT' | 'PIRACY' | 'CURSE'
-export type EquipSlot = 'WEAPON' | 'ARMOR' | 'TRINKET' | 'AMULET' | 'RING'
+export type EquipSlot = 'HEAD' | 'CHEST' | 'WEAPON' | 'ACCESSORY'
 export type CharacterClassName =
   | 'NETRUNNER' | 'SYSADMIN' | 'CRYPTOMANCER'
   | 'WHITE_HAT' | 'HERETIC' | 'SCOURGE'

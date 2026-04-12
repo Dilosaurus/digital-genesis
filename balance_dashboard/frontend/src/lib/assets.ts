@@ -31,6 +31,21 @@ export function resolveAsset(resPath: string | undefined | null): string | null 
   return null
 }
 
+/** Return a /media/thumb/ URL for a compressed WebP thumbnail. */
+export function resolveThumb(resPath: string | undefined | null): string | null {
+  if (!resPath) return null
+  if (resPath.startsWith('res://assets/')) {
+    return '/media/thumb/' + resPath.slice('res://assets/'.length)
+  }
+  if (resPath.startsWith('res://')) {
+    return '/media/thumb/' + resPath.slice('res://'.length)
+  }
+  if (resPath.startsWith('/media/')) {
+    return '/media/thumb/' + resPath.slice('/media/'.length)
+  }
+  return null
+}
+
 // ─── Character class palette ─────────────────────────────────────────────
 // Fallback colors matching the .tres color_primary values. Prefer the live
 // character.color_primary when available — this is just a fallback for when
@@ -118,14 +133,13 @@ export const TAG_ORDER: CardTag[] = [
 
 // ─── Equipment slot labels ────────────────────────────────────────────────
 
-export const SLOT_ORDER: EquipSlot[] = ['WEAPON', 'ARMOR', 'TRINKET', 'AMULET', 'RING']
+export const SLOT_ORDER: EquipSlot[] = ['HEAD', 'CHEST', 'WEAPON', 'ACCESSORY']
 
 export const SLOT_GLYPH: Record<EquipSlot, string> = {
-  WEAPON: '†',
-  ARMOR:  '⛨',
-  TRINKET: '✦',
-  AMULET: '☍',
-  RING:   '◯',
+  HEAD:      '⛨',
+  CHEST:     '⛨',
+  WEAPON:    '†',
+  ACCESSORY: '☍',
 }
 
 // ─── Target labels ────────────────────────────────────────────────────────
@@ -173,6 +187,7 @@ export const ANIMATION_POSES: Record<string, string[]> = {
     'skill_stealth',
     'hurt',
     'defeated',
+    'curse',
   ],
   aegis:    ['idle'],
 }
@@ -190,6 +205,7 @@ export const POSE_LABELS: Record<string, string> = {
   skill_stealth:      'STEALTH',
   hurt:               'HURT',
   defeated:           'DEFEATED',
+  curse:              'CURSE',
 }
 
 export function characterCallsign(displayName: string): string {

@@ -25,7 +25,7 @@ SCRIPTS_DIR = CARD_GAME_DIR / "scripts"
 ASSETS_DIR = CARD_GAME_DIR / "assets"
 THEMES_DIR = CARD_GAME_DIR / "themes"
 
-# Generated sprite-sheet GIFs from the Grok Imagine pipeline. Mounted at
+# Generated sprite-sheet GIFs from the Veo 3.1 pipeline. Mounted at
 # /anim/ in the backend so the React dashboard can preview character idles
 # and attack animations on the operator dossier page. Empty in fresh checkouts
 # until the per-character build_sprite_sheet.py runs are complete.

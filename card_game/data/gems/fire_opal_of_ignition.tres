@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GemData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="GemData" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/gem_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/items/illustrations/fire_opal_of_ignition/fire_opal_of_ignition.png" id="icon_tex"]
 
 [resource]
 script = ExtResource("1")
@@ -8,6 +9,7 @@ id = "fire_opal_of_ignition"
 display_name = "Fire Opal of Ignition"
 description = "When this card is played, deal 3 damage to ALL enemies."
 rarity = 1
+icon = ExtResource("icon_tex")
 on_play_modifiers = []
 trigger_event = "on_play"
 trigger_effect = "deal_aoe_damage"

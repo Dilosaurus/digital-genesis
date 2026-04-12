@@ -5,6 +5,7 @@ import {
   FilterBar, FilterGroup, FilterChip, SearchInput,
 } from '../components/codex/FilterBar'
 import { CardTile } from '../components/codex/CardTile'
+import { CardModal } from '../components/codex/CardModal'
 import {
   CARD_TYPE_ORDER, CARD_TYPE_COLORS, RARITY_ORDER, RARITY_COLORS,
   TAG_ORDER, TAG_COLORS, CHARACTER_COLORS,
@@ -34,6 +35,7 @@ export function CodexCards() {
   const [rarityFilter, setRarityFilter] = useState<Rarity | null>(null)
   const [tagFilter, setTagFilter] = useState<CardTag | null>(null)
   const [costFilter, setCostFilter] = useState<number | null>(null)
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
     if (!cards) return []
@@ -72,6 +74,7 @@ export function CodexCards() {
   }
 
   const hasAny = search || classFilter != null || typeFilter || rarityFilter || tagFilter || costFilter != null
+  const selectedCard = selectedCardId ? cards?.find(c => c.id === selectedCardId) : undefined
 
   return (
     <section className="relative pb-20">
@@ -209,14 +212,23 @@ export function CodexCards() {
             gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 140px), 1fr))',
           }}
         >
-          {filtered.map((card, i) => (
-            <CardTile key={card.id} card={card} index={i + 1} />
+          {filtered.map(card => (
+            <CardTile key={card.id} card={card} onSelect={setSelectedCardId} />
           ))}
         </div>
       )}
 
       {/* ─── empty state ────────────────────────────────────────────── */}
       {cards && filtered.length === 0 && <EmptyState onClear={clearAll} />}
+
+      {selectedCard && cards && (
+        <CardModal
+          card={selectedCard}
+          allCards={cards}
+          onClose={() => setSelectedCardId(null)}
+          onSelectCard={setSelectedCardId}
+        />
+      )}
     </section>
   )
 }

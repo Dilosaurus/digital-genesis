@@ -24,7 +24,7 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
-      // Grok Imagine animation GIFs (idles + attacks) served from
+      // Veo 3.1 animation GIFs (idles + attacks) served from
       // card_game/art_pipeline/animations/sheets/ on the backend.
       '/anim': {
         target: 'http://localhost:8000',

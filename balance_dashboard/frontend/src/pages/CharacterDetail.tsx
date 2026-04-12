@@ -230,7 +230,7 @@ export function CharacterDetail() {
             style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))' }}
           >
             {starterDeck.map((card, i) => (
-              <CardTile key={`${card.id}-${i}`} card={card} index={i + 1} />
+              <CardTile key={`${card.id}-${i}`} card={card} />
             ))}
           </div>
         </section>

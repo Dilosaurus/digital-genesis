@@ -24,7 +24,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.config import ANIMATION_DIR, ASSETS_DIR, CARD_GAME_DIR, verify_paths
 from app.parsers.enums import all_enums
-from app.routers import codex, content, meta
+from app.routers import codex, content, meta, thumb
 
 # Baked frontend dist path — set when running inside the Docker image.
 # In local dev this directory doesn't exist and we skip static mounting.
@@ -60,6 +60,7 @@ app.add_middleware(
 app.include_router(codex.router)
 app.include_router(content.router)
 app.include_router(meta.router)
+app.include_router(thumb.router)
 
 
 @app.get("/api/health")
@@ -81,7 +82,7 @@ def health() -> dict:
 if ASSETS_DIR.exists():
     app.mount("/media", StaticFiles(directory=str(ASSETS_DIR)), name="media")
 
-# Animation preview mount — Grok Imagine sprite-sheet GIFs for the operator
+# Animation preview mount — Veo 3.1 sprite-sheet GIFs for the operator
 # dossier page. Lives outside /media because the art pipeline isn't part of
 # the in-game res:// asset tree.
 if ANIMATION_DIR.exists():

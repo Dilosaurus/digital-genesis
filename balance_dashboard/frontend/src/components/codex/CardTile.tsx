@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import type { Card } from '../../types/game'
 import {
-  resolveAsset,
+  resolveThumb,
   charClassColor,
   charClassCode,
   CARD_TYPE_COLORS,
@@ -11,21 +12,17 @@ import {
 
 interface Props {
   card: Card
-  index?: number
+  onSelect?: (id: string) => void
 }
 
 /**
- * CardTile — one card in the catalog grid. A vertical rectangle with a
- * gold-brass frame, a proportion of space for art (when present), a name
- * block, an energy cost badge, a type glyph, a rarity strip, a row of
- * gem socket pips, and the character-class accent line on the left.
- *
- * Intentional visual idiom: nothing is centered. The cost badge sits
- * slightly outside the frame in the top-left notch. The rarity strip is
- * a vertical bar on the right edge, not a bottom badge.
+ * CardTile — one card in the catalog grid. Art-forward layout with
+ * a minimal name plate below. Clicking opens the detail modal when
+ * onSelect is provided; ctrl/meta/shift+click still opens the
+ * dedicated detail page in a new tab via the underlying Link.
  */
-export function CardTile({ card, index }: Props) {
-  const art = resolveAsset(card.artwork)
+export const CardTile = memo(function CardTile({ card, onSelect }: Props) {
+  const art = resolveThumb(card.artwork)
   const typeColor = CARD_TYPE_COLORS[card.card_type]
   const typeGlyph = CARD_TYPE_GLYPH[card.card_type]
   const rarity = RARITY_COLORS[card.rarity]
@@ -36,11 +33,19 @@ export function CardTile({ card, index }: Props) {
       to={`/codex/cards/${card.id}`}
       className="group relative block"
       style={{
-        aspectRatio: '3 / 4.1',
+        aspectRatio: '3 / 4',
         textDecoration: 'none',
+        contentVisibility: 'auto',
+        containIntrinsicSize: 'auto 140px auto 186px',
+      } as React.CSSProperties}
+      onClick={e => {
+        if (onSelect && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+          e.preventDefault()
+          onSelect(card.id)
+        }
       }}
     >
-      {/* ── outer frame (burnt brass) ───────────────────────────────── */}
+      {/* ── outer frame ────────────────────────────────────────────── */}
       <div
         className="absolute inset-0 transition-all duration-200 ease-out group-hover:translate-y-[-2px]"
         style={{
@@ -51,26 +56,26 @@ export function CardTile({ card, index }: Props) {
         }}
       />
 
-      {/* ── character-class accent stripe (left edge) ───────────────── */}
+      {/* ── character-class accent stripe (left) ───────────────────── */}
       <div
         className="absolute top-0 bottom-0 left-0 w-[3px] group-hover:w-[5px] transition-[width] duration-150"
         style={{ background: classColor }}
       />
 
-      {/* ── rarity strip (right edge) ───────────────────────────────── */}
+      {/* ── rarity strip (right) ───────────────────────────────────── */}
       <div
         className="absolute top-0 bottom-0 right-0 w-[3px]"
         style={{ background: rarity.fg, opacity: 0.85 }}
       />
 
-      {/* ── art region ──────────────────────────────────────────────── */}
+      {/* ── art region (72% of card height) ────────────────────────── */}
       <div
         className="absolute overflow-hidden"
         style={{
-          top: 6,
-          left: 6,
-          right: 6,
-          height: '62%',
+          top: 5,
+          left: 5,
+          right: 5,
+          height: '72%',
           background: 'var(--void-deeper)',
           border: '1px solid var(--burnt-brass-dim)',
         }}
@@ -80,73 +85,65 @@ export function CardTile({ card, index }: Props) {
             src={art}
             alt=""
             loading="lazy"
-            className="w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-[1.04]"
-            style={{
-              filter: 'contrast(1.05) saturate(0.95)',
-            }}
+            className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+            style={{ filter: 'contrast(1.05) saturate(0.95)' }}
           />
         ) : (
           <MissingArt card={card} />
         )}
-
-        {/* Corner hatch marks */}
         <CornerHatches />
       </div>
 
-      {/* ── energy cost (top-left, half-outside the frame) ──────────── */}
+      {/* ── energy cost badge (top-left) ───────────────────────────── */}
       <div
-        className="absolute flex items-center justify-center font-display font-bold"
+        className="absolute flex items-center justify-center"
         style={{
-          top: -8,
-          left: -8,
-          width: 30,
-          height: 30,
+          top: -7,
+          left: -7,
+          width: 28,
+          height: 28,
           borderRadius: '50%',
           background: 'var(--void)',
           border: '1.5px solid var(--oxidized-gold)',
           color: 'var(--halo)',
           fontFamily: 'var(--font-display)',
-          fontSize: 15,
-          letterSpacing: 0,
-          boxShadow: '0 0 12px rgba(217, 176, 95, 0.25)',
+          fontSize: 14,
+          fontWeight: 700,
+          boxShadow: '0 0 10px rgba(217, 176, 95, 0.25)',
         }}
       >
         {card.energy_cost}
       </div>
 
-      {/* ── type glyph (top-right of art) ───────────────────────────── */}
+      {/* ── type glyph (top-right of art) ──────────────────────────── */}
       <div
-        className="absolute font-display"
+        className="absolute"
         style={{
-          top: 10,
-          right: 12,
+          top: 9,
+          right: 10,
           color: typeColor,
-          fontSize: 18,
-          textShadow: `0 0 6px ${typeColor}66`,
+          fontSize: 16,
           fontFamily: 'var(--font-display)',
+          textShadow: `0 0 6px ${typeColor}66`,
         }}
       >
         {typeGlyph}
       </div>
 
-      {/* ── name + meta ─────────────────────────────────────────────── */}
+      {/* ── name plate ─────────────────────────────────────────────── */}
       <div
-        className="absolute left-0 right-0 px-3 pt-2 pb-2 min-w-0"
-        style={{
-          top: '65%',
-          bottom: 0,
-        }}
+        className="absolute left-0 right-0 px-[8px] flex flex-col justify-center"
+        style={{ top: '74%', bottom: 0 }}
       >
         <div
-          className="mb-[2px]"
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: 13,
-            letterSpacing: '0.05em',
+            fontSize: 12,
+            letterSpacing: '0.04em',
             color: 'var(--bone)',
             fontWeight: 600,
             textTransform: 'uppercase',
-            lineHeight: 1.1,
+            lineHeight: 1.15,
             overflow: 'hidden',
             display: '-webkit-box',
             WebkitLineClamp: 2,
@@ -159,16 +156,18 @@ export function CardTile({ card, index }: Props) {
         </div>
 
         <div
-          className="font-mono flex items-center gap-[6px] mb-2"
+          className="font-mono flex items-center gap-[5px] mt-[3px]"
           style={{
-            fontSize: 9,
+            fontSize: 8,
             color: 'var(--bone-faint)',
-            letterSpacing: '0.1em',
+            letterSpacing: '0.08em',
           }}
         >
           <span style={{ color: typeColor }}>{card.card_type}</span>
           <span style={{ color: 'var(--burnt-brass)' }}>·</span>
-          <span style={{ color: classColor }}>{charClassCode(card.character_class)}</span>
+          <span style={{ color: classColor }}>
+            {charClassCode(card.character_class)}
+          </span>
           {card.upgraded && (
             <>
               <span style={{ color: 'var(--burnt-brass)' }}>·</span>
@@ -176,65 +175,9 @@ export function CardTile({ card, index }: Props) {
             </>
           )}
         </div>
-
-        {/* description preview */}
-        <div
-          className="line-clamp-2"
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 11,
-            lineHeight: 1.35,
-            color: 'var(--bone-dim)',
-            fontStyle: card.description ? 'normal' : 'italic',
-            overflow: 'hidden',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-          }}
-        >
-          {card.description || '—'}
-        </div>
       </div>
 
-      {/* ── gem sockets (bottom-left pips) ──────────────────────────── */}
-      {card.gem_sockets > 0 && (
-        <div
-          className="absolute flex gap-[3px]"
-          style={{ bottom: 4, left: 6 }}
-        >
-          {Array.from({ length: card.gem_sockets }).map((_, i) => (
-            <span
-              key={i}
-              style={{
-                display: 'inline-block',
-                width: 5,
-                height: 5,
-                background: 'var(--oxidized-gold)',
-                border: '0.5px solid var(--halo)',
-                transform: 'rotate(45deg)',
-              }}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* ── index in gutter (bottom-right, filename-style) ──────────── */}
-      {index != null && (
-        <div
-          className="absolute font-mono"
-          style={{
-            bottom: 4,
-            right: 8,
-            fontSize: 8,
-            color: 'var(--burnt-brass)',
-            letterSpacing: '0.04em',
-          }}
-        >
-          #{String(index).padStart(3, '0')}
-        </div>
-      )}
-
-      {/* ── hover chromatic aberration on title ─────────────────────── */}
+      {/* ── hover glow ─────────────────────────────────────────────── */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200"
@@ -244,12 +187,10 @@ export function CardTile({ card, index }: Props) {
       />
     </Link>
   )
-}
+})
 
 /**
- * Fallback art slot for cards without illustrations. Shows a big type glyph
- * and the card id as a filename — very deliberate "this is missing" framing,
- * not a placeholder.
+ * Fallback for cards without art — big type glyph + filename.
  */
 function MissingArt({ card }: { card: Card }) {
   const typeColor = CARD_TYPE_COLORS[card.card_type]
@@ -272,54 +213,41 @@ function MissingArt({ card }: { card: Card }) {
       <div
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 56,
+          fontSize: 48,
           color: typeColor,
-          opacity: 0.6,
-          letterSpacing: 0,
+          opacity: 0.5,
           lineHeight: 1,
-          marginBottom: 6,
-          filter: `drop-shadow(0 0 8px ${typeColor}44)`,
         }}
       >
         {glyph}
       </div>
       <div
-        className="font-mono uppercase text-center px-2"
+        className="font-mono uppercase text-center mt-1 px-2"
         style={{
           color: 'var(--burnt-brass)',
-          fontSize: 8,
+          fontSize: 7,
           letterSpacing: '0.18em',
         }}
       >
         art pending
-      </div>
-      <div
-        className="font-mono text-center mt-1 px-2 truncate max-w-full"
-        style={{
-          color: 'var(--bone-faint)',
-          fontSize: 9,
-          letterSpacing: '0.02em',
-        }}
-      >
-        {card.id}.png
       </div>
     </div>
   )
 }
 
 function CornerHatches() {
-  const style = {
-    position: 'absolute',
-    width: 8,
-    height: 8,
-    border: '1px solid rgba(217, 176, 95, 0.35)',
-  } as const
+  const s = {
+    position: 'absolute' as const,
+    width: 7,
+    height: 7,
+    border: '1px solid rgba(217, 176, 95, 0.3)',
+  }
   return (
     <>
-      <span aria-hidden style={{ ...style, top: 2, left: 2, borderRight: 'none', borderBottom: 'none' }} />
-      <span aria-hidden style={{ ...style, top: 2, right: 2, borderLeft: 'none', borderBottom: 'none' }} />
-      <span aria-hidden style={{ ...style, bottom: 2, left: 2, borderRight: 'none', borderTop: 'none' }} />
-      <span aria-hidden style={{ ...style, bottom: 2, right: 2, borderLeft: 'none', borderTop: 'none' }} />
+      <span aria-hidden style={{ ...s, top: 2, left: 2, borderRight: 'none', borderBottom: 'none' }} />
+      <span aria-hidden style={{ ...s, top: 2, right: 2, borderLeft: 'none', borderBottom: 'none' }} />
+      <span aria-hidden style={{ ...s, bottom: 2, left: 2, borderRight: 'none', borderTop: 'none' }} />
+      <span aria-hidden style={{ ...s, bottom: 2, right: 2, borderLeft: 'none', borderTop: 'none' }} />
     </>
   )
 }

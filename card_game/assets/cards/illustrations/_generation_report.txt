@@ -1,0 +1,10 @@
+Card art generation report
+Model: gemini-3.1-flash-image-preview
+Aspect: 1:1 | Size: 2K
+Cards: 1 | Variants: no
+
+recursive_loop base: OK  29.1s  2048x2048
+
+Total: 31.8s (0.5m)
+Base: 1 ok, 0 skipped, 0 failed
+Variants: 0 ok, 0 skipped, 0 failed
