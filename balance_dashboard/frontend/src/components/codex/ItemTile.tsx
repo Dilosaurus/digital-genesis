@@ -64,12 +64,12 @@ export function ItemTile({
         style={{ background: r.fg, opacity: 0.85 }}
       />
 
-      <div className="flex items-start gap-3 md:gap-4 p-4 pl-5 pr-5 min-w-0">
+      <div className="flex items-start gap-3 p-4 pl-5 pr-5 min-w-0">
         {/* icon */}
         <div
           className="relative shrink-0 overflow-hidden scanlines-soft"
           style={{
-            width: 'clamp(56px, 16vw, 72px)',
+            width: 'clamp(48px, 14vw, 64px)',
             aspectRatio: '1 / 1',
             background: 'var(--void-deeper)',
             border: '1px solid var(--burnt-brass-dim)',
@@ -118,58 +118,58 @@ export function ItemTile({
 
         {/* text column */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2 mb-1">
-            <div className="min-w-0 flex-1">
-              <div
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(14px, 4vw, 17px)',
-                  letterSpacing: '0.05em',
-                  color: 'var(--bone)',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  lineHeight: 1.15,
-                  overflow: 'hidden',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  wordBreak: 'break-word',
-                  overflowWrap: 'anywhere',
-                }}
-              >
-                {displayName}
-              </div>
-              <div
-                className="mt-[3px] font-mono flex items-center gap-2 truncate"
-                style={{ fontSize: 9, letterSpacing: '0.12em' }}
-              >
-                <span style={{ color: r.fg }}>{rarity}</span>
-                <span style={{ color: 'var(--burnt-brass)' }}>·</span>
-                <span className="truncate" style={{ color: 'var(--bone-faint)' }}>{id}</span>
-              </div>
-            </div>
+          {/* name — full width, no badge competing */}
+          <div
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(13px, 3.6vw, 16px)',
+              letterSpacing: '0.04em',
+              color: 'var(--bone)',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              lineHeight: 1.2,
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflowWrap: 'break-word',
+            }}
+          >
+            {displayName}
+          </div>
 
+          {/* rarity · id · badge row */}
+          <div
+            className="mt-[3px] mb-[6px] font-mono flex items-center gap-2 min-w-0"
+            style={{ fontSize: 9, letterSpacing: '0.12em' }}
+          >
+            <span style={{ color: r.fg }}>{rarity}</span>
+            <span style={{ color: 'var(--burnt-brass)' }}>·</span>
+            <span className="truncate" style={{ color: 'var(--bone-faint)' }}>{id}</span>
             {topRightLabel && (
-              <span
-                className="shrink-0 font-mono uppercase"
-                style={{
-                  fontSize: 9,
-                  letterSpacing: '0.14em',
-                  color: topRightColor ?? 'var(--oxidized-gold)',
-                  padding: '3px 6px',
-                  border: `1px solid ${topRightColor ?? 'var(--oxidized-gold)'}`,
-                  lineHeight: 1,
-                }}
-              >
-                {topRightLabel}
-              </span>
+              <>
+                <span style={{ color: 'var(--burnt-brass)' }}>·</span>
+                <span
+                  className="shrink-0 uppercase"
+                  style={{
+                    fontSize: 8,
+                    letterSpacing: '0.12em',
+                    color: topRightColor ?? 'var(--oxidized-gold)',
+                    padding: '1px 4px',
+                    border: `1px solid ${topRightColor ?? 'var(--oxidized-gold)'}`,
+                    lineHeight: 1,
+                  }}
+                >
+                  {topRightLabel}
+                </span>
+              </>
             )}
           </div>
 
           <p
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: 14,
+              fontSize: 13,
               lineHeight: 1.45,
               color: 'var(--bone-dim)',
               fontStyle: description ? 'normal' : 'italic',
@@ -177,8 +177,7 @@ export function ItemTile({
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
-              wordBreak: 'break-word',
-              overflowWrap: 'anywhere',
+              overflowWrap: 'break-word',
             }}
           >
             {description || '—'}
