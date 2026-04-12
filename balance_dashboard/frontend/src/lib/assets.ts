@@ -15,25 +15,46 @@ import type {
 
 // ─── res:// asset resolution ─────────────────────────────────────────────
 // .tres files store paths like "res://assets/cards/illustrations/strike/strike_base.png".
-// The FastAPI backend mounts card_game/assets/ at /media/ (not /assets/,
-// because Vite's built JS/CSS ships under /assets/ and we don't want the
-// mounts to collide in production). We rewrite res://assets/... → /media/...
+// Card & item illustrations are served from a public GCS bucket (fast CDN,
+// keeps the container image small). Everything else still goes through the
+// FastAPI /media/ mount.
+
+const GCS_ART_BASE = 'https://storage.googleapis.com/deus-exe-art'
+
+/** Strip the res:// prefix and return the relative asset path. */
+function stripRes(resPath: string): string {
+  if (resPath.startsWith('res://assets/')) return resPath.slice('res://assets/'.length)
+  if (resPath.startsWith('res://')) return resPath.slice('res://'.length)
+  if (resPath.startsWith('/media/')) return resPath.slice('/media/'.length)
+  return resPath
+}
 
 export function resolveAsset(resPath: string | undefined | null): string | null {
   if (!resPath) return null
-  if (resPath.startsWith('res://assets/')) {
-    return '/media/' + resPath.slice('res://assets/'.length)
+  const rel = stripRes(resPath)
+  // Card & item illustrations → GCS CDN
+  if (rel.startsWith('cards/illustrations/')) {
+    return `${GCS_ART_BASE}/cards/${rel.slice('cards/illustrations/'.length)}`
   }
-  if (resPath.startsWith('res://')) {
-    return '/media/' + resPath.slice('res://'.length)
+  if (rel.startsWith('items/illustrations/')) {
+    return `${GCS_ART_BASE}/items/${rel.slice('items/illustrations/'.length)}`
   }
+  // Everything else → local /media/ mount
+  if (resPath.startsWith('res://assets/')) return '/media/' + rel
+  if (resPath.startsWith('res://')) return '/media/' + rel
   if (resPath.startsWith('/media/') || resPath.startsWith('/assets/')) return resPath
   return null
 }
 
-/** Return a /media/thumb/ URL for a compressed WebP thumbnail. */
+/** Return a thumbnail URL. GCS art uses the same CDN URL (browser caches it).
+ *  Non-illustration assets still go through the backend /media/thumb/ endpoint. */
 export function resolveThumb(resPath: string | undefined | null): string | null {
   if (!resPath) return null
+  const rel = stripRes(resPath)
+  // Illustrations → just use the GCS URL (no server-side thumb needed)
+  if (rel.startsWith('cards/illustrations/') || rel.startsWith('items/illustrations/')) {
+    return resolveAsset(resPath)
+  }
   if (resPath.startsWith('res://assets/')) {
     return '/media/thumb/' + resPath.slice('res://assets/'.length)
   }
